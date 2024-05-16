@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8337269782460211468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2374796366600156981}
+  - component: {fileID: 8736285364790976682}
+  - component: {fileID: 2232003874651656951}
+  - component: {fileID: 7199570154390944304}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2374796366600156981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8736285364790976682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f5a8f505c9540109bb271f147e6895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  howToStart: 1
+  level1: {fileID: 0}
+  level2: {fileID: 0}
+  checkPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cameraManager: {fileID: 0}
+  playerRef: {fileID: 0}
+  playerLastPosition: {fileID: 0}
+  _volume: {fileID: 0}
+  fadeOut: {fileID: 0}
+  uiPause: {fileID: 0}
+  uiPauseControlsKeyboard: {fileID: 0}
+  uiPauseControlsGamepad: {fileID: 0}
+  uiContinueBtn: {fileID: 0}
+  musicAmbientIntro:
+    Guid:
+      Data1: 1969113685
+      Data2: 1312227404
+      Data3: 1050986143
+      Data4: -495737772
+    Path: event:/Music/MX_Stealth
+  musicAmbientDanger:
+    Guid:
+      Data1: 827840815
+      Data2: 1140869789
+      Data3: 794727318
+      Data4: -1354514175
+    Path: event:/Music/MX_Ambient
+  musicBlue:
+    Guid:
+      Data1: 1282386473
+      Data2: 1238082002
+      Data3: -326485091
+      Data4: -572433713
+    Path: event:/Music/MX_Friend
+  sfxMonsterAtDistance:
+    Guid:
+      Data1: -1608885101
+      Data2: 1175459041
+      Data3: 1663358906
+      Data4: 2075521201
+    Path: event:/SFX/sfx_monster_distance
+  sfxShelterEnter:
+    Guid:
+      Data1: 1188042724
+      Data2: 1291741675
+      Data3: -2071469125
+      Data4: -1060360293
+    Path: event:/SFX/sfx_covermuffle in
+  sfxShelterExit:
+    Guid:
+      Data1: -995696551
+      Data2: 1235270268
+      Data3: 1084793497
+      Data4: -2133877000
+    Path: event:/SFX/sfx_covermuffle out
+  numMonstersChasing: 0
+  numMonstersOnScreen: 0
+--- !u!114 &2232003874651656951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadEvent: 1
+  UnloadEvent: 2
+  Banks:
+  - Master
+  CollisionTag: 
+  PreloadSamples: 1
+--- !u!114 &7199570154390944304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -544767625
+      Data2: 1215959679
+      Data3: -136961902
+      Data4: -779169634
+    Path: event:/SFX/sfx_monsteraggro_Loop_1
+  Event: 
+  PlayEvent: 0
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

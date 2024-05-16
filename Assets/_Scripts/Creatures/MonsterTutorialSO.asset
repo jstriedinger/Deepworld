@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407751715453448178e11ae9b0bdebb0, type: 3}
+  m_Name: MonsterTutorialSO
+  m_EditorClassIdentifier: 
+  <IsPatrolType>k__BackingField: 1
+  <IsSimpleType>k__BackingField: 1
+  <FollowRange>k__BackingField: 70
+  <FollowSpeed>k__BackingField: 13
+  <ChasingRange>k__BackingField: 40
+  <ChasingSpeed>k__BackingField: 18
+  <SfxSeesPlayer>k__BackingField:
+    Guid:
+      Data1: 548043345
+      Data2: 1141115889
+      Data3: -1875364733
+      Data4: -434441116
+    Path: event:/SFX/sfx_monsteraggro_Impact_1
+  <SfxFurious>k__BackingField:
+    Guid:
+      Data1: 548043345
+      Data2: 1141115889
+      Data3: -1875364733
+      Data4: -434441116
+    Path: event:/SFX/sfx_monsteraggro_Impact_1
+  <SfxChasePlayer>k__BackingField:
+    Guid:
+      Data1: 548043345
+      Data2: 1141115889
+      Data3: -1875364733
+      Data4: -434441116
+    Path: event:/SFX/sfx_monsteraggro_Impact_1
+  <SfxPlayerDiscover>k__BackingField:
+    Guid:
+      Data1: -1608885101
+      Data2: 1175459041
+      Data3: 1663358906
+      Data4: 2075521201
+    Path: event:/SFX/sfx_monster_distance
+  <SpriteBall>k__BackingField: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+    type: 3}
+  <SpriteMaw>k__BackingField: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+    type: 3}
+  <SpritePupil>k__BackingField: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+    type: 3}
+  <PupilDropSpeed>k__BackingField: 0.175
+  <EyeBallShutSpeed>k__BackingField: 0.125
+  <DefaultColor>k__BackingField: {r: 0.023529412, g: 0.1882353, b: 0.007843138, a: 1}
+  <FollowColor>k__BackingField: {r: 0.26528534, g: 0.2830189, b: 0.011747941, a: 1}
+  <ChaseColor>k__BackingField: {r: 0.5, g: 0.05791606, b: 0.025471658, a: 1}
+  <DistanceToShowOnCamera>k__BackingField: 140

@@ -1,0 +1,26 @@
+{e7ec61c7-0243-417a-a821-e1814b2b378c} bank:/Master
+{7ff14113-7338-0d38-2e68-6b7fbad83114} bank:/Master.strings
+{16dcdea0-a94f-4fdb-87e2-d336b11b0709} bank:/Music
+{caf13e80-3adf-444c-b4c5-7c2ec5367d1a} bank:/SFX
+{b030c564-2a01-40ca-b8b1-2bca061361b5} bus:/
+{47614b67-a6a0-4414-bd77-278b25e2982d} bus:/Reverb
+{6efa7bda-2841-4665-bac4-b12b6705ab06} event:/Music/Blue_Left
+{7ccacc2d-dac0-4dfd-a546-e9212aaaf2aa} event:/Music/Ending_Captured
+{3157d92f-4a9d-4400-9693-5e2f01c143af} event:/Music/MX_Ambient
+{4c6faa29-a1d2-49cb-9d3b-8aeccf5ae1dd} event:/Music/MX_Friend
+{755e4a55-004c-4e37-9fc6-a43e54a473e2} event:/Music/MX_Stealth
+{76189261-3ce0-4ba6-95dc-dc9ee607a81b} event:/Music/MX_exploration
+{1a49a841-b23a-4d49-ad9e-5effc734bcfa} event:/Music/Monster_Chasing_Sub
+{78ad0c9d-5d76-44e5-af5a-a709d6b6cd97} event:/Music/Warm_Ending
+{a01a5c93-14e1-4610-bad7-2463b1f0b57b} event:/SFX/sfx_Monster_distance
+{f88b7c1b-4128-4e83-a9c0-fcfd2fb48fa0} event:/SFX/sfx_blue
+{59d44b9b-a6d1-458d-889e-4e7ce7f4625a} event:/SFX/sfx_blue_dial1
+{8c4a1ada-21fc-4e67-8967-c12136e781df} event:/SFX/sfx_blue_dial2
+{46d017e4-69eb-4cfe-bbe3-87849b2fccc0} event:/SFX/sfx_covermuffle in
+{c4a6e059-ba7c-49a0-99a2-a840f89ecf80} event:/SFX/sfx_covermuffle out
+{20aa7a51-0bf1-4404-8334-389064f41ae6} event:/SFX/sfx_monsteraggro_Impact_1
+{df878177-127f-487a-9220-d6f79ed08ed1} event:/SFX/sfx_monsteraggro_Loop_1
+{96b69700-9c51-47e4-a3d7-b6826aa4c863} event:/SFX/sfx_playerdies_1
+{dfeb56a0-e033-4176-96d9-f8a1d2afb386} event:/SFX/sfx_subtleswim_1
+{b70090f3-2951-485a-8d38-3027f6b7b5c3} event:/SFX/sfx_swimming_dash_1
+{0ab27228-8b2a-471f-9955-62d40a8050df} parameter:/Monster Distance

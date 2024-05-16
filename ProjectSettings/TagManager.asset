@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Hideout
+  - Blue
+  - PlayerLastPos
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - Player
+  - Ground
+  - Monster
+  - Cover
+  - Background
+  - TutorialMonster
+  - Fishes
+  - PlayerPos
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Particles
+    uniqueID: 3791271617
+    locked: 0
+  - name: Background
+    uniqueID: 2981557201
+    locked: 0
+  - name: Props
+    uniqueID: 3216684679
+    locked: 0
+  - name: Player
+    uniqueID: 487045279
+    locked: 0
+  - name: Monsters
+    uniqueID: 1156445973
+    locked: 0
+  - name: Foreground
+    uniqueID: 3345326903
+    locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 2822308573
+    locked: 0
