@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Expo2024.unity
+    path: Assets/_Project/Scenes/Expo2024.unity
     guid: 923ffe00c01938a49983cfcb66118c39
   m_configObjects: {}
