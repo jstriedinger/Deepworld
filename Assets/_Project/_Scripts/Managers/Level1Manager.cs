@@ -34,8 +34,9 @@ public class Level1Manager : MonoBehaviour
     [Header("References")]
     [SerializeField] CinemachineTargetGroup targetGroup;
     [SerializeField] CinemachineVirtualCamera vCam;
-    private CameraManager cameraManager;
-    private GameManager gameManager;
+    private CameraManager _cameraManager;
+    private GameManager _gameManager;
+    private AudioManager _audioManager;
 
 
     [Header("World UI")]
@@ -103,6 +104,14 @@ public class Level1Manager : MonoBehaviour
         studioEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
     }
     
+    void Start()
+    {
+        _playerInput = _player.playerInput;
+        _cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
+        _gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
+    }
+    
     //Start this level. This is called by the gameManager
     public void StartLevel()
     {
@@ -120,18 +129,9 @@ public class Level1Manager : MonoBehaviour
         DoCinematicTitles();
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        _playerInput = _player.playerInput;
-        cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
-    }
+    
 
-    private void OnDisable()
-    {
-        MonsterPlayer.PlayerOnControlsChanged -= OnControlsChanged;
-    }
-
+    
     
 
     //function called when showing the control UI for the first time, when game is starting
@@ -172,7 +172,10 @@ public class Level1Manager : MonoBehaviour
         }
     }
 
-
+    private void OnDisable()
+    {
+        MonsterPlayer.PlayerOnControlsChanged -= OnControlsChanged;
+    }
 
     #region Cinematics
 
@@ -192,7 +195,7 @@ public class Level1Manager : MonoBehaviour
         ToggleCinematicBars(false);
         _playerInput.ActivateInput();
         _playerInput.enabled = true;
-        gameManager.ChangeGameState(GameState.Default);
+        _gameManager.ChangeGameState(GameState.Default);
        
     }
     /**
@@ -322,7 +325,7 @@ public class Level1Manager : MonoBehaviour
             
         cinematic.AppendCallback(() =>
             {
-                gameManager.ChangeBackgroundMusic(2);
+                _audioManager.ChangeBackgroundMusic(2);
                 StartCoroutine(blueNPCIntro.PlayCallSFX());
                 //change to friend music
             })
@@ -396,7 +399,7 @@ public class Level1Manager : MonoBehaviour
             .AppendCallback(() => { StartCoroutine(blueNPCIntro.PlayCallSFX()); })
             .AppendInterval(1f)
             .AppendCallback(() => { StartCoroutine(_player.PlayCallSFX()); })
-            .AppendCallback(() => { cameraManager.ChangePlayerRadius(35); /*cameraManager.AddObjectToTargetGroup(newCamFollow.gameObject);*/ })
+            .AppendCallback(() => { _cameraManager.ChangePlayerRadius(35); /*cameraManager.AddObjectToTargetGroup(newCamFollow.gameObject);*/ })
             .AppendInterval(0.5f)
             .Append(_player.transform.DOPath(playerPathC3V, blueTime, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -433,9 +436,9 @@ public class Level1Manager : MonoBehaviour
             .OnComplete(
                 () =>
                 {
-                    gameManager.ChangeBackgroundMusic(1);
-                    cameraManager.RemoveddObjectToTargetGroup(newCamFollow);
-                    cameraManager.ChangePlayerRadius(30);
+                    _audioManager.ChangeBackgroundMusic(1);
+                    _cameraManager.RemoveddObjectToTargetGroup(newCamFollow);
+                    _cameraManager.ChangePlayerRadius(30);
                     Destroy(blueNPCIntro.gameObject);
                     Destroy(enemy1.gameObject);
                     Destroy(enemy2.gameObject);
@@ -547,10 +550,20 @@ public class Level1Manager : MonoBehaviour
     }
 
 
-    
+    //Activates danger music for first encoutner of the tutorial
+    public void TriggerSwarmEncounter(bool trigger)
+    {
+        if (trigger)
+            _cameraManager.ChangePlayerRadius(35);
+        else
+            _cameraManager.ChangePlayerRadius(28);
+        _audioManager.ToggleCloseDangerAndFriendMusic(trigger);
+    }
 
 
-   
+
+
+
 
 
 

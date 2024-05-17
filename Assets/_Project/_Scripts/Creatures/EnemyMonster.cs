@@ -25,8 +25,9 @@ public class EnemyMonster : MonoBehaviour
     [SerializeField] private Light2D _headLight;
     [SerializeField] private bool _canAffectCamera = true;
     [SerializeField] private bool _Testing = false;
-    private CameraManager cameraManager;
+    private CameraManager _cameraManager;
     private GameManager _gameManager;
+    private AudioManager _audioManager;
 
     private EyeManager _eyeManager;
     private BehaviorTree _behaviorTree;
@@ -52,10 +53,7 @@ public class EnemyMonster : MonoBehaviour
         isChasing = false;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _randomInitialSize = Random.Range(1.9f, 2.1f);
-        Debug.Log("Randome size for "+gameObject.name + " is: "+_randomInitialSize);
         _headObj.transform.localScale = Vector3.one * _randomInitialSize;
-        Debug.Log("Localscale ends up for "+gameObject.name + " is: "+_headObj.transform.localScale.ToString());
-        
 
         _vfxDetect = _headObj.GetComponentInChildren<ParticleSystem>();
         
@@ -96,8 +94,9 @@ public class EnemyMonster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
+        _cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
         _gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
         if (_behaviorTree && !monsterStats.IsSimpleType)
         {
             _behaviorTree.SetVariableValue("playerRef",_gameManager.playerRef.gameObject);
@@ -148,7 +147,7 @@ public class EnemyMonster : MonoBehaviour
             if(!InCamera)
             {
                 //add to the
-                cameraManager.AddEnemyToCameraView(gameObject);
+                _cameraManager.AddMonsterToView(gameObject);
                 InCamera = true;
 
             }
@@ -156,7 +155,7 @@ public class EnemyMonster : MonoBehaviour
 
         else if(InCamera)
         {
-            cameraManager.RemoveEnemyFromCameraView(gameObject);
+            _cameraManager.RemoveEnemyFromCameraView(gameObject);
             InCamera = false;
         }
 
@@ -173,7 +172,6 @@ public class EnemyMonster : MonoBehaviour
     //react to player call, go investigate a position using a lastpos object since btree needs an object
     public void ReactToPlayerCall()
     {
-        Debug.Log(name + "Current monster state: "+CurrentState.ToString());
         if (CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
         {
             if (!_canReactToCall)
@@ -195,18 +193,16 @@ public class EnemyMonster : MonoBehaviour
     }
     public void UpdateMonsterState(MonsterState newState)
     {
-        float colorFadeTime = 1f;
         if (CurrentState == MonsterState.Chasing)
         {
             //we were on a chase
-            _gameManager.UpdateMonstersChasing(false);
+            _audioManager.UpdateMonstersChasing(false);
         }
 
         if (newState != MonsterState.Investigate)
         {
             if (_canReactToCall)
             {
-                Debug.Log("Patrol: no longer react to player call");
                 _behaviorTree.SetVariableValue("CanReactToCall",false);
                 _canReactToCall = false;
             }
@@ -214,7 +210,6 @@ public class EnemyMonster : MonoBehaviour
         //kill whatever is happening with head animation
         if (CurrentState != MonsterState.Follow)
         {
-            Debug.Log("Was not following. Go back to normal");
             //it wasnt following, kill whatever animation is happening and go back to head scale
             _headTween.Kill();
             _headObj.transform.localScale = Vector3.one * _randomInitialSize;
@@ -245,7 +240,7 @@ public class EnemyMonster : MonoBehaviour
                 break;
             case MonsterState.Chasing:
                 //important for the chase music bg
-                _gameManager.UpdateMonstersChasing(true);
+                _audioManager.UpdateMonstersChasing(true);
                 UpdateColors(monsterStats.ChaseColor, monsterStats.ChaseColor);
                 
                 StartCoroutine(PlayReactSound(false, false));

@@ -13,11 +13,9 @@ namespace USCG.Core
     /// </summary>
     public class Debugger : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI fpsText;
         float fps;
         float updateTimer = 0.2f;
 
-        [SerializeField] private MonsterPlayer player;
 
         [Tooltip("Pressing the combination of these keys will reload all currently open scenes.")]
         [SerializeField]
@@ -52,7 +50,6 @@ namespace USCG.Core
 
         private void Update()
         {
-            UpdateFPSDisplay();
             if (bIsReloadingScenes || KeyCodes.Count == 0)
             {
                 return;
@@ -72,26 +69,13 @@ namespace USCG.Core
 
         }
 
-        private void UpdateFPSDisplay()
-        {
-            if(fpsText != null)
-            {
-                updateTimer -= Time.deltaTime;
-                if(updateTimer <= 0f)
-                {
-                    fps = 1 / Time.unscaledDeltaTime;
-                    fpsText.text = "FPS: " + fps;
-                    updateTimer = 0.2f;
-                }
-
-            }
-        }
+       
 
         private IEnumerator ReloadAllOpenScenes()
         {
             //find game manager and stop instance
-            GameManager gm = FindFirstObjectByType<GameManager>();
-            gm.StopAllFMODInstances();
+            AudioManager am = FindFirstObjectByType<AudioManager>();
+            am.StopAllFMODInstances();
             Debug.Log("Reloading scenes...");
 
             // Only one scene can be the active scene. Remember that scene, and record

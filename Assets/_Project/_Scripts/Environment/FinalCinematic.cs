@@ -72,6 +72,8 @@ public class FinalCinematic : MonoBehaviour
         player.StopMovement();
 
         ShowCinematicBars();
+        AudioManager am = FindFirstObjectByType<AudioManager>();
+        
 
         Sequence finalCinematic = DOTween.Sequence()
             .Append(player.transform.DOPath(playerVectors, cinematicTime, PathType.CatmullRom, PathMode.Sidescroller2D)
@@ -92,6 +94,8 @@ public class FinalCinematic : MonoBehaviour
             .Append(fadeOut.DOFade(1, 3))
             .OnComplete( () =>
             {
+                    
+                am.StopAllFMODInstances();
                 SceneManager.LoadScene(0);
             });
     }

@@ -950,8 +950,11 @@ namespace FMODUnity
                 new MoveRecord() { source = FMODSource + "/CodeGeneration.cs", destination = "src/Editor" },
             };
 
-            private static readonly string[] foldersToCleanUp = {
+            private static readonly string[] fmodFoldersToCleanUp = {
                 "Assets/Plugins/FMOD/Runtime",
+                "Assets/Plugins/FMOD/lib",
+            };
+            private static readonly string[] publicFoldersToCleanUp = {
                 "Assets/Plugins/Editor",
             };
 
@@ -1173,12 +1176,30 @@ namespace FMODUnity
 
             private void GenerateTasksForFolderCleanup()
             {
-                foreach (string folder in foldersToCleanUp)
+                foreach (string folder in publicFoldersToCleanUp)
                 {
                     if (AssetDatabase.IsValidFolder(folder))
                     {
                         AddFolderTask(folder);
                     }
+                }
+                foreach (string folder in fmodFoldersToCleanUp)
+                {
+                    SearchSubFolders(folder);
+                }
+            }
+
+            private void SearchSubFolders(string folder)
+            {
+                if (AssetDatabase.IsValidFolder(folder))
+                {
+                    var subdirs = AssetDatabase.GetSubFolders(folder);
+                    foreach (var subfolder in subdirs)
+                    {
+                        SearchSubFolders(subfolder);
+                        AddFolderTask(subfolder);
+                    }
+                    AddFolderTask(folder);
                 }
             }
 

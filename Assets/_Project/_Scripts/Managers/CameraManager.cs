@@ -11,25 +11,21 @@ using System;
 using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
-
 {
 
-    private GameManager gameManager;
+    private GameManager _gameManager;
+    private AudioManager _audioManager;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-
     [SerializeField] CinemachineTargetGroup targetGroup;
-
     [SerializeField] float lerpDuration = 1f;
-
     [SerializeField] int camZoomPlayer = 28;
-
     [SerializeField] int camZoomEnemy = 28;
-
     [SerializeField] int camZoomMultiplier = 5;
 
 
-    // Start is called before the first frame update
+    private int _numMonstersOnScreen = 0;
 
+    // Start is called before the first frame update
     private void Awake()
     {
         
@@ -38,7 +34,8 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         targetGroup.m_Targets[0].radius = camZoomPlayer;
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        _gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
     }
     
     public void ChangeCameraTracking()
@@ -72,7 +69,7 @@ public class CameraManager : MonoBehaviour
     private void UpdateTargetGroupRadius()
     {
         int numMonsters = targetGroup.m_Targets.Length - 1;
-        int newRadius = camZoomEnemy + (camZoomMultiplier * gameManager.numMonstersOnScreen);
+        int newRadius = camZoomEnemy + (camZoomMultiplier * _numMonstersOnScreen);
         if (numMonsters >= 1)
         {
             for (int i = 1; i < targetGroup.m_Targets.Length; i++)
@@ -88,8 +85,10 @@ public class CameraManager : MonoBehaviour
 
     //adds enemy to camera view
 
-    public void AddEnemyToCameraView(GameObject monsterToAdd)
+    public void AddMonsterToView(GameObject monsterToAdd)
     {
+        if(_numMonstersOnScreen == 0)
+            _audioManager.PlayMonsterAppearSfx();
 
         if (targetGroup.FindMember(monsterToAdd.transform) == -1)
         {
@@ -97,8 +96,7 @@ public class CameraManager : MonoBehaviour
             targetGroup.AddMember(monsterToAdd.transform, 0, camZoomEnemy);
 
         }
-        gameManager?.HandleMonstersAppearSFX();
-        StartCoroutine(LerpWeight(monsterToAdd.transform, lerpDuration, 0, 1));
+        StartCoroutine(LerpWeightinTargetGroup(monsterToAdd.transform, lerpDuration, 0, 1));
     }
 
 
@@ -111,12 +109,12 @@ public class CameraManager : MonoBehaviour
     {
         if (targetGroup.FindMember(monsterToRemove.transform) > 0)
         {
-            StartCoroutine(LerpWeight(monsterToRemove.transform, lerpDuration, 1, 0));
+            StartCoroutine(LerpWeightinTargetGroup(monsterToRemove.transform, lerpDuration, 1, 0));
         }
     }
 
     //Lerps the weight of the target so the camera size change is smooth
-    private IEnumerator LerpWeight(Transform member, float duration, float start, float end)
+    private IEnumerator LerpWeightinTargetGroup(Transform member, float duration, float start, float end)
     {
         float timeElapsed = 0;
         float weightLerped = 0;
@@ -139,7 +137,7 @@ public class CameraManager : MonoBehaviour
                 weightLerped = end;
                 targetGroup.m_Targets[memberIndex].weight = weightLerped;
                 isDecreasing = false;
-                gameManager.numMonstersOnScreen--;
+                _numMonstersOnScreen--;
                 //MetricManagerScript.instance?.LogString("EnemiesOnScreen", gameManager.numMonstersOnScreen.ToString());
 
             }
@@ -162,7 +160,7 @@ public class CameraManager : MonoBehaviour
                 weightLerped = end;
                 targetGroup.m_Targets[memberIndex].weight = weightLerped;
                 isIncreasing = false;
-                gameManager.numMonstersOnScreen++;
+                _numMonstersOnScreen++;
                 //MetricManagerScript.instance?.LogString("EnemiesOnScreen", gameManager.numMonstersOnScreen.ToString());
 
             }

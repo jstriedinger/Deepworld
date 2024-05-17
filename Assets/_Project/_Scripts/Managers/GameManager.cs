@@ -32,13 +32,16 @@ public class GameManager : MonoBehaviour
     }
 
     public static event Action OnRestartingGame;
+    
+    [Header("Systems")]
+    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private AudioManager audioManager;
 
     [Header("Level management")] 
     [SerializeField] private HowToStart howToStart;
     [SerializeField] private Level1Manager level1;
     [SerializeField] private GameObject level2;
     [SerializeField] CheckPoint[] checkPoints;
-    [SerializeField] private CameraManager cameraManager;
 
     [Header("Others")]
     public MonsterPlayer playerRef;
@@ -53,36 +56,21 @@ public class GameManager : MonoBehaviour
     private bool isPauseFading = false;
 
 
-    [Header("FMOD Music")]
-    [SerializeField] private EventReference musicAmbientIntro;
-    [SerializeField] private EventReference musicAmbientDanger;
-    [SerializeField] private EventReference musicBlue;
-    private FMOD.Studio.EventInstance _instanceAmbientIntro, _instanceAmbientDanger, _instanceFriend, _currentInstancePlaying;
-    // order of above 0 = ambient intro 1= danger 2=friend
-    private int _currentMusicIndex;
-    
-    [Header("FMOD audio")]
-    public EventReference sfxMonsterAtDistance;
-    public EventReference sfxShelterEnter;
-    public EventReference sfxShelterExit;
-    private StudioEventEmitter _sfxMonsterChaseLoop;
 
     [HideInInspector]
-    public int numMonstersChasing;
-    public int numMonstersOnScreen = 0;
     public static bool IsPlayerDead;
     private int _currentCheckPointIndex = -1;
     private GameState _gameState;
     private Vector3 _originPos;
 
-
     // Start is called before the first frame update
     private void Awake()
     {
-        _sfxMonsterChaseLoop = GetComponent<StudioEventEmitter>();
+        //UI stuff
         fadeOut.gameObject.SetActive(true);
         uiPause.gameObject.SetActive(false);
         uiPause.alpha = 0;
+        
         _originPos = playerRef.transform.position;
         IsPlayerDead = false;
         _gameState = GameState.Cinematic;
@@ -92,31 +80,13 @@ public class GameManager : MonoBehaviour
         //bind pause
         MonsterPlayer.PlayerOnPause += OnPauseGame;
         
-        
-        
-
+        audioManager.Initialize(playerRef.transform);
     }
 
-    public void StopAllFMODInstances()
-    {
-        _instanceAmbientIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        _instanceAmbientDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        _instanceFriend.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-    }
 
     void Start()
     {
-        //getting all music ready
-        _instanceAmbientIntro = RuntimeManager.CreateInstance(musicAmbientIntro.Guid);
-        _instanceAmbientDanger = RuntimeManager.CreateInstance(musicAmbientDanger.Guid);
-        _instanceFriend = RuntimeManager.CreateInstance(musicBlue.Guid);
-        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientIntro, transform);
-        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientDanger, transform);
-        RuntimeManager.AttachInstanceToGameObject(_instanceFriend, transform);
-        
-        
         fadeOut.DOFade(0, 3).SetEase(Ease.InQuad);
-        
         
         //now lets decide how to actually start the game
         Transform cp;
@@ -127,19 +97,17 @@ public class GameManager : MonoBehaviour
             cameraManager.ChangePlayerRadius(30, true);
             ChangeGameState(GameState.Default);
             level2.SetActive(true);
-            UpdateVolumeToLevel();
+            //UpdateVolumeToLevel();
             playerRef.isHidden = true;
             
-            _instanceAmbientDanger.start();
-            _instanceAmbientDanger.release();
-            _currentMusicIndex = 1;
+            audioManager.ChangeBackgroundMusic(1);
         }
         else
         {
-            _currentMusicIndex = 0;
-            _instanceAmbientIntro.start();
-            _instanceAmbientIntro.release();
+            level2.SetActive(false);
+            audioManager.ChangeBackgroundMusic(0);
         }
+        
         switch (howToStart)
         {
             case HowToStart.Default:
@@ -238,7 +206,7 @@ public class GameManager : MonoBehaviour
         seq.AppendCallback(() =>
         {
             ChangeGameState(GameState.Default);
-            UpdateMonstersChasing(false,true);
+            audioManager.UpdateMonstersChasing(false,true);
             playerRef.OnRestartingGame();
             //OnRestartingGame?.Invoke();
         });
@@ -247,41 +215,14 @@ public class GameManager : MonoBehaviour
             () =>
             {
                 IsPlayerDead = false;
-                numMonstersChasing = 0;
+                audioManager.numMonstersChasing = 0;
             }
         ));
        
 
     }
 
-    public void UpdateMonstersChasing(bool _newMonster, bool reset = false)
-    {
-        if (reset)
-        {
-            numMonstersChasing = 0;
-            _sfxMonsterChaseLoop.Stop();
-        }
-        else
-        {
-            
-            if (_newMonster)
-            {
-                numMonstersChasing++;
-                if (!_sfxMonsterChaseLoop.IsPlaying())
-                {
-                    _sfxMonsterChaseLoop.Play();
-                }
-            }
-            else
-            {
-                numMonstersChasing--;
-                if (numMonstersChasing < 1)
-                {
-                    _sfxMonsterChaseLoop.Stop();
-                }
-            }
-        }
-    }
+    
     public void UpdateCheckPoint(CheckPoint cp)
     {
         int index = System.Array.IndexOf(checkPoints, cp);
@@ -291,56 +232,8 @@ public class GameManager : MonoBehaviour
             MetricManagerScript.instance?.LogString("Checkpoint",index.ToString());
         }
     }
-
-    //callback when controls changes to update the icons on the menu
-   
-
-    //This assumes we are comming from ambient intro, which might not work later lol
-    public void ChangeBackgroundMusic(int newMusic)
-    {
-        switch (_currentMusicIndex)
-        {
-            case 0:
-                _instanceAmbientIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                break;
-            case 1:
-                _instanceAmbientDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                break;
-            case 2:
-                _instanceFriend.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                break;
-        }
-        switch (newMusic)
-        {
-            case 0:
-                _instanceAmbientIntro.start();
-                break;
-            case 1:
-                _instanceAmbientDanger.start();
-                break;
-            case 2:
-                _instanceFriend.start();
-                break;
-            
-        }
-
-        _currentMusicIndex = newMusic;
-    }
-
-    //Handles when to play the audio of monsters appearing
-    public void HandleMonstersAppearSFX()
-    {
-        if(numMonstersOnScreen == 0 && !sfxMonsterAtDistance.IsNull)
-        {
-            FMODUnity.RuntimeManager.PlayOneShot(sfxMonsterAtDistance.Guid, playerRef.transform.position);
-        }
-    }
     
-    public FMOD.Studio.EventInstance GetBlueMusicInstance()
-    {
-        return _instanceFriend;
-    }
-
+    #region UI
     public void OnPauseGame()
     {
         if (!isPauseFading)
@@ -357,7 +250,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
+    
     public void UIQuitGame()
     {
         #if UNITY_EDITOR
@@ -366,6 +259,15 @@ public class GameManager : MonoBehaviour
                 Application.Quit();
         #endif
     }
+    #endregion
+
+    //adds an enemy to our camera so player can see them
+    public void AddEnemyToCameraView(GameObject monsterToAdd)
+    {
+        
+        cameraManager.AddMonsterToView(monsterToAdd);
+    }
+
 
     //update some volume properties to let the player know now is dangerous
     public void UpdateVolumeToLevel()
