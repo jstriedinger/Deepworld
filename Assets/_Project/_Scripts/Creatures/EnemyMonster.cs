@@ -34,10 +34,9 @@ public class EnemyMonster : MonoBehaviour
     private StudioEventEmitter _monsterChaseMusicEmitter;
     private Vector3 origWorldPos;
     [HideInInspector]
-    public bool isChasing = false;
+    public bool isChasing = false, inCamera = false;
 
     private bool _canReactToCall = false;
-    private bool InCamera = false;
     private Rigidbody2D _rigidbody2D;
     private ParticleSystem _vfxDetect;
     private float _randomInitialSize = 1;
@@ -107,26 +106,7 @@ public class EnemyMonster : MonoBehaviour
         //_light2D.color = monsterStats.DefaultColor;
     }
 
-    private void Update()
-    {
-        if (_Testing)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if(CurrentState == MonsterState.Default)
-                    UpdateMonsterState(MonsterState.Follow);
-                else if(CurrentState == MonsterState.Follow)
-                    UpdateMonsterState(MonsterState.Chasing);
-                else if(CurrentState == MonsterState.Chasing)
-                    UpdateMonsterState(MonsterState.Frustrated);
-                else if(CurrentState == MonsterState.Frustrated)
-                    UpdateMonsterState(MonsterState.Default);
-                    
-               
-            } 
-            
-        }
-    }
+  
 
     private void FixedUpdate()
     {
@@ -144,19 +124,18 @@ public class EnemyMonster : MonoBehaviour
 
         if(playerCheckCamera)
         {
-            if(!InCamera)
+            if(!inCamera)
             {
                 //add to the
                 _cameraManager.AddMonsterToView(gameObject);
-                InCamera = true;
+                inCamera = true;
 
             }
         }
-
-        else if(InCamera)
+        else if(inCamera)
         {
             _cameraManager.RemoveEnemyFromCameraView(gameObject);
-            InCamera = false;
+            inCamera = false;
         }
 
 
@@ -236,7 +215,7 @@ public class EnemyMonster : MonoBehaviour
                 
                 UpdateColors(monsterStats.FollowColor, monsterStats.FollowColor);
                 
-                StartCoroutine(PlayReactSound(true, false));
+                StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Chasing:
                 //important for the chase music bg
@@ -271,16 +250,17 @@ public class EnemyMonster : MonoBehaviour
 
     IEnumerator PlayReactSound(bool showEffect, bool animate)
     {
-        if (animate)
-        {
-            _headTween = _headObj.DOScale(_randomInitialSize + 0.5f, 0.15f).SetAutoKill(false).SetEase(Ease.OutSine);
-            yield return _headTween.WaitForCompletion();
-            _headTween.PlayBackwards();
-        }
         if (showEffect)
         {
             _vfxDetect.Play();
             yield return new WaitForSeconds(0.25f);
+        }
+        if (animate)
+        {
+            _headTween = _headObj.DOPunchScale(new Vector3(1.25f, 1.25f, 0), .5f, 2, 0f);
+            //_headTween = _headObj.DOScale(_randomInitialSize + 0.5f, 0.15f).SetAutoKill(false).SetEase(Ease.OutSine);
+            //yield return _headTween.WaitForCompletion();
+            //_headTween.PlayBackwards();
         }
 
         FMODUnity.RuntimeManager.PlayOneShot(monsterStats.SfxMonsterReact, transform.position);
@@ -332,15 +312,21 @@ public class EnemyMonster : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //biting game feel
-            Sequence seq = DOTween.Sequence();
-            seq.SetEase(Ease.OutCubic);
-            seq.Append(_headObj.DOScaleY(_randomInitialSize + 0.5f, 0.5f));
-            seq.Append(_headObj.DOScaleY(_randomInitialSize, 0.5f * 1.5f));
-            _rigidbody2D.AddForce(transform.up * 20f, ForceMode2D.Impulse);
-
+            StartCoroutine(EatPlayerAnimation());
             //signal to the tree that we killed the player
-            _behaviorTree.SendEvent("PlayerKilled");
+            //_behaviorTree.SendEvent("PlayerKilled");
         }
+    }
+
+    IEnumerator EatPlayerAnimation()
+    {
+        _behaviorTree.DisableBehavior();
+        _rigidbody2D.AddForce(transform.up * 5f, ForceMode2D.Impulse);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_headObj.DOPunchRotation(new Vector3(0,0,60), .75f, 5, 1));
+        seq.Join(_headObj.DOPunchScale(new Vector3(.25f, 1.25f, 0), 0.75f, 10, 1));
+        yield return new WaitForSecondsRealtime(2);
+        _behaviorTree.EnableBehavior();
     }
 }
 

@@ -17,7 +17,7 @@ public class Hideout : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") )
+        if(collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
         {
             MonsterPlayer monsterPlayer = collision.gameObject.GetComponent<MonsterPlayer>();
             monsterPlayer.isHidden = true;
@@ -46,7 +46,7 @@ public class Hideout : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
         {
             MonsterPlayer monsterPlayer = collision.gameObject.GetComponent<MonsterPlayer>();
             monsterPlayer.isHidden = false;
@@ -55,14 +55,6 @@ public class Hideout : MonoBehaviour
             MetricManagerScript.instance?.LogString("Hideout", "Exit");
 
         }
-    }
-
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 40);
     }
 
 }

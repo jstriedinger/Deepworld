@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 //this class conrols everythign that happens when you are chased by monsters
@@ -65,11 +66,7 @@ public class AudioManager : MonoBehaviour
         _instanceCloseDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
-    //x the corresponding background music
-    public void PlayLevelMusic(bool firstLevel)
-    {
-        
-    }
+   
     
     //Change bg music. 0 = intro, 1=danger 2= friends
     public void ChangeBackgroundMusic(int newMusic)
@@ -195,6 +192,8 @@ public class AudioManager : MonoBehaviour
                 if (!_sfxMonsterChaseLoop.IsPlaying())
                 {
                     _sfxMonsterChaseLoop.Play();
+                    //controller rumble feedback here
+                    Gamepad.current?.SetMotorSpeeds(0.125f, .5f);
                 }
             }
             else
@@ -203,6 +202,7 @@ public class AudioManager : MonoBehaviour
                 if (numMonstersChasing < 1)
                 {
                     _sfxMonsterChaseLoop.Stop();
+                    Gamepad.current?.SetMotorSpeeds(0, 0f);
                 }
             }
         }

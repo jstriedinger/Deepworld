@@ -121,6 +121,8 @@ public class MonsterPlayer : MonoBehaviour
 
         yield return null;
     }
+    
+    
 
     private void OnControlsChanged()
     {
@@ -252,22 +254,21 @@ public class MonsterPlayer : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy") && !GameManager.IsPlayerDead && !inmortal)
         {
-            GameOver();
+            GameOver(collision.gameObject);
         }
     }
 
-    //Before game over
-    private void GameOver()
+    //Events when mosnter eats our player
+    private void GameOver(GameObject monster)
     {
-        StartCoroutine(RumbleController());
         StopMovement();
-        Instantiate(vfxDeath, transform.position, quaternion.identity);
         playerInput.DeactivateInput();
+        StartCoroutine(RumbleController());
+        Instantiate(vfxDeath, transform.position, quaternion.identity);
+        FMODUnity.RuntimeManager.PlayOneShot(sfxDeath, transform.position);
+        gameManager.GameOver(monster);
         bodyPart.SetActive(false);
         _collider.enabled = false;
-        
-        FMODUnity.RuntimeManager.PlayOneShot(sfxDeath, transform.position);
-        gameManager.GameOver();
     }
 
     //When player is ready to restart

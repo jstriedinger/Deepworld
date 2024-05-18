@@ -38,30 +38,49 @@ public class CameraManager : MonoBehaviour
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
     }
     
-    public void ChangeCameraTracking()
+    //set camera to follow specific target
+    public void ChangeCameraTracking(GameObject newTarget = null)
     {
-        virtualCamera.Follow = targetGroup.transform;
+        if (newTarget)
+            virtualCamera.Follow = newTarget.transform;
+        else
+            virtualCamera.Follow = targetGroup.transform;
+    }
+
+    //makes all other target with radius 0 so that it focus on the monster that just eat oyr player
+    public void OnGameOver(GameObject monster)
+    {
+        //reset targetgroup
+        int i = targetGroup.FindMember(monster.transform);
+        if (i > 0)
+        {
+            Debug.Log("Lerping the rest to zero");
+            //all other members will lerp to zero
+            Target monsterTarget = targetGroup.m_Targets[i];
+            monsterTarget.radius = camZoomPlayer;
+            for (int j = 0; j < targetGroup.m_Targets.Length; j++)
+            {
+                if (j != i)
+                {
+                    targetGroup.m_Targets[j].weight = 0;
+                    if (j > 0)
+                    {
+                        EnemyMonster enemyMonster = targetGroup.m_Targets[j].target.GetComponent<EnemyMonster>();
+                        enemyMonster.inCamera = false;
+                        
+                    }
+                }
+            }
+        }
     }
 
 
 
-    // Update is called once per frame
-
-    void Update()
-
-    {
-
-    }
-
-
-
-    //reset to only have the player
-
+    //reset to focus on player again
     public void ResetTargetGroup()
     {
-        var oldTargets = targetGroup.m_Targets;
-        targetGroup.m_Targets = new Target[1];
-        targetGroup.m_Targets[0] = oldTargets[0];
+        targetGroup.m_Targets[0].weight = 1.25f;
+        targetGroup.m_Targets[0].radius = camZoomPlayer;
     }
 
 

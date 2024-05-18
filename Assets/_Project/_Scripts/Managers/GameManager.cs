@@ -178,12 +178,14 @@ public class GameManager : MonoBehaviour
     }
 
     //When player gets eaten
-    public void GameOver()
+    public void GameOver(GameObject monster)
     {
-        ChangeGameState(GameState.Cinematic);
         IsPlayerDead = true;
+        cameraManager.OnGameOver(monster);
+        ChangeGameState(GameState.Cinematic);
         //MetricManagerScript.instance?.LogString("Death", "1");
         Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(1);
         seq.Append(fadeOut.DOFade(1, 2).SetEase(Ease.InCubic).OnComplete(
             () =>
             {
@@ -197,7 +199,7 @@ public class GameManager : MonoBehaviour
                 {
                     playerRef.transform.position = _originPos;
                 }
-                //cameraManager.ResetTargetGroup();
+                cameraManager.ResetTargetGroup();
                 //fadeOut.alpha = 1;
 
             }
