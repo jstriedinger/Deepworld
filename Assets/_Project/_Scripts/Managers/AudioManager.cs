@@ -56,6 +56,7 @@ public class AudioManager : MonoBehaviour
         _currentMusicIndex = -1;
     }
     
+    //Stop al background music instances
     public void StopAllFMODInstances()
     {
         _instanceAmbientIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

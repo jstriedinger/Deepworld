@@ -72,7 +72,7 @@ public class FinalCinematic : MonoBehaviour
         player.StopMovement();
 
         ShowCinematicBars();
-        AudioManager am = FindFirstObjectByType<AudioManager>();
+        GameManager gm = FindFirstObjectByType<GameManager>();
         
 
         Sequence finalCinematic = DOTween.Sequence()
@@ -94,9 +94,7 @@ public class FinalCinematic : MonoBehaviour
             .Append(fadeOut.DOFade(1, 3))
             .OnComplete( () =>
             {
-                    
-                am.StopAllFMODInstances();
-                SceneManager.LoadScene(0);
+                gm.ResetGame();
             });
     }
 

@@ -1,16 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using FMODUnity;
-using Unity.Mathematics;
-using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 public enum GameState
@@ -43,7 +39,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject level2;
     [SerializeField] CheckPoint[] checkPoints;
 
-    [Header("Others")]
+    [Header("Others")] 
+    [SerializeField] private Light2D globalPlayerLight;
     public MonsterPlayer playerRef;
     public GameObject playerLastPosition;
     [SerializeField] private Volume _volume;
@@ -101,6 +98,8 @@ public class GameManager : MonoBehaviour
             playerRef.isHidden = true;
             
             audioManager.ChangeBackgroundMusic(1);
+            DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
+
         }
         else
         {
@@ -222,6 +221,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ResetGame()
+    {
+        //stop all music
+        audioManager.StopAllFMODInstances();
+        SceneManager.LoadScene(0);
+        _currentCheckPointIndex = 0;
+        
+    }
+
     
     public void UpdateCheckPoint(CheckPoint cp)
     {
@@ -229,7 +237,6 @@ public class GameManager : MonoBehaviour
         if (index > _currentCheckPointIndex)
         {
             _currentCheckPointIndex = index;
-            MetricManagerScript.instance?.LogString("Checkpoint",index.ToString());
         }
     }
     
@@ -269,32 +276,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //update some volume properties to let the player know now is dangerous
-    public void UpdateVolumeToLevel()
+    //update lighting properties for dangerous level
+    public void UpdateLightingLevel()
     {
-        Vignette vig;
-        ColorCurves colorCurves;
-        Bloom bloom;
-
-        if (_volume.profile.TryGet<Vignette>(out vig) && _volume.profile.TryGet<Bloom>(out bloom)
-            && _volume.profile.TryGet<ColorCurves>(out colorCurves))
-        {
-            //colorCurves.red.value.MoveKey(1, new Keyframe(0.6f, 1.0f));
-            float curveVal2 = 0.95f;
-            Sequence seq = DOTween.Sequence()
-                .Append(
-                    DOTween.To(() => vig.intensity.value,
-                        x => { vig.intensity.value = x; }, 0.2f, 3)
-                )
-                .Join(
-                    DOTween.To(() => bloom.intensity.value,
-                        x => { bloom.intensity.value = x; }, 2, 3)
-                )
-                .Join(
-                    DOTween.To(() => curveVal2,
-                        x => { colorCurves.green.value.MoveKey(1, new Keyframe(x, 1.0f)); }, 1, 3)
-                );
-        }
+        DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
+        //globalPlayerLight.intensity = 0.2f;
+        
     }
 
 

@@ -107,6 +107,21 @@ public class MonsterPlayer : MonoBehaviour
         }
     }
 
+    IEnumerator RumbleController()
+    {
+        Gamepad pad = Gamepad.current;
+
+        if (pad != null && playerInput.currentControlScheme == "Gamepad")
+        {
+            pad.SetMotorSpeeds(0.25f, 1f);
+            yield return new WaitForSecondsRealtime(2);
+            pad.SetMotorSpeeds(0,0);
+
+        }
+
+        yield return null;
+    }
+
     private void OnControlsChanged()
     {
         PlayerOnControlsChanged?.Invoke();
@@ -244,6 +259,7 @@ public class MonsterPlayer : MonoBehaviour
     //Before game over
     private void GameOver()
     {
+        StartCoroutine(RumbleController());
         StopMovement();
         Instantiate(vfxDeath, transform.position, quaternion.identity);
         playerInput.DeactivateInput();

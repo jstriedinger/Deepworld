@@ -19,6 +19,7 @@ public class FishFlock : MonoBehaviour
     {
         _behaviorTree = GetComponent<BehaviorTree>();
         _flockTask = _behaviorTree.FindTask<Flock>();
+        InitializeFlock();
         
         
     }
@@ -46,7 +47,6 @@ public class FishFlock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeFlock();
     }
 
     // Update is called once per frame
