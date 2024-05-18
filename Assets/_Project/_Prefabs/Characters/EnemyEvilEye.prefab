@@ -326,7 +326,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1824785459058989857}
@@ -1107,8 +1107,8 @@ MonoBehaviour:
   _pupilObj: {fileID: 1072006124411310023}
   _headLight: {fileID: 5679324004921067343}
   _canAffectCamera: 1
-  _Testing: 0
   isChasing: 0
+  inCamera: 0
 --- !u!114 &5039743520618852438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,8 +1140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 2.5
-  height: 2.5
+  radius: 3.5
+  height: 3.5
   canMove: 1
   maxSpeed: 4
   gravity: {x: NaN, y: NaN, z: NaN}
@@ -1253,7 +1253,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.6
+  m_Radius: 2.7
 --- !u!50 &5038222169594272408
 Rigidbody2D:
   serializedVersion: 4

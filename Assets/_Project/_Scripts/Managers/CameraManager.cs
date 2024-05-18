@@ -54,7 +54,6 @@ public class CameraManager : MonoBehaviour
         int i = targetGroup.FindMember(monster.transform);
         if (i > 0)
         {
-            Debug.Log("Lerping the rest to zero");
             //all other members will lerp to zero
             Target monsterTarget = targetGroup.m_Targets[i];
             monsterTarget.radius = camZoomPlayer;

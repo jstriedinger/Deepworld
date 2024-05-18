@@ -9,6 +9,7 @@ public class MonsterSO : ScriptableObject
     [field: Header("movement")]
     [field: SerializeField] public bool IsPatrolType { get; private set; }
     [field: SerializeField] public bool IsSimpleType { get; private set; }
+    [field: SerializeField] public float PatrolSpeed { get; private set; }
     [field: SerializeField] public float FollowRange { get; private set; }
     [field: SerializeField] public float FollowSpeed { get; private set; }
     [field: SerializeField] public float ChasingRange { get; private set; }

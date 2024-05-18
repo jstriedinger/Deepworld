@@ -24,7 +24,7 @@ public class EnemyMonster : MonoBehaviour
     [SerializeField] private Transform _pupilObj;
     [SerializeField] private Light2D _headLight;
     [SerializeField] private bool _canAffectCamera = true;
-    [SerializeField] private bool _Testing = false;
+    
     private CameraManager _cameraManager;
     private GameManager _gameManager;
     private AudioManager _audioManager;
@@ -39,9 +39,9 @@ public class EnemyMonster : MonoBehaviour
     private bool _canReactToCall = false;
     private Rigidbody2D _rigidbody2D;
     private ParticleSystem _vfxDetect;
-    private float _randomInitialSize = 1;
     private Tween _headTween;
     private Sequence _colorTweenSequence;
+    private Tween _scaleTween;
 
 
     private void Awake()
@@ -51,11 +51,10 @@ public class EnemyMonster : MonoBehaviour
         _monsterChaseMusicEmitter = GetComponent<StudioEventEmitter>();
         isChasing = false;
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _randomInitialSize = Random.Range(1.9f, 2.1f);
-        _headObj.transform.localScale = Vector3.one * _randomInitialSize;
 
         _vfxDetect = _headObj.GetComponentInChildren<ParticleSystem>();
-        
+
+        _scaleTween = _headObj.DOScale(1.25f, 0.3f).SetLoops(-1, LoopType.Yoyo).SetAutoKill(false).Pause();
         
         foreach (LineRenderer tentacle in _tentacles)
         {
@@ -66,9 +65,10 @@ public class EnemyMonster : MonoBehaviour
         //pass data from SO to the AI Tree
         if (_behaviorTree)
         {
-            _behaviorTree.SetVariableValue("FollowSpeed",monsterStats.FollowSpeed);
+            _behaviorTree.SetVariableValue("PatrolSpeed",monsterStats.PatrolSpeed);
             if (!monsterStats.IsSimpleType)
             {
+                _behaviorTree.SetVariableValue("FollowSpeed",monsterStats.FollowSpeed);
                 _behaviorTree.SetVariableValue("ChasingSpeed",monsterStats.ChasingSpeed);
                 _behaviorTree.SetVariableValue("ChasingRange",monsterStats.ChasingRange);
                 _behaviorTree.SetVariableValue("FollowRange",monsterStats.FollowRange);
@@ -176,6 +176,7 @@ public class EnemyMonster : MonoBehaviour
         {
             //we were on a chase
             _audioManager.UpdateMonstersChasing(false);
+            _scaleTween.Rewind();
         }
 
         if (newState != MonsterState.Investigate)
@@ -191,7 +192,7 @@ public class EnemyMonster : MonoBehaviour
         {
             //it wasnt following, kill whatever animation is happening and go back to head scale
             _headTween.Kill();
-            _headObj.transform.localScale = Vector3.one * _randomInitialSize;
+            _headObj.transform.localScale = Vector3.one;
         }
         
         //if there was a color transition, stop it
@@ -220,6 +221,7 @@ public class EnemyMonster : MonoBehaviour
             case MonsterState.Chasing:
                 //important for the chase music bg
                 _audioManager.UpdateMonstersChasing(true);
+                _scaleTween.Play();
                 UpdateColors(monsterStats.ChaseColor, monsterStats.ChaseColor);
                 
                 StartCoroutine(PlayReactSound(false, false));
@@ -258,9 +260,6 @@ public class EnemyMonster : MonoBehaviour
         if (animate)
         {
             _headTween = _headObj.DOPunchScale(new Vector3(1.25f, 1.25f, 0), .5f, 2, 0f);
-            //_headTween = _headObj.DOScale(_randomInitialSize + 0.5f, 0.15f).SetAutoKill(false).SetEase(Ease.OutSine);
-            //yield return _headTween.WaitForCompletion();
-            //_headTween.PlayBackwards();
         }
 
         FMODUnity.RuntimeManager.PlayOneShot(monsterStats.SfxMonsterReact, transform.position);
@@ -312,6 +311,7 @@ public class EnemyMonster : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             //biting game feel
+            _audioManager.StopChaseMusic();
             StartCoroutine(EatPlayerAnimation());
             //signal to the tree that we killed the player
             //_behaviorTree.SendEvent("PlayerKilled");
@@ -320,11 +320,12 @@ public class EnemyMonster : MonoBehaviour
 
     IEnumerator EatPlayerAnimation()
     {
+        _scaleTween.Rewind();
         _behaviorTree.DisableBehavior();
         _rigidbody2D.AddForce(transform.up * 5f, ForceMode2D.Impulse);
         Sequence seq = DOTween.Sequence();
         seq.Append(_headObj.DOPunchRotation(new Vector3(0,0,60), .75f, 5, 1));
-        seq.Join(_headObj.DOPunchScale(new Vector3(.25f, 1.25f, 0), 0.75f, 10, 1));
+        //seq.Append(_headObj.DOPunchScale(new Vector3(.25f, 1f, 0), 0.75f, 5, 1));
         yield return new WaitForSecondsRealtime(2);
         _behaviorTree.EnableBehavior();
     }

@@ -14,38 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsPatrolType>k__BackingField: 1
   <IsSimpleType>k__BackingField: 1
+  <PatrolSpeed>k__BackingField: 10
   <FollowRange>k__BackingField: 70
   <FollowSpeed>k__BackingField: 13
   <ChasingRange>k__BackingField: 40
   <ChasingSpeed>k__BackingField: 18
-  <SfxSeesPlayer>k__BackingField:
+  <SfxMonsterReact>k__BackingField:
     Guid:
-      Data1: 548043345
-      Data2: 1141115889
-      Data3: -1875364733
-      Data4: -434441116
-    Path: event:/SFX/sfx_monsteraggro_Impact_1
-  <SfxFurious>k__BackingField:
-    Guid:
-      Data1: 548043345
-      Data2: 1141115889
-      Data3: -1875364733
-      Data4: -434441116
-    Path: event:/SFX/sfx_monsteraggro_Impact_1
-  <SfxChasePlayer>k__BackingField:
-    Guid:
-      Data1: 548043345
-      Data2: 1141115889
-      Data3: -1875364733
-      Data4: -434441116
-    Path: event:/SFX/sfx_monsteraggro_Impact_1
-  <SfxPlayerDiscover>k__BackingField:
-    Guid:
-      Data1: -1608885101
-      Data2: 1175459041
-      Data3: 1663358906
-      Data4: 2075521201
-    Path: event:/SFX/sfx_monster_distance
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <SpriteBall>k__BackingField: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
   <SpriteMaw>k__BackingField: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,

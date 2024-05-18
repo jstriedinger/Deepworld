@@ -6,9 +6,7 @@ using FMODUnity;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using DG.Tweening;
 using UnityEngine.InputSystem;
-
 
 public enum GameState
 {

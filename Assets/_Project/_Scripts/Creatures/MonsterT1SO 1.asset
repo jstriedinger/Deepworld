@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsPatrolType>k__BackingField: 1
   <IsSimpleType>k__BackingField: 0
-  <FollowRange>k__BackingField: 70
+  <PatrolSpeed>k__BackingField: 10
+  <FollowRange>k__BackingField: 75
   <FollowSpeed>k__BackingField: 13
   <ChasingRange>k__BackingField: 40
   <ChasingSpeed>k__BackingField: 19
