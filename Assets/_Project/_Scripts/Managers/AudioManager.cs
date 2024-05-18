@@ -189,20 +189,24 @@ public class AudioManager : MonoBehaviour
             if (_newMonster)
             {
                 numMonstersChasing++;
-                if (!_sfxMonsterChaseLoop.IsPlaying())
+                if (numMonstersChasing == 1)
                 {
+                    Debug.Log("Playing chase music");
                     _sfxMonsterChaseLoop.Play();
-                    //controller rumble feedback here
-                    Gamepad.current?.SetMotorSpeeds(0.125f, .5f);
                 }
+                Debug.Log("Monsters chasing: "+numMonstersChasing);
+                Gamepad.current?.SetMotorSpeeds(0.0625f, .15f);
             }
             else
             {
                 numMonstersChasing--;
-                if (numMonstersChasing < 1)
+                Debug.Log("Monsters chasing: "+numMonstersChasing);
+                if (numMonstersChasing <= 0)
                 {
-                    _sfxMonsterChaseLoop.Stop();
                     Gamepad.current?.SetMotorSpeeds(0, 0f);
+                    numMonstersChasing = 0;
+                    Debug.Log("Stopping chase music");
+                    _sfxMonsterChaseLoop.Stop();
                 }
             }
         }

@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 
 public enum GameState
@@ -150,6 +151,7 @@ public class GameManager : MonoBehaviour
                     Time.timeScale = 0;
                     isPauseFading = false;
                 });
+                Gamepad.current?.PauseHaptics();
                 break;
             case GameState.Default:
                 playerRef.ToggleInput(true);
@@ -170,6 +172,9 @@ public class GameManager : MonoBehaviour
                 //always come back to player action map
                 playerRef.ToggleInputMap(false);
                 Time.timeScale = 1;
+                break;
+            default:
+                Gamepad.current?.ResumeHaptics();
                 break;
 
         }

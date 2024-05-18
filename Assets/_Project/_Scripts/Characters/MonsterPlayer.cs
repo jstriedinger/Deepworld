@@ -114,7 +114,7 @@ public class MonsterPlayer : MonoBehaviour
         if (pad != null && playerInput.currentControlScheme == "Gamepad")
         {
             pad.SetMotorSpeeds(0.25f, 1f);
-            yield return new WaitForSecondsRealtime(2);
+            yield return new WaitForSecondsRealtime(.5f);
             pad.SetMotorSpeeds(0,0);
 
         }
