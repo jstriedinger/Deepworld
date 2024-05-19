@@ -378,6 +378,11 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[0]
       value: -1313410095
       objectReference: {fileID: 0}
+    - target: {fileID: 4092194170743479187, guid: 5476911d57d6b0544b08a8c278936613,
+        type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: -949640393
+      objectReference: {fileID: 0}
     - target: {fileID: 4868704569314660080, guid: 5476911d57d6b0544b08a8c278936613,
         type: 3}
       propertyPath: m_Name
@@ -386,12 +391,22 @@ PrefabInstance:
     - target: {fileID: 8449457283548325967, guid: 5476911d57d6b0544b08a8c278936613,
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8449457283548325967, guid: 5476911d57d6b0544b08a8c278936613,
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.data[1]
       value: -949640393
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449457283548325967, guid: 5476911d57d6b0544b08a8c278936613,
+        type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[2]
+      value: -1472658723
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449457283548325967, guid: 5476911d57d6b0544b08a8c278936613,
+        type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
+      value: -1313410095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
