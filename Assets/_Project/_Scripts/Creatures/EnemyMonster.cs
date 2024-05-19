@@ -41,7 +41,7 @@ public class EnemyMonster : MonoBehaviour
     private ParticleSystem _vfxDetect;
     private Tween _headTween;
     private Sequence _colorTweenSequence;
-    private Tween _scaleTween;
+    private Tween _chaseScaleTween;
 
 
     private void Awake()
@@ -54,7 +54,7 @@ public class EnemyMonster : MonoBehaviour
 
         _vfxDetect = _headObj.GetComponentInChildren<ParticleSystem>();
 
-        _scaleTween = _headObj.DOScale(1.25f, 0.3f).SetLoops(-1, LoopType.Yoyo).SetAutoKill(false).Pause();
+        _chaseScaleTween = _headObj.DOScale(1.2f, 0.3f).SetLoops(-1, LoopType.Yoyo).SetAutoKill(false).Pause();
         
         foreach (LineRenderer tentacle in _tentacles)
         {
@@ -176,7 +176,7 @@ public class EnemyMonster : MonoBehaviour
         {
             //we were on a chase
             _audioManager.UpdateMonstersChasing(false);
-            _scaleTween.Rewind();
+            _chaseScaleTween.Rewind();
         }
 
         if (newState != MonsterState.Investigate)
@@ -221,7 +221,7 @@ public class EnemyMonster : MonoBehaviour
             case MonsterState.Chasing:
                 //important for the chase music bg
                 _audioManager.UpdateMonstersChasing(true);
-                _scaleTween.Play();
+                _chaseScaleTween.Play();
                 UpdateColors(monsterStats.ChaseColor, monsterStats.ChaseColor);
                 
                 StartCoroutine(PlayReactSound(false, false));
@@ -259,7 +259,7 @@ public class EnemyMonster : MonoBehaviour
         }
         if (animate)
         {
-            _headTween = _headObj.DOPunchScale(new Vector3(1.25f, 1.25f, 0), .5f, 2, 0f);
+            _headTween = _headObj.DOPunchScale(new Vector3(.5f, .5f, 0), .5f, 2, 0f);
         }
 
         FMODUnity.RuntimeManager.PlayOneShot(monsterStats.SfxMonsterReact, transform.position);
@@ -320,7 +320,7 @@ public class EnemyMonster : MonoBehaviour
 
     IEnumerator EatPlayerAnimation()
     {
-        _scaleTween.Rewind();
+        _chaseScaleTween.Rewind();
         _behaviorTree.DisableBehavior();
         _rigidbody2D.AddForce(transform.up * 5f, ForceMode2D.Impulse);
         Sequence seq = DOTween.Sequence();

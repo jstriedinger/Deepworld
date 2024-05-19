@@ -6,6 +6,7 @@ using FMODUnity;
 using DG.Tweening;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 //this class conrols everythign that happens when you are chased by monsters
 public class AudioManager : MonoBehaviour
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
         _instanceCloseDanger;
     // order of above 0 = ambient intro 1= danger 2=friend
     private int _currentMusicIndex;
+    private Transform _playerRef;
     
     [HideInInspector]
     public int numMonstersChasing;
@@ -35,20 +37,29 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (numMonstersChasing > 0)
+        {
+            Collider2D col = Physics2D.OverlapCircle(_playerRef.position,40,LayerMask.GetMask("Monster"));
+            Debug.Log("Closest enemy is: "+col.gameObject.name);
+            float d = Vector3.Distance(_playerRef.position, col.transform.position) / 40;
+            Debug.Log("Normalized Distance from player: "+d);
+            _instanceCloseDanger.setParameterByName("Monster Distance", 1 - d);
+        }
     }
 
     public void Initialize(Transform playerRef)
     {
+        _playerRef = playerRef;
         _instanceAmbientIntro = RuntimeManager.CreateInstance(musicAmbientIntro.Guid);
         _instanceAmbientDanger = RuntimeManager.CreateInstance(musicAmbientDanger.Guid);
+        _instanceAmbientDanger.setVolume(0.5f);
         _instanceFriend = RuntimeManager.CreateInstance(musicBlue.Guid);
         _instanceCloseDanger = RuntimeManager.CreateInstance(musicCloseDanger.Guid);
         
-        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientIntro, playerRef);
-        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientDanger, playerRef);
-        RuntimeManager.AttachInstanceToGameObject(_instanceFriend, playerRef);
-        RuntimeManager.AttachInstanceToGameObject(_instanceCloseDanger, playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientIntro, _playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientDanger, _playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceFriend, _playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceCloseDanger, _playerRef);
     }
 
     private void Awake()
@@ -192,6 +203,7 @@ public class AudioManager : MonoBehaviour
                 if (numMonstersChasing == 1)
                 {
                     _sfxMonsterChaseLoop.Play();
+                    _instanceCloseDanger.start();
                 }
                 Gamepad.current?.SetMotorSpeeds(0.0625f, .15f);
             }
@@ -203,6 +215,8 @@ public class AudioManager : MonoBehaviour
                     Gamepad.current?.SetMotorSpeeds(0, 0f);
                     numMonstersChasing = 0;
                     _sfxMonsterChaseLoop.Stop();
+                    _instanceCloseDanger.stop(STOP_MODE.ALLOWFADEOUT);
+                    _instanceCloseDanger.setParameterByName("Monster Distance", 0);
                 }
             }
         }
@@ -211,6 +225,7 @@ public class AudioManager : MonoBehaviour
     public void StopChaseMusic()
     {
         _sfxMonsterChaseLoop.Stop();
+        _instanceCloseDanger.stop(STOP_MODE.ALLOWFADEOUT);
     }
     #endregion
 
