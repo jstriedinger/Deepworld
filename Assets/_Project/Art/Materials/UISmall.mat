@@ -15,7 +15,7 @@ Material:
   - ATLAS_ON
   - GLOWLIGHT_ON
   - GLOW_ON
-  - ROUNDWAVEUV_ON
+  - WAVEUV_ON
   m_InvalidKeywords:
   - _GLOWAFFECTLIGHT_ON
   m_LightmapFlags: 4
@@ -119,7 +119,7 @@ Material:
     - _DistortAmount: 0.05
     - _DistortTexXSpeed: 0.5
     - _DistortTexYSpeed: 0.5
-    - _EditorDrawers: 15
+    - _EditorDrawers: 4
     - _FadeAmount: 1
     - _FadeBurnGlow: 1
     - _FadeBurnTransition: 0.5
@@ -133,7 +133,7 @@ Material:
     - _GhostTransparency: 0.857
     - _GlitchAmount: 3
     - _GlitchSize: 1
-    - _Glow: 1
+    - _Glow: 2
     - _GlowAffectLight: 1
     - _GlowGlobal: 1
     - _GradBlend: 1
@@ -198,8 +198,8 @@ Material:
     - _RandomSeed: 0
     - _RectSize: 1
     - _RotateUvAmount: 0
-    - _RoundWaveSpeed: 1
-    - _RoundWaveStrength: 0.01
+    - _RoundWaveSpeed: 0.18
+    - _RoundWaveStrength: 0.02
     - _ShadowAlpha: 0.5
     - _ShadowX: 0.1
     - _ShadowY: -0.05
@@ -216,11 +216,11 @@ Material:
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.75
-    - _WaveAmount: 7
-    - _WaveSpeed: 10
-    - _WaveStrength: 10.5
-    - _WaveX: 0.5
-    - _WaveY: 0.5
+    - _WaveAmount: 5
+    - _WaveSpeed: 3.5
+    - _WaveStrength: 10
+    - _WaveX: 0.3
+    - _WaveY: 0.4
     - _ZTestMode: 4
     - _ZWrite: 0
     - _ZoomUvAmount: 0.5

@@ -10,6 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765166502467725063, guid: a4d5c2572708945d6ab332e46bc5fdfb,
         type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ef017112adbf4537ace2d75b440e48b,
+        type: 3}
+    - target: {fileID: 765166502467725063, guid: a4d5c2572708945d6ab332e46bc5fdfb,
+        type: 3}
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
@@ -21,7 +27,7 @@ PrefabInstance:
     - target: {fileID: 3264445730383427813, guid: a4d5c2572708945d6ab332e46bc5fdfb,
         type: 3}
       propertyPath: m_Name
-      value: Grass-1
+      value: Grass-FG
       objectReference: {fileID: 0}
     - target: {fileID: 6274738727964342987, guid: a4d5c2572708945d6ab332e46bc5fdfb,
         type: 3}

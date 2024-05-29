@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e6c55deeb9e4dbc9faa131335ab276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 3539995148590980320}
   targetGroup: {fileID: 3911235152976901046}
   lerpDuration: 2.5
   camZoomPlayer: 24
@@ -165,15 +166,16 @@ PolygonCollider2D:
       - {x: 1177.0391, y: -554.7427}
       - {x: 1240.594, y: -551.1296}
       - {x: 1275.6476, y: -592.96466}
-      - {x: 1296.6776, y: -609.66907}
+      - {x: 1265.4028, y: -612.12195}
       - {x: 1264.1752, y: -645.9811}
       - {x: 1239.6215, y: -683.07245}
       - {x: 1190.6293, y: -712.3026}
       - {x: 1176.1414, y: -790.8367}
       - {x: 1152.7429, y: -884.14154}
       - {x: 1199.3209, y: -959.32367}
-      - {x: 1368.9852, y: -993.4363}
-      - {x: 1408.0931, y: -1061.8716}
+      - {x: 1354.2677, y: -1006.9273}
+      - {x: 1374.3655, y: -1058.1921}
+      - {x: 1407.714, y: -1105.3639}
       - {x: 1397.5416, y: -1161.2018}
       - {x: 1413.5778, y: -1251.3751}
       - {x: 1436.4973, y: -1378.3071}
@@ -182,12 +184,12 @@ PolygonCollider2D:
       - {x: 1514.7836, y: -1292.8912}
       - {x: 1533.5012, y: -1174.0674}
       - {x: 1554.9631, y: -1112.0184}
-      - {x: 1474.161, y: -1007.8553}
-      - {x: 1481.2351, y: -939.91516}
+      - {x: 1487.0388, y: -1010.3082}
+      - {x: 1494.7262, y: -955.2459}
       - {x: 1504.9235, y: -827.1064}
       - {x: 1464.1984, y: -738.1091}
       - {x: 1455.8665, y: -663.85834}
-      - {x: 1380.7172, y: -593.6984}
+      - {x: 1448.7858, y: -591.24554}
       - {x: 1375.3674, y: -480.23807}
       - {x: 1331.4965, y: -471.5255}
       - {x: 1289.1478, y: -429.31915}
@@ -232,8 +234,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7253303692650444840}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -994.6342, y: 524.4357, z: -165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -994.634, y: 564.9357, z: -165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -261,7 +263,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 19
     OrthographicSize: 28
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -286,7 +288,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7253303692650444840}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
@@ -347,12 +349,12 @@ Transform:
   m_GameObject: {fileID: 7574655857494226001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -994.6342, y: 524.4357, z: -165}
+  m_LocalPosition: {x: -994.634, y: 564.9357, z: -165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 193075210771597026}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 19.584, y: 0, z: 0}
 --- !u!20 &6700567254371377496
 Camera:
   m_ObjectHideFlags: 0
@@ -386,8 +388,8 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60
-  orthographic: 1
+  field of view: 19
+  orthographic: 0
   orthographic size: 28
   m_Depth: -1
   m_CullingMask:
@@ -428,7 +430,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -492,9 +494,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a31356959ac1f436fab2ab383bb939e3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cd13405d9ced04aa2803bc6d0f57b6e9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -700,10 +702,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  m_NoiseProfile: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 0.8
-  m_FrequencyGain: 0.4
+  m_AmplitudeGain: 0.3
+  m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &8916493613574645936
 GameObject:
@@ -731,7 +733,7 @@ Transform:
   m_GameObject: {fileID: 8916493613574645936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1143.5339, y: 285.53574, z: 0}
+  m_LocalPosition: {x: -1050.934, y: 254.83572, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -752,4 +754,7 @@ MonoBehaviour:
   m_PositionMode: 0
   m_RotationMode: 0
   m_UpdateMethod: 2
-  m_Targets: []
+  m_Targets:
+  - target: {fileID: 0}
+    weight: 1.25
+    radius: 28

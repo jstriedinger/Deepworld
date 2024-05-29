@@ -5,27 +5,14 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     public int index { get; set; }
     private Transform spawnPoint;
-    private GameManager gameManager;
 
     private void Awake()
     {
         spawnPoint = transform.GetChild(0);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

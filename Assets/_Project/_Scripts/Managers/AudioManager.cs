@@ -229,5 +229,27 @@ public class AudioManager : MonoBehaviour
     }
     #endregion
 
-    
+    //reduces background music volume to better hear something
+    //for now it uses the friend music right away
+    public void ToggleMusicVolume(bool off)
+    {
+        float vol = 0;
+        if (off)
+        {
+            DOTween.To(() =>
+                {
+                    _instanceFriend.getVolume(out vol);
+                    return vol;
+                }, x => { _instanceFriend.setVolume(x); }, 0.3f, 2);
+        }
+        else
+        {
+            DOTween.To(() =>
+            {
+                _instanceFriend.getVolume(out vol);
+                return vol;
+            }, x => { _instanceFriend.setVolume(x); }, 1, 2);
+        }
+
+    }
 }

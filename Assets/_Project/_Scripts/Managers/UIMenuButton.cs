@@ -20,7 +20,6 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     private void Awake()
     {
         _btnText = GetComponentInChildren<TextMeshProUGUI>();
-        Debug.Log(_btnText.ToString());
     }
 
     public void OnSelect(BaseEventData eventData)

@@ -7,23 +7,26 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public enum GameState
 {
     Default,
     Paused,
+    MainMenu,
     Cinematic
 }
 
 
 public class GameManager : MonoBehaviour
 {
-    private enum HowToStart
+    private enum StartSection
     {
         Default,
         Checkpoint1,
         Checkpoint2,
-        Checkpoint3
+        Checkpoint3,
+        Checkpoint4
     }
 
     public static event Action OnRestartingGame;
@@ -31,28 +34,21 @@ public class GameManager : MonoBehaviour
     [Header("Systems")]
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private UIManager uiManager;
+    
 
     [Header("Level management")] 
-    [SerializeField] private HowToStart howToStart;
+    [SerializeField] private StartSection startSection;
     [SerializeField] private Level1Manager level1;
-    [SerializeField] private GameObject level2;
+    [SerializeField] private GameObject[] levelSections;
     [SerializeField] CheckPoint[] checkPoints;
 
     [Header("Others")] 
     [SerializeField] private Light2D globalPlayerLight;
     public MonsterPlayer playerRef;
     public GameObject playerLastPosition;
-    [SerializeField] private Volume _volume;
 
     
-    [Header("UI")]
-    [SerializeField] private CanvasGroup fadeOut;
-    [SerializeField] private CanvasGroup uiPause;
-    [SerializeField] private Button uiContinueBtn;
-    private bool isPauseFading = false;
-
-
-
     [HideInInspector]
     public static bool IsPlayerDead;
     private int _currentCheckPointIndex = -1;
@@ -62,121 +58,127 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        //UI stuff
-        fadeOut.gameObject.SetActive(true);
-        uiPause.gameObject.SetActive(false);
-        uiPause.alpha = 0;
+        //all sections are off except for the first one
+        foreach (GameObject levelSection in levelSections)
+        {
+            levelSection.SetActive(false);
+        }
         
         _originPos = playerRef.transform.position;
         IsPlayerDead = false;
         _gameState = GameState.Cinematic;
 
-        playerLastPosition.transform.position = playerRef.transform.position;
+        playerLastPosition.transform.position = _originPos;
         
         //bind pause
-        MonsterPlayer.PlayerOnPause += OnPauseGame;
         
         audioManager.Initialize(playerRef.transform);
+    }
+
+    private void OnEnable()
+    {
+        MonsterPlayer.PlayerOnPause += TogglePauseGame;
+    }
+
+    private void OnDisable()
+    {
+        MonsterPlayer.PlayerOnPause -= TogglePauseGame;
     }
 
 
     void Start()
     {
-        fadeOut.DOFade(0, 3).SetEase(Ease.InQuad);
-        
+        _currentCheckPointIndex = (int)startSection;
+        Debug.Log("Checkpoint is: "+(int)startSection);
         //now lets decide how to actually start the game
         Transform cp;
-        if (howToStart != HowToStart.Default)
+        if (startSection != StartSection.Default)
         {
             //if not default lets change our camera tracking
             cameraManager.ChangeCameraTracking();
             cameraManager.ChangePlayerRadius(30, true);
             ChangeGameState(GameState.Default);
-            level2.SetActive(true);
-            //UpdateVolumeToLevel();
             playerRef.isHidden = true;
             
-            audioManager.ChangeBackgroundMusic(1);
-            DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
 
+            if (startSection != StartSection.Checkpoint1)
+            {
+                audioManager.ChangeBackgroundMusic(1);
+                DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
+                levelSections[2].SetActive(true);
+            }
+            else
+            {
+                ///for now the 3 section is just the "second" level
+                levelSections[0].SetActive(true);
+            }
         }
         else
         {
-            level2.SetActive(false);
             audioManager.ChangeBackgroundMusic(0);
         }
         
-        switch (howToStart)
+        switch (startSection)
         {
-            case HowToStart.Default:
+            case StartSection.Default:
                 //on level 1
                 ChangeGameState(GameState.Cinematic);
-                _currentCheckPointIndex = 0;
                 level1.StartLevel();
                 break;
-            case HowToStart.Checkpoint1:
-                _currentCheckPointIndex = 1;
+            case StartSection.Checkpoint1:
+                levelSections[_currentCheckPointIndex].SetActive(true);
                 break;
-            case HowToStart.Checkpoint2:
-                _currentCheckPointIndex = 2;
+            case StartSection.Checkpoint2:
                 break;
-            case HowToStart.Checkpoint3:
-                _currentCheckPointIndex = 3;
+            case StartSection.Checkpoint3:
                 break;
             
         }
         cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
         playerRef.transform.position = cp.position;
     }
+    
+    
 
     /**
      * Changes the game state and takes care of anything that must be done when the game enters that state
      */
     public void ChangeGameState(GameState pNewState)
     {
-        
-        switch(pNewState) 
-        { 
-            case GameState.Cinematic:
-                playerRef.ToggleInput(false);
-                break;
-            case GameState.Paused: 
-                
-                isPauseFading = true;
-                uiPause.gameObject.SetActive(true);
-                playerRef.ToggleInputMap(true);
-                uiPause.DOFade(1, 0.2f).OnComplete(()=>{
-                    Time.timeScale = 0;
-                    isPauseFading = false;
-                });
-                Gamepad.current?.PauseHaptics();
-                break;
-            case GameState.Default:
-                playerRef.ToggleInput(true);
-                if (_gameState == GameState.Paused)
-                {
-                    //it was paused
-                    isPauseFading = true;
-                    Time.timeScale = 1;
-                    uiPause.DOFade(0, 0.2f).OnComplete(() =>
-                    {
-                        uiContinueBtn.Select();
-                        uiPause.gameObject.SetActive(false);
-                        isPauseFading = false;
-                    });
-                }
-                else if(_gameState == GameState.Cinematic)
+        if (pNewState != _gameState)
+        {
+            switch(pNewState) 
+            { 
+                case GameState.MainMenu:
+                    playerRef.ToggleInputMap(true);
                     playerRef.ToggleInput(true);
-                //always come back to player action map
-                playerRef.ToggleInputMap(false);
-                Time.timeScale = 1;
-                break;
-            default:
-                Gamepad.current?.ResumeHaptics();
-                break;
+                    break;
+                case GameState.Cinematic:
+                    playerRef.ToggleInput(false);
+                    break;
+                case GameState.Paused:
+                    playerRef.ToggleInputMap(true);
+                    uiManager.PauseGame(true);
+                    break;
+                case GameState.Default:
+                    playerRef.ToggleInput(true);
+                    if (_gameState == GameState.Paused)
+                    {
+                        uiManager.PauseGame(false);
+                    }
+                    
+                    //always come back to player action map
+                    playerRef.ToggleInputMap(false);
+                    Time.timeScale = 1;
+                    break;
+                default:
+                    Gamepad.current?.ResumeHaptics();
+                    break;
 
+            }
+            _gameState = pNewState;
+            
         }
-        _gameState = pNewState;
 
     }
 
@@ -189,7 +191,7 @@ public class GameManager : MonoBehaviour
         //MetricManagerScript.instance?.LogString("Death", "1");
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1);
-        seq.Append(fadeOut.DOFade(1, 2).SetEase(Ease.InCubic).OnComplete(
+        seq.Append(uiManager.blackout.DOFade(1, 2).SetEase(Ease.InCubic).OnComplete(
             () =>
             {
                 //Put player on checkpoint
@@ -203,7 +205,6 @@ public class GameManager : MonoBehaviour
                     playerRef.transform.position = _originPos;
                 }
                 cameraManager.ResetTargetGroup();
-                //fadeOut.alpha = 1;
 
             }
         ));
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour
             //OnRestartingGame?.Invoke();
         });
         seq.AppendInterval(1.5f);
-        seq.Append(fadeOut.DOFade(0, 2).OnComplete(
+        seq.Append(uiManager.blackout.DOFade(0, 2).OnComplete(
             () =>
             {
                 IsPlayerDead = false;
@@ -246,14 +247,12 @@ public class GameManager : MonoBehaviour
     }
     
     #region UI
-    public void OnPauseGame()
+    public void TogglePauseGame()
     {
-        if (!isPauseFading)
+        if (!uiManager.isPauseFading)
         {
-            //hold up the 0.2 it takes for the text fading animation to happen
-            Debug.Log("Trying to pause/unpause");
             //only pause if we are not in a cinematic
-            if (_gameState != GameState.Cinematic)
+            if (_gameState != GameState.Cinematic && _gameState != GameState.MainMenu)
             {
                 if(_gameState == GameState.Paused)
                     ChangeGameState(GameState.Default);
@@ -263,14 +262,39 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void UIQuitGame()
+    public void QuitGame()
     {
         #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
         #else
-                Application.Quit();
+                        Application.Quit();
         #endif
     }
+
+    public void StartGame()
+    {
+        uiManager.StartGame();
+    }
+    
+    public void ShowMainMenuFirstTime()
+    {
+        ChangeGameState(GameState.MainMenu);
+        uiManager.ShowMainMenu();
+        
+    }
+
+    public void UIShowCredits()
+    {
+        uiManager.ShowMenuCredits();
+    }
+
+    public void UIShowMenu()
+    {
+        uiManager.ShowMainMenu();
+    }
+    
+    
+    
     #endregion
 
     //adds an enemy to our camera so player can see them
@@ -288,7 +312,7 @@ public class GameManager : MonoBehaviour
         //globalPlayerLight.intensity = 0.2f;
         
     }
-
+    
 
 }
 

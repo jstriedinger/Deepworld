@@ -102,7 +102,7 @@ public class MonsterPlayer : MonoBehaviour
             if (Time.time >= _nextCall)
             {
                 _nextCall = Time.time + 2f;
-                StartCoroutine(PlayCallSFX());
+                StartCoroutine(PlayCallSFX(true));
             }
         }
     }
@@ -151,9 +151,9 @@ public class MonsterPlayer : MonoBehaviour
         else
             playerInput.actions.FindAction(actionName).Enable();
     }
-    public void ToggleInputMap(bool changeToPause)
+    public void ToggleInputMap(bool toUI)
     {
-        if (changeToPause)
+        if (toUI)
             playerInput.SwitchCurrentActionMap("UI");
         else
             playerInput.SwitchCurrentActionMap("Player");
@@ -164,6 +164,7 @@ public class MonsterPlayer : MonoBehaviour
     public void StopMovement()
     {
         _moveInputValue = Vector2.zero;
+        _rigidBody.velocity = Vector2.zero;
     }
 
    
@@ -282,7 +283,7 @@ public class MonsterPlayer : MonoBehaviour
 
    
 
-    public IEnumerator PlayCallSFX()
+    public IEnumerator PlayCallSFX(bool respond)
     {
         vfxVoice.Play();
         yield return new WaitForSeconds(0.2f);
@@ -296,7 +297,7 @@ public class MonsterPlayer : MonoBehaviour
         }
         FMODUnity.RuntimeManager.PlayOneShot(_sfxCallLastTime, transform.position);
         
-        if (_blueRef)
+        if (_blueRef && respond)
         {
             //tell blue to do a call as well
             yield return new WaitForSeconds(Random.Range(1f, 1.75f));

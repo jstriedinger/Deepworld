@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2374796366600156981}
   - component: {fileID: 8736285364790976682}
+  - component: {fileID: 2931836815834029951}
+  - component: {fileID: 1765660057177189511}
   - component: {fileID: 2232003874651656951}
   - component: {fileID: 7199570154390944304}
   m_Layer: 0
@@ -46,23 +48,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f5a8f505c9540109bb271f147e6895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howToStart: 1
+  cameraManager: {fileID: 0}
+  audioManager: {fileID: 1765660057177189511}
+  uiManager: {fileID: 2931836815834029951}
+  startSection: 1
   level1: {fileID: 0}
-  level2: {fileID: 0}
+  levelSections:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   checkPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  cameraManager: {fileID: 0}
+  - {fileID: 0}
+  globalPlayerLight: {fileID: 0}
   playerRef: {fileID: 0}
   playerLastPosition: {fileID: 0}
-  _volume: {fileID: 0}
-  fadeOut: {fileID: 0}
-  uiPause: {fileID: 0}
-  uiPauseControlsKeyboard: {fileID: 0}
-  uiPauseControlsGamepad: {fileID: 0}
-  uiContinueBtn: {fileID: 0}
+--- !u!114 &2931836815834029951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f483404332c824fcfbd6901cdcb4ea0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackout: {fileID: 0}
+  pauseGroup: {fileID: 0}
+  logoSprite: {fileID: 0}
+  creditsSprite: {fileID: 0}
+  mainMenuGroup: {fileID: 0}
+  mainMenu: {fileID: 0}
+  mainMenuBack: {fileID: 0}
+  pauseContinueBtn: {fileID: 0}
+  isPauseFading: 0
+--- !u!114 &1765660057177189511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a553ca0fc314b29b72d702b88f140b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxFirstMonsterAppear:
+    Guid:
+      Data1: -1608885101
+      Data2: 1175459041
+      Data3: 1663358906
+      Data4: 2075521201
+    Path: event:/SFX/sfx_monster_distance
   musicAmbientIntro:
     Guid:
       Data1: 1969113685
@@ -84,29 +127,14 @@ MonoBehaviour:
       Data3: -326485091
       Data4: -572433713
     Path: event:/Music/MX_Friend
-  sfxMonsterAtDistance:
+  musicCloseDanger:
     Guid:
-      Data1: -1608885101
-      Data2: 1175459041
-      Data3: 1663358906
-      Data4: 2075521201
-    Path: event:/SFX/sfx_monster_distance
-  sfxShelterEnter:
-    Guid:
-      Data1: 1188042724
-      Data2: 1291741675
-      Data3: -2071469125
-      Data4: -1060360293
-    Path: event:/SFX/sfx_covermuffle in
-  sfxShelterExit:
-    Guid:
-      Data1: -995696551
-      Data2: 1235270268
-      Data3: 1084793497
-      Data4: -2133877000
-    Path: event:/SFX/sfx_covermuffle out
+      Data1: 441034817
+      Data2: 1296675386
+      Data3: -10576211
+      Data4: -88329017
+    Path: event:/Music/Monster_Chasing_Sub
   numMonstersChasing: 0
-  numMonstersOnScreen: 0
 --- !u!114 &2232003874651656951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +151,8 @@ MonoBehaviour:
   UnloadEvent: 2
   Banks:
   - Master
+  - Music
+  - SFX
   CollisionTag: 
   PreloadSamples: 1
 --- !u!114 &7199570154390944304

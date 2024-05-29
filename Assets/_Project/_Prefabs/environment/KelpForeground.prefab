@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _internalLight2D: {fileID: 0}
-  length: 18
+  length: 16
   segmentPoses:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}

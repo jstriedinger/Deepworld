@@ -17,7 +17,8 @@ public class BlueNPC : MonoBehaviour
     [SerializeField] ParticleSystem VFXSwimBubbles;
     [SerializeField] EventReference SFXSwim;
     
-    private Transform playerRef;
+    [HideInInspector]
+    public Transform targetRef;
     [Header("Audio")]
     [SerializeField] private ParticleSystem vfxVoice;
     [SerializeField] private EventReference sfxCall1;
@@ -45,9 +46,10 @@ public class BlueNPC : MonoBehaviour
     {
         _playBubbles = true;
         StartCoroutine("NPCBubbleSwim");
-        playerRef = _aiDestinationSetter.target;
+        targetRef = _aiDestinationSetter.target;
         //AIBluePath.enabled = false;
     }
+    
 
 
     public IEnumerator PlayCallSFX()
@@ -69,7 +71,7 @@ public class BlueNPC : MonoBehaviour
     private void Update()
     {
         //_swimDir = (_rigidbody2D.velocity).normalized;
-        _swimDir = (playerRef.transform.position - transform.position).normalized;
+        _swimDir = (targetRef.transform.position - transform.position).normalized;
     }
 
     public IEnumerator Swim()
