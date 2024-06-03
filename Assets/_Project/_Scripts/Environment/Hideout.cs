@@ -22,7 +22,7 @@ public class Hideout : MonoBehaviour
             MonsterPlayer monsterPlayer = collision.gameObject.GetComponent<MonsterPlayer>();
             monsterPlayer.isHidden = true;
             //Sound effect
-            FMODUnity.RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
+            RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
 
             Collider2D[] monsterHits = Physics2D.OverlapCircleAll(transform.position, 40, LayerMask.GetMask("Monster"));
             //lets tell the monster chasing that were near the shelter
@@ -40,6 +40,11 @@ public class Hideout : MonoBehaviour
             MetricManagerScript.instance?.LogString("Hideout", "Enter");
 
         }
+        else if (collision.gameObject.CompareTag("Blue"))
+        {
+            //just the sound
+            RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
+        }
     }
 
 
@@ -54,6 +59,11 @@ public class Hideout : MonoBehaviour
             //metric handler
             MetricManagerScript.instance?.LogString("Hideout", "Exit");
 
+        }
+        else if (collision.gameObject.CompareTag("Blue"))
+        {
+            //just the sound
+            RuntimeManager.PlayOneShot(configuration.SfxExit, transform.position);
         }
     }
 

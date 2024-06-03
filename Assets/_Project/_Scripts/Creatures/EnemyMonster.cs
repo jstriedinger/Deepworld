@@ -21,7 +21,6 @@ public class EnemyMonster : MonoBehaviour
     
     [SerializeField] private LineRenderer[] _tentacles;
     [SerializeField] private Transform _headObj;
-    [SerializeField] private Transform _pupilObj;
     [SerializeField] private Light2D _headLight;
     [SerializeField] private bool _canAffectCamera = true;
     

@@ -13,15 +13,21 @@ public class AudioManager : MonoBehaviour
 {
     [Header("Audio sfx")]
     [SerializeField] private EventReference sfxFirstMonsterAppear;
+    public EventReference sfxMonsterScream;
+    [SerializeField] private EventReference sfxBlueCall;
+    [SerializeField] private EventReference sfxBlueScream;
+    
     private StudioEventEmitter _sfxMonsterChaseLoop;
     
+    [FormerlySerializedAs("musicAmbientIntro")]
     [Header("Music")]
-    [SerializeField] private EventReference musicAmbientIntro;
-    [SerializeField] private EventReference musicAmbientDanger;
+    [SerializeField] private EventReference musicIntro;
     [SerializeField] private EventReference musicBlue;
+    [SerializeField] private EventReference musicMystery;
     [SerializeField] private EventReference musicCloseDanger;
-    private FMOD.Studio.EventInstance _instanceAmbientIntro, _instanceAmbientDanger, _instanceFriend, _currentInstancePlaying,
-        _instanceCloseDanger;
+    [SerializeField] private EventReference musicUnderworld;
+    private FMOD.Studio.EventInstance _instanceMusicIntro, _instanceMusicUnderworld, _instanceMusicBlue, _currentInstancePlaying,
+        _instanceCloseDanger, _instanceMusicMystery;
     // order of above 0 = ambient intro 1= danger 2=friend
     private int _currentMusicIndex;
     private Transform _playerRef;
@@ -50,16 +56,23 @@ public class AudioManager : MonoBehaviour
     public void Initialize(Transform playerRef)
     {
         _playerRef = playerRef;
-        _instanceAmbientIntro = RuntimeManager.CreateInstance(musicAmbientIntro.Guid);
-        _instanceAmbientDanger = RuntimeManager.CreateInstance(musicAmbientDanger.Guid);
-        _instanceAmbientDanger.setVolume(0.5f);
-        _instanceFriend = RuntimeManager.CreateInstance(musicBlue.Guid);
+        _instanceMusicIntro = RuntimeManager.CreateInstance(musicIntro.Guid);
+        _instanceMusicBlue = RuntimeManager.CreateInstance(musicBlue.Guid);
+        _instanceMusicMystery = RuntimeManager.CreateInstance(musicMystery.Guid);
         _instanceCloseDanger = RuntimeManager.CreateInstance(musicCloseDanger.Guid);
+        _instanceMusicUnderworld = RuntimeManager.CreateInstance(musicUnderworld.Guid);
         
-        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientIntro, _playerRef);
-        RuntimeManager.AttachInstanceToGameObject(_instanceAmbientDanger, _playerRef);
-        RuntimeManager.AttachInstanceToGameObject(_instanceFriend, _playerRef);
+        //all volume starts in zero
+        _instanceMusicIntro.setVolume(0);
+        _instanceMusicBlue.setVolume(0);
+        _instanceMusicMystery.setVolume(0);
+        _instanceMusicUnderworld.setVolume(0);
+        
+        RuntimeManager.AttachInstanceToGameObject(_instanceMusicIntro, _playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceMusicUnderworld, _playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceMusicBlue, _playerRef);
         RuntimeManager.AttachInstanceToGameObject(_instanceCloseDanger, _playerRef);
+        RuntimeManager.AttachInstanceToGameObject(_instanceMusicMystery, _playerRef);
     }
 
     private void Awake()
@@ -71,44 +84,115 @@ public class AudioManager : MonoBehaviour
     //Stop al background music instances
     public void StopAllFMODInstances()
     {
-        _instanceAmbientIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        _instanceAmbientDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        _instanceFriend.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        _instanceMusicIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        _instanceMusicUnderworld.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        _instanceMusicBlue.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         _instanceCloseDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
    
     
-    //Change bg music. 0 = intro, 1=danger 2= friends
+    //Change background music smoothly.
+    //1 = intro, 2=Blue 3=mystery 4=closeDanger 5=underworld
     public void ChangeBackgroundMusic(int newMusic)
     {
+        float vol = 0;
+        Sequence seq = DOTween.Sequence();
+        
         switch (_currentMusicIndex)
         {
-            case 0:
-                _instanceAmbientIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                break;
             case 1:
-                _instanceAmbientDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                seq.Append(DOTween.To(() =>
+                    {
+                        _instanceMusicIntro.getVolume(out vol);
+                        return vol;
+                    },
+                    x => { _instanceMusicIntro.setVolume(x); }, 0, 2));
+                seq.AppendCallback(() => { _instanceMusicIntro.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); });
+                
                 break;
             case 2:
-                _instanceFriend.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                seq.Append(DOTween.To(() =>
+                    {
+                        _instanceMusicBlue.getVolume(out vol);
+                        return vol;
+                    },
+                    x => { _instanceMusicBlue.setVolume(x); }, 0, 3));
+                seq.AppendCallback(() => { _instanceMusicBlue.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); });
+                break;
+            case 3:
+                seq.Append(DOTween.To(() =>
+                    {
+                        _instanceMusicMystery.getVolume(out vol);
+                        return vol;
+                    },
+                    x => { _instanceMusicMystery.setVolume(x); }, 0, 3));
+                seq.AppendCallback(() => { _instanceMusicMystery.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); });
+                break;
+            case 4:
+                seq.Append(DOTween.To(() =>
+                    {
+                        _instanceCloseDanger.getVolume(out vol);
+                        return vol;
+                    },
+                    x => { _instanceCloseDanger.setVolume(x); }, 0, 3));
+                seq.AppendCallback(() => { _instanceCloseDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); });
+                
+                break;
+            case 5:
+                seq.Append(DOTween.To(() =>
+                    {
+                        _instanceMusicUnderworld.getVolume(out vol);
+                        return vol;
+                    },
+                    x => { _instanceMusicUnderworld.setVolume(x); }, 0, 3));
+                seq.AppendCallback(() => { _instanceMusicUnderworld.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); });
                 break;
         }
         switch (newMusic)
         {
-            case 0:
-                Debug.Log("Intro music");
-                _instanceAmbientIntro.start();
+            case 1:
+                seq.AppendCallback(() =>    
+                {
+                    _instanceMusicIntro.setVolume(1);
+                    _instanceMusicIntro.start();
+                    
+                });
                 break;
-            case 1: 
-                Debug.Log("Danger music");
-                _instanceAmbientDanger.start();
+            case 2: 
+                seq.AppendCallback(() =>    
+                {
+                    _instanceMusicBlue.setVolume(1);
+                    _instanceMusicBlue.start();
+                });
                 break;
-            case 2:
-                Debug.Log("blue music");
-                _instanceFriend.start();
+            case 3:
+                seq.AppendCallback(() =>    
+                {
+                    
+                    _instanceMusicMystery.setVolume(1);
+                    _instanceMusicMystery.start();
+                    
+                });
                 break;
-            
+            case 4:
+                seq.AppendCallback(() =>    
+                {
+                    
+                    _instanceCloseDanger.setVolume(1);
+                    _instanceCloseDanger.start();
+                    
+                });
+                break;
+            case 5:
+                seq.AppendCallback(() =>    
+                {
+                    
+                    _instanceMusicUnderworld.setVolume(1);
+                    _instanceMusicUnderworld.start(); 
+                    
+                });
+                break;
         }
 
         _currentMusicIndex = newMusic;
@@ -137,12 +221,12 @@ public class AudioManager : MonoBehaviour
                 .Join(
                     DOTween.To(() =>
                         {
-                            _instanceFriend.getVolume(out vol);
+                            _instanceMusicBlue.getVolume(out vol);
                             return vol;
 
                         },
 
-                        x => { _instanceFriend.setVolume(x); }, 0, 7)
+                        x => { _instanceMusicBlue.setVolume(x); }, 0, 7)
                 );
         }
         else
@@ -162,12 +246,12 @@ public class AudioManager : MonoBehaviour
                 .Join(
                     DOTween.To(() =>
                         {
-                            _instanceFriend.getVolume(out vol);
+                            _instanceMusicBlue.getVolume(out vol);
                             return vol;
 
                         },
 
-                        x => { _instanceFriend.setVolume(x); }, 1, 7)
+                        x => { _instanceMusicBlue.setVolume(x); }, 1, 7)
                 )
                 .OnComplete(() =>
                 {
@@ -238,18 +322,60 @@ public class AudioManager : MonoBehaviour
         {
             DOTween.To(() =>
                 {
-                    _instanceFriend.getVolume(out vol);
+                    _instanceMusicBlue.getVolume(out vol);
                     return vol;
-                }, x => { _instanceFriend.setVolume(x); }, 0.3f, 2);
+                }, x => { _instanceMusicBlue.setVolume(x); }, 0.3f, 3);
         }
         else
         {
             DOTween.To(() =>
             {
-                _instanceFriend.getVolume(out vol);
+                _instanceMusicBlue.getVolume(out vol);
                 return vol;
-            }, x => { _instanceFriend.setVolume(x); }, 1, 2);
+            }, x => { _instanceMusicBlue.setVolume(x); }, 1, 3);
         }
 
+    }
+    
+    //Used on first level. Fading out smoothly since there is option added on FMOD and
+    //Im too lazy to open that up
+    public void FadeOutFriendMusic()
+    {
+        float vol = 0;
+        DOTween.To(() =>
+        {
+            _instanceMusicBlue.getVolume(out vol);
+            return vol;
+        }, x => { _instanceMusicBlue.setVolume(x); }, 0, 5)
+            .OnComplete(() =>
+            {
+                _instanceMusicBlue.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            });
+    }
+
+    //Do the cinematic screams of Blue and the monster, as changing the background music
+    public void DoCinematicScreams()
+    {
+        Sequence seq = DOTween.Sequence()
+            .AppendCallback(() =>
+            {
+                RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
+            })
+            .AppendInterval(1f)
+            .AppendCallback(() =>
+            {
+                RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
+                ChangeBackgroundMusic(3);
+            })
+            .AppendInterval(2f)
+            .AppendCallback(() =>
+            {
+                RuntimeManager.PlayOneShot(sfxBlueCall, transform.position);
+            });
+    }
+
+    public void DoCinematicScreamsInsideTunnel()
+    {
+        
     }
 }

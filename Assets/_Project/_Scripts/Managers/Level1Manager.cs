@@ -18,10 +18,7 @@ public class Level1Manager : MonoBehaviour
     
     
     [Header("Title and intro UI")]
-    [SerializeField] private SpriteRenderer LogoUSC;
-    [SerializeField] private SpriteRenderer LogoBerklee;
     [SerializeField] private SpriteRenderer Title;
-    [SerializeField] private CanvasGroup fadeOut;
 
     [FormerlySerializedAs("player")]
     [Header("Player references")]
@@ -36,6 +33,7 @@ public class Level1Manager : MonoBehaviour
     private CameraManager _cameraManager;
     private GameManager _gameManager;
     private AudioManager _audioManager;
+    [SerializeField] private UIManager uiManager;
 
 
     [Header("World UI")]
@@ -73,8 +71,11 @@ public class Level1Manager : MonoBehaviour
 
 
     [Header("Cinematic - earthquake")] 
-    [SerializeField] private AudioClip sfxExplosion;
-    [SerializeField] private GameObject _bluePathEarthquake;
+    [SerializeField] AudioClip sfxExplosion;
+    [SerializeField] GameObject _bluePathEarthquake;
+    
+    [Header("Cinematic - screams")]
+    [SerializeField] EventReference sfxBlueCall;
 
 
     [Header("Final cinematic")]
@@ -99,15 +100,12 @@ public class Level1Manager : MonoBehaviour
     [SerializeField] float blueTime;
 
 
-    private float _iniLogoScale;
 
     private void Awake()
     {
         blueRb = _blueIntro.GetComponent<Rigidbody2D>();
         blueNPCIntro = _blueIntro.GetComponent<BlueNPC>();
         studioEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
-
-        _iniLogoScale = Title.transform.localScale.x;
     }
     
     void Start()
@@ -122,18 +120,8 @@ public class Level1Manager : MonoBehaviour
     
 
     //Start this level. This is called by the gameManager
-    public void StartLevel()
-    {
-        //make all ui invisible by default
-        isUiActive = true;
-        Color transparent = new Color(255, 255, 255, 0);
-        for (int i = 0; i < uiKeyboardIcons.Length; i++)
-        {
-            uiKeyboardIcons[i].color =  uiGamepadIcons[i].color = transparent;
-        }
-        
-        DoCinematicTitles();
-    }
+   
+
     // Start is called before the first frame update
     
 
@@ -180,14 +168,12 @@ public class Level1Manager : MonoBehaviour
     
     private void OnEnable()
     {
-        UIManager.OnStartGame += DoCinematicStartGame;
         MonsterPlayer.PlayerOnControlsChanged += OnControlsChanged;
     }
 
     private void OnDisable()
     {
         MonsterPlayer.PlayerOnControlsChanged -= OnControlsChanged;
-        UIManager.OnStartGame -= DoCinematicStartGame;
     }
 
     #region Cinematics
@@ -200,120 +186,20 @@ public class Level1Manager : MonoBehaviour
        _playerInput.DeactivateInput();
         
         if(bars)
-            ToggleCinematicBars(true);
+            uiManager.ToggleCinematicBars(true);
     }
 
     private void AfterCinematicEnds(bool bars)
     {
-        ToggleCinematicBars(false);
+        uiManager.ToggleCinematicBars(false);
         _playerInput.ActivateInput();
         _playerInput.enabled = true;
         _gameManager.ChangeGameState(GameState.Default);
-       
+
     }
+
+
     
-    /**
-     * Introduction cinematic of the game with logos and title
-     */
-    private void DoCinematicTitles()
-    {
-        BeforeCinematicStarts(false);
-        _noiseAmplitudeBefore = vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain;
-        vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-
-        Transform[] playerPathC0Transforms = _playerC0P1.GetComponentsInChildren<Transform>();
-
-        Transform[] bluePathC0Transforms = _blueC0P1.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathC0Pos = new Vector3[bluePathC0Transforms.Length-1];
-        for (int i = 1; i < bluePathC0Transforms.Length; i++)
-        {
-            bluePathC0Pos[i-1] = bluePathC0Transforms[i].position;
-        }
-
-        Transform[] bluePathC1Transforms = _blueC0P2.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathC1Pos = new Vector3[bluePathC1Transforms.Length-1];
-        for (int i = 1; i < bluePathC1Transforms.Length; i++)
-        {
-            bluePathC1Pos[i-1] = bluePathC1Transforms[i].position;
-        }
-
-
-        Sequence introLogos = DOTween.Sequence()
-            .AppendInterval(3f)
-            .Append(LogoUSC.DOFade(1, 3).SetEase(Ease.InQuart))
-            .Join(blueNPCIntro.transform.DOPath(bluePathC0Pos, blueC0Time, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right)
-                .OnWaypointChange(
-                    (int waypointIndex) =>
-                    {
-                        if (waypointIndex == 2)
-                            StartCoroutine(blueNPCIntro.PlayCallSFX());
-                    }))
-            .Join(LogoUSC.DOFade(0, 3).SetDelay(4f))
-            .Join(LogoBerklee.DOFade(1, 3).SetEase(Ease.InQuart).SetDelay(4f))
-            .Join(LogoBerklee.DOFade(0, 3).SetDelay(4f))
-            .AppendCallback(() =>
-            {
-                blueNPCIntro.transform.position = bluePathC1Pos[0];
-            })
-            .Join(blueNPCIntro.transform
-                .DOPath(bluePathC1Pos, blueC01Time, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right)
-                .SetDelay(2f))
-            .Join(Title.transform.DOScale(_iniLogoScale, 4).SetDelay(3f ))
-            .Join(Title.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(3f ));
-
-        Sequence introMover = DOTween.Sequence()
-        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y, 25)
-            .SetEase(Ease.InOutSine))
-        .Join(camPivotFollow.DOMoveY(playerPathC0Transforms[^1].position.y, 25).SetEase(Ease.InOutSine).OnComplete(
-            () => {
-                mainMenuObject.parent = null;
-            }
-         ))
-        .Join(fadeOut.DOFade(0, 3).SetDelay(0.5f))
-        .Join(introLogos)
-        .OnComplete(
-            () =>
-            {
-                //showMainMenu
-                _gameManager.ShowMainMenuFirstTime();
-            }
-            
-        );
-    }
-
-   
-    //prepare everything to ask the player to use the Call function
-    //A special case of beforeCinematicStarts
-    public void BeforeDoCinematicBlueEncounter()
-    {
-        //disable move input action
-        _playerInput.actions.FindAction("Move").Disable();
-        _player.StopMovement();
-        ToggleCinematicBars(true);
-        
-        //show Call UI prompt
-        if (_playerInput.currentControlScheme == "Gamepad")
-            uiGamepadIcons[2].DOFade(1, 0.75f);
-        else
-            uiKeyboardIcons[2].DOFade(1, 0.75f);
-        
-        //register or waitforcall first time callback
-        _playerInput.actions.FindAction("Call").Enable();
-        _playerInput.actions.FindAction("Call").performed += FirstTimeCallInput;
-
-    }
-
-    private void FirstTimeCallInput(InputAction.CallbackContext ctx)
-    {
-        //does the call normally
-        DoCinematicBlueEncounter();
-        _playerInput.actions.FindAction("Call").performed -= FirstTimeCallInput;
-        
-    }
     
     /* Initial Blue encounter.This is triggered after Player uses the call input */
     public void DoCinematicBlueEncounter()
@@ -329,10 +215,8 @@ public class Level1Manager : MonoBehaviour
         Sequence cinematic = DOTween.Sequence()
             .AppendInterval(2f);
         
-        if (_playerInput.currentControlScheme == "Gamepad")
-            cinematic.Append(uiGamepadIcons[2].DOFade(0, 0.5f));
-        else
-            cinematic.Append(uiKeyboardIcons[2].DOFade(0, 0.5f));
+        uiGamepadIcons[2].DOFade(0, 0.75f);
+        uiKeyboardIcons[2].DOFade(0, 0.75f);
             
         cinematic.AppendCallback(() =>
             {
@@ -410,7 +294,7 @@ public class Level1Manager : MonoBehaviour
             .AppendCallback(() => { StartCoroutine(blueNPCIntro.PlayCallSFX()); })
             .AppendInterval(1f)
             .AppendCallback(() => { StartCoroutine(_player.PlayCallSFX(false)); })
-            .AppendCallback(() => { _cameraManager.ChangePlayerRadius(35); /*cameraManager.AddObjectToTargetGroup(newCamFollow.gameObject);*/ })
+            .AppendCallback(() => { _cameraManager.ChangePlayerRadius(35);  })
             .AppendInterval(0.5f)
             .Append(_player.transform.DOPath(playerPathC3V, blueTime, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -462,101 +346,7 @@ public class Level1Manager : MonoBehaviour
 
     }
 
-    private void ToggleCinematicBars(bool show)
-    {
-        Sequence barsSeq = DOTween.Sequence()
-            .Append(topCinematicBar.DOSizeDelta(new Vector2(0, show? 100 : 0), 1))
-            .Join(bottomCinematicBar.DOSizeDelta(new Vector2(0, show ? 100 : 0), 1));
-        
-    }
-   
-    private void DoCinematicStartGame()
-    {
-
-        //Blue little swim away
-        Transform[] bluePathC2Transforms = _blueC0P3.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathC2Pos = new Vector3[bluePathC2Transforms.Length-1];
-        for (int i = 1; i < bluePathC2Transforms.Length; i++)
-        {
-            bluePathC2Pos[i-1] = bluePathC2Transforms[i].position;
-        }
-        
-        //Green appears from the cave
-        Transform[] playerPathC0Transforms = _playerC0P1.GetComponentsInChildren<Transform>();
-        Vector3[] playerPathC0Pos = new Vector3[playerPathC0Transforms.Length-1];
-        for (int i = 1; i < playerPathC0Transforms.Length; i++)
-        {
-            playerPathC0Pos[i-1] = playerPathC0Transforms[i].position;
-        }
-        
-        //we need the first point of the next Blue cinematic to position her
-        Transform[] nextBlueCinematicTransforms = _blueC1P1.GetComponentsInChildren<Transform>();
-       
-
-        Sequence startGameCinematic = DOTween.Sequence()
-            .AppendInterval(0.5f)
-            .AppendCallback(() =>
-            {
-                StartCoroutine(blueNPCIntro.PlayCallSFX());
-                _player.transform.position = playerPathC0Pos[0];
-            })
-            .Append(blueNPCIntro.transform.DOPath(bluePathC2Pos, 5, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right)
-                .OnComplete(() =>
-                {
-                    var blueTransform = blueNPCIntro.transform;
-                    blueTransform.position = nextBlueCinematicTransforms[1].position + Vector3.down * 5;
-                    blueTransform.rotation = Quaternion.identity;
-                    blueNPCIntro.transform.DOMoveY(nextBlueCinematicTransforms[1].position.y, 1);
-                }))
-            .Join(_player.transform.DOPath(playerPathC0Pos, 6, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right)
-                .SetDelay(1f)
-                .OnComplete(
-                    () =>
-                    {
-                        AfterCinematicEnds(false);
-                        //change targetgroup to us
-                        targetGroup.transform.position = camPivotFollow.position;
-                        vCam.Follow = targetGroup.transform;
-                        ShowMoveControls();
-                        _playerInput.actions.FindAction("Call").Disable();
-                        //MonsterPlayer.PlayerOnControlsChanged += OnControlsChanged;
-                    }
-
-                ))
-            .Append(DOTween.To(() => vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain,
-                x => vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = x, _noiseAmplitudeBefore, 6));;
-    }
     #endregion
-
-
-    //Fadeout title logo + move icons after player moves in a little to the right
-    public void FadeOutUIPt1()
-    {
-        Sequence seq = DOTween.Sequence();
-        seq.SetEase(Ease.OutCubic);
-        seq.Append(Title.transform.DOScale(_iniLogoScale - .25f, 5))
-            .Join(Title.DOFade(0, 3f))
-            .Join(uiKeyboardIcons[0].DOFade(0, 4f))
-            .Join(uiGamepadIcons[0].DOFade(0, 4f));
-
-        seq.OnComplete(() =>
-        {
-            Destroy(Title.gameObject);
-        });
-    }
-    
-    //fading out the dash + call icons
-    public void FadeOutUIPt2()
-    {
-        Sequence seq = DOTween.Sequence();
-        seq.SetEase(Ease.OutCubic);
-        seq.Append(uiKeyboardIcons[1].DOFade(0, 4f))
-            .Join(uiGamepadIcons[1].DOFade(0, 4f));
-    }
 
 
     //Activates danger music for first encoutner of the tutorial
@@ -568,77 +358,7 @@ public class Level1Manager : MonoBehaviour
             _cameraManager.ChangePlayerRadius(28);
         _audioManager.ToggleCloseDangerAndFriendMusic(trigger);
     }
-
-
-    public void DoCinematicEarthquake()
-    {
-       
-        Transform[] bluePathEarthquakeTransforms = _bluePathEarthquake.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathEarthquakePos = new Vector3[bluePathEarthquakeTransforms.Length-1];
-        for (int i = 1; i < bluePathEarthquakeTransforms.Length; i++)
-        {
-            bluePathEarthquakePos[i-1] = bluePathEarthquakeTransforms[i].position;
-        }
-        
-        //path to near player
-        Vector3 dif = blueNPCIntro.targetRef.position - blueNPCIntro.transform.position;
-        Vector3[] closeToPlayerPath = new Vector3[] { (blueNPCIntro.transform.position + dif * 0.8f) };
-        
-        BeforeCinematicStarts(true);
-        Sequence seq = DOTween.Sequence()
-            .Append(blueNPCIntro.transform.DOPath(closeToPlayerPath, 2, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .JoinCallback(() => {_audioManager.ToggleMusicVolume(true);})
-            .AppendCallback(() =>
-            {
-                ShakeCamera();
-                AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position);
-
-            })
-            .AppendInterval(3)
-            .AppendCallback(() =>
-            {
-                StartCoroutine(blueNPCIntro.PlayCallSFX());
-            })
-            .AppendInterval(2)
-            .AppendCallback(() => { StartCoroutine(_player.PlayCallSFX(false)); })
-            .Append(blueNPCIntro.transform.DOPath(bluePathEarthquakePos, 6, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .AppendInterval(1)
-            .OnComplete(
-                () =>
-                {
-                    _audioManager.ToggleMusicVolume(false);
-                    AfterCinematicEnds(true);
-                }
-            );
-
-    }
-
-
-    private void ShakeCamera( )
-    {
-        CinemachineBasicMultiChannelPerlin cmbcp = vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        float beforeAmplitude = cmbcp.m_AmplitudeGain;
-        float beforeFreq = cmbcp.m_FrequencyGain;
-
-        cmbcp.m_AmplitudeGain = .6f;
-        DOTween.To(() => cmbcp.m_FrequencyGain,
-            x => cmbcp.m_FrequencyGain = x, 10, 4).SetLoops(1, LoopType.Yoyo)
-            .OnComplete(() => { 
-                cmbcp.m_AmplitudeGain = beforeAmplitude;
-                cmbcp.m_FrequencyGain = beforeFreq;
-            });
-
-    }
-
-
-
-
-
-
+    
 
 
 

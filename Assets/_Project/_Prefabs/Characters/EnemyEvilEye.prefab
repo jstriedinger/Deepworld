@@ -1104,7 +1104,6 @@ MonoBehaviour:
   - {fileID: 5981271975517618766}
   - {fileID: 7766839229153368042}
   _headObj: {fileID: 8975018061798418240}
-  _pupilObj: {fileID: 1072006124411310023}
   _headLight: {fileID: 5679324004921067343}
   _canAffectCamera: 1
   isChasing: 0
@@ -1309,7 +1308,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ChasingSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ChasingRange","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowRange","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"PatrolInfo","IsShared":true,"List`1mValue":[null,null,null,null,null]},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"playerRef","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isPatrolType","IsShared":true,"BooleanmValue":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"playerLastPosition","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanReactToCall","IsShared":true,"BooleanmValue":false}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ChasingSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ChasingRange","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowRange","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FollowSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"PatrolInfo","IsShared":true,"List`1mValue":[null,null,null,null,null]},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"playerRef","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"isPatrolType","IsShared":true,"BooleanmValue":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"playerLastPosition","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"CanReactToCall","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PatrolSpeed","IsShared":true,"SinglemValue":0}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 

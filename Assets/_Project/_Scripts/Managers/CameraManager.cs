@@ -24,15 +24,19 @@ public class CameraManager : MonoBehaviour
 
 
     private int _numMonstersOnScreen = 0;
+    private float _defaultNoiseAmplitude;
+    private CinemachineBasicMultiChannelPerlin _cbmcp;
+    private GameObject _tmpExtraFollowedObject;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        
+        _cbmcp = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _defaultNoiseAmplitude = _cbmcp.m_AmplitudeGain;
     }
-
     void Start()
     {
+        
         targetGroup.m_Targets[0].radius = camZoomPlayer;
         _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
@@ -45,6 +49,67 @@ public class CameraManager : MonoBehaviour
             virtualCamera.Follow = newTarget.transform;
         else
             virtualCamera.Follow = targetGroup.transform;
+    }
+
+    //Changes from previous followed objet to the targetGroup
+    public void StartFollowingTargetGroup(Transform lastFollow)
+    {
+        targetGroup.transform.position = lastFollow.position;
+        virtualCamera.Follow = targetGroup.transform;
+    }
+
+    public void ChangeFollowedObject(Transform newFollow)
+    {
+        virtualCamera.Follow = newFollow;
+    }
+
+    //Add an extra obj to be followed. Used for camera changes on cinemachine target group
+    public void AddTempFollowedObj(GameObject tmpObj)
+    {
+        _tmpExtraFollowedObject = tmpObj;
+        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer);
+        int memberIndex = targetGroup.FindMember(tmpObj.transform);
+        DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 1.75f, 2);
+    }
+
+    public void RemoveTempFollowedObj()
+    {
+        targetGroup.RemoveMember(_tmpExtraFollowedObject.transform);
+        _tmpExtraFollowedObject = null;
+    }
+
+    //Get back into the default noise amplitude
+    public void ToggleDefaultNoise(bool toggle)
+    {
+        
+        if (toggle)
+        {
+            DOTween.To(() => _cbmcp.m_AmplitudeGain,
+                        x => _cbmcp.m_AmplitudeGain = x,
+                        _defaultNoiseAmplitude, 6);
+            
+        }
+        else
+        {
+            _cbmcp.m_AmplitudeGain = 0;
+        }
+        
+    }
+    
+    public void ShakeCamera()
+    {
+        float beforeFreq = _cbmcp.m_FrequencyGain;
+
+        _cbmcp.m_AmplitudeGain = .5f;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(DOTween.To(() => _cbmcp.m_FrequencyGain,
+                x => _cbmcp.m_FrequencyGain = x, 15, 2))
+            .AppendInterval(1)
+            .Append(DOTween.To(() => _cbmcp.m_FrequencyGain,
+                x => _cbmcp.m_FrequencyGain = x, beforeFreq, 2))
+            .OnComplete(() => { 
+                _cbmcp.m_AmplitudeGain = _defaultNoiseAmplitude;
+            });
     }
 
     //makes all other target with radius 0 so that it focus on the monster that just eat oyr player
@@ -102,7 +167,6 @@ public class CameraManager : MonoBehaviour
 
 
     //adds enemy to camera view
-
     public void AddMonsterToView(GameObject monsterToAdd)
     {
         if(_numMonstersOnScreen == 0)
@@ -200,16 +264,7 @@ public class CameraManager : MonoBehaviour
         }
 
     }
-
-
-
-    public void AddObjectToTargetGroup(GameObject obj)
-
-    {
-
-        targetGroup.AddMember(obj.transform, 2, 45);
-
-    }
+    
 
 
 

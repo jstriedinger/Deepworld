@@ -16,9 +16,11 @@ public class BlueNPC : MonoBehaviour
     [SerializeField] Transform headPart;
     [SerializeField] ParticleSystem VFXSwimBubbles;
     [SerializeField] EventReference SFXSwim;
-    
+
     [HideInInspector]
     public Transform targetRef;
+    public bool followPlayer;
+    
     [Header("Audio")]
     [SerializeField] private ParticleSystem vfxVoice;
     [SerializeField] private EventReference sfxCall1;
@@ -39,6 +41,8 @@ public class BlueNPC : MonoBehaviour
         _aiDestinationSetter = GetComponent<AIDestinationSetter>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _aiBlue.canMove = false;
+        followPlayer = false;
+
     }
 
     // Start is called before the first frame update
@@ -89,7 +93,8 @@ public class BlueNPC : MonoBehaviour
         
         yield return new WaitForSeconds(1.5f);
         _rigidbody2D.velocity = Vector3.zero;
-       _aiBlue.canMove = true;
+        if(followPlayer)
+            _aiBlue.canMove = true;
     }
 
     public void PlayScreamSFX()
@@ -111,6 +116,7 @@ public class BlueNPC : MonoBehaviour
     public void ToggleFollow(bool shouldFollow)
     {
         _aiBlue.canMove = shouldFollow;
+        followPlayer = shouldFollow;
     }
 
     private void OnDrawGizmosSelected()

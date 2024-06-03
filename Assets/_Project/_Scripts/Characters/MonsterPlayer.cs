@@ -96,6 +96,7 @@ public class MonsterPlayer : MonoBehaviour
 
     private void OnCall(InputValue inputValue)
     {
+        Debug.Log("Call!");
         //playerInput.actions.FindAction("Call").Disable();
         if (inputValue.isPressed)
         {

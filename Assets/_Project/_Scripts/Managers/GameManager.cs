@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
         Checkpoint1,
         Checkpoint2,
         Checkpoint3,
-        Checkpoint4
+        Checkpoint4,
+        Checkpoint5,
+        
     }
 
     public static event Action OnRestartingGame;
@@ -35,11 +37,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private CinematicsManager cinematicsManager;
     
 
     [Header("Level management")] 
     [SerializeField] private StartSection startSection;
-    [SerializeField] private Level1Manager level1;
     [SerializeField] private GameObject[] levelSections;
     [SerializeField] CheckPoint[] checkPoints;
 
@@ -59,10 +61,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //all sections are off except for the first one
-        foreach (GameObject levelSection in levelSections)
-        {
-            levelSection.SetActive(false);
-        }
+        
         
         _originPos = playerRef.transform.position;
         IsPlayerDead = false;
@@ -84,12 +83,18 @@ public class GameManager : MonoBehaviour
     {
         MonsterPlayer.PlayerOnPause -= TogglePauseGame;
     }
+    
+    public void StartGame()
+    {
+        uiManager.HideMainMenu();
+        cinematicsManager.DoCinematicStartGame();
+    }
 
 
     void Start()
     {
+        uiManager.Initialize(playerRef);
         _currentCheckPointIndex = (int)startSection;
-        Debug.Log("Checkpoint is: "+(int)startSection);
         //now lets decide how to actually start the game
         Transform cp;
         if (startSection != StartSection.Default)
@@ -101,36 +106,33 @@ public class GameManager : MonoBehaviour
             playerRef.isHidden = true;
             
 
-            if (startSection != StartSection.Checkpoint1)
+            if (_currentCheckPointIndex > 2)
             {
-                audioManager.ChangeBackgroundMusic(1);
                 DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
-                levelSections[2].SetActive(true);
             }
-            else
-            {
-                ///for now the 3 section is just the "second" level
-                levelSections[0].SetActive(true);
-            }
-        }
-        else
-        {
-            audioManager.ChangeBackgroundMusic(0);
+            
         }
         
         switch (startSection)
         {
             case StartSection.Default:
-                //on level 1
                 ChangeGameState(GameState.Cinematic);
-                level1.StartLevel();
+                audioManager.ChangeBackgroundMusic(1);
+                cinematicsManager.DoCinematicTitles();
                 break;
             case StartSection.Checkpoint1:
-                levelSections[_currentCheckPointIndex].SetActive(true);
+                uiManager.isWorldUiActive = true;
+                audioManager.ChangeBackgroundMusic(1);
                 break;
             case StartSection.Checkpoint2:
+                uiManager.isWorldUiActive = true;
+                audioManager.ChangeBackgroundMusic(3);
                 break;
             case StartSection.Checkpoint3:
+                audioManager.ChangeBackgroundMusic(5);
+                break;
+            case StartSection.Checkpoint4:
+                audioManager.ChangeBackgroundMusic(5);
                 break;
             
         }
@@ -271,11 +273,6 @@ public class GameManager : MonoBehaviour
         #endif
     }
 
-    public void StartGame()
-    {
-        uiManager.StartGame();
-    }
-    
     public void ShowMainMenuFirstTime()
     {
         ChangeGameState(GameState.MainMenu);

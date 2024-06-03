@@ -38,7 +38,7 @@ public class BlueMovement : AIPath
     {
         //before any internal stuff lets check if we should swim 
         base.MovementUpdateInternal(deltaTime, out nextPosition, out nextRotation);
-        if ((_playerRef.position - transform.position).sqrMagnitude >= distanceToSwimPow && Time.time >= _nextSwim)
+        if ((_playerRef.position - transform.position).sqrMagnitude >= distanceToSwimPow && Time.time >= _nextSwim && _blueNpc.followPlayer)
         {
             //far away, make blue swim if it can
             if (Time.time >= _nextSwim)

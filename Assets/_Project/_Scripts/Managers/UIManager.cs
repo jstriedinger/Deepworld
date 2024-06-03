@@ -9,7 +9,15 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static event Action OnStartGame;
+    [Header("In-world UI")]
+    public SpriteRenderer logoUsc;
+    public SpriteRenderer logoBerklee;
+    public SpriteRenderer logoTitle;
+    //1. move 2.dash 3.call
+    [SerializeField] private SpriteRenderer[] uiKeyboardIcons;
+    [SerializeField] private SpriteRenderer[] uiGamepadIcons;
+    [SerializeField] private RectTransform topCinematicBar;
+    [SerializeField] private RectTransform bottomCinematicBar;
 
     [Header("Pause Menu")]
     public CanvasGroup blackout;
@@ -24,10 +32,9 @@ public class UIManager : MonoBehaviour
     private Button _mainMenuBackBtn;
     private Button _mainMenuStartBtn;
     [HideInInspector]
-    public bool isPauseFading = false;
+    public bool isPauseFading = false, isWorldUiActive = false;
 
-    //references to other managers
-    private Level1Manager _level1Manager;
+    private MonsterPlayer _playerRef;
 
     private void Awake()
     {
@@ -44,6 +51,15 @@ public class UIManager : MonoBehaviour
         
 
     }
+    private void OnEnable()
+    {
+        MonsterPlayer.PlayerOnControlsChanged += OnControlsChanged;
+    }
+
+    private void OnDisable()
+    {
+        MonsterPlayer.PlayerOnControlsChanged -= OnControlsChanged;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,9 +68,21 @@ public class UIManager : MonoBehaviour
         blackout.DOFade(0, 3).SetEase(Ease.InQuad);
     }
 
+    public void Initialize(MonsterPlayer playerRef)
+    {
+        _playerRef = playerRef;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        
+    }
+    
+    public void HideMainMenu()
+    {
+        //do cinematic
+        mainMenuGroup.gameObject.SetActive(false);
         
     }
 
@@ -116,13 +144,118 @@ public class UIManager : MonoBehaviour
             });
     }
 
-    public void StartGame()
+    //Show and hide cinematic bars
+    public void ToggleCinematicBars(bool show)
     {
-        //do cinematic
-        mainMenuGroup.gameObject.SetActive(false);
-        OnStartGame?.Invoke();
+        Sequence barsSeq = DOTween.Sequence()
+            .Append(topCinematicBar.DOSizeDelta(new Vector2(0, show? 100 : 0), 1))
+            .Join(bottomCinematicBar.DOSizeDelta(new Vector2(0, show ? 100 : 0), 1));
         
     }
+
+    
+    public void SetupWorldUIForTitles()
+    {
+        isWorldUiActive = true;
+        Color transparent = new Color(255, 255, 255, 0);
+        for (int i = 0; i < uiKeyboardIcons.Length; i++)
+        {
+            uiKeyboardIcons[i].color =  uiGamepadIcons[i].color = transparent;
+        }
+    }
+    
+    //After Intro cinematic
+    public void ShowMoveControls()
+    {
+        OnControlsChanged();
+        Sequence seq = DOTween.Sequence()
+            .Append(uiKeyboardIcons[0].DOFade(1, 0.5f))
+            .Join(uiKeyboardIcons[1].DOFade(1, 0.5f))
+            .Join(uiGamepadIcons[0].DOFade(1, 0.5f))
+            .Join(uiGamepadIcons[1].DOFade(1, 0.5f));
+       
+    }
+
+    public void PrepareBlueMeetupCinematic()
+    {
+        ToggleCinematicBars(true);
+        ToggleCallIcons(true);
+    }
+
+    public void ToggleCallIcons(bool toggle)
+    {
+        if (toggle)
+        {
+            uiGamepadIcons[2].DOFade(1, 0.75f);
+            uiKeyboardIcons[2].DOFade(1, 0.75f);
+            
+            uiGamepadIcons[3].DOFade(1, 0.75f);
+            uiKeyboardIcons[3].DOFade(1, 0.75f);
+        }
+        else
+        {
+            uiGamepadIcons[2].DOFade(0, 0.75f);
+            uiKeyboardIcons[2].DOFade(0, 0.75f);
+            
+            uiGamepadIcons[3].DOFade(0, 0.75f);
+            uiKeyboardIcons[3].DOFade(0, 0.75f);
+        }
+    }
+    
+    
+    //callback to control showing the world UI
+    public void OnControlsChanged()
+    {
+        if (isWorldUiActive)
+        {
+            if (_playerRef.playerInput.currentControlScheme == "Gamepad")
+            {
+                for (int i = 0; i < uiGamepadIcons.Length; i++)
+                {
+                    uiKeyboardIcons[i].gameObject.SetActive(false);
+                    uiGamepadIcons[i].gameObject.SetActive(true);
+                }
+               
+            }
+            else if(_playerRef.playerInput.currentControlScheme.Contains("Keyboard"))
+            {
+                for (int i = 0; i < uiGamepadIcons.Length; i++)
+                {
+                    uiKeyboardIcons[i].gameObject.SetActive(true);
+                    uiGamepadIcons[i].gameObject.SetActive(false);
+                }
+            }
+            
+        }
+    }
+    
+    
+    //Fadeout title logo + move icons after player moves in a little to the right
+    public void FadeOutUIPt1()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.SetEase(Ease.OutCubic);
+        seq.Append(logoTitle.transform.DOScale(logoTitle.transform.localScale.x - .1f, 5))
+            .Join(logoTitle.DOFade(0, 3f))
+            .Join(uiKeyboardIcons[0].DOFade(0, 4f))
+            .Join(uiGamepadIcons[0].DOFade(0, 4f));
+
+        seq.OnComplete(() =>
+        {
+            Destroy(logoTitle.gameObject);
+        });
+    }
+    
+    //fading out the dash + call icons
+    public void FadeOutUIPt2()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.SetEase(Ease.OutCubic);
+        seq.Append(uiKeyboardIcons[1].DOFade(0, 4f))
+            .Join(uiGamepadIcons[1].DOFade(0, 4f));
+    }
+    
+    
     
     
    
