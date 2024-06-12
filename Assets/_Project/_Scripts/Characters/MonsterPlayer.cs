@@ -16,6 +16,11 @@ public class MonsterPlayer : MonoBehaviour
     //managers
     private GameManager gameManager;
 
+    
+    private Tentacle[] _proceduralTentacles;
+    private TentacleDynamic[] _proceduralDynamicTentacles;
+    private BodyTentacle _proceduralBody;
+
     [Header("Movement settings")] 
     [SerializeField] private GameObject bodyPart;
     [SerializeField] Transform headPart;
@@ -65,6 +70,10 @@ public class MonsterPlayer : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         _normalSwimSfxEmitter = GetComponent<StudioEventEmitter>();
+
+        _proceduralDynamicTentacles = GetComponentsInChildren<TentacleDynamic>();
+        _proceduralTentacles = GetComponentsInChildren<Tentacle>();
+        _proceduralBody = GetComponentInChildren<BodyTentacle>();
 
     }
 
@@ -279,6 +288,8 @@ public class MonsterPlayer : MonoBehaviour
         bodyPart.SetActive(true);
         _collider.enabled = true;
         transform.rotation = Quaternion.identity;
+        
+        //reset tentacles?
 
     }
 

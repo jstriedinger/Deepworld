@@ -67,15 +67,20 @@ public class CameraManager : MonoBehaviour
     public void AddTempFollowedObj(GameObject tmpObj)
     {
         _tmpExtraFollowedObject = tmpObj;
-        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer);
+        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer+5);
         int memberIndex = targetGroup.FindMember(tmpObj.transform);
-        DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 1.75f, 2);
+        DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 1.8f, 2);
     }
 
     public void RemoveTempFollowedObj()
     {
-        targetGroup.RemoveMember(_tmpExtraFollowedObject.transform);
-        _tmpExtraFollowedObject = null;
+        int memberIndex = targetGroup.FindMember(_tmpExtraFollowedObject.transform);
+        DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 0f, 2)
+            .OnComplete(() =>
+            {
+                targetGroup.RemoveMember(_tmpExtraFollowedObject.transform);
+                _tmpExtraFollowedObject = null;
+            });
     }
 
     //Get back into the default noise amplitude

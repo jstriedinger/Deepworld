@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407751715453448178e11ae9b0bdebb0, type: 3}
   m_Name: MonsterTutorialSO
   m_EditorClassIdentifier: 
-  <IsPatrolType>k__BackingField: 1
-  <IsSimpleType>k__BackingField: 1
+  <IsReactive>k__BackingField: 0
   <PatrolSpeed>k__BackingField: 10
   <FollowRange>k__BackingField: 70
   <FollowSpeed>k__BackingField: 13
@@ -21,11 +20,11 @@ MonoBehaviour:
   <ChasingSpeed>k__BackingField: 18
   <SfxMonsterReact>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 548043345
+      Data2: 1141115889
+      Data3: -1875364733
+      Data4: -434441116
+    Path: event:/SFX/sfx_monsteraggro_Impact_1
   <SpriteBall>k__BackingField: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
   <SpriteMaw>k__BackingField: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,

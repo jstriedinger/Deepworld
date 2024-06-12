@@ -69,9 +69,10 @@ public class GameManager : MonoBehaviour
 
         playerLastPosition.transform.position = _originPos;
         
-        //bind pause
-        
         audioManager.Initialize(playerRef.transform);
+        
+        
+        
     }
 
     private void OnEnable()
@@ -108,7 +109,7 @@ public class GameManager : MonoBehaviour
 
             if (_currentCheckPointIndex > 2)
             {
-                DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
+                DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.25f, 1f);
             }
             
         }
@@ -116,6 +117,13 @@ public class GameManager : MonoBehaviour
         switch (startSection)
         {
             case StartSection.Default:
+                //playing the way it is supposed to be played
+                //by default all sections are disable except the first one
+                for (int i = 1; i < levelSections.Length; i++)
+                {
+                    levelSections[i].SetActive(false);
+                }
+                LoadLevelSection(0);
                 ChangeGameState(GameState.Cinematic);
                 audioManager.ChangeBackgroundMusic(1);
                 cinematicsManager.DoCinematicTitles();
@@ -309,7 +317,44 @@ public class GameManager : MonoBehaviour
         //globalPlayerLight.intensity = 0.2f;
         
     }
-    
 
+
+    public void LoadLevelSection(int level)
+    {
+        //depends on the section multiples things get activated and deactivated
+        levelSections[level].SetActive(true);
+        if (level == 0)
+        {
+            //also L2
+            levelSections[1].SetActive(true);
+        }
+        
+    }
+
+    public void UnloadLevelSection(int level)
+    {
+        levelSections[level].SetActive(false);
+    }
+
+    private void OnApplicationQuit()
+    {
+        Gamepad.current?.PauseHaptics();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if(pauseStatus)
+            Gamepad.current?.PauseHaptics();
+        else
+            Gamepad.current?.ResetHaptics();
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if(!hasFocus)
+            Gamepad.current?.PauseHaptics();
+        else
+            Gamepad.current?.ResetHaptics();
+    }
 }
 

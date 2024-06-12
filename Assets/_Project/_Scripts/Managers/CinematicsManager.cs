@@ -5,6 +5,7 @@ using Cinemachine;
 using UnityEngine;
 using DG.Tweening;
 using FMODUnity;
+using Unity.Mathematics;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -39,11 +40,20 @@ public class CinematicsManager : MonoBehaviour
 
     [Header("Cinematic - Monster encounter")] 
     [SerializeField] private GameObject pathBlueMonster;
-    [SerializeField] private GameObject pathMonster1;
-    [SerializeField] private GameObject pathMonster2;
+    [SerializeField] private GameObject pathBlueMonster2;
+    [SerializeField] private GameObject pathBlueMonster3;
+    [SerializeField] private EnemyMonster TutorialMonster1;
+    [SerializeField] private EnemyMonster TutorialMonster2;
+    [SerializeField] private GameObject path1Monster1;
+    [SerializeField] private GameObject path2Monster1;
+    [SerializeField] private GameObject path3Monster1;
+    [SerializeField] private GameObject path1Monster2;
+    [SerializeField] private GameObject path2Monster2;
+    [SerializeField] private GameObject path3Monster2;
     [SerializeField] private GameObject encounterFollowCamObj;
     [SerializeField] private GameObject pathPlayer1;
     [SerializeField] private GameObject pathPlayer2;
+    [SerializeField] private Transform finalBlueSpot;
     
 
     private void Awake()
@@ -151,6 +161,7 @@ public class CinematicsManager : MonoBehaviour
                     AfterCinematicEnds();
                     _blueNpc.ToggleFollow(true);
                     _playerRef.SetBlueReference(_blueNpc);
+                    _gameManager.LoadLevelSection(2);
                 }
             );
 
@@ -166,13 +177,14 @@ public class CinematicsManager : MonoBehaviour
     }
     
     //After going inside a little bit of the tunnel
-
+    //Also deactivate first level to save memory
     public void DoCinematicInsideTunnel()
     {
         _cameraManager.ShakeCamera();
         AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position);
         RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
         tunnelRocks.SetActive(true);
+        _gameManager.UnloadLevelSection(0);
         
     }
 
@@ -195,18 +207,101 @@ public class CinematicsManager : MonoBehaviour
             pathPlayerPos[i-1] = tPathPlayer2[i].position;
         }
         
+        //Blue path getting sacrifice
+        Transform[] tPathBlue = pathBlueMonster2.GetComponentsInChildren<Transform>();
+        Vector3[] pathBluePos = new Vector3[tPathBlue.Length-1];
+        for (int i = 1; i < tPathBlue.Length; i++)
+        {
+            pathBluePos[i-1] = tPathBlue[i].position;
+        }
+
+        //Final path of Blue escaping into void
+        Transform[] tPathBlue2 = pathBlueMonster3.GetComponentsInChildren<Transform>();
+        Vector3[] pathBluePos2 = new Vector3[tPathBlue2.Length-1];
+        for (int i = 1; i < tPathBlue2.Length; i++)
+        {
+            pathBluePos2[i-1] = tPathBlue2[i].position;
+        }
+        
+        //Monster1 path 2
+        Transform[] tPath2Monster1 = path2Monster1.GetComponentsInChildren<Transform>();
+        Vector3[] path2Monster1Pos = new Vector3[tPath2Monster1.Length-1];
+        for (int i = 1; i < tPath2Monster1.Length; i++)
+        {
+            path2Monster1Pos[i-1] = tPath2Monster1[i].position;
+        }
+        //Monster2 Path 2
+        Transform[] tPath2Monster2 = path2Monster2.GetComponentsInChildren<Transform>();
+        Vector3[] path2Monster2Pos = new Vector3[tPath2Monster2.Length-1];
+        for (int i = 1; i < tPath2Monster2.Length; i++)
+        {
+            path2Monster2Pos[i-1] = tPath2Monster2[i].position;
+        }
+        
+        //Monster1 path 3
+        Transform[] tPath3Monster1 = path3Monster1.GetComponentsInChildren<Transform>();
+        Vector3[] path3Monster1Pos = new Vector3[tPath3Monster1.Length-1];
+        for (int i = 1; i < tPath3Monster1.Length; i++)
+        {
+            path3Monster1Pos[i-1] = tPath3Monster1[i].position;
+        }
+        //Monster2 Path 3
+        Transform[] tPath3Monster2 = path3Monster2.GetComponentsInChildren<Transform>();
+        Vector3[] path3Monster2Pos = new Vector3[tPath3Monster2.Length-1];
+        for (int i = 1; i < tPath3Monster2.Length; i++)
+        {
+            path3Monster2Pos[i-1] = tPath3Monster2[i].position;
+        }
+        
         Sequence seq = DOTween.Sequence()
-            .AppendInterval(1)
-            .Append(_playerRef.transform.DOPath(pathPlayerPos, 3, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .AppendInterval(2)
+            .Append(_playerRef.transform.DOPath(pathPlayerPos, 2f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right))
+            .Join(TutorialMonster1.transform.DOPath(path2Monster1Pos, 3f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutBack)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.25f))
+            .Join(TutorialMonster2.transform.DOPath(path2Monster2Pos, 3.2f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutBack)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.25f))
+            .AppendInterval(2)
+            .Append(_blueNpc.transform.DOPath(pathBluePos, 2, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right))
+            .AppendCallback(() =>
+            {
+                StartCoroutine(_blueNpc.PlayCallSFX());
+            })
+            .AppendInterval(1)
+            .Append(_blueNpc.transform.DOPath(pathBluePos2, 3, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right)
+                .OnComplete(() => { _blueNpc.PlayScreamSFX();}))
+            .Join(TutorialMonster1.transform.DOPath(path3Monster1Pos, 3, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.25f))
+            .Join(TutorialMonster2.transform.DOPath(path3Monster2Pos, 3.4f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.1f))
+            .AppendCallback(() => {_blueNpc.gameObject.SetActive(false);})
+            .AppendInterval(1)
             .OnComplete(() =>
             {
                 AfterCinematicEnds();
+                Destroy(TutorialMonster1.gameObject);
+                Destroy(TutorialMonster2.gameObject);
+                _cameraManager.RemoveTempFollowedObj();
                 //enable everything again
                 pInput.actions.FindAction("Call").Enable();
                 pInput.actions.FindAction("Move").Enable();
+                _blueNpc.transform.position = finalBlueSpot.position;
+                _blueNpc.transform.rotation = quaternion.identity;
+                _blueNpc.ResetProceduralBody();
+                _blueNpc.gameObject.SetActive(true);
+                _audioManager.ChangeBackgroundMusic(5);
+
                 
+
             });
     }
 
@@ -228,6 +323,21 @@ public class CinematicsManager : MonoBehaviour
             pathPlayerPos[i-1] = tPathPlayer1[i].position;
         }
         
+        //Monster1 path 1
+        Transform[] tPath1Monster1 = path1Monster1.GetComponentsInChildren<Transform>();
+        Vector3[] path1Monster1Pos = new Vector3[tPath1Monster1.Length-1];
+        for (int i = 1; i < tPath1Monster1.Length; i++)
+        {
+            path1Monster1Pos[i-1] = tPath1Monster1[i].position;
+        }
+        //Monster2 Path 1
+        Transform[] tPath1Monster2 = path1Monster2.GetComponentsInChildren<Transform>();
+        Vector3[] path1Monster2Pos = new Vector3[tPath1Monster2.Length-1];
+        for (int i = 1; i < tPath1Monster2.Length; i++)
+        {
+            path1Monster2Pos[i-1] = tPath1Monster2[i].position;
+        }
+        
         PlayerInput pInput = _playerRef.playerInput;
         //disable move input action
         pInput.actions.FindAction("Move").Disable();
@@ -236,7 +346,7 @@ public class CinematicsManager : MonoBehaviour
         
         Sequence seq = DOTween.Sequence()
             .AppendCallback(() => { _cameraManager.AddTempFollowedObj(encounterFollowCamObj);})
-            .Append(_blueNpc.transform.DOPath(bluePathMonsterPos, 6, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Append(_blueNpc.transform.DOPath(bluePathMonsterPos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnWaypointChange(
@@ -247,7 +357,13 @@ public class CinematicsManager : MonoBehaviour
                         else if (waypointIndex == 1)
                             RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
                     }))
-            .Join(_playerRef.transform.DOPath(pathPlayerPos, 4, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Join(TutorialMonster1.transform.DOPath(path1Monster1Pos, 3.25f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right))
+            .Join(TutorialMonster2.transform.DOPath(path1Monster2Pos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.5f))
+            .Join(_playerRef.transform.DOPath(pathPlayerPos, 3, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .SetDelay(2))
@@ -258,7 +374,8 @@ public class CinematicsManager : MonoBehaviour
                 _uiManager.ToggleCallIcons(true);
                 pInput.actions.FindAction("Call").Enable();
                 pInput.actions.FindAction("Call").performed += DoCinematicMonsterEncounterPt2;
-                Debug.Log("Enable call again");
+                _gameManager.LoadLevelSection(3);
+                
                 
             });
 

@@ -45,10 +45,9 @@ public class EnemyMonster : MonoBehaviour
 
     private void Awake()
     {
-        _eyeManager = GetComponent<EyeManager>();
-        _behaviorTree = GetComponent<BehaviorTree>();
-        _monsterChaseMusicEmitter = GetComponent<StudioEventEmitter>();
         isChasing = false;
+        _eyeManager = GetComponent<EyeManager>();
+        _monsterChaseMusicEmitter = GetComponent<StudioEventEmitter>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
         _vfxDetect = _headObj.GetComponentInChildren<ParticleSystem>();
@@ -62,29 +61,23 @@ public class EnemyMonster : MonoBehaviour
 
         _headLight.color = monsterStats.DefaultColor*1.5f;
         //pass data from SO to the AI Tree
-        if (_behaviorTree)
+        //Reactive type means it used for gameplay: reacts to player and has behavoir
+        _behaviorTree = GetComponent<BehaviorTree>();
+        if (monsterStats.IsReactive)
         {
             _behaviorTree.SetVariableValue("PatrolSpeed",monsterStats.PatrolSpeed);
-            if (!monsterStats.IsSimpleType)
-            {
-                _behaviorTree.SetVariableValue("FollowSpeed",monsterStats.FollowSpeed);
-                _behaviorTree.SetVariableValue("ChasingSpeed",monsterStats.ChasingSpeed);
-                _behaviorTree.SetVariableValue("ChasingRange",monsterStats.ChasingRange);
-                _behaviorTree.SetVariableValue("FollowRange",monsterStats.FollowRange);
-                _behaviorTree.SetVariableValue("isPatrolType",monsterStats.IsPatrolType);
-            }
+            _behaviorTree.SetVariableValue("FollowSpeed",monsterStats.FollowSpeed);
+            _behaviorTree.SetVariableValue("ChasingSpeed",monsterStats.ChasingSpeed);
+            _behaviorTree.SetVariableValue("ChasingRange",monsterStats.ChasingRange);
+            _behaviorTree.SetVariableValue("FollowRange",monsterStats.FollowRange);
+            _behaviorTree.SetVariableValue("isPatrolType",monsterStats.IsReactive);
             
-            
-            //get the patrol points
-            if (monsterStats.IsPatrolType)
+            List<GameObject> patrolPoints = new List<GameObject>();
+            foreach (Transform child in patrolObject)
             {
-                List<GameObject> patrolPoints = new List<GameObject>();
-                foreach (Transform child in patrolObject)
-                {
-                    patrolPoints.Add(child.gameObject);
-                }
-                _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
+                patrolPoints.Add(child.gameObject);
             }
+            _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
         }
         
     }
@@ -92,11 +85,11 @@ public class EnemyMonster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
-        _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
-        if (_behaviorTree && !monsterStats.IsSimpleType)
+        if (monsterStats.IsReactive )
         {
+            _gameManager = GameObject.FindFirstObjectByType<GameManager>();
+            _cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
             _behaviorTree.SetVariableValue("playerRef",_gameManager.playerRef.gameObject);
             _behaviorTree.SetVariableValue("playerLastPosition",_gameManager.playerLastPosition);
         }
@@ -109,7 +102,7 @@ public class EnemyMonster : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_canAffectCamera && !GameManager.IsPlayerDead)
+        if(monsterStats.IsReactive && _canAffectCamera && !GameManager.IsPlayerDead)
             UpdateEnemyInCamera();
     }
     
@@ -150,7 +143,7 @@ public class EnemyMonster : MonoBehaviour
     //react to player call, go investigate a position using a lastpos object since btree needs an object
     public void ReactToPlayerCall()
     {
-        if (CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
+        if (monsterStats.IsReactive && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
         {
             if (!_canReactToCall)
             {
@@ -174,7 +167,8 @@ public class EnemyMonster : MonoBehaviour
         if (CurrentState == MonsterState.Chasing)
         {
             //we were on a chase
-            _audioManager.UpdateMonstersChasing(false);
+            if(monsterStats.IsReactive)
+                _audioManager.UpdateMonstersChasing(false);
             _chaseScaleTween.Rewind();
         }
 
@@ -218,8 +212,8 @@ public class EnemyMonster : MonoBehaviour
                 StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Chasing:
-                //important for the chase music bg
-                _audioManager.UpdateMonstersChasing(true);
+                if(monsterStats.IsReactive)
+                    _audioManager.UpdateMonstersChasing(true);
                 _chaseScaleTween.Play();
                 UpdateColors(monsterStats.ChaseColor, monsterStats.ChaseColor);
                 
@@ -301,13 +295,17 @@ public class EnemyMonster : MonoBehaviour
     //show distance on camera
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, monsterStats.DistanceToShowOnCamera);
+        if(monsterStats.IsReactive)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, monsterStats.DistanceToShowOnCamera);
+            
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && monsterStats.IsReactive)
         {
             //biting game feel
             _audioManager.StopChaseMusic();

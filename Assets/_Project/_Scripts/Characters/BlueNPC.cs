@@ -34,6 +34,12 @@ public class BlueNPC : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private float _nextSwim;
     private Vector3 _swimDir;
+    
+    
+    //Procedural bodies
+    private Tentacle[] _proceduralTentacles;
+    private TentacleDynamic[] _proceduralDynamicTentacles;
+    private BodyTentacle _proceduralBody;
 
     private void Awake()
     {
@@ -42,6 +48,10 @@ public class BlueNPC : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _aiBlue.canMove = false;
         followPlayer = false;
+        
+        _proceduralDynamicTentacles = GetComponentsInChildren<TentacleDynamic>();
+        _proceduralTentacles = GetComponentsInChildren<Tentacle>();
+        _proceduralBody = GetComponentInChildren<BodyTentacle>();
 
     }
 
@@ -51,7 +61,6 @@ public class BlueNPC : MonoBehaviour
         _playBubbles = true;
         StartCoroutine("NPCBubbleSwim");
         targetRef = _aiDestinationSetter.target;
-        //AIBluePath.enabled = false;
     }
     
 
@@ -70,6 +79,20 @@ public class BlueNPC : MonoBehaviour
         }
 
         FMODUnity.RuntimeManager.PlayOneShot(_sfxLastTime, transform.position);
+    }
+
+    public void ResetProceduralBody()
+    {
+        for (int i = 0; i < _proceduralTentacles.Length; i++)
+        {
+            _proceduralTentacles[i].ResetPos();
+        }
+        for (int i = 0; i < _proceduralDynamicTentacles.Length; i++)
+        {
+            _proceduralDynamicTentacles[i].ResetPositions();
+        }
+
+        _proceduralBody.ResetPositions();
     }
 
     private void Update()
@@ -119,9 +142,4 @@ public class BlueNPC : MonoBehaviour
         followPlayer = shouldFollow;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + _swimDir*swimForce  );
-    }
 }

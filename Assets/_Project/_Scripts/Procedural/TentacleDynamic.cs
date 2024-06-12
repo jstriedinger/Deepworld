@@ -104,5 +104,15 @@ public class TentacleDynamic : MonoBehaviour
 
     }
 
+
+    public void ResetPositions()
+    {
+        segmentPoses[0] = targetDir.position;
+        for(int i = 1; i < length; i++){
+            segmentPoses[i] = segmentPoses[i-1] + targetDir.right * targetDist;
+        }
+        lineRend.SetPositions(segmentPoses);
+    }
+
 }
 

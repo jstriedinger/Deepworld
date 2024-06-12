@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407751715453448178e11ae9b0bdebb0, type: 3}
   m_Name: MonsterT1SO 1
   m_EditorClassIdentifier: 
-  <IsPatrolType>k__BackingField: 1
-  <IsSimpleType>k__BackingField: 0
+  <IsReactive>k__BackingField: 1
   <PatrolSpeed>k__BackingField: 10
   <FollowRange>k__BackingField: 75
   <FollowSpeed>k__BackingField: 13

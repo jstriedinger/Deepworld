@@ -5,15 +5,14 @@ using UnityEngine;
 public class ChaseMonsterReset : MonoBehaviour
 {
     public GameObject monster;
-    private GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
     private Vector3 initialPos;
     private float countDown = 4f;
     private bool isCountingDown;
     // Start is called before the first frame update
     void Awake()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        initialPos = this.transform.position;
+        initialPos = transform.position;
         countDown = 4f;
     }
 

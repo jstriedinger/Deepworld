@@ -63,7 +63,7 @@ public class Tentacle : MonoBehaviour
             _internalLightParent.position = segmentPoses[^1];
     }
 
-    private void ResetPos()
+    public void ResetPos()
     {
         segmentPoses[0] = targetDir.position;
         for(int i = 1; i < length; i++){

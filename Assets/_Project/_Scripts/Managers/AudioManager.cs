@@ -46,10 +46,12 @@ public class AudioManager : MonoBehaviour
         if (numMonstersChasing > 0)
         {
             Collider2D col = Physics2D.OverlapCircle(_playerRef.position,40,LayerMask.GetMask("Monster"));
-            Debug.Log("Closest enemy is: "+col.gameObject.name);
-            float d = Vector3.Distance(_playerRef.position, col.transform.position) / 40;
-            Debug.Log("Normalized Distance from player: "+d);
-            _instanceCloseDanger.setParameterByName("Monster Distance", 1 - d);
+            if (col)
+            {
+                float d = Vector3.Distance(_playerRef.position, col.transform.position) / 40;
+                _instanceCloseDanger.setParameterByName("Monster Distance", 1 - d);
+                
+            }
         }
     }
 

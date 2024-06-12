@@ -33,7 +33,7 @@ public class BodyTentacle : MonoBehaviour
         segmentPoses = new Vector3[length];
         segmentV = new Vector3[length];
 
-        ResetPos();
+        ResetPositions();
     }
 
     
@@ -66,7 +66,7 @@ public class BodyTentacle : MonoBehaviour
      //   Debug.Log("first update--body parts are in position");
     }
 
-    private void ResetPos(){
+    public void ResetPositions(){
         segmentPoses[0] = targetDir.position;
         for(int i=1; i<length; i++){
             segmentPoses[i] = segmentPoses[i-1] + targetDir.right * targetDist;
