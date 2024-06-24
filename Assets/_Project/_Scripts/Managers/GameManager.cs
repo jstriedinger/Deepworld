@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
             
         }
         
+		//Prepare everything to start from a checkpoint or something
         switch (startSection)
         {
             case StartSection.Default:
@@ -135,11 +136,17 @@ public class GameManager : MonoBehaviour
             case StartSection.Checkpoint2:
                 uiManager.isWorldUiActive = true;
                 audioManager.ChangeBackgroundMusic(3);
+                //place blue in the first point of path
+                cinematicsManager.PrepareBlueForMonsterEncounter();
                 break;
             case StartSection.Checkpoint3:
+                playerRef.ToggleMonsterEyeDetection(true);
+                playerRef.ToggleEyeFollowTarget(true);
                 audioManager.ChangeBackgroundMusic(5);
                 break;
             case StartSection.Checkpoint4:
+                playerRef.ToggleMonsterEyeDetection(true);
+                playerRef.ToggleEyeFollowTarget(true);
                 audioManager.ChangeBackgroundMusic(5);
                 break;
             

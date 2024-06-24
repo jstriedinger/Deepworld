@@ -17,8 +17,7 @@ public class TargetLerp : MonoBehaviour
     {
         if(_enemyMonster && (_enemyMonster.CurrentState == MonsterState.Frustrated || _enemyMonster.CurrentState == MonsterState.Follow )  )
         {
-            transform.position = idealTarget.position;
-            //transform.position = Vector3.SmoothDamp(transform.position, idealTarget.position, ref velocity, smoothTime);
+            transform.position = Vector3.SmoothDamp(transform.position, idealTarget.position, ref velocity, smoothTime);
         }
 
     }

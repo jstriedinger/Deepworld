@@ -20,6 +20,7 @@ public class MonsterPlayer : MonoBehaviour
     private Tentacle[] _proceduralTentacles;
     private TentacleDynamic[] _proceduralDynamicTentacles;
     private BodyTentacle _proceduralBody;
+    private EyeFollower _eyeFollower;
 
     [Header("Movement settings")] 
     [SerializeField] private GameObject bodyPart;
@@ -74,6 +75,7 @@ public class MonsterPlayer : MonoBehaviour
         _proceduralDynamicTentacles = GetComponentsInChildren<TentacleDynamic>();
         _proceduralTentacles = GetComponentsInChildren<Tentacle>();
         _proceduralBody = GetComponentInChildren<BodyTentacle>();
+        _eyeFollower = GetComponentInChildren<EyeFollower>();
 
     }
 
@@ -83,10 +85,6 @@ public class MonsterPlayer : MonoBehaviour
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     #region InputSystem
     /**
@@ -105,7 +103,6 @@ public class MonsterPlayer : MonoBehaviour
 
     private void OnCall(InputValue inputValue)
     {
-        Debug.Log("Call!");
         //playerInput.actions.FindAction("Call").Disable();
         if (inputValue.isPressed)
         {
@@ -175,6 +172,16 @@ public class MonsterPlayer : MonoBehaviour
     {
         _moveInputValue = Vector2.zero;
         _rigidBody.velocity = Vector2.zero;
+    }
+
+    public void ToggleEyeFollowTarget(bool willFollow = false, Transform newTarget = null)
+    {
+        _eyeFollower.ToggleFollowTarget(willFollow,newTarget);
+    }
+
+    public void ToggleMonsterEyeDetection(bool canDetectMonsters)
+    {
+        _eyeFollower.ToggleMonsterDetect(canDetectMonsters);
     }
 
    
@@ -326,12 +333,7 @@ public class MonsterPlayer : MonoBehaviour
                 EnemyMonster monster = enemies[i].GetComponent<EnemyMonster>();
                 if (monster.CurrentState == MonsterState.Default)
                 {
-                    Debug.Log("Sending react to call event");
                     monster.ReactToPlayerCall();
-                }
-                else
-                {
-                    Debug.Log("Nothing should fucking happen");
                 }
                 //tell to check a position
             }

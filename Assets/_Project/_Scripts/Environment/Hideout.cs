@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 using System.Collections.Generic;
@@ -13,11 +14,17 @@ using UnityEngine.Serialization;
 public class Hideout : MonoBehaviour
 {
     [SerializeField] private CoverSO configuration;
+    private GameManager _gameManager;
 
-    
+
+    private void Start()
+    {
+        _gameManager = FindFirstObjectByType<GameManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
+        if( collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
         {
             MonsterPlayer monsterPlayer = collision.gameObject.GetComponent<MonsterPlayer>();
             monsterPlayer.isHidden = true;
@@ -29,10 +36,14 @@ public class Hideout : MonoBehaviour
             foreach (Collider2D monsterCollider in monsterHits)
             {
                 EnemyMonster enemyMonster = monsterCollider.GetComponent<EnemyMonster>();
-                enemyMonster?.UpdateMonsterState(MonsterState.Frustrated);
+                if (enemyMonster.IsGameplayActiveMonster())
+                {
+                    BehaviorTree tree = monsterCollider.gameObject.GetComponent<BehaviorTree>();
+                    enemyMonster?.UpdateMonsterState(MonsterState.Frustrated);
+                    tree?.SendEvent("PlayerHidesDuringChase");
+                    
+                }
                 
-                BehaviorTree tree = monsterCollider.gameObject.GetComponent<BehaviorTree>();
-                tree?.SendEvent("PlayerHidesDuringChase");
 
             }
 

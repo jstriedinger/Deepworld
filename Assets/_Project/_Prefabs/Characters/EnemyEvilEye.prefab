@@ -180,8 +180,8 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 3567410348307882826}
   targetDist: 0.3
-  smoothSpeed: 0.05
-  wiggleSpeed: 1
+  smoothSpeed: 0.045
+  wiggleSpeed: 1.25
   wiggleMagnitude: 50
   wiggleDir: {fileID: 7731861231031968431}
 --- !u!120 &3330321730601023884
@@ -262,7 +262,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.023869388, g: 0.18867922, b: 0.00978996, a: 1}
-      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.5882353}
+      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.78431374}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -278,7 +278,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 16991
-      atime1: 56231
+      atime1: 56500
       atime2: 0
       atime3: 0
       atime4: 0
@@ -469,8 +469,8 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 7220749084569027762}
   targetDist: 0.3
-  smoothSpeed: 0.05
-  wiggleSpeed: 1
+  smoothSpeed: 0.045
+  wiggleSpeed: 1.25
   wiggleMagnitude: 50
   wiggleDir: {fileID: 1667678333124123414}
 --- !u!120 &1646938015526981060
@@ -551,7 +551,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.023869388, g: 0.18867922, b: 0.00978996, a: 1}
-      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.5882353}
+      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.78431374}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -756,8 +756,8 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 6044630155847732619}
   targetDist: 0.3
-  smoothSpeed: 0.05
-  wiggleSpeed: 1
+  smoothSpeed: 0.045
+  wiggleSpeed: 1.25
   wiggleMagnitude: 50
   wiggleDir: {fileID: 6567151680263472929}
 --- !u!120 &7766839229153368042
@@ -838,7 +838,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.023869388, g: 0.18867922, b: 0.00978996, a: 1}
-      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.5882353}
+      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.78431374}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1124,7 +1124,6 @@ MonoBehaviour:
   _eyeBall: {fileID: 6557561463741752968}
   eyeRenderer: {fileID: 8906213389041749866}
   pupilRenderer: {fileID: 5527174553719690557}
-  _simplePatrol: 0
   timer: 3.25
 --- !u!114 &2289235338297122811
 MonoBehaviour:
@@ -1195,7 +1194,7 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
-    value: 8
+    value: 2
 --- !u!114 &8393807303173930285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6751,8 +6750,8 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 8647625367464663147}
   targetDist: 0.3
-  smoothSpeed: 0.05
-  wiggleSpeed: 1
+  smoothSpeed: 0.045
+  wiggleSpeed: 1.25
   wiggleMagnitude: 50
   wiggleDir: {fileID: 3767183701739463978}
 --- !u!120 &5981271975517618766
@@ -6833,7 +6832,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.023869388, g: 0.18867922, b: 0.00978996, a: 1}
-      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.5882353}
+      key1: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0.78431374}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

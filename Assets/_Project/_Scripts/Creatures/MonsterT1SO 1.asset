@@ -36,4 +36,4 @@ MonoBehaviour:
   <DefaultColor>k__BackingField: {r: 0.023529412, g: 0.1882353, b: 0.007843138, a: 1}
   <FollowColor>k__BackingField: {r: 0.26249334, g: 0.31132078, b: 0.0044054748, a: 1}
   <ChaseColor>k__BackingField: {r: 0.43529412, g: 0.09803922, b: 0.007843138, a: 1}
-  <DistanceToShowOnCamera>k__BackingField: 140
+  <DistanceToShowOnCamera>k__BackingField: 120

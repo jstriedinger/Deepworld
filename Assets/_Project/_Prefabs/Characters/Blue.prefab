@@ -101,7 +101,6 @@ Transform:
   - {fileID: 1740835217051956488}
   - {fileID: 8242382004035849814}
   - {fileID: 5335836652397838011}
-  - {fileID: 4435735507514712432}
   m_Father: {fileID: 8100880464474704638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8132941885005647075
@@ -319,6 +318,8 @@ MonoBehaviour:
       Data3: 657471629
       Data4: -1011501066
     Path: event:/SFX/sfx_swimming_dash_1
+  targetRef: {fileID: 0}
+  followPlayer: 0
   vfxVoice: {fileID: 36057654435150531}
   sfxCall1:
     Guid:
@@ -671,8 +672,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   targetDir: {fileID: 5453283406467291084}
-  targetDist: 0.3
-  smoothSpeed: 0.03
+  targetDist: 0.25
+  smoothSpeed: 0.01
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 2222016238251829669}
@@ -1028,8 +1029,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   targetDir: {fileID: 8064901514526308175}
-  targetDist: 0.3
-  smoothSpeed: 0.03
+  targetDist: 0.25
+  smoothSpeed: 0.01
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 7634606992920627336}
@@ -1265,12 +1266,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4131635678297749655}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e5c3f3b8a2a14b4bbadf5ca071077c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5479194258880808542}
+  target: {fileID: 0}
   pupil: {fileID: 8445904390810358957}
   offMod: 1
   offMax: 0.15
@@ -1749,8 +1750,8 @@ MonoBehaviour:
   lineRend: {fileID: 5046989612232128309}
   segmentPoses: []
   targetDir: {fileID: 2117967637109023816}
-  targetDist: 0.3
-  smoothSpeed: 0.015
+  targetDist: 0.25
+  smoothSpeed: 0.009
   wiggleSpeed: 2
   wiggleMagnitude: 20
   magMin: 15
@@ -1800,6 +1801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8242382004035849814}
+  - component: {fileID: 1825924102338651595}
   m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
@@ -1826,6 +1828,27 @@ Transform:
   - {fileID: 4323686570098498802}
   m_Father: {fileID: 8353174683347167719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1825924102338651595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440502421513338222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32dd027c111cc4a52898638d42d1560c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _canFollow: 0
+  eyeballLeft: {fileID: 7384058489162201062}
+  pupilLeft: {fileID: 3186946962634848015}
+  pupilLeftMidpoint: {fileID: 8592282585909991437}
+  eyeballRight: {fileID: 1640690110684905861}
+  pupilRight: {fileID: 6731398248999455861}
+  pupilRightMidpoint: {fileID: 4323686570098498802}
+  timer: 3
 --- !u!1 &5440888254715082944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,37 +2008,6 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 3474443084122066884}
---- !u!1 &5479194258880808542
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4435735507514712432}
-  m_Layer: 7
-  m_Name: EyeTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4435735507514712432
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5479194258880808542}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8353174683347167719}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5533858681786537401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,12 +2048,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5533858681786537401}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e5c3f3b8a2a14b4bbadf5ca071077c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5479194258880808542}
+  target: {fileID: 0}
   pupil: {fileID: 8218898132355414124}
   offMod: 1
   offMax: 0.15
@@ -2398,8 +2390,8 @@ MonoBehaviour:
   lineRend: {fileID: 7060495200132920999}
   segmentPoses: []
   targetDir: {fileID: 4007747382792550221}
-  targetDist: 0.3
-  smoothSpeed: 0.015
+  targetDist: 0.25
+  smoothSpeed: 0.009
   wiggleSpeed: -2
   wiggleMagnitude: 20
   magMin: 15
@@ -2520,26 +2512,26 @@ LineRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 13
   m_Positions:
-  - {x: 133.8, y: 21.2, z: 0}
-  - {x: 133.8, y: 20.900002, z: 0}
-  - {x: 133.8, y: 20.600002, z: 0}
-  - {x: 133.8, y: 20.300003, z: 0}
-  - {x: 133.8, y: 20.000004, z: 0}
-  - {x: 133.8, y: 19.700005, z: 0}
-  - {x: 133.8, y: 19.400005, z: 0}
-  - {x: 133.8, y: 19.100006, z: 0}
-  - {x: 133.8, y: 18.800007, z: 0}
-  - {x: 133.8, y: 18.500008, z: 0}
-  - {x: 133.8, y: 18.200008, z: 0}
-  - {x: 133.8, y: 17.90001, z: 0}
-  - {x: 133.8, y: 17.60001, z: 0}
-  - {x: 133.8, y: 17.30001, z: 0}
-  - {x: 133.8, y: 17.000011, z: 0}
-  - {x: 133.8, y: 16.700012, z: 0}
-  - {x: 133.8, y: 16.400013, z: 0}
-  - {x: 133.8, y: 16.100014, z: 0}
-  - {x: 133.8, y: 15.800014, z: 0}
-  - {x: 133.8, y: 15.500013, z: 0}
+  - {x: 53.3, y: -18.61, z: 0}
+  - {x: 53.3, y: -18.86, z: 0}
+  - {x: 53.3, y: -19.11, z: 0}
+  - {x: 53.3, y: -19.36, z: 0}
+  - {x: 53.3, y: -19.61, z: 0}
+  - {x: 53.3, y: -19.86, z: 0}
+  - {x: 53.3, y: -20.11, z: 0}
+  - {x: 53.3, y: -20.36, z: 0}
+  - {x: 53.3, y: -20.61, z: 0}
+  - {x: 53.3, y: -20.86, z: 0}
+  - {x: 53.3, y: -21.11, z: 0}
+  - {x: 53.3, y: -21.36, z: 0}
+  - {x: 53.3, y: -21.61, z: 0}
+  - {x: 53.3, y: -21.86, z: 0}
+  - {x: 53.3, y: -22.11, z: 0}
+  - {x: 53.3, y: -22.36, z: 0}
+  - {x: 53.3, y: -22.61, z: 0}
+  - {x: 53.3, y: -22.86, z: 0}
+  - {x: 53.3, y: -23.11, z: 0}
+  - {x: 53.3, y: -23.36, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.9667169
@@ -2614,7 +2606,7 @@ MonoBehaviour:
   length: 20
   segmentPoses: []
   targetDir: {fileID: 7899289817624706469}
-  targetDist: 0.3
+  targetDist: 0.25
   smoothSpeed: 0.0001
   wiggleSpeed: 0.5
   wiggleMagnitude: 0.5
@@ -2670,8 +2662,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.021800041, y: -0.7677498, z: 0}
-    m_Extent: {x: 21.423302, y: 21.56205, z: 0}
+    m_Center: {x: -0.017499924, y: -0.7762499, z: 0}
+    m_Extent: {x: 21.4292, y: 21.56725, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -7619,7 +7611,7 @@ Transform:
   m_GameObject: {fileID: 8218898132355414124}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0149998665, y: 0.05000019, z: 0}
+  m_LocalPosition: {x: -0.0149998665, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7704,7 +7696,7 @@ Transform:
   m_GameObject: {fileID: 8445904390810358957}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.015000105, y: 0.05000019, z: 0}
+  m_LocalPosition: {x: 0.015000105, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

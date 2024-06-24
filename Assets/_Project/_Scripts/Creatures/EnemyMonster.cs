@@ -6,6 +6,7 @@ using Pathfinding;
 using BehaviorDesigner.Runtime;
 using DG.Tweening;
 using FMODUnity;
+using TMPro;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -30,6 +31,7 @@ public class EnemyMonster : MonoBehaviour
 
     private EyeManager _eyeManager;
     private BehaviorTree _behaviorTree;
+    private AIPath _aiPath;
     private StudioEventEmitter _monsterChaseMusicEmitter;
     private Vector3 origWorldPos;
     [HideInInspector]
@@ -41,6 +43,7 @@ public class EnemyMonster : MonoBehaviour
     private Tween _headTween;
     private Sequence _colorTweenSequence;
     private Tween _chaseScaleTween;
+    private EyeTracker _eyeTracker;
 
 
     private void Awake()
@@ -49,6 +52,7 @@ public class EnemyMonster : MonoBehaviour
         _eyeManager = GetComponent<EyeManager>();
         _monsterChaseMusicEmitter = GetComponent<StudioEventEmitter>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _eyeTracker = GetComponentInChildren<EyeTracker>();
 
         _vfxDetect = _headObj.GetComponentInChildren<ParticleSystem>();
 
@@ -63,6 +67,7 @@ public class EnemyMonster : MonoBehaviour
         //pass data from SO to the AI Tree
         //Reactive type means it used for gameplay: reacts to player and has behavoir
         _behaviorTree = GetComponent<BehaviorTree>();
+        _aiPath = GetComponent<AIPath>();
         if (monsterStats.IsReactive)
         {
             _behaviorTree.SetVariableValue("PatrolSpeed",monsterStats.PatrolSpeed);
@@ -72,13 +77,13 @@ public class EnemyMonster : MonoBehaviour
             _behaviorTree.SetVariableValue("FollowRange",monsterStats.FollowRange);
             _behaviorTree.SetVariableValue("isPatrolType",monsterStats.IsReactive);
             
-            List<GameObject> patrolPoints = new List<GameObject>();
-            foreach (Transform child in patrolObject)
-            {
-                patrolPoints.Add(child.gameObject);
-            }
-            _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
         }
+        List<GameObject> patrolPoints = new List<GameObject>();
+        foreach (Transform child in patrolObject)
+        {
+            patrolPoints.Add(child.gameObject);
+        }
+        _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
         
     }
 
@@ -105,9 +110,27 @@ public class EnemyMonster : MonoBehaviour
         if(monsterStats.IsReactive && _canAffectCamera && !GameManager.IsPlayerDead)
             UpdateEnemyInCamera();
     }
+
+    public void ToggleTrackTarget(GameObject obj)
+    {
+        _eyeTracker.ToggleTrackTarget(obj);
+    }
     
+    public void UpdatePatrolInfo(Transform newPatrolInfo)
+    {
+        List<GameObject> patrolPoints = new List<GameObject>();
+        foreach (Transform child in newPatrolInfo)
+        {
+            patrolPoints.Add(child.gameObject);
+        }
+        _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
+    }
 
-
+    public bool IsGameplayActiveMonster()
+    {
+        return monsterStats.IsReactive;
+    }
+    
 
     //Trigered to put enemy on the player line of sight
     private void UpdateEnemyInCamera()
@@ -149,10 +172,26 @@ public class EnemyMonster : MonoBehaviour
             {
                 //if mosnter is not chasing or following, it can react to player call
                 UpdateMonsterState(MonsterState.Investigate);
-                Debug.Log("player call heard");
                 _behaviorTree.SetVariableValue("CanReactToCall",true);
                 _canReactToCall = true;
             }
+        }
+    }
+
+    public void ToggleBehaviorTree(bool toggle)
+    {
+        if (toggle)
+        {
+            _aiPath.enabled = true;
+            _behaviorTree.enabled = true;
+            _behaviorTree.EnableBehavior();
+        }
+        else
+        {
+            _behaviorTree.DisableBehavior(true);
+            _behaviorTree.enabled = false;
+            _aiPath.enabled = false;
+
         }
     }
 
@@ -243,7 +282,7 @@ public class EnemyMonster : MonoBehaviour
             lightColor*1.5f, 1f));
     }
 
-    IEnumerator PlayReactSound(bool showEffect, bool animate)
+    public IEnumerator PlayReactSound(bool showEffect, bool animate)
     {
         if (showEffect)
         {
@@ -252,22 +291,18 @@ public class EnemyMonster : MonoBehaviour
         }
         if (animate)
         {
-            _headTween = _headObj.DOPunchScale(new Vector3(.5f, .5f, 0), .5f, 2, 0f);
+            _headTween = _headObj.DOPunchScale(new Vector3(.75f, .75f, 0), .4f, 2, 0f);
         }
 
         FMODUnity.RuntimeManager.PlayOneShot(monsterStats.SfxMonsterReact, transform.position);
     }
 
-    //trigerred when the monster enters into chase mode from the eyeManager
-
-    //for now it only does something witht he sfx
 
     //Fire when entering chase mode
     public void EnterChaseMode()
     {
         Debug.Log("chase mode sfx");
         _monsterChaseMusicEmitter.Play();
-        //FMODUnity.RuntimeManager.PlayOneShot(MonsterChaseSFXEvent, transform.position);
     }
     
     #region BehaviourTreeEvents

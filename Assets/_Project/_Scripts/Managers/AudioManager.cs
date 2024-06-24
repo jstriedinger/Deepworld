@@ -31,6 +31,8 @@ public class AudioManager : MonoBehaviour
     // order of above 0 = ambient intro 1= danger 2=friend
     private int _currentMusicIndex;
     private Transform _playerRef;
+    private MonsterPlayer _monsterPlayer;
+    private Transform currentClosestMonster;
     
     [HideInInspector]
     public int numMonstersChasing;
@@ -48,6 +50,8 @@ public class AudioManager : MonoBehaviour
             Collider2D col = Physics2D.OverlapCircle(_playerRef.position,40,LayerMask.GetMask("Monster"));
             if (col)
             {
+                //always look at the closest monster
+                _monsterPlayer.ToggleEyeFollowTarget(true,col.gameObject.transform);
                 float d = Vector3.Distance(_playerRef.position, col.transform.position) / 40;
                 _instanceCloseDanger.setParameterByName("Monster Distance", 1 - d);
                 
@@ -58,6 +62,7 @@ public class AudioManager : MonoBehaviour
     public void Initialize(Transform playerRef)
     {
         _playerRef = playerRef;
+        _monsterPlayer = _playerRef.GetComponent<MonsterPlayer>();
         _instanceMusicIntro = RuntimeManager.CreateInstance(musicIntro.Guid);
         _instanceMusicBlue = RuntimeManager.CreateInstance(musicBlue.Guid);
         _instanceMusicMystery = RuntimeManager.CreateInstance(musicMystery.Guid);

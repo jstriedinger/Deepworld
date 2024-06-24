@@ -8,15 +8,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 781208060262266928, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.035
+      objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.5
+      value: 44.1
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 63.7
+      value: 73.5
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -58,12 +63,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3921976907519975270, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.035
+      objectReference: {fileID: 0}
     - target: {fileID: 4013539651867559864, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: monsterStats
       value: 
       objectReference: {fileID: 11400000, guid: b211b289bb08f445c9343b19ed11a8ea,
         type: 2}
+    - target: {fileID: 4013539651867559864, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: _canAffectCamera
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280019566030105874, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767542599160114223, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: graphMask.value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5039743520618852438, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: _simplePatrol
@@ -82,29 +107,40 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
+      propertyPath: startWhenEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
       propertyPath: showBehaviorDesignerGizmo
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
+      propertyPath: mBehaviorSource.behaviorName
+      value: TutorialMonster
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"PatrolInfo","IsShared":true,"List`1mValue":[null,null,null,null,null,null,null]},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PatrolSpeed","IsShared":true,"SinglemValue":0}]}'
+      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PatrolSpeed","IsShared":true,"SinglemValue":5}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7229075155926953987, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: smoothSpeed
+      value: 0.035
+      objectReference: {fileID: 0}
     - target: {fileID: 8407431020621240944, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}
-    - {fileID: 2289235338297122811, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}
-    - {fileID: 8393807303173930285, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}
-    - {fileID: 4767542599160114223, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

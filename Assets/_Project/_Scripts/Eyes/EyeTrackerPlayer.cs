@@ -95,7 +95,7 @@ public class EyeTrackerPlayer : MonoBehaviour
 
 
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
 
 

@@ -16,7 +16,7 @@ public class BlueNPC : MonoBehaviour
     [SerializeField] Transform headPart;
     [SerializeField] ParticleSystem VFXSwimBubbles;
     [SerializeField] EventReference SFXSwim;
-
+    
     [HideInInspector]
     public Transform targetRef;
     public bool followPlayer;
@@ -34,6 +34,7 @@ public class BlueNPC : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private float _nextSwim;
     private Vector3 _swimDir;
+    private EyeFollower _eyeFollower;
     
     
     //Procedural bodies
@@ -52,6 +53,7 @@ public class BlueNPC : MonoBehaviour
         _proceduralDynamicTentacles = GetComponentsInChildren<TentacleDynamic>();
         _proceduralTentacles = GetComponentsInChildren<Tentacle>();
         _proceduralBody = GetComponentInChildren<BodyTentacle>();
+        _eyeFollower = GetComponentInChildren<EyeFollower>();
 
     }
 
@@ -140,6 +142,11 @@ public class BlueNPC : MonoBehaviour
     {
         _aiBlue.canMove = shouldFollow;
         followPlayer = shouldFollow;
+    }
+    
+    public void ToggleEyeFollowTarget(bool willFollow = false, Transform newTarget = null)
+    {
+        _eyeFollower.ToggleFollowTarget(willFollow,newTarget);
     }
 
 }
