@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Grass 2
   m_EditorClassIdentifier: 
   m_Angles:
-  - m_Start: -45
-    m_End: 45
+  - m_Start: -180
+    m_End: 180
     m_Order: 0
     m_Sprites:
-    - {fileID: 21300000, guid: 8316467b0e4144113b312264f0945350, type: 3}
-    - {fileID: 21300000, guid: cb53d5b0f20124560a7653e9a4d607b6, type: 3}
+    - {fileID: 21300000, guid: b2ca872dd0e5846f4b1ce9744f697268, type: 3}
+    - {fileID: 21300000, guid: d4ebcea121fbf4f0d9335d2dfa6f55a8, type: 3}
     - {fileID: 21300000, guid: 623b31a81294c4488be278ca1aa21358, type: 3}
   m_FillTexture: {fileID: 0}
   m_CornerSprites:

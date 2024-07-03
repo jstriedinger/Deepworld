@@ -17,7 +17,7 @@ PrefabInstance:
     - target: {fileID: 162863687330448299, guid: 7272d899e1f86af45a0bd300fefd5d25,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 162863687330448299, guid: 7272d899e1f86af45a0bd300fefd5d25,
         type: 3}
@@ -32,17 +32,17 @@ PrefabInstance:
     - target: {fileID: 2595455376480334942, guid: 7272d899e1f86af45a0bd300fefd5d25,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2595455376480334942, guid: 7272d899e1f86af45a0bd300fefd5d25,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2595455376480334942, guid: 7272d899e1f86af45a0bd300fefd5d25,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2595455376480334942, guid: 7272d899e1f86af45a0bd300fefd5d25,
         type: 3}

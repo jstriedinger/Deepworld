@@ -9,6 +9,7 @@ using FMODUnity;
 using TMPro;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
+using LineRenderer = UnityEngine.LineRenderer;
 using Random = UnityEngine.Random;
 
 public enum MonsterState {  Default, Investigate, Follow, Chasing, Frustrated };
@@ -24,6 +25,9 @@ public class EnemyMonster : MonoBehaviour
     [SerializeField] private Transform _headObj;
     [SerializeField] private Light2D _headLight;
     [SerializeField] private bool _canAffectCamera = true;
+    [SerializeField] private ParticleSystem vfxDetect;
+    [SerializeField] private ParticleSystem vfxAttack;
+    private IEnumerator _attackColorAnimationLoop1,_attackColorAnimationLoop2,_attackColorAnimationLoop3,_attackColorAnimationLoop4;
     
     private CameraManager _cameraManager;
     private GameManager _gameManager;
@@ -39,7 +43,6 @@ public class EnemyMonster : MonoBehaviour
 
     private bool _canReactToCall = false;
     private Rigidbody2D _rigidbody2D;
-    private ParticleSystem _vfxDetect;
     private Tween _headTween;
     private Sequence _colorTweenSequence;
     private Tween _chaseScaleTween;
@@ -54,16 +57,22 @@ public class EnemyMonster : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _eyeTracker = GetComponentInChildren<EyeTracker>();
 
-        _vfxDetect = _headObj.GetComponentInChildren<ParticleSystem>();
+        //testing color animation for attacking
+        _attackColorAnimationLoop1 = AnimateColorLoop(_tentacles[0],0.03f);
+        _attackColorAnimationLoop2 = AnimateColorLoop(_tentacles[1],0.03f);
+        _attackColorAnimationLoop3 = AnimateColorLoop(_tentacles[2],0.03f);
+        _attackColorAnimationLoop4 = AnimateColorLoop(_tentacles[3],0.03f);
+        
+       
 
         _chaseScaleTween = _headObj.DOScale(1.2f, 0.3f).SetLoops(-1, LoopType.Yoyo).SetAutoKill(false).Pause();
         
         foreach (LineRenderer tentacle in _tentacles)
         {
-            tentacle.startColor = monsterStats.DefaultColor;
+            tentacle.colorGradient = monsterStats.DefaultColorGradient;
         }
 
-        _headLight.color = monsterStats.DefaultColor*1.5f;
+        _headLight.color = monsterStats.DefaultColorGradient.colorKeys[0].color*1.5f;
         //pass data from SO to the AI Tree
         //Reactive type means it used for gameplay: reacts to player and has behavoir
         _behaviorTree = GetComponent<BehaviorTree>();
@@ -100,7 +109,7 @@ public class EnemyMonster : MonoBehaviour
         }
 
         _colorTweenSequence = DOTween.Sequence();
-        //_light2D.color = monsterStats.DefaultColor;
+        
     }
 
   
@@ -233,29 +242,26 @@ public class EnemyMonster : MonoBehaviour
         switch (newState)
         {
             case MonsterState.Default:
-                //pupil size
-                //eyemanager change eyes + pupil size
-                UpdateColors(monsterStats.DefaultColor, monsterStats.DefaultColor);
+                UpdateColorsAndToggleAnimation(monsterStats.DefaultColorGradient,false);
                 
                 break;
             case MonsterState.Follow:
-                UpdateColors(monsterStats.FollowColor, monsterStats.FollowColor);
-                StartCoroutine(PlayReactSound(false, true));
+                UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false);
+                StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Investigate:
                 _behaviorTree.SetVariableValue("CanReactToCall",true);
                 _canReactToCall = true;
                 
-                UpdateColors(monsterStats.FollowColor, monsterStats.FollowColor);
-                
+                UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false);
                 StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Chasing:
                 if(monsterStats.IsReactive)
                     _audioManager.UpdateMonstersChasing(true);
                 _chaseScaleTween.Play();
-                UpdateColors(monsterStats.ChaseColor, monsterStats.ChaseColor);
                 
+                UpdateColorsAndToggleAnimation(monsterStats.ChaseColorGradient,true);
                 StartCoroutine(PlayReactSound(false, false));
                 break;
             case MonsterState.Frustrated:
@@ -269,24 +275,163 @@ public class EnemyMonster : MonoBehaviour
         _eyeManager.OnUpdateMonsterState();
     }
 
-    private void UpdateColors(Color tentacleColor, Color lightColor)
+    private void UpdateColorsAndToggleAnimation(Gradient newColorGradient, bool animate)
     {
+        if (!animate)
+        {
+            //we must first stop the animations
+            StopCoroutine(_attackColorAnimationLoop1);
+            StopCoroutine(_attackColorAnimationLoop2);
+            StopCoroutine(_attackColorAnimationLoop3);
+            StopCoroutine(_attackColorAnimationLoop4);
+            
+            //now we put back the current color keuy back to their default time positions
+            //Remember we assume a structure of 4 color keys in every gradient
+            foreach (LineRenderer tentacle in _tentacles)
+            {
+                Gradient colorGradient = tentacle.colorGradient;
+                GradientColorKey[] colorKeys = colorGradient.colorKeys;
+
+                colorKeys[0].time = monsterStats.DefaultColorGradient.colorKeys[0].time;
+                colorKeys[1].time = monsterStats.DefaultColorGradient.colorKeys[1].time;
+                colorKeys[2].time = monsterStats.DefaultColorGradient.colorKeys[2].time;
+                colorKeys[3].time = monsterStats.DefaultColorGradient.colorKeys[3].time;
+                
+                colorGradient.SetKeys(colorKeys, monsterStats.DefaultColorGradient.alphaKeys);
+                tentacle.colorGradient = colorGradient;
+            }
+            
+        }
+        //we assume all color gradiente have the same key spacing, so we only have to change the colors of those keys
         _colorTweenSequence = DOTween.Sequence();
         foreach (LineRenderer tentacle in _tentacles)
         {
-            _colorTweenSequence.Join(DOTween.To(() => tentacle.startColor, x => tentacle.startColor = x,
-                tentacleColor, 1f));
+            //current gradient of line renderer
+            Gradient colorGradient = tentacle.colorGradient;
+            GradientColorKey[] colorKeys = colorGradient.colorKeys;
+            
+            _colorTweenSequence.Join(DOTween.To(() =>  colorKeys[0].color, x => colorKeys[0].color = x,
+                newColorGradient.colorKeys[0].color, 1f).OnUpdate(() =>
+            {
+                colorGradient.SetKeys(colorKeys, colorGradient.alphaKeys);
+                tentacle.colorGradient = colorGradient;
+            }));
+            _colorTweenSequence.Join(DOTween.To(() =>  colorKeys[1].color, x => colorKeys[1].color = x,
+                newColorGradient.colorKeys[1].color, 1f).OnUpdate(() =>
+            {
+                colorGradient.SetKeys(colorKeys, colorGradient.alphaKeys);
+                tentacle.colorGradient = colorGradient;
+            }));
+            _colorTweenSequence.Join(DOTween.To(() =>  colorKeys[2].color, x => colorKeys[2].color = x,
+                newColorGradient.colorKeys[2].color, 1f).OnUpdate(() =>
+            {
+                colorGradient.SetKeys(colorKeys, colorGradient.alphaKeys);
+                tentacle.colorGradient = colorGradient;
+            }));
+            _colorTweenSequence.Join(DOTween.To(() =>  colorKeys[3].color, x => colorKeys[3].color = x,
+                newColorGradient.colorKeys[3].color, 1f).OnUpdate(() =>
+            {
+                colorGradient.SetKeys(colorKeys, colorGradient.alphaKeys);
+                tentacle.colorGradient = colorGradient;
+            }));
         }
-        //light is a litle lighter
+        //the new light color will always be the first color fo the gradient. But a little darker
         _colorTweenSequence.Join(DOTween.To(() => _headLight.color, x => _headLight.color = x,
-            lightColor*1.5f, 1f));
+            newColorGradient.colorKeys[0].color*1.5f, 1f));
+
+        if (animate)
+        {
+            //begin animation after smooth color transition
+            _colorTweenSequence.OnComplete(() =>
+            {
+                StartCoroutine(_attackColorAnimationLoop2);
+                StartCoroutine(_attackColorAnimationLoop2);
+                StartCoroutine(_attackColorAnimationLoop3);
+                StartCoroutine(_attackColorAnimationLoop4);
+            });
+        }
+
+    }
+
+    //remove first and last keys since they dont shift.
+    List<GradientColorKey> RemoveFirstAndLast(Gradient incomingGradient)
+    {
+        List<GradientColorKey> currentColorKeys = new List<GradientColorKey>(incomingGradient.colorKeys);
+        currentColorKeys.RemoveAt(currentColorKeys.Count-1);
+        currentColorKeys.RemoveAt(0);
+        return currentColorKeys;
+    }
+    
+    //returns the gradient with a copy of the first key for intersection purposes.
+    Gradient AddInitialCopy(Gradient incomingGradient)
+    {
+        List<GradientColorKey> newColorKeys = new List<GradientColorKey>(incomingGradient.colorKeys);
+        Color interSectionColor = newColorKeys[0].color;
+        newColorKeys.Insert(0,new GradientColorKey(interSectionColor,0));
+        Gradient newInitGradient = new Gradient();
+        newInitGradient.colorKeys = newColorKeys.ToArray();
+        return newInitGradient;
+    }
+    
+    Color GetIntersectionColor(List<GradientColorKey> incomingKeys, int lowestIndex, int highestIndex)
+    {
+        Color firstColor = incomingKeys[lowestIndex].color;
+        Color lastColor = incomingKeys[highestIndex].color;
+        float distance = 1 - (incomingKeys[highestIndex].time - incomingKeys[lowestIndex].time);
+        float colorLerpAmount = (1f-incomingKeys[highestIndex].time) / distance;;
+        Color newIntersectionColor = Color.Lerp(lastColor,firstColor,colorLerpAmount);
+        return newIntersectionColor;
+    }
+    
+    IEnumerator AnimateColorLoop(LineRenderer lineRendererToChange, float movementPerTick = .001f)
+    {
+        lineRendererToChange.colorGradient = AddInitialCopy(lineRendererToChange.colorGradient);
+ 
+        while(true)
+        {
+            List<GradientColorKey> currentColorKeys = RemoveFirstAndLast(lineRendererToChange.colorGradient);
+            float highestTime=0;
+            float lowestTime=1;
+            int highestIndex = currentColorKeys.Count-1;
+            int lowestIndex = 0;
+            //Move all inner ones.
+            for(int i = 0 ;i<currentColorKeys.Count;i++)
+            {
+                GradientColorKey tempColorKey = currentColorKeys[i];
+                float newTime = tempColorKey.time + movementPerTick;
+                
+                if(newTime>1)
+                {
+                    newTime = newTime-1;
+                }
+                tempColorKey.time = newTime;
+                currentColorKeys[i] = tempColorKey;
+                if(newTime<lowestTime)
+                {
+                    lowestTime = newTime;
+                    lowestIndex = i;
+                }
+                if(newTime>highestTime)
+                {
+                    highestTime = newTime;
+                    highestIndex = i;
+                }
+            }
+            Color newIntersectionColor = GetIntersectionColor(currentColorKeys,lowestIndex,highestIndex);
+            currentColorKeys.Insert(0,new GradientColorKey(newIntersectionColor,0));
+            currentColorKeys.Add(new GradientColorKey(newIntersectionColor,1));
+            Gradient tempGradient = lineRendererToChange.colorGradient;
+            tempGradient.colorKeys = currentColorKeys.ToArray();
+            lineRendererToChange.colorGradient = tempGradient;  
+            yield return null;
+        }
     }
 
     public IEnumerator PlayReactSound(bool showEffect, bool animate)
     {
         if (showEffect)
         {
-            _vfxDetect.Play();
+            vfxDetect.Play();
             yield return new WaitForSeconds(0.25f);
         }
         if (animate)

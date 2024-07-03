@@ -26,9 +26,9 @@ public class MonsterSO : ScriptableObject
     [field: SerializeField] public float EyeBallShutSpeed { get; private set; } = 0.05f;
     
     [field:Header("State colors")]
-    [field: SerializeField] public Color DefaultColor { get; private set; } = Color.white;
-    [field: SerializeField] public Color FollowColor { get; private set; } = Color.yellow;
-    [field: SerializeField] public Color ChaseColor { get; private set; } = Color.red;
+    [field: SerializeField] public Gradient DefaultColorGradient { get; private set; }
+    [field: SerializeField] public Gradient FollowColorGradient { get; private set; }
+    [field: SerializeField] public Gradient ChaseColorGradient { get; private set; }
     
     [field: Header("Misc")]
     [field: SerializeField] public int DistanceToShowOnCamera { get; private set; } = 0;

@@ -12,6 +12,7 @@ public class FishFlock : MonoBehaviour
     [SerializeField] private GameObject _playerRef;
     [SerializeField] private float numFishes;
     [SerializeField] private GameObject fishPrefab;
+    [SerializeField] private bool reactToPlayer = true;
     private List<GameObject> _fishes = new List<GameObject>();
     private BehaviorTree _behaviorTree;
     private Flock _flockTask;
@@ -33,7 +34,7 @@ public class FishFlock : MonoBehaviour
             GameObject fishObj = Instantiate(fishPrefab,transform.position,quaternion.identity,transform);
             fishObj.transform.localPosition = randomPos;
             Fish fish = fishObj.GetComponent<Fish>();
-            fish.Initialize(_behaviorTree,_flockTask, _playerRef);
+            fish.Initialize(_behaviorTree,_flockTask, reactToPlayer, _playerRef);
             _fishes.Add(fishObj);
         }
         //setup the fish var of the tree

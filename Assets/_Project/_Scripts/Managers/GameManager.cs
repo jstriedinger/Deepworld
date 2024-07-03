@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
             case StartSection.Checkpoint1:
                 uiManager.isWorldUiActive = true;
                 audioManager.ChangeBackgroundMusic(1);
+                cinematicsManager.PrepareBlueForMeetup();
                 break;
             case StartSection.Checkpoint2:
                 uiManager.isWorldUiActive = true;

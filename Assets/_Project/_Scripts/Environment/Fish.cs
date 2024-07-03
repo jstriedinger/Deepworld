@@ -25,12 +25,15 @@ public class Fish : MonoBehaviour
         _behaviorTree = GetComponent<BehaviorTree>();
     }
 
-    public void Initialize(BehaviorTree parentFlockTree, Flock parentFlockTask,GameObject playerRef)
+    public void Initialize(BehaviorTree parentFlockTree, Flock parentFlockTask, bool reactToPlayer, GameObject playerRef)
     {
         _parentFlockTree = parentFlockTree;
         _flockParentTask = parentFlockTask;
-        _behaviorTree.SetVariable("playerRef",(SharedGameObject)playerRef);
-        _behaviorTree.EnableBehavior();
+        if (reactToPlayer)
+        {
+            _behaviorTree.SetVariable("playerRef",(SharedGameObject)playerRef);
+            _behaviorTree.EnableBehavior();
+        }
         
     }
 

@@ -45,6 +45,15 @@ public class Tentacle : MonoBehaviour
         ResetPos();
     }
 
+    private void OnEnable()
+    {
+        _lineRenderer.positionCount = length;
+
+        segmentPoses = new Vector3[length];
+        segmentV = new Vector3[length];
+
+        ResetPos();
+    }
 
 
     private void Update()

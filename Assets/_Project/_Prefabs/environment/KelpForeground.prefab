@@ -104,7 +104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 51
   m_Sprite: {fileID: 21300000, guid: 8179ee51dde8e9146993b6e345090df3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -192,7 +192,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1472658723
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 50
   m_Positions:
   - {x: 975.6339, y: -481.75522, z: 0}
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _internalLight2D: {fileID: 0}
-  length: 16
+  length: 14
   segmentPoses:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}

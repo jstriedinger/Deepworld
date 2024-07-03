@@ -25,10 +25,15 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private GameObject pathBlueTitles2;
     [SerializeField] private GameObject pathBlueTitles3;
     [SerializeField] private GameObject pathPlayerTitles;
+    [SerializeField] private Transform fish1Titles;
+    [SerializeField] private GameObject pathFishTitles;
+    [SerializeField] private Transform fish2Titles;
+    [SerializeField] private GameObject pathFish2Titles;
     [SerializeField] Transform logosFollowCamObj;
     [SerializeField] Transform mainMenuObject;
     [SerializeField] float blueC0Time;
     [SerializeField] int blueC01Time;
+    
     
     [Header("Cinematic - Blue meetup")]
     [SerializeField] private GameObject pathBlueMeetup1;
@@ -39,6 +44,7 @@ public class CinematicsManager : MonoBehaviour
     [Header("Cinematic - earthquake & tunnel")] 
     [SerializeField] AudioClip sfxExplosion;
     [SerializeField] GameObject pathBlueEarthquake;
+    [SerializeField] GameObject pathBlueEarthquake2;
     [SerializeField] private GameObject tunnelRocks;
 
     [Header("Cinematic - Monster encounter")] 
@@ -88,6 +94,7 @@ public class CinematicsManager : MonoBehaviour
     private void BeforeCinematicStarts(bool bars = true, bool deactivateInput = true)
     {
         _playerRef.StopMovement();
+        _playerRef.swimStage = false;
         _blueNpc.ToggleFollow(false);
         //playerInput.enabled = false;
         if (deactivateInput)
@@ -195,17 +202,16 @@ public class CinematicsManager : MonoBehaviour
             .Append(_blueNpc.transform.DOPath(bluePathPos2, 5, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .Join(_playerRef.transform.DOPath(playerPathPos2, 4, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Join(_playerRef.transform.DOPath(playerPathPos2, 4.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1.5f)
                 .OnWaypointChange(
                     (int waypointIndex) =>
                     {
-                        if (waypointIndex == 2)
+                        if (waypointIndex == 3)
                             StartCoroutine(_playerRef.PlayCallSFX(false));
                     }))
             .AppendCallback(() => { StartCoroutine(_blueNpc.PlayCallSFX()); })
-            .AppendInterval(1)
             .OnComplete(
                 () =>
                 {
@@ -340,7 +346,7 @@ public class CinematicsManager : MonoBehaviour
         }
         
         Sequence seq = DOTween.Sequence()
-            .AppendInterval(0.5f)
+            .AppendInterval(2.5f)
             .AppendCallback(() =>
             {
                 TutorialMonster1.ToggleBehaviorTree(false);
@@ -366,37 +372,37 @@ public class CinematicsManager : MonoBehaviour
                 .SetLookAt(0.001f, transform.forward, Vector3.right))
             .Join(TutorialMonster1.transform.DOPath(path2Monster1Pos, 2f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.25f))
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.5f))
             .Join(TutorialMonster2.transform.DOPath(path2Monster2Pos, 2.1f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.25f))
-            .Append(TutorialMonster1.transform.DOPath(path2MiniMonster1Pos, 4.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.5f))
+            .Append(TutorialMonster1.transform.DOPath(path2MiniMonster1Pos, 5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .Join(TutorialMonster2.transform.DOPath(path2MiniMonster2Pos, 5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Join(TutorialMonster2.transform.DOPath(path2MiniMonster2Pos, 5.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right))
             .Join(_blueNpc.transform.DOPath(pathBluePos, 2.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1f)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1.2f)
                 .OnComplete(() =>
                 {
                     StartCoroutine(_blueNpc.PlayCallSFX());
                 }))
-            .AppendInterval(0.5f)
-            .AppendCallback(() =>
-            {
-                TutorialMonster1.ToggleTrackTarget(_blueNpc.gameObject);
-                StartCoroutine(TutorialMonster2.PlayReactSound(true,true));
-                
-            })
             .AppendInterval(0.15f)
             .AppendCallback(() =>
             {
                 TutorialMonster2.ToggleTrackTarget(_blueNpc.gameObject);
                 StartCoroutine(TutorialMonster2.PlayReactSound(true,true));
             })
-            .AppendInterval(1)
+            .AppendInterval(0.5f)
+            .AppendCallback(() =>
+            {
+                TutorialMonster1.ToggleTrackTarget(_blueNpc.gameObject);
+                StartCoroutine(TutorialMonster1.PlayReactSound(true,true));
+                
+            })
+            .AppendInterval(.25f)
             .Append(_blueNpc.transform.DOPath(pathBluePos2, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
@@ -405,15 +411,20 @@ public class CinematicsManager : MonoBehaviour
             {
                 TutorialMonster2.OnAIChasePlayer();
                 RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
-                TutorialMonster1.OnAIChasePlayer();
                 
             })
-            .Join(TutorialMonster1.transform.DOPath(path3Monster1Pos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Join(TutorialMonster2.transform.DOPath(path3Monster2Pos, 4.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.25f))
-            .Join(TutorialMonster2.transform.DOPath(path3Monster2Pos, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.1f)
+                .OnWaypointChange(
+                    (int waypointIndex) =>
+                    {
+                        if (waypointIndex == 1)
+                            TutorialMonster1.OnAIChasePlayer();
+                    }))
+            .Join(TutorialMonster1.transform.DOPath(path3Monster1Pos, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.1f))
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.15f))
             .AppendCallback(() => {_blueNpc.gameObject.SetActive(false);})
             .AppendInterval(1)
             .OnComplete(() =>
@@ -487,9 +498,9 @@ public class CinematicsManager : MonoBehaviour
                 .OnWaypointChange(
                     (int waypointIndex) =>
                     {
-                        if (waypointIndex == 0)
+                        if (waypointIndex == 1)
                             StartCoroutine(_blueNpc.PlayCallSFX());
-                        else if (waypointIndex == 1)
+                        else if (waypointIndex == 2)
                         {
                             RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
                             _playerRef.ToggleEyeFollowTarget(true, _blueNpc.transform);
@@ -497,20 +508,20 @@ public class CinematicsManager : MonoBehaviour
                         else if(waypointIndex == 3)
                             RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
                     }))
-            .Join(TutorialMonster1.transform.DOPath(path1Monster1Pos, 4.2f, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Join(TutorialMonster1.transform.DOPath(path1Monster1Pos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnComplete(() =>
                 {
                     TutorialMonster1.ToggleBehaviorTree(true);
-                }))
-            .Join(TutorialMonster2.transform.DOPath(path1Monster2Pos, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                }).SetDelay(.75f))
+            .Join(TutorialMonster2.transform.DOPath(path1Monster2Pos, 3f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1f)
+                .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnComplete(() =>
                 {
                     TutorialMonster2.ToggleBehaviorTree(true);
-                }))
+                }).SetDelay(1f))
             .Join(_playerRef.transform.DOPath(pathPlayerPos, 5, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
@@ -545,6 +556,13 @@ public class CinematicsManager : MonoBehaviour
             bluePathEarthquakePos[i-1] = bluePathEarthquakeTransforms[i].position;
         }
         
+        Transform[] bluePath2EarthquakeTransforms = pathBlueEarthquake2.GetComponentsInChildren<Transform>();
+        Vector3[] bluePath2EarthquakePos = new Vector3[bluePath2EarthquakeTransforms.Length-1];
+        for (int i = 1; i < bluePath2EarthquakeTransforms.Length; i++)
+        {
+            bluePath2EarthquakePos[i-1] = bluePath2EarthquakeTransforms[i].position;
+        }
+        
         //path to near player
         Vector3 dif = _blueNpc.targetRef.position - _blueNpc.transform.position;
         Vector3[] closeToPlayerPath = new Vector3[] { (_blueNpc.transform.position + dif * 0.8f) };
@@ -565,25 +583,35 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() =>
             {
                 _cameraManager.ShakeCamera();
-                AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.9f );
 
             })
-            .AppendInterval(3)
+            .AppendInterval(2.5f)
             .AppendCallback(() =>
             {
-                _blueNpc.ToggleEyeFollowTarget(false);
                 _playerRef.ToggleEyeFollowTarget(true,_blueNpc.transform);
             })
-            .Append(_blueNpc.transform.DOPath(bluePathEarthquakePos, 7, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Append(_blueNpc.transform.DOPath(bluePathEarthquakePos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right)
+                .OnComplete(() =>
+                {
+                    StartCoroutine(_blueNpc.PlayCallSFX());
+                }))
+            .AppendInterval(1)
+            .Append(_blueNpc.transform.DOPath(bluePath2EarthquakePos, 4, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnWaypointChange(
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 0)
-                            StartCoroutine(_blueNpc.PlayCallSFX());
-                        else if(waypointIndex == 1)
+                        {
                             StartCoroutine(_playerRef.PlayCallSFX(false));
+                            _blueNpc.ToggleEyeFollowTarget(false);
+                        }
+                        else if(waypointIndex == 1)
+                            StartCoroutine(_blueNpc.PlayCallSFX());
                     }))
             .OnComplete(
                 () =>
@@ -593,9 +621,6 @@ public class CinematicsManager : MonoBehaviour
                     _blueNpc.transform.position = bluePathMonsterPos[0];
                     _audioManager.ToggleMusicVolume(false);
                     AfterCinematicEnds();
-                    //Now put Blue in the next pos
-                    //prepare blue for next cinematic, for just destroy it
-                    
                 }
             );
 
@@ -604,6 +629,13 @@ public class CinematicsManager : MonoBehaviour
     public void PrepareBlueForMonsterEncounter()
     {
         Transform[] tBluePathMonster = pathBlueMonster.GetComponentsInChildren<Transform>();
+        
+        _blueNpc.transform.position = tBluePathMonster[1].position;
+    }
+
+    public void PrepareBlueForMeetup()
+    {
+        Transform[] tBluePathMonster = pathBlueMeetup1.GetComponentsInChildren<Transform>();
         
         _blueNpc.transform.position = tBluePathMonster[1].position;
     }
@@ -628,10 +660,32 @@ public class CinematicsManager : MonoBehaviour
         {
             bluePathC1Pos[i-1] = bluePathC1Transforms[i].position;
         }
+        
+        
+        Transform[] fishPathTransforms = pathFishTitles.GetComponentsInChildren<Transform>();
+        Vector3[] fishPathPos = new Vector3[fishPathTransforms.Length-1];
+        for (int i = 1; i < fishPathTransforms.Length; i++)
+        {
+            fishPathPos[i-1] = fishPathTransforms[i].position;
+        }
+        
+        Transform[] fish2PathTransforms = pathFish2Titles.GetComponentsInChildren<Transform>();
+        Vector3[] fish2PathPos = new Vector3[fish2PathTransforms.Length-1];
+        for (int i = 1; i < fish2PathTransforms.Length; i++)
+        {
+            fish2PathPos[i-1] = fish2PathTransforms[i].position;
+        }
 
+        Sequence fishes = DOTween.Sequence();
+        fishes.Append(fish1Titles.DOPath(fishPathPos, 25, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .SetEase(Ease.InOutSine)
+            .SetLookAt(0.001f, transform.forward, Vector3.right));
+        fishes.Join(fish2Titles.DOPath(fish2PathPos, 12, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .SetEase(Ease.InOutSine)
+            .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(8));
         
         Sequence introLogos = DOTween.Sequence()
-            .AppendInterval(3f)
+            .AppendInterval(3.5f)
             .Append(_uiManager.logoUsc.DOFade(1, 3).SetEase(Ease.InQuart))
             .Join(_blueNpc.transform.DOPath(bluePathC0Pos, blueC0Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -654,12 +708,12 @@ public class CinematicsManager : MonoBehaviour
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .SetDelay(2f))
-            .Join(_uiManager.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(3f ));
+            .Join(_uiManager.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(4f ));
 
         Sequence introMover = DOTween.Sequence()
-        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y, 26)
+        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y, 27)
             .SetEase(Ease.InOutSine))
-        .Join(logosFollowCamObj.DOMoveY(playerPathC0Transforms[^1].position.y, 26).SetEase(Ease.InOutSine).OnComplete(
+        .Join(logosFollowCamObj.DOMoveY(playerPathC0Transforms[^1].position.y, 27).SetEase(Ease.InOutSine).OnComplete(
             () => {
                 mainMenuObject.parent = null;
             }

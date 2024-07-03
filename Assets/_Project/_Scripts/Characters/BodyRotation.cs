@@ -8,7 +8,6 @@ public class BodyRotation : MonoBehaviour
     public float speed;
     private Vector2 direction;
     public GameObject target;
-    private Vector3 tarTrans;
 
     void Start(){
         Rotate();
@@ -26,6 +25,7 @@ public class BodyRotation : MonoBehaviour
         //Determine the angle of our direction Vector2
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = rotation; //Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+        //transform.rotation = rotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
     }
 }

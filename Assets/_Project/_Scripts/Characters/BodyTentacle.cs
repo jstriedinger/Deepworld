@@ -56,9 +56,18 @@ public class BodyTentacle : MonoBehaviour
             //These conditions hardcode for body part positions on the player's model
             if(i == upperBody){
                 bodyParts[0].transform.position = segmentPoses[i];
+                //lets rotate here the body part
+                Vector2 dir = segmentPoses[i - 1] - segmentPoses[i];
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90f;
+                Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                bodyParts[0].transform.rotation = Quaternion.Slerp(bodyParts[0].transform.rotation, rotation, 10 * Time.deltaTime);
             }
             else if(i == lowerBody){
                 bodyParts[1].transform.position = segmentPoses[i];
+                Vector2 dir = segmentPoses[i - 1] - segmentPoses[i];
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90f;
+                Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                bodyParts[1].transform.rotation = Quaternion.Slerp(bodyParts[1].transform.rotation, rotation, 10 * Time.deltaTime);
             }
 
             }

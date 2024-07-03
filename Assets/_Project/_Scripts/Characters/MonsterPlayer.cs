@@ -37,8 +37,8 @@ public class MonsterPlayer : MonoBehaviour
     private StudioEventEmitter _normalSwimSfxEmitter;
 
     //Input and movement handler
-    [HideInInspector]
-    public PlayerInput playerInput;
+    [HideInInspector] public PlayerInput playerInput;
+    [HideInInspector] public bool swimStage;
     private Vector2 _moveInputValue;
     private Vector3 _finalMovement;
     private Rigidbody2D _rigidBody;
@@ -192,6 +192,7 @@ public class MonsterPlayer : MonoBehaviour
         Vector2 dir = _moveInputValue.normalized;
         if (Time.time >= _nextSwim)
         {
+            swimStage = true;
             //swimm
             float magnitude = _moveInputValue.magnitude;
             //myAnim.SetFloat("Speed", magnitude);
@@ -212,20 +213,29 @@ public class MonsterPlayer : MonoBehaviour
                 seq.Append(headPart.DOScaleY(1f, 0.5f  * 1.5f));
             }
 
+
             //metric handler
             MetricManagerScript.instance?.LogString("Player Action", "Swim");
         }
         
 
     }
-    
-    private void FixedUpdate()
+
+    private void Update()
     {
         Move();
         SlowTurn();
+        if (Time.time >= _nextSwim + 1f)
+            swimStage = false;
     }
-    
-     //Main function that moves the player very very slowly
+
+    private void FixedUpdate()
+    {
+        //dot he final movement on fixedupdate since we are using rigidbody
+        _rigidBody.AddForce(_finalMovement);
+    }
+
+    //Main function that moves the player very very slowly
     public void Move()
     {
         Vector2 dir = _moveInputValue.normalized;
@@ -233,7 +243,7 @@ public class MonsterPlayer : MonoBehaviour
         //myAnim.SetFloat("Speed", magnitude);
         _finalMovement = ( slowSpeed * magnitude * Time.fixedDeltaTime * transform.up);
 
-        _rigidBody.AddForce(_finalMovement);
+        
 
         if(magnitude > 0 )
         {
@@ -262,7 +272,7 @@ public class MonsterPlayer : MonoBehaviour
             Vector3 rotatedTemp = Quaternion.Euler(0, 0, 0) * new Vector3(_moveInputValue.x, _moveInputValue.y, 0f);
 
             Quaternion tempRotation = Quaternion.LookRotation(Vector3.forward, rotatedTemp);
-            this.transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.fixedDeltaTime);
+            this.transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -305,7 +315,7 @@ public class MonsterPlayer : MonoBehaviour
     public IEnumerator PlayCallSFX(bool respond)
     {
         vfxVoice.Play();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         if(_sfxCallLastTime.Equals(sfxCall1))
         {
             _sfxCallLastTime = sfxCall2;
