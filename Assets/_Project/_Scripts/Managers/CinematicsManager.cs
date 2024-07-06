@@ -93,6 +93,7 @@ public class CinematicsManager : MonoBehaviour
     //stuff that happens before starting a blocking cinematic
     private void BeforeCinematicStarts(bool bars = true, bool deactivateInput = true)
     {
+        
         _playerRef.StopMovement();
         _playerRef.swimStage = false;
         _blueNpc.ToggleFollow(false);

@@ -177,8 +177,10 @@ public class GameManager : MonoBehaviour
                 case GameState.Paused:
                     playerRef.ToggleInputMap(true);
                     uiManager.PauseGame(true);
+                    audioManager.TogglePauseAudio(true);
                     break;
                 case GameState.Default:
+                    audioManager.TogglePauseAudio(false);
                     playerRef.ToggleInput(true);
                     if (_gameState == GameState.Paused)
                     {

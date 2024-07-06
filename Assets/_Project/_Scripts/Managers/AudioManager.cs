@@ -82,6 +82,11 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(_instanceMusicMystery, _playerRef);
     }
 
+    public void TogglePauseAudio(bool p)
+    {
+        RuntimeManager.PauseAllEvents(p);
+    }
+
     private void Awake()
     {
         _sfxMonsterChaseLoop = GetComponent<StudioEventEmitter>();
@@ -97,8 +102,6 @@ public class AudioManager : MonoBehaviour
         _instanceCloseDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
-   
-    
     //Change background music smoothly.
     //1 = intro, 2=Blue 3=mystery 4=closeDanger 5=underworld
     public void ChangeBackgroundMusic(int newMusic)
