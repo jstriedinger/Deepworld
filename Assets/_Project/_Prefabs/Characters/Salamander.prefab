@@ -101,7 +101,7 @@ Transform:
   - {fileID: 5335836652397838011}
   - {fileID: 4435735507514712432}
   - {fileID: 3684964435982335343}
-  m_Father: {fileID: 8100880464474704638}
+  m_Father: {fileID: 7196203181398277919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8132941885005647075
 SpriteRenderer:
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_Sprite: {fileID: -6637185859828127244, guid: a9faae61ecec15841a406ebb1c73fbdc,
     type: 3}
@@ -228,7 +228,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 21
   m_Sprite: {fileID: 1514730948093615263, guid: a9faae61ecec15841a406ebb1c73fbdc,
     type: 3}
@@ -328,9 +328,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8353174683347167719}
-  - {fileID: 7055298759358132506}
-  - {fileID: 2880813587380899022}
+  - {fileID: 7196203181398277919}
+  - {fileID: 8172742903819945644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8986583373273412776
@@ -466,8 +465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyPart: {fileID: 0}
   headPart: {fileID: 8353174683347167719}
-  maxSpeed: 600
-  slowSpeed: 400
+  maxSpeed: 650
+  slowSpeed: 500
   rotationSpeed: 180
   swimForce: 10
   timeBetweenSwim: 1
@@ -489,6 +488,7 @@ MonoBehaviour:
       Data4: -1011501066
     Path: event:/SFX/sfx_swimming_dash_1
   playerInput: {fileID: 0}
+  swimStage: 0
   isHidden: 0
   vfxVoice: {fileID: 9377556075274551}
   sfxCall1:
@@ -529,7 +529,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 10
-  m_GravityScale: 0.00005
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -681,7 +681,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 17
   m_Positions:
   - {x: -54.845, y: -269.91, z: 0}
@@ -848,7 +848,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 19
   m_Positions:
   - {x: -55.420002, y: -271.033, z: 0}
@@ -929,7 +929,7 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 5214795842110023620}
   targetDist: 0.3
-  smoothSpeed: 0.05
+  smoothSpeed: 0.03
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 3415951992824199789}
@@ -1038,7 +1038,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 17
   m_Positions:
   - {x: -53.595, y: -269.91, z: 0}
@@ -1162,6 +1162,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7634606992920627336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -75}
+--- !u!1 &3312446136030182985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8172742903819945644}
+  m_Layer: 7
+  m_Name: BlueTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8172742903819945644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312446136030182985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8100880464474704638}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3528804789430632087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1225,7 @@ Transform:
   m_Children:
   - {fileID: 8735924584062221859}
   - {fileID: 4052131069822046913}
-  m_Father: {fileID: 8100880464474704638}
+  m_Father: {fileID: 7196203181398277919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2274541459283278322
 MonoBehaviour:
@@ -1203,13 +1234,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3528804789430632087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92b5e3663db614241990aba0c46bb682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  target: {fileID: 913637230269838656}
+  target: {fileID: 7104198354756831741}
 --- !u!1 &3579636834221748157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2631,7 +2662,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 0.18039216, g: 0.8, b: 0.44313726, a: 0}
         key1: {r: 0.1333333, g: 0.75686276, b: 0.5860117, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key2: {r: 0, g: 0, b: 0, a: 0.78431374}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -2646,9 +2677,9 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 7686
-        atime2: 58982
-        atime3: 0
+        atime1: 5243
+        atime2: 16384
+        atime3: 58982
         atime4: 0
         atime5: 0
         atime6: 0
@@ -2656,7 +2687,7 @@ ParticleSystem:
         m_Mode: 0
         m_ColorSpace: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 3
+        m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6117,7 +6148,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: -10
   m_RenderMode: 3
   m_MeshDistribution: 0
@@ -6223,7 +6254,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 19
   m_Positions:
   - {x: -53.02, y: -271.033, z: 0}
@@ -6304,7 +6335,7 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 355515022712225048}
   targetDist: 0.3
-  smoothSpeed: 0.05
+  smoothSpeed: 0.03
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 4567320990749767517}
@@ -6341,7 +6372,7 @@ Transform:
   m_Children:
   - {fileID: 7517233240806014010}
   - {fileID: 1294928673326788311}
-  m_Father: {fileID: 8100880464474704638}
+  m_Father: {fileID: 7196203181398277919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5570849090520567647
 SpriteRenderer:
@@ -6403,7 +6434,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4807751497390677264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92b5e3663db614241990aba0c46bb682, type: 3}
   m_Name: 
@@ -6437,7 +6468,7 @@ Transform:
   m_GameObject: {fileID: 5278061453918920970}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.375, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.3, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6484,7 +6515,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 15
   m_Positions: []
   m_Parameters:
@@ -6558,6 +6589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5096b90bc059fe54087bda379774e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPlayer: {fileID: 7766123913844448042}
   length: 16
   head: {fileID: 5740145806345126017}
   lineRend: {fileID: 5046989612232128309}
@@ -6568,10 +6600,11 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 20
   magMin: 15
-  magMax: 50
+  magMax: 30
   speedMin: 2
-  speedMax: 8
+  speedMax: 10
   isRight: 0
+  changeSpeed: 2
   wiggleDir: {fileID: 619854248849521133}
 --- !u!1 &5290441019458469581
 GameObject:
@@ -6736,7 +6769,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 19
   m_Positions:
   - {x: -54.22, y: -271.223, z: 0}
@@ -6817,7 +6850,7 @@ MonoBehaviour:
   segmentPoses: []
   targetDir: {fileID: 8463338825383179799}
   targetDist: 0.3
-  smoothSpeed: 0.05
+  smoothSpeed: 0.03
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 3474443084122066884}
@@ -7083,7 +7116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 21
   m_Sprite: {fileID: -3917542862177904002, guid: a9faae61ecec15841a406ebb1c73fbdc,
     type: 3}
@@ -7176,7 +7209,7 @@ Transform:
   m_GameObject: {fileID: 6784684105019156936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.375, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0.3, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7223,7 +7256,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 16
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -7299,6 +7332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5096b90bc059fe54087bda379774e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPlayer: {fileID: 7766123913844448042}
   length: 16
   head: {fileID: 5740145806345126017}
   lineRend: {fileID: 7060495200132920999}
@@ -7309,10 +7343,11 @@ MonoBehaviour:
   wiggleSpeed: -2
   wiggleMagnitude: 20
   magMin: 15
-  magMax: 35
+  magMax: 30
   speedMin: 2
-  speedMax: 8
+  speedMax: 10
   isRight: 1
+  changeSpeed: 2
   wiggleDir: {fileID: 1061462909536652400}
 --- !u!1 &6872261311979092011
 GameObject:
@@ -7422,7 +7457,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 18
   m_Positions:
   - {x: -35.9, y: -270.4, z: 0}
@@ -7594,6 +7629,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d835a6f5e3b50d6469770f716d47f396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7164717680314026464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7196203181398277919}
+  m_Layer: 7
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7196203181398277919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7164717680314026464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8353174683347167719}
+  - {fileID: 7055298759358132506}
+  - {fileID: 2880813587380899022}
+  m_Father: {fileID: 8100880464474704638}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7409327146196404225
 GameObject:
   m_ObjectHideFlags: 0
@@ -7729,7 +7798,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 22
   m_Sprite: {fileID: 5548965315073439189, guid: a9faae61ecec15841a406ebb1c73fbdc,
     type: 3}
@@ -7814,7 +7883,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 22
   m_Sprite: {fileID: -4046912555474788999, guid: a9faae61ecec15841a406ebb1c73fbdc,
     type: 3}
@@ -7990,7 +8059,7 @@ PrefabInstance:
     - target: {fileID: 7123034158159383304, guid: 853219686f09c479bb2db04992346225,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7123034158159383304, guid: 853219686f09c479bb2db04992346225,
         type: 3}

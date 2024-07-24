@@ -16,7 +16,11 @@ public class AudioManager : MonoBehaviour
     public EventReference sfxMonsterScream;
     [SerializeField] private EventReference sfxBlueCall;
     [SerializeField] private EventReference sfxBlueScream;
+    public AudioClip uiButtonFocus;
+    public AudioClip uiButtonSelected;
     
+
+
     private StudioEventEmitter _sfxMonsterChaseLoop;
     
     [FormerlySerializedAs("musicAmbientIntro")]
@@ -272,8 +276,9 @@ public class AudioManager : MonoBehaviour
     }
     
     //Handles when to play the audio of monsters appearing
-    public void PlayMonsterAppearSfx()
+    public IEnumerator PlayMonsterAppearSfx()
     {
+        yield return new WaitForSeconds(0.35f);
         if(!sfxFirstMonsterAppear.IsNull)
         {
             RuntimeManager.PlayOneShot(sfxFirstMonsterAppear.Guid, transform.position);

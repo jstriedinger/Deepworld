@@ -26,7 +26,6 @@ public class EnemyMonster : MonoBehaviour
     [SerializeField] private Light2D _headLight;
     [SerializeField] private bool _canAffectCamera = true;
     [SerializeField] private ParticleSystem vfxDetect;
-    [SerializeField] private ParticleSystem vfxAttack;
     private IEnumerator _attackColorAnimationLoop1,_attackColorAnimationLoop2,_attackColorAnimationLoop3,_attackColorAnimationLoop4;
     
     private CameraManager _cameraManager;
@@ -151,14 +150,14 @@ public class EnemyMonster : MonoBehaviour
             if(!inCamera)
             {
                 //add to the
-                _cameraManager.AddMonsterToView(gameObject);
+                _cameraManager.AddObjectToCameraView(transform, true);
                 inCamera = true;
 
             }
         }
         else if(inCamera)
         {
-            _cameraManager.RemoveEnemyFromCameraView(gameObject);
+            _cameraManager.RemoveObjectFromCameraView(transform, true);
             inCamera = false;
         }
 
@@ -277,13 +276,13 @@ public class EnemyMonster : MonoBehaviour
 
     private void UpdateColorsAndToggleAnimation(Gradient newColorGradient, bool animate)
     {
+        //always try to stop animation just in case
+        StopCoroutine(_attackColorAnimationLoop1);
+        StopCoroutine(_attackColorAnimationLoop2);
+        StopCoroutine(_attackColorAnimationLoop3);
+        StopCoroutine(_attackColorAnimationLoop4);
         if (!animate)
         {
-            //we must first stop the animations
-            StopCoroutine(_attackColorAnimationLoop1);
-            StopCoroutine(_attackColorAnimationLoop2);
-            StopCoroutine(_attackColorAnimationLoop3);
-            StopCoroutine(_attackColorAnimationLoop4);
             
             //now we put back the current color keuy back to their default time positions
             //Remember we assume a structure of 4 color keys in every gradient
@@ -302,7 +301,7 @@ public class EnemyMonster : MonoBehaviour
             }
             
         }
-        //we assume all color gradiente have the same key spacing, so we only have to change the colors of those keys
+        //we assume all color gradient have the same key spacing, so we only have to change the colors of those keys
         _colorTweenSequence = DOTween.Sequence();
         foreach (LineRenderer tentacle in _tentacles)
         {
@@ -341,10 +340,11 @@ public class EnemyMonster : MonoBehaviour
 
         if (animate)
         {
+            Debug.Log("Animate colors");
             //begin animation after smooth color transition
             _colorTweenSequence.OnComplete(() =>
             {
-                StartCoroutine(_attackColorAnimationLoop2);
+                StartCoroutine(_attackColorAnimationLoop1);
                 StartCoroutine(_attackColorAnimationLoop2);
                 StartCoroutine(_attackColorAnimationLoop3);
                 StartCoroutine(_attackColorAnimationLoop4);

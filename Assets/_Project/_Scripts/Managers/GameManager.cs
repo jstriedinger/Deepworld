@@ -176,12 +176,12 @@ public class GameManager : MonoBehaviour
                     break;
                 case GameState.Paused:
                     playerRef.ToggleInputMap(true);
-                    uiManager.PauseGame(true);
                     audioManager.TogglePauseAudio(true);
+                    uiManager.PauseGame(true);
                     break;
                 case GameState.Default:
                     audioManager.TogglePauseAudio(false);
-                    playerRef.ToggleInput(true);
+                    playerRef.ToggleInputMap(false);
                     if (_gameState == GameState.Paused)
                     {
                         uiManager.PauseGame(false);
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
             //only pause if we are not in a cinematic
             if (_gameState != GameState.Cinematic && _gameState != GameState.MainMenu)
             {
-                if(_gameState == GameState.Paused)
+                if (_gameState == GameState.Paused)
                     ChangeGameState(GameState.Default);
                 else
                     ChangeGameState(GameState.Paused);
@@ -311,22 +311,6 @@ public class GameManager : MonoBehaviour
     
     
     #endregion
-
-    //adds an enemy to our camera so player can see them
-    public void AddEnemyToCameraView(GameObject monsterToAdd)
-    {
-        
-        cameraManager.AddMonsterToView(monsterToAdd);
-    }
-
-
-    //update lighting properties for dangerous level
-    public void UpdateLightingLevel()
-    {
-        DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.15f, 1f);
-        //globalPlayerLight.intensity = 0.2f;
-        
-    }
 
 
     public void LoadLevelSection(int level)
@@ -366,5 +350,6 @@ public class GameManager : MonoBehaviour
         else
             Gamepad.current?.ResetHaptics();
     }
+
 }
 

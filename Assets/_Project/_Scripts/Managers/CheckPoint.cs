@@ -7,11 +7,12 @@ public class CheckPoint : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     public int index { get; set; }
-    private Transform spawnPoint;
+    private Transform _spawnPoint;
 
     private void Awake()
     {
-        spawnPoint = transform.GetChild(0);
+        if(transform.childCount >= 1)
+            _spawnPoint = transform.GetChild(0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,6 +25,6 @@ public class CheckPoint : MonoBehaviour
 
     public Transform GetSpawnPoint()
     {
-        return spawnPoint? spawnPoint : null;
+        return _spawnPoint? _spawnPoint : null;
     }
 }

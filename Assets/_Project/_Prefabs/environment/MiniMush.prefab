@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4887375276392317361}
   - component: {fileID: 7484585463701193210}
   - component: {fileID: 3061385470033440752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MiniMush
   m_TagString: Untagged
   m_Icon: {fileID: 0}

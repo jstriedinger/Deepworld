@@ -27,6 +27,7 @@ public class CameraManager : MonoBehaviour
     private float _defaultNoiseAmplitude;
     private CinemachineBasicMultiChannelPerlin _cbmcp;
     private GameObject _tmpExtraFollowedObject;
+    private Tween _cameraTween;
 
     // Start is called before the first frame update
     private void Awake()
@@ -67,7 +68,7 @@ public class CameraManager : MonoBehaviour
     public void AddTempFollowedObj(GameObject tmpObj)
     {
         _tmpExtraFollowedObject = tmpObj;
-        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer+5);
+        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer);
         int memberIndex = targetGroup.FindMember(tmpObj.transform);
         DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 1.8f, 2);
     }
@@ -101,17 +102,17 @@ public class CameraManager : MonoBehaviour
         
     }
     
-    public void ShakeCamera()
+    public void ShakeCamera(float duration, int freq = 15)
     {
         float beforeFreq = _cbmcp.m_FrequencyGain;
 
         _cbmcp.m_AmplitudeGain = .5f;
         Sequence seq = DOTween.Sequence();
         seq.Append(DOTween.To(() => _cbmcp.m_FrequencyGain,
-                x => _cbmcp.m_FrequencyGain = x, 15, 2))
+                x => _cbmcp.m_FrequencyGain = x, freq, duration))
             .AppendInterval(1)
             .Append(DOTween.To(() => _cbmcp.m_FrequencyGain,
-                x => _cbmcp.m_FrequencyGain = x, beforeFreq, 2))
+                x => _cbmcp.m_FrequencyGain = x, beforeFreq, duration))
             .OnComplete(() => { 
                 _cbmcp.m_AmplitudeGain = _defaultNoiseAmplitude;
             });
@@ -157,7 +158,7 @@ public class CameraManager : MonoBehaviour
     private void UpdateTargetGroupRadius()
     {
         int numMonsters = targetGroup.m_Targets.Length - 1;
-        int newRadius = camZoomEnemy + (camZoomMultiplier * _numMonstersOnScreen);
+        int newRadius = camZoomEnemy;// + (camZoomMultiplier * _numMonstersOnScreen);
         if (numMonsters >= 1)
         {
             for (int i = 1; i < targetGroup.m_Targets.Length; i++)
@@ -172,18 +173,17 @@ public class CameraManager : MonoBehaviour
 
 
     //adds enemy to camera view
-    public void AddMonsterToView(GameObject monsterToAdd)
+    public void AddObjectToCameraView(Transform objectToAdd, bool isMonster, bool makeNoise = true, float radius = -1)
     {
-        if(_numMonstersOnScreen == 0)
-            _audioManager.PlayMonsterAppearSfx();
-
-        if (targetGroup.FindMember(monsterToAdd.transform) == -1)
-        {
-
-            targetGroup.AddMember(monsterToAdd.transform, 0, camZoomEnemy);
-
-        }
-        StartCoroutine(LerpWeightinTargetGroup(monsterToAdd.transform, lerpDuration, 0, 1));
+        if(_numMonstersOnScreen == 0 && (isMonster || makeNoise) )
+            StartCoroutine(_audioManager.PlayMonsterAppearSfx());
+        
+        //if not added already
+        if (targetGroup.FindMember(objectToAdd) == -1)
+            targetGroup.AddMember(objectToAdd, 0, isMonster? camZoomEnemy :  radius);
+        
+        ToggleCameraTween(objectToAdd.transform,isMonster? 1 : 1.5f, true,isMonster);
+        //StartCoroutine(LerpWeightinTargetGroup(objectToAdd.transform, lerpDuration, 0, isMonster? 1 : 1.2f, isMonster));
     }
 
 
@@ -192,16 +192,43 @@ public class CameraManager : MonoBehaviour
 
     //remove enemy from camera view
 
-    public void RemoveEnemyFromCameraView(GameObject monsterToRemove)
+    public void RemoveObjectFromCameraView(Transform objectToRemove, bool isMonster)
     {
-        if (targetGroup.FindMember(monsterToRemove.transform) > 0)
+        if (targetGroup.FindMember(objectToRemove) > 0)
         {
-            StartCoroutine(LerpWeightinTargetGroup(monsterToRemove.transform, lerpDuration, 1, 0));
+            ToggleCameraTween(objectToRemove, 0,false, isMonster);
+            //StartCoroutine(LerpWeightinTargetGroup(objectToRemove.transform, lerpDuration, 1, 0, isMonster));
         }
     }
 
+    private void ToggleCameraTween(Transform member, float finalWeight, bool isAdding, bool isMonster)
+    {
+        //always stop the tween before using it again
+        _cameraTween.Kill();
+        int memberIndex = targetGroup.FindMember(member);
+        _cameraTween = DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, finalWeight, lerpDuration)
+            .SetAutoKill(false)
+            .OnComplete(() =>
+            {
+                if (isMonster)
+                {
+                    if (isAdding)
+                        _numMonstersOnScreen++;
+                    else
+                        _numMonstersOnScreen--;
+                }
+            })
+            .OnKill(() =>
+            {
+                //if it was removing and ended unexpectedly, go to zero always
+                if (!isAdding)
+                    targetGroup.m_Targets[memberIndex].weight = 0;
+            });
+        
+    }
+
     //Lerps the weight of the target so the camera size change is smooth
-    private IEnumerator LerpWeightinTargetGroup(Transform member, float duration, float start, float end)
+    private IEnumerator LerpWeightinTargetGroup(Transform member, float duration, float start, float end, bool isMonster)
     {
         float timeElapsed = 0;
         float weightLerped = 0;
@@ -224,7 +251,8 @@ public class CameraManager : MonoBehaviour
                 weightLerped = end;
                 targetGroup.m_Targets[memberIndex].weight = weightLerped;
                 isDecreasing = false;
-                _numMonstersOnScreen--;
+                if(isMonster)
+                    _numMonstersOnScreen--;
                 //MetricManagerScript.instance?.LogString("EnemiesOnScreen", gameManager.numMonstersOnScreen.ToString());
 
             }
@@ -247,12 +275,13 @@ public class CameraManager : MonoBehaviour
                 weightLerped = end;
                 targetGroup.m_Targets[memberIndex].weight = weightLerped;
                 isIncreasing = false;
-                _numMonstersOnScreen++;
+                if(isMonster)
+                    _numMonstersOnScreen++;
                 //MetricManagerScript.instance?.LogString("EnemiesOnScreen", gameManager.numMonstersOnScreen.ToString());
 
             }
         }
-        UpdateTargetGroupRadius();
+        //UpdateTargetGroupRadius();
 
 
     }

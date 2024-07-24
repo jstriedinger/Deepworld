@@ -151,13 +151,7 @@ public class MonsterPlayer : MonoBehaviour
     }
 
     //toggle any input action by name and bool
-    public void ToggleInputAction(string actionName, bool activate)
-    {
-        if(!activate)
-            playerInput.actions.FindAction(actionName).Disable();
-        else
-            playerInput.actions.FindAction(actionName).Enable();
-    }
+    
     public void ToggleInputMap(bool toUI)
     {
         if (toUI)
@@ -185,42 +179,7 @@ public class MonsterPlayer : MonoBehaviour
     }
 
    
-    //Main function that moves the player like a squid. Propulsion by adding force to rigidbody
-    void Swim()
-    {
-        //swimTimer += Time.deltaTime;
-        Vector2 dir = _moveInputValue.normalized;
-        if (Time.time >= _nextSwim)
-        {
-            swimStage = true;
-            //swimm
-            float magnitude = _moveInputValue.magnitude;
-            //myAnim.SetFloat("Speed", magnitude);
-            _finalMovement = (transform.up * swimForce * magnitude);
-
-            _rigidBody.AddForce(_finalMovement, ForceMode2D.Impulse);
-            _rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, maxSpeed);
-            _nextSwim = Time.time + timeBetweenSwim;
-
-            //Head scale animation
-            if (magnitude > 0)
-            {
-                vfxSwimBubbles.Play();
-                FMODUnity.RuntimeManager.PlayOneShot(sfxSwim, transform.position);
-                Sequence seq = DOTween.Sequence();
-                seq.SetEase(Ease.OutCubic);
-                seq.Append(headPart.DOScaleY(1.5f, 0.5f));
-                seq.Append(headPart.DOScaleY(1f, 0.5f  * 1.5f));
-            }
-
-
-            //metric handler
-            MetricManagerScript.instance?.LogString("Player Action", "Swim");
-        }
-        
-
-    }
-
+    
     private void Update()
     {
         Move();
@@ -261,6 +220,43 @@ public class MonsterPlayer : MonoBehaviour
             }
         }
     }
+    
+    //Main function that moves the player like a squid. Propulsion by adding force to rigidbody
+    void Swim()
+    {
+        //swimTimer += Time.deltaTime;
+        Vector2 dir = _moveInputValue.normalized;
+        if (Time.time >= _nextSwim)
+        {
+            swimStage = true;
+            //swimm
+            float magnitude = _moveInputValue.magnitude;
+            //myAnim.SetFloat("Speed", magnitude);
+            _finalMovement = (transform.up * swimForce * magnitude);
+
+            _rigidBody.AddForce(_finalMovement, ForceMode2D.Impulse);
+            _rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, maxSpeed);
+            _nextSwim = Time.time + timeBetweenSwim;
+
+            //Head scale animation
+            if (magnitude > 0)
+            {
+                vfxSwimBubbles.Play();
+                FMODUnity.RuntimeManager.PlayOneShot(sfxSwim, transform.position);
+                Sequence seq = DOTween.Sequence();
+                seq.SetEase(Ease.OutCubic);
+                seq.Append(headPart.DOScaleY(1.5f, 0.5f));
+                seq.Append(headPart.DOScaleY(1f, 0.5f  * 1.5f));
+            }
+
+
+            //metric handler
+            MetricManagerScript.instance?.LogString("Player Action", "Swim");
+        }
+        
+
+    }
+
 
 
     //Handles the ability for the player to slowly turn, making it more realistic
@@ -305,6 +301,7 @@ public class MonsterPlayer : MonoBehaviour
         bodyPart.SetActive(true);
         _collider.enabled = true;
         transform.rotation = Quaternion.identity;
+        playerInput.ActivateInput();
         
         //reset tentacles?
 

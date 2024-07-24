@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuGroup;
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup mainMenuBack;
-    [SerializeField] private Button pauseContinueBtn;
+    private Button _pauseContinueBtn;
     private Button _mainMenuBackBtn;
     private Button _mainMenuStartBtn;
     [HideInInspector]
@@ -47,8 +47,9 @@ public class UIManager : MonoBehaviour
         pauseGroup.alpha = mainMenu.alpha = mainMenuBack.alpha = 0;
         _mainMenuBackBtn = mainMenuBack.GetComponentInChildren<Button>();
         _mainMenuStartBtn = mainMenu.GetComponentInChildren<Button>();
-        
-        
+        _pauseContinueBtn = pauseGroup.GetComponentInChildren<Button>();
+
+
 
     }
     private void OnEnable()
@@ -90,13 +91,15 @@ public class UIManager : MonoBehaviour
     {
         if (toggle)
         {
+            Debug.Log("Pausing game");
             isPauseFading = true;
             pauseGroup.gameObject.SetActive(true);
-            pauseGroup.DOFade(1, 0.2f).OnComplete(()=>{
-                Time.timeScale = 0;
-                isPauseFading = false;
-            });
             Gamepad.current?.PauseHaptics();
+            _pauseContinueBtn.Select();
+            pauseGroup.DOFade(1, 0.25f).OnComplete(()=>{
+                isPauseFading = false;
+                Time.timeScale = 0;
+            });
         }
         else
         {
@@ -104,7 +107,7 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1;
             pauseGroup.DOFade(0, 0.2f).OnComplete(() =>
             {
-                pauseContinueBtn.Select();
+                _pauseContinueBtn.Select();
                 pauseGroup.gameObject.SetActive(false);
                 isPauseFading = false;
             });

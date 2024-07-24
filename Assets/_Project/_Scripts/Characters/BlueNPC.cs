@@ -10,16 +10,10 @@ using UnityEngine.Serialization;
 public class BlueNPC : MonoBehaviour
 {
     [Header("Swim")]
-    public float _distanceToSwim = 0f;
-    public float swimForce;
-    public float timeBetweenSwim;
     [SerializeField] Transform headPart;
     [SerializeField] ParticleSystem VFXSwimBubbles;
     [SerializeField] EventReference SFXSwim;
     
-    [HideInInspector]
-    public Transform targetRef;
-    public bool followPlayer;
     
     [Header("Audio")]
     [SerializeField] private ParticleSystem vfxVoice;
@@ -29,11 +23,9 @@ public class BlueNPC : MonoBehaviour
 
     private EventReference _sfxLastTime;
     private bool _playBubbles;
-    private AIPath _aiBlue;
+    private BlueMovement _aiBlue;
     private AIDestinationSetter _aiDestinationSetter;
-    private Rigidbody2D _rigidbody2D;
     private float _nextSwim;
-    private Vector3 _swimDir;
     private EyeFollower _eyeFollower;
     
     
@@ -46,9 +38,7 @@ public class BlueNPC : MonoBehaviour
     {
         _aiBlue = GetComponent<BlueMovement>();
         _aiDestinationSetter = GetComponent<AIDestinationSetter>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
         _aiBlue.canMove = false;
-        followPlayer = false;
         
         _proceduralDynamicTentacles = GetComponentsInChildren<TentacleDynamic>();
         _proceduralTentacles = GetComponentsInChildren<Tentacle>();
@@ -62,7 +52,11 @@ public class BlueNPC : MonoBehaviour
     {
         _playBubbles = true;
         StartCoroutine("NPCBubbleSwim");
-        targetRef = _aiDestinationSetter.target;
+    }
+
+    public Transform GetFollowTarget()
+    {
+        return _aiBlue.target;
     }
     
 
@@ -97,17 +91,9 @@ public class BlueNPC : MonoBehaviour
         _proceduralBody.ResetPositions();
     }
 
-    private void Update()
+    //Swim effects with adding the force
+    public void SwimEffect(Vector3 dir)
     {
-        //_swimDir = (_rigidbody2D.velocity).normalized;
-        _swimDir = (targetRef.transform.position - transform.position).normalized;
-    }
-
-    public IEnumerator Swim()
-    {
-        _aiBlue.canMove = false;
-        _rigidbody2D.velocity = Vector3.zero;
-        _rigidbody2D.AddForce((_swimDir * swimForce ), ForceMode2D.Impulse);
         //Head scale animation
         VFXSwimBubbles.Play();
         FMODUnity.RuntimeManager.PlayOneShot(SFXSwim, transform.position);
@@ -115,12 +101,9 @@ public class BlueNPC : MonoBehaviour
         seq.SetEase(Ease.OutCubic);
         seq.Append(headPart.DOScaleY(1.75f, 0.5f));
         seq.Append(headPart.DOScaleY(1f, 0.5f  * 1.5f));
-        
-        yield return new WaitForSeconds(1.5f);
-        _rigidbody2D.velocity = Vector3.zero;
-        if(followPlayer)
-            _aiBlue.canMove = true;
     }
+
+ 
 
     public void PlayScreamSFX()
     {
@@ -141,7 +124,6 @@ public class BlueNPC : MonoBehaviour
     public void ToggleFollow(bool shouldFollow)
     {
         _aiBlue.canMove = shouldFollow;
-        followPlayer = shouldFollow;
     }
     
     public void ToggleEyeFollowTarget(bool willFollow = false, Transform newTarget = null)

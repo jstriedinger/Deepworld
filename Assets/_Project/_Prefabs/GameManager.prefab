@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2374796366600156981}
   - component: {fileID: 8736285364790976682}
   - component: {fileID: 2931836815834029951}
+  - component: {fileID: 5754947249081926405}
   - component: {fileID: 1765660057177189511}
   - component: {fileID: 2232003874651656951}
   - component: {fileID: 7199570154390944304}
@@ -51,13 +52,15 @@ MonoBehaviour:
   cameraManager: {fileID: 0}
   audioManager: {fileID: 1765660057177189511}
   uiManager: {fileID: 2931836815834029951}
-  startSection: 1
-  level1: {fileID: 0}
+  cinematicsManager: {fileID: 5754947249081926405}
+  startSection: 2
   levelSections:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   checkPoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -78,6 +81,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f483404332c824fcfbd6901cdcb4ea0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logoUsc: {fileID: 0}
+  logoBerklee: {fileID: 0}
+  logoTitle: {fileID: 0}
+  uiKeyboardIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  uiGamepadIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  topCinematicBar: {fileID: 0}
+  bottomCinematicBar: {fileID: 0}
   blackout: {fileID: 0}
   pauseGroup: {fileID: 0}
   logoSprite: {fileID: 0}
@@ -85,8 +103,64 @@ MonoBehaviour:
   mainMenuGroup: {fileID: 0}
   mainMenu: {fileID: 0}
   mainMenuBack: {fileID: 0}
-  pauseContinueBtn: {fileID: 0}
   isPauseFading: 0
+  isWorldUiActive: 0
+--- !u!114 &5754947249081926405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337269782460211468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a13d85ca2c8444f940ee6bc17a45e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraManager: {fileID: 0}
+  _blueNpc: {fileID: 0}
+  _playerRef: {fileID: 0}
+  pathBlueTitles1: {fileID: 0}
+  pathBlueTitles2: {fileID: 0}
+  pathBlueTitles3: {fileID: 0}
+  pathPlayerTitles: {fileID: 0}
+  fish1Titles: {fileID: 0}
+  pathFishTitles: {fileID: 0}
+  fish2Titles: {fileID: 0}
+  pathFish2Titles: {fileID: 0}
+  logosFollowCamObj: {fileID: 0}
+  mainMenuObject: {fileID: 0}
+  blueC0Time: 13.2
+  blueC01Time: 9
+  pathBlueMeetup1: {fileID: 0}
+  pathBlueMeetup2: {fileID: 0}
+  pathPlayerMeetup1: {fileID: 0}
+  pathPlayerMeetup2: {fileID: 0}
+  sfxExplosion: {fileID: 8300000, guid: 50e913f4a563741208eed268bf38df66, type: 3}
+  pathBlueEarthquake: {fileID: 0}
+  pathBlueEarthquake2: {fileID: 0}
+  pathBlueMonster: {fileID: 0}
+  pathBlueMonster2: {fileID: 0}
+  pathBlueMonster3: {fileID: 0}
+  TutorialMonster1: {fileID: 0}
+  TutorialMonster2: {fileID: 0}
+  path1Monster1: {fileID: 0}
+  path1MiniMonster1: {fileID: 0}
+  path2Monster1: {fileID: 0}
+  path2MiniMonster1: {fileID: 0}
+  path3Monster1: {fileID: 0}
+  path1Monster2: {fileID: 0}
+  path1MiniMonster2: {fileID: 0}
+  path2Monster2: {fileID: 0}
+  path2MiniMonster2: {fileID: 0}
+  path3Monster2: {fileID: 0}
+  encounterFollowCamObj: {fileID: 0}
+  pathPlayer1: {fileID: 0}
+  pathPlayer2: {fileID: 0}
+  finalBlueSpot: {fileID: 0}
+  tunnelRocks: {fileID: 0}
+  rockWallLevel4Before: {fileID: 0}
+  rockWallLevel4After: {fileID: 0}
 --- !u!114 &1765660057177189511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,20 +180,36 @@ MonoBehaviour:
       Data3: 1663358906
       Data4: 2075521201
     Path: event:/SFX/sfx_monster_distance
-  musicAmbientIntro:
+  sfxMonsterScream:
+    Guid:
+      Data1: 548043345
+      Data2: 1141115889
+      Data3: -1875364733
+      Data4: -434441116
+    Path: event:/SFX/sfx_monsteraggro_Impact_1
+  sfxBlueCall:
+    Guid:
+      Data1: 1507085211
+      Data2: 1166911185
+      Data3: 2085527176
+      Data4: 1516434663
+    Path: event:/SFX/sfx_blue_dial1
+  sfxBlueScream:
+    Guid:
+      Data1: -125076453
+      Data2: 1317224744
+      Data3: -33767255
+      Data4: -1601194961
+    Path: event:/SFX/sfx_blue
+  uiButtonFocus: {fileID: 8300000, guid: 237fe8d9eeb7e4a75a8335d353275440, type: 3}
+  uiButtonSelected: {fileID: 8300000, guid: 7cc000278cc594b9a870cf8f7415429a, type: 3}
+  musicIntro:
     Guid:
       Data1: 1969113685
       Data2: 1312227404
       Data3: 1050986143
       Data4: -495737772
     Path: event:/Music/MX_Stealth
-  musicAmbientDanger:
-    Guid:
-      Data1: 827840815
-      Data2: 1140869789
-      Data3: 794727318
-      Data4: -1354514175
-    Path: event:/Music/MX_Ambient
   musicBlue:
     Guid:
       Data1: 1282386473
@@ -127,6 +217,13 @@ MonoBehaviour:
       Data3: -326485091
       Data4: -572433713
     Path: event:/Music/MX_Friend
+  musicMystery:
+    Guid:
+      Data1: 2093665325
+      Data2: 1308482240
+      Data3: 568936101
+      Data4: -1426937302
+    Path: event:/Music/Ending_Captured
   musicCloseDanger:
     Guid:
       Data1: 441034817
@@ -134,6 +231,13 @@ MonoBehaviour:
       Data3: -10576211
       Data4: -88329017
     Path: event:/Music/Monster_Chasing_Sub
+  musicUnderworld:
+    Guid:
+      Data1: 827840815
+      Data2: 1140869789
+      Data3: 794727318
+      Data4: -1354514175
+    Path: event:/Music/MX_Ambient
   numMonstersChasing: 0
 --- !u!114 &2232003874651656951
 MonoBehaviour:

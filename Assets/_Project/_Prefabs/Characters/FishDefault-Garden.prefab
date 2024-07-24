@@ -63,10 +63,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2943200215287572071, guid: 7e45e7b14cdcb48bc968ba75e753d2da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3069541806291960988, guid: 7e45e7b14cdcb48bc968ba75e753d2da,
         type: 3}
       propertyPath: m_Name
       value: FishDefault-Garden
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069541806291960988, guid: 7e45e7b14cdcb48bc968ba75e753d2da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -45,7 +45,6 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] AudioClip sfxExplosion;
     [SerializeField] GameObject pathBlueEarthquake;
     [SerializeField] GameObject pathBlueEarthquake2;
-    [SerializeField] private GameObject tunnelRocks;
 
     [Header("Cinematic - Monster encounter")] 
     [SerializeField] private GameObject pathBlueMonster;
@@ -67,6 +66,11 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private GameObject pathPlayer1;
     [SerializeField] private GameObject pathPlayer2;
     [SerializeField] private Transform finalBlueSpot;
+    
+    [Header("RockWalls Checkpoints")]
+    [SerializeField] private GameObject tunnelRocks;
+    [SerializeField] private GameObject rockWallLevel4Before;
+    [SerializeField] private GameObject rockWallLevel4After;
     
 
     private void Awake()
@@ -111,6 +115,7 @@ public class CinematicsManager : MonoBehaviour
     
     private void AfterCinematicEnds()
     {
+        Debug.Log("Toggle bars");
         _uiManager.ToggleCinematicBars(false);
         _playerRef.playerInput.ActivateInput();
         _gameManager.ChangeGameState(GameState.Default);
@@ -237,17 +242,7 @@ public class CinematicsManager : MonoBehaviour
         _audioManager.DoCinematicScreams();
     }
     
-    //After going inside a little bit of the tunnel
-    //Also deactivate first level to save memory
-    public void DoCinematicInsideTunnel()
-    {
-        _cameraManager.ShakeCamera();
-        AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position);
-        RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
-        tunnelRocks.SetActive(true);
-        _gameManager.UnloadLevelSection(0);
-        
-    }
+    
 
     public void DoCinematicMonsterEncounterPt2(InputAction.CallbackContext ctx)
     {
@@ -400,7 +395,6 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() =>
             {
                 TutorialMonster1.ToggleTrackTarget(_blueNpc.gameObject);
-                StartCoroutine(TutorialMonster1.PlayReactSound(true,true));
                 
             })
             .AppendInterval(.25f)
@@ -411,38 +405,46 @@ public class CinematicsManager : MonoBehaviour
             .JoinCallback(() =>
             {
                 TutorialMonster2.OnAIChasePlayer();
-                RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
+                //RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
                 
             })
-            .Join(TutorialMonster2.transform.DOPath(path3Monster2Pos, 4.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Join(TutorialMonster2.transform.DOPath(path3Monster2Pos, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.1f)
                 .OnWaypointChange(
                     (int waypointIndex) =>
                     {
-                        if (waypointIndex == 1)
+                        if (waypointIndex == 2)
                             TutorialMonster1.OnAIChasePlayer();
                     }))
             .Join(TutorialMonster1.transform.DOPath(path3Monster1Pos, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(.15f))
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1f))
             .AppendCallback(() => {_blueNpc.gameObject.SetActive(false);})
             .AppendInterval(1)
-            .OnComplete(() =>
+            .AppendCallback(() =>
             {
-                AfterCinematicEnds();
                 Destroy(TutorialMonster1.gameObject);
                 Destroy(TutorialMonster2.gameObject);
                 _cameraManager.RemoveTempFollowedObj();
                 //enable everything again
                 pInput.actions.FindAction("Call").Enable();
                 pInput.actions.FindAction("Move").Enable();
+                _playerRef.ToggleMonsterEyeDetection(true);
+                _audioManager.ChangeBackgroundMusic(5);
                 _blueNpc.transform.position = finalBlueSpot.position;
                 _blueNpc.transform.rotation = quaternion.identity;
                 _blueNpc.ResetProceduralBody();
                 _blueNpc.gameObject.SetActive(true);
-                _audioManager.ChangeBackgroundMusic(5);
-                _playerRef.ToggleMonsterEyeDetection(true);
+                AfterCinematicEnds();
+                
+            })
+            .AppendInterval(2f)
+            .OnComplete(() =>
+            {
+                
+                _cameraManager.ShakeCamera(1,10);
+                AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f );
 
             });
     }
@@ -565,7 +567,7 @@ public class CinematicsManager : MonoBehaviour
         }
         
         //path to near player
-        Vector3 dif = _blueNpc.targetRef.position - _blueNpc.transform.position;
+        Vector3 dif = _blueNpc.GetFollowTarget().position - _blueNpc.transform.position;
         Vector3[] closeToPlayerPath = new Vector3[] { (_blueNpc.transform.position + dif * 0.8f) };
         
         //we  need to position Blue for the next cinematic
@@ -583,7 +585,7 @@ public class CinematicsManager : MonoBehaviour
             .JoinCallback(() => {_audioManager.ToggleMusicVolume(true);})
             .AppendCallback(() =>
             {
-                _cameraManager.ShakeCamera();
+                _cameraManager.ShakeCamera(2);
                 AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.9f );
 
             })
@@ -790,6 +792,26 @@ public class CinematicsManager : MonoBehaviour
     }
 
 
+    //After going inside a little bit of the tunnel
+    //Also deactivate first level to save memory
+    public void DoCinematicRockWallLevel3()
+    {
+        _cameraManager.ShakeCamera(1.5f);
+        AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f);
+        RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
+        tunnelRocks.SetActive(true);
+        _gameManager.UnloadLevelSection(0);
+        
+    }
+    public void DoCinematicRockWallLevel4()
+    {
+        _cameraManager.ShakeCamera(1,10);
+        AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f);
+        rockWallLevel4Before.SetActive(false);
+        rockWallLevel4After.SetActive(true);
+        _gameManager.UnloadLevelSection(1);
+        _gameManager.UnloadLevelSection(2);
+    }
 
 
 }

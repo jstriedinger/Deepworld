@@ -17,7 +17,7 @@ MonoBehaviour:
   <FollowRange>k__BackingField: 75
   <FollowSpeed>k__BackingField: 14
   <ChasingRange>k__BackingField: 40
-  <ChasingSpeed>k__BackingField: 20
+  <ChasingSpeed>k__BackingField: 21
   <SfxMonsterReact>k__BackingField:
     Guid:
       Data1: 548043345
@@ -37,7 +37,7 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0.023869388, g: 0.18867922, b: 0.00978996, a: 1}
     key1: {r: 0.061304383, g: 0.18071927, b: 0.028440509, a: 1}
-    key2: {r: 0.0627451, g: 0.18039216, b: 0.02745098, a: 0.78431374}
+    key2: {r: 0.0627451, g: 0.18039216, b: 0.02745098, a: 0.8627451}
     key3: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -65,10 +65,10 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   <FollowColorGradient>k__BackingField:
     serializedVersion: 2
-    key0: {r: 1, g: 0.38459545, b: 0, a: 1}
+    key0: {r: 1, g: 0.8173368, b: 0, a: 1}
     key1: {r: 1, g: 0.3882353, b: 0, a: 1}
-    key2: {r: 1, g: 0.3882353, b: 0, a: 0.78431374}
-    key3: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0}
+    key2: {r: 1, g: 0.3882353, b: 0, a: 0.9019608}
+    key3: {r: 0.42352942, g: 0.015686275, b: 0.15294118, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 0.4245283, g: 0.014017452, b: 0.15329798, a: 1}
     key1: {r: 0.42745098, g: 0.015686275, b: 0.15686275, a: 1}
-    key2: {r: 0.9647059, g: 0.050980393, b: 0.050980393, a: 0}
+    key2: {r: 0.9647059, g: 0.15892868, b: 0.0509804, a: 0}
     key3: {r: 0.9647059, g: 0.050980393, b: 0.050980393, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
