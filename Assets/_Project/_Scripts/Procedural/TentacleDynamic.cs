@@ -85,7 +85,6 @@ public class TentacleDynamic : MonoBehaviour
             //Debug.Log("Speed before: " + wiggleSpeed);
             //we are swimming, we need to change everything
             //wiggleMagnitude = Mathf.Lerp(wiggleMagnitude, magMax, Time.deltaTime);
-            float speed = 1;
             wiggleSpeed = Mathf.Lerp(wiggleSpeed, speedMax, changeSpeed * Time.deltaTime);
             wiggleSpeed = Mathf.Clamp(wiggleSpeed, speedMin, speedMax);
             //Debug.Log("Speed after: " + wiggleSpeed);

@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2336305837628199879}
   serializedVersion: 8
   lengthInSec: 50
-  simulationSpeed: 0.5
+  simulationSpeed: 0.25
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -116,8 +116,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 40
-      minScalar: 30
+      scalar: 49
+      minScalar: 40
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
+      scalar: 1.25
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -226,12 +226,12 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 0.19607843}
         key1: {r: 0.03137237, g: 0.4433962, b: 0.18347988, a: 1}
-        key2: {r: 1, g: 1, b: 1, a: 0}
-        key3: {r: 1, g: 1, b: 1, a: 0}
-        key4: {r: 1, g: 0.09511273, b: 0.019145397, a: 0}
-        key5: {r: 1, g: 0.09511273, b: 0.019145397, a: 0}
+        key2: {r: 1, g: 1, b: 1, a: 1}
+        key3: {r: 1, g: 1, b: 1, a: 0.19607843}
+        key4: {r: 1, g: 0.09511273, b: 0.019145397, a: 1}
+        key5: {r: 1, g: 0.09511273, b: 0.019145397, a: 1}
         key6: {r: 1, g: 0.09511273, b: 0.019145397, a: 0}
         key7: {r: 1, g: 0.09511273, b: 0.019145397, a: 0}
         ctime0: 12001
@@ -243,17 +243,17 @@ ParticleSystem:
         ctime6: 65535
         ctime7: 65535
         atime0: 0
-        atime1: 65535
-        atime2: 0
-        atime3: 0
-        atime4: 0
-        atime5: 0
+        atime1: 12001
+        atime2: 45578
+        atime3: 65535
+        atime4: 65535
+        atime5: 65535
         atime6: 0
         atime7: 0
         m_Mode: 0
         m_ColorSpace: 0
         m_NumColorKeys: 3
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -672,7 +672,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: -0, y: 0, z: 0}
-    m_Scale: {x: 350, y: 160, z: 20}
+    m_Scale: {x: 374.3, y: 100, z: 20}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 25
       minScalar: 10
       maxCurve:
         serializedVersion: 2

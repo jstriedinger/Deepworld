@@ -56,8 +56,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3559799598047333730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.00000011920926, w: 1}
+  m_LocalPosition: {x: 2.500007, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -139,29 +139,29 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078282617
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 46
   m_Positions:
-  - {x: -16.165726, y: -267.14307, z: 0}
-  - {x: -15.9519825, y: -266.58243, z: 0}
-  - {x: -15.738239, y: -266.0218, z: 0}
-  - {x: -15.524496, y: -265.46115, z: 0}
-  - {x: -15.310753, y: -264.9005, z: 0}
-  - {x: -15.09701, y: -264.33987, z: 0}
-  - {x: -14.883266, y: -263.77924, z: 0}
-  - {x: -14.669523, y: -263.2186, z: 0}
-  - {x: -14.45578, y: -262.65796, z: 0}
-  - {x: -14.242037, y: -262.09732, z: 0}
-  - {x: -14.028294, y: -261.53668, z: 0}
-  - {x: -13.81455, y: -260.97604, z: 0}
-  - {x: -13.600807, y: -260.4154, z: 0}
-  - {x: -13.387064, y: -259.85477, z: 0}
-  - {x: -13.173321, y: -259.29413, z: 0}
-  - {x: -12.959578, y: -258.7335, z: 0}
-  - {x: -12.745834, y: -258.17285, z: 0}
-  - {x: -12.532091, y: -257.6122, z: 0}
-  - {x: -12.318348, y: -257.05157, z: 0}
-  - {x: -12.104605, y: -256.49094, z: 0}
+  - {x: 1091.4501, y: -400.64523, z: 0}
+  - {x: 1091.2267, y: -400.08835, z: 0}
+  - {x: 1091.0033, y: -399.53146, z: 0}
+  - {x: 1090.7799, y: -398.97458, z: 0}
+  - {x: 1090.5565, y: -398.4177, z: 0}
+  - {x: 1090.3331, y: -397.8608, z: 0}
+  - {x: 1090.1097, y: -397.30392, z: 0}
+  - {x: 1089.8864, y: -396.74704, z: 0}
+  - {x: 1089.663, y: -396.19016, z: 0}
+  - {x: 1089.4396, y: -395.63327, z: 0}
+  - {x: 1089.2162, y: -395.0764, z: 0}
+  - {x: 1088.9928, y: -394.5195, z: 0}
+  - {x: 1088.7694, y: -393.96262, z: 0}
+  - {x: 1088.546, y: -393.40573, z: 0}
+  - {x: 1088.3226, y: -392.84885, z: 0}
+  - {x: 1088.0992, y: -392.29196, z: 0}
+  - {x: 1087.8759, y: -391.73508, z: 0}
+  - {x: 1087.6525, y: -391.1782, z: 0}
+  - {x: 1087.4291, y: -390.6213, z: 0}
+  - {x: 1087.2057, y: -390.06442, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2.452282
@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 20
-  lineRend: {fileID: 2031807770201710282}
   segmentPoses:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -262,6 +262,7 @@ MonoBehaviour:
   wiggleSpeed: 3
   wiggleMagnitude: 20
   wiggleDir: {fileID: 3614364389639420051}
+  resettingFromPlayer: 0
 --- !u!114 &484663731438642707
 MonoBehaviour:
   m_ObjectHideFlags: 0

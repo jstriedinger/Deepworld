@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour
             {
                 //always look at the closest monster
                 _monsterPlayer.ToggleEyeFollowTarget(true,col.gameObject.transform);
-                float d = Vector3.Distance(_playerRef.position, col.transform.position) / 40;
+                float d = Vector3.Distance(_playerRef.position, col.transform.position) / 70;
                 _instanceCloseDanger.setParameterByName("Monster Distance", 1 - d);
                 
             }
@@ -94,6 +94,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         _sfxMonsterChaseLoop = GetComponent<StudioEventEmitter>();
+        _sfxMonsterChaseLoop.EventInstance.setVolume(0.7f);
         _currentMusicIndex = -1;
     }
     

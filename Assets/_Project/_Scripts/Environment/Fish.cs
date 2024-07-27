@@ -14,14 +14,20 @@ public class Fish : MonoBehaviour
     private Flock _flockParentTask;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
+    [SerializeField]
+    private bool randomSizes = true;
+
 
     private void Awake()
     {
         evadingPlayer = false;
         //randome sizing ourselves
-        float r1 = Random.Range(0.75f, 1.51f);
-        float r2 = Random.Range(0.75f, 1.51f);
-        transform.localScale = new Vector3(r1,r2,1);
+        if (randomSizes)
+        {
+            float r1 = Random.Range(1, 1.51f);
+            float r2 = Random.Range(1, 1.51f);
+            transform.localScale = new Vector3(r1,r2,1);
+        }
         _behaviorTree = GetComponent<BehaviorTree>();
     }
 

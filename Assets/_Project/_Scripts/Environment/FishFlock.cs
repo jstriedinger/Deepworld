@@ -5,15 +5,17 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks.Movement.AstarPathfindingProject;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class FishFlock : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerRef;
+    [SerializeField] private GameObject playerRef;
     [SerializeField] private float numFishes;
     [SerializeField] private GameObject fishPrefab;
     [SerializeField] private bool reactToPlayer = true;
     [SerializeField] private float speed = 3;
+    [SerializeField] private float initialFlockRadius = 3;
     private List<GameObject> _fishes = new List<GameObject>();
     private BehaviorTree _behaviorTree;
     private Flock _flockTask;
@@ -31,11 +33,11 @@ public class FishFlock : MonoBehaviour
         for (int i = 0; i < numFishes; i++)
         {
             //create a fish
-            Vector3 randomPos = Random.insideUnitCircle * 3;
+            Vector3 randomPos = Random.insideUnitCircle * initialFlockRadius;
             GameObject fishObj = Instantiate(fishPrefab,transform.position,quaternion.identity,transform);
             fishObj.transform.localPosition = randomPos;
             Fish fish = fishObj.GetComponent<Fish>();
-            fish.Initialize(_behaviorTree,_flockTask, reactToPlayer, _playerRef);
+            fish.Initialize(_behaviorTree,_flockTask, reactToPlayer, playerRef);
             _fishes.Add(fishObj);
         }
         //setup the fish var of the tree

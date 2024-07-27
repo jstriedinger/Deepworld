@@ -5,29 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class PolypTracker : MonoBehaviour
 {
+    [SerializeField] private Transform target;
     public Vector3 targetPosition;
     public bool isFixed;
     public GameObject anchoredStart;
     public int segmentAmount = 10; 
     public float segmentsLength = 1;
-    Segment[] segments;
-    LineRenderer lineRenderer;
     public GameObject targetSearchLocation;
-    private GameObject player;
     public float distTrigger;
     public float smoothFactor;
+    
+    Segment[] _segments;
+    LineRenderer _lineRenderer;
     private Tentacle tentacle;
  
-    void Awake()
+    void Start()
     {
         InitializeSegments();
     }
  
     void InitializeSegments()
     {
-        player = GameObject.Find("Player");
-        lineRenderer = this.GetComponent<LineRenderer>();
-        segments = new Segment[segmentAmount];
+        if(!target)
+            target = GameObject.Find("Player").transform;
+        _lineRenderer = this.GetComponent<LineRenderer>();
+        _segments = new Segment[segmentAmount];
         for(int i = 0; i<segmentAmount;i++)
         {
             Segment segment = new Segment();
@@ -35,7 +37,7 @@ public class PolypTracker : MonoBehaviour
             segment.startingPosition = anchoredStart.transform.position+(anchoredStart.transform.up*segmentsLength*(i));
             segment.endingPosition = segment.startingPosition+(anchoredStart.transform.up*segmentsLength*(i));
             segment.length = segmentsLength;
-            segments[i] = segment;
+            _segments[i] = segment;
         }
     }
  
@@ -47,77 +49,67 @@ public class PolypTracker : MonoBehaviour
 
         //Check if the player is within our target distance
         //If not, skip eveything else in this script
-        if(distTrigger < Math.Abs(Vector3.Distance(targetSearchLocation.transform.position, player.transform.position))){
-            if(tentacle.enabled == false){
-                tentacle.RecalcPos(segments);
+        if(distTrigger < Math.Abs(Vector3.Distance(targetSearchLocation.transform.position, target.transform.position))){
+            if(!tentacle.enabled){
+                tentacle.enabled = true;
+                tentacle.RecalcPos(_segments);
+                StartCoroutine(tentacle.resetFromPlayer());
+                //tentacle.ResetPos();
             }
-            tentacle.enabled = true;
             return;
         }
 
-        if(segmentAmount!=segments.Length)
+        //player within our reach!
+        if(segmentAmount!=_segments.Length)
         {
             InitializeSegments(); //reinitialize if amount changed
         }
         
-        /*if(distTrigger >= Math.Abs(Vector3.Distance(this.transform.position, player)))
-        {
-          //targetPosition = GetWorldPositionFromMouse();
-          
-        }*/
-
-        if(tentacle.enabled == true){
+        if(tentacle.enabled){
             //Call RecalcSegments with tentacle.segmentposes
             RecalcSegments(tentacle.segmentPoses);
         }
 
         tentacle.enabled = false;
-        targetPosition = player.transform.position;
+        targetPosition = target.transform.position;
         Follow();        
-        DrawSegments(segments);
+        DrawSegments(_segments);
     }
  
     void Follow()
     {
-        segments[segmentAmount-1].Follow(targetPosition, smoothFactor);
+        _segments[segmentAmount-1].Follow(targetPosition, smoothFactor);
         for(int i = segmentAmount-2; i>=0;i--)
         {
-            segments[i].Follow(segments[i+1], smoothFactor);
+            _segments[i].Follow(_segments[i+1], smoothFactor);
         }
  
         if(isFixed)
         {
-            segments[0].AnchorStartAt(anchoredStart.transform.position);
+            _segments[0].AnchorStartAt(anchoredStart.transform.position);
             for(int i = 1 ; i<segmentAmount;i++)
             {
-                segments[i].AnchorStartAt(segments[i-1].endingPosition);
+                _segments[i].AnchorStartAt(_segments[i-1].endingPosition);
             }
         }
     }
  
     void DrawSegments(Segment[] segments)
     {
-        lineRenderer.positionCount = segmentAmount+1;
+        _lineRenderer.positionCount = segmentAmount+1;
         List<Vector3> points = new List<Vector3>();
         for(int i = 0; i < segmentAmount;i++)
         {
             points.Add(segments[i].startingPosition);
         }
         points.Add(segments[segmentAmount-1].endingPosition);
-        lineRenderer.SetPositions(points.ToArray());
+        _lineRenderer.SetPositions(points.ToArray());
     }
- 
-/*    Vector3 GetWorldPositionFromMouse()
-    {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        return mousePos;
-    }*/
 
     private void RecalcSegments (Vector3[] poses){
         for(int i = 0; i < poses.Length - 1; i++){
-            segments[i].startingPosition = poses[i];
-            segments[i].endingPosition = poses[i+1];
+            _segments[i].startingPosition = poses[i];
+            _segments[i].endingPosition = poses[i+1];
         }
     }
 

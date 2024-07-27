@@ -159,6 +159,7 @@ MonoBehaviour:
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 8879768339673343144}
+  resettingFromPlayer: 0
 --- !u!1 &500783359902659049
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +284,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3170054436038675300}
@@ -388,9 +389,9 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 0
-    textureScale: {x: 1.3, y: 1.3}
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
@@ -409,10 +410,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8e83cab61d1cf4fa360332045a8fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 10
+  length: 13
   segmentPoses: []
   targetDir: {fileID: 3831934168134227220}
-  targetDist: 0.3
+  targetDist: 0.35
   smoothSpeed: 0.0001
   wiggleSpeed: 0.5
   wiggleMagnitude: 0.5
@@ -718,6 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 0}
+  randomSizes: 0
 --- !u!1 &3181258620569662686
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +879,7 @@ MonoBehaviour:
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 6824530170423568889}
+  resettingFromPlayer: 0
 --- !u!1 &3183222008225011786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1039,7 @@ MonoBehaviour:
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 8857428483551298800}
+  resettingFromPlayer: 0
 --- !u!1 &3956896484812609926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1521,7 @@ MonoBehaviour:
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 3529730902772389013}
+  resettingFromPlayer: 0
 --- !u!1 &7244763796763100908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,8 +1665,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8717893297404292606}
   - {fileID: 2625936021752116709}

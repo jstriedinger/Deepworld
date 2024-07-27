@@ -60,6 +60,9 @@ TagManager:
   - name: Player
     uniqueID: 487045279
     locked: 0
+  - name: MonsterProps
+    uniqueID: 862094791
+    locked: 0
   - name: Monsters
     uniqueID: 1156445973
     locked: 0

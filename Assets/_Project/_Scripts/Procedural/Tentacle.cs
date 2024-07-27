@@ -8,9 +8,7 @@ using UnityEngine.Rendering.Universal;
 
 
 public class Tentacle : MonoBehaviour
-
 {
-
 
     private LineRenderer _lineRenderer;
     private Vector3[] segmentV;
@@ -26,10 +24,12 @@ public class Tentacle : MonoBehaviour
     public float wiggleSpeed;
     public float wiggleMagnitude;
     public Transform wiggleDir;
-
+    [HideInInspector] public bool resettingFromPlayer;
+    private Segment[] _segmentsFromFollowPlayer;
 
     private void Awake()
     {
+        resettingFromPlayer = false;
         _lineRenderer = GetComponent<LineRenderer>();
         if (_internalLight2D is not null)
             _internalLightParent = _internalLight2D.transform.parent;
@@ -52,7 +52,14 @@ public class Tentacle : MonoBehaviour
         segmentPoses = new Vector3[length];
         segmentV = new Vector3[length];
 
-        ResetPos();
+        
+        //ResetPos();
+    }
+
+    public IEnumerator resetFromPlayer()
+    {
+        yield return new WaitForSeconds(2);
+        resettingFromPlayer = false;
     }
 
 
@@ -63,13 +70,15 @@ public class Tentacle : MonoBehaviour
 
         for(int i = 1; i < segmentPoses.Length; i++)
         {
-            segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], smoothSpeed);
+            segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
+                resettingFromPlayer? 0.15f : smoothSpeed);
         }
 
-        _lineRenderer.SetPositions(segmentPoses);
         //light always follows last point in line renderer
         if (_internalLight2D is not null)
             _internalLightParent.position = segmentPoses[^1];
+
+        _lineRenderer.SetPositions(segmentPoses);
     }
 
     public void ResetPos()
@@ -81,7 +90,10 @@ public class Tentacle : MonoBehaviour
         _lineRenderer.SetPositions(segmentPoses);
     }
 
-    public void RecalcPos(Segment[] segments){
+    //puts all tentacles back in their place, not smoothly
+    public void RecalcPos(Segment[] segments)
+    {
+        resettingFromPlayer = true;
         segmentPoses[0] = segments[0].startingPosition;
         for(int i = 0; i < segments.Length; i++){
             segmentPoses[i+1] = segments[i].endingPosition;

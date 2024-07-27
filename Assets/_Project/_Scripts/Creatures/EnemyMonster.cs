@@ -71,7 +71,7 @@ public class EnemyMonster : MonoBehaviour
             tentacle.colorGradient = monsterStats.DefaultColorGradient;
         }
 
-        _headLight.color = monsterStats.DefaultColorGradient.colorKeys[0].color*1.5f;
+        _headLight.color = monsterStats.DefaultLightColor;
         //pass data from SO to the AI Tree
         //Reactive type means it used for gameplay: reacts to player and has behavoir
         _behaviorTree = GetComponent<BehaviorTree>();
@@ -150,7 +150,7 @@ public class EnemyMonster : MonoBehaviour
             if(!inCamera)
             {
                 //add to the
-                _cameraManager.AddObjectToCameraView(transform, true);
+                _cameraManager.AddObjectToCameraView(transform, true, false);
                 inCamera = true;
 
             }
@@ -241,18 +241,18 @@ public class EnemyMonster : MonoBehaviour
         switch (newState)
         {
             case MonsterState.Default:
-                UpdateColorsAndToggleAnimation(monsterStats.DefaultColorGradient,false);
+                UpdateColorsAndToggleAnimation(monsterStats.DefaultColorGradient,false, monsterStats.DefaultLightColor);
                 
                 break;
             case MonsterState.Follow:
-                UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false);
+                UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false,  monsterStats.DefaultLightColor);
                 StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Investigate:
                 _behaviorTree.SetVariableValue("CanReactToCall",true);
                 _canReactToCall = true;
                 
-                UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false);
+                UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false,  monsterStats.DefaultLightColor);
                 StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Chasing:
@@ -260,12 +260,11 @@ public class EnemyMonster : MonoBehaviour
                     _audioManager.UpdateMonstersChasing(true);
                 _chaseScaleTween.Play();
                 
-                UpdateColorsAndToggleAnimation(monsterStats.ChaseColorGradient,true);
+                UpdateColorsAndToggleAnimation(monsterStats.ChaseColorGradient,true,  monsterStats.ChaseLightColor);
                 StartCoroutine(PlayReactSound(false, false));
                 break;
             case MonsterState.Frustrated:
                 StartCoroutine(PlayReactSound(false, false));
-                //DOTween.To(() => _light2D.color, x => _light2D.color = x, monsterStats.FollowColor, 0.5f);
                 break;
             
         }
@@ -274,7 +273,7 @@ public class EnemyMonster : MonoBehaviour
         _eyeManager.OnUpdateMonsterState();
     }
 
-    private void UpdateColorsAndToggleAnimation(Gradient newColorGradient, bool animate)
+    private void UpdateColorsAndToggleAnimation(Gradient newColorGradient, bool animate, Color newLightColor)
     {
         //always try to stop animation just in case
         StopCoroutine(_attackColorAnimationLoop1);
@@ -336,11 +335,10 @@ public class EnemyMonster : MonoBehaviour
         }
         //the new light color will always be the first color fo the gradient. But a little darker
         _colorTweenSequence.Join(DOTween.To(() => _headLight.color, x => _headLight.color = x,
-            newColorGradient.colorKeys[0].color*1.5f, 1f));
+          newLightColor, 1f));
 
         if (animate)
         {
-            Debug.Log("Animate colors");
             //begin animation after smooth color transition
             _colorTweenSequence.OnComplete(() =>
             {

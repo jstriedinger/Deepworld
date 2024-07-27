@@ -7,6 +7,9 @@ public class CameraZoneHelper : MonoBehaviour
 {
     private CameraManager _cameraManager;
     [SerializeField] private float desiredRadius;
+    [Range(0,2)]
+    [SerializeField] private float desiredWeight;
+    
 
     private bool inCamera;
     // Start is called before the first frame update
@@ -42,7 +45,7 @@ public class CameraZoneHelper : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead && !inCamera)
         {
             //add to target group 
-            _cameraManager.AddObjectToCameraView(gameObject.transform, false, true, desiredRadius);
+            _cameraManager.AddObjectToCameraView(gameObject.transform, false, true, desiredRadius, desiredWeight);
             inCamera = true;
         }
     }

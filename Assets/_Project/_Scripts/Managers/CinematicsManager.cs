@@ -424,6 +424,7 @@ public class CinematicsManager : MonoBehaviour
             .AppendInterval(1)
             .AppendCallback(() =>
             {
+                AfterCinematicEnds();
                 Destroy(TutorialMonster1.gameObject);
                 Destroy(TutorialMonster2.gameObject);
                 _cameraManager.RemoveTempFollowedObj();
@@ -436,7 +437,6 @@ public class CinematicsManager : MonoBehaviour
                 _blueNpc.transform.rotation = quaternion.identity;
                 _blueNpc.ResetProceduralBody();
                 _blueNpc.gameObject.SetActive(true);
-                AfterCinematicEnds();
                 
             })
             .AppendInterval(2f)

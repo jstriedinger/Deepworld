@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5393714456216672186}
   - component: {fileID: 5457806549292809540}
   - component: {fileID: 5353069474118757334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TinyMush
   m_TagString: Untagged
   m_Icon: {fileID: 0}

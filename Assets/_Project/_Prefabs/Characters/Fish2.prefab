@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1379994431871039379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -173,6 +173,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 30
   wiggleDir: {fileID: 2691523504757064507}
+  resettingFromPlayer: 0
 --- !u!1 &1501780612580971890
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 1501780612580971890}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -312,7 +313,7 @@ Transform:
   m_GameObject: {fileID: 2976192796051792595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0.45, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -458,6 +459,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 30
   wiggleDir: {fileID: 6629163635971106973}
+  resettingFromPlayer: 0
 --- !u!1 &3069541806291960988
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,8 +493,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5236580647985618308}
   - {fileID: 5842737114422786903}
@@ -641,7 +643,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 5
-  m_GravityScale: 0.005
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -660,7 +662,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3069541806291960988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -706,6 +708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 0}
+  randomSizes: 0
 --- !u!1 &3231762340931310804
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +736,7 @@ Transform:
   m_GameObject: {fileID: 3231762340931310804}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: -0.05, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -879,6 +882,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 30
   wiggleDir: {fileID: 4725353376857278962}
+  resettingFromPlayer: 0
 --- !u!1 &3538521128133071367
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,9 +910,9 @@ Transform:
   m_GameObject: {fileID: 3538521128133071367}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 462920085407539457}
   m_Father: {fileID: 2300238618568686877}
@@ -1016,7 +1020,7 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 2
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
@@ -1037,10 +1041,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8e83cab61d1cf4fa360332045a8fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 10
+  length: 12
   segmentPoses: []
   targetDir: {fileID: 1782815678940248917}
-  targetDist: 0.12
+  targetDist: 0.2
   smoothSpeed: 0.1
   wiggleSpeed: 0.1
   wiggleMagnitude: 0
@@ -1108,7 +1112,7 @@ Transform:
   m_GameObject: {fileID: 3651002395575831637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1251,7 +1255,7 @@ Transform:
   m_GameObject: {fileID: 5789204085976598703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.1, z: 0}
+  m_LocalPosition: {x: -0.45, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1397,6 +1401,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 30
   wiggleDir: {fileID: 5565418487542993896}
+  resettingFromPlayer: 0
 --- !u!1 &6526561432240268843
 GameObject:
   m_ObjectHideFlags: 0

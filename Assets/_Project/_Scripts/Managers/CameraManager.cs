@@ -20,7 +20,6 @@ public class CameraManager : MonoBehaviour
     [SerializeField] float lerpDuration = 1f;
     [SerializeField] int camZoomPlayer = 28;
     [SerializeField] int camZoomEnemy = 28;
-    [SerializeField] int camZoomMultiplier = 5;
 
 
     private int _numMonstersOnScreen = 0;
@@ -173,7 +172,7 @@ public class CameraManager : MonoBehaviour
 
 
     //adds enemy to camera view
-    public void AddObjectToCameraView(Transform objectToAdd, bool isMonster, bool makeNoise = true, float radius = -1)
+    public void AddObjectToCameraView(Transform objectToAdd, bool isMonster, bool makeNoise, float radius = 0, float weight = 1)
     {
         if(_numMonstersOnScreen == 0 && (isMonster || makeNoise) )
             StartCoroutine(_audioManager.PlayMonsterAppearSfx());
@@ -182,7 +181,7 @@ public class CameraManager : MonoBehaviour
         if (targetGroup.FindMember(objectToAdd) == -1)
             targetGroup.AddMember(objectToAdd, 0, isMonster? camZoomEnemy :  radius);
         
-        ToggleCameraTween(objectToAdd.transform,isMonster? 1 : 1.5f, true,isMonster);
+        ToggleCameraTween(objectToAdd.transform,weight, true,isMonster);
         //StartCoroutine(LerpWeightinTargetGroup(objectToAdd.transform, lerpDuration, 0, isMonster? 1 : 1.2f, isMonster));
     }
 

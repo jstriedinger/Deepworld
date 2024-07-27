@@ -65,7 +65,6 @@ public class MonsterPlayer : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.OnRestartingGame += OnRestartingGame;
 
         _collider = GetComponent<Collider2D>();
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -78,6 +77,17 @@ public class MonsterPlayer : MonoBehaviour
         _eyeFollower = GetComponentInChildren<EyeFollower>();
 
     }
+
+    private void OnEnable()
+    {
+        GameManager.OnRestartingGame += OnRestartingGame;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnRestartingGame -= OnRestartingGame;
+    }
+
 
     // Start is called before the first frame update
     void Start()

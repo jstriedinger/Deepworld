@@ -63,6 +63,8 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 3
+  <DefaultLightColor>k__BackingField: {r: 0.8490566, g: 0.73505384, b: 0.22828408,
+    a: 0.5058824}
   <FollowColorGradient>k__BackingField:
     serializedVersion: 2
     key0: {r: 1, g: 0.8173368, b: 0, a: 1}
@@ -123,4 +125,6 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  <ChaseLightColor>k__BackingField: {r: 0.5943396, g: 0.014017441, b: 0.014017441,
+    a: 0.70980394}
   <DistanceToShowOnCamera>k__BackingField: 120

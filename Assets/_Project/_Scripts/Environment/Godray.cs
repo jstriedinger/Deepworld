@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using DG.Tweening;
-using UnityEngine.Serialization;
 
 public class Godray : MonoBehaviour
 {

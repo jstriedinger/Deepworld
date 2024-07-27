@@ -27,8 +27,10 @@ public class MonsterSO : ScriptableObject
     
     [field:Header("State colors")]
     [field: SerializeField] public Gradient DefaultColorGradient { get; private set; }
+    [field: SerializeField] public Color DefaultLightColor { get; private set; }
     [field: SerializeField] public Gradient FollowColorGradient { get; private set; }
     [field: SerializeField] public Gradient ChaseColorGradient { get; private set; }
+    [field: SerializeField] public Color ChaseLightColor { get; private set; }
     
     [field: Header("Misc")]
     [field: SerializeField] public int DistanceToShowOnCamera { get; private set; } = 0;

@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Others")] 
     [SerializeField] private Light2D globalPlayerLight;
+    [SerializeField] private Light2D globalEnvLight;
+    [SerializeField] private Light2D globalPropsLight;
     public MonsterPlayer playerRef;
     public GameObject playerLastPosition;
 
@@ -70,9 +72,6 @@ public class GameManager : MonoBehaviour
         playerLastPosition.transform.position = _originPos;
         
         audioManager.Initialize(playerRef.transform);
-        
-        
-        
     }
 
     private void OnEnable()
@@ -105,12 +104,6 @@ public class GameManager : MonoBehaviour
             cameraManager.ChangePlayerRadius(30, true);
             ChangeGameState(GameState.Default);
             playerRef.isHidden = true;
-            
-
-            if (_currentCheckPointIndex > 2)
-            {
-                DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 0.25f, 1f);
-            }
             
         }
         
@@ -349,6 +342,21 @@ public class GameManager : MonoBehaviour
             Gamepad.current?.PauseHaptics();
         else
             Gamepad.current?.ResetHaptics();
+    }
+
+    //Change the global lighting of the game.
+    public void ChangeLighting(float plusIntensity)
+    {
+        float envLight = globalEnvLight.intensity + plusIntensity;
+        float playerLight = globalPlayerLight.intensity + plusIntensity;
+        float propsLight = globalPropsLight.intensity + plusIntensity;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(DOTween.To(() => globalEnvLight.intensity, x => globalEnvLight.intensity = x, envLight, 0.5f));
+        seq.Join(DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, playerLight,
+            0.5f));
+        seq.Join(DOTween.To(() => globalPropsLight.intensity, x => globalPropsLight.intensity = x, propsLight, 0.5f));
+        
+
     }
 
 }
