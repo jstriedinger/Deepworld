@@ -348,7 +348,7 @@ public class MonsterPlayer : MonoBehaviour
             for (int i = 0; i < enemies.Length; i++)
             {
                 EnemyMonster monster = enemies[i].GetComponent<EnemyMonster>();
-                if (monster.CurrentState == MonsterState.Default)
+                if (monster.CurrentState == MonsterState.Default || monster.CurrentState == MonsterState.Investigate)
                 {
                     monster.ReactToPlayerCall();
                 }

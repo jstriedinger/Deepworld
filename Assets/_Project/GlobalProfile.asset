@@ -21,16 +21,16 @@ MonoBehaviour:
     m_Value: 2
   acesPreset:
     m_OverrideState: 0
-    m_Value: 3
+    m_Value: 5
   hueShiftAmount:
     m_OverrideState: 0
     m_Value: 0
   detectPaperWhite:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   paperWhite:
     m_OverrideState: 0
-    m_Value: 300
+    m_Value: 115
   detectBrightnessLimits:
     m_OverrideState: 0
     m_Value: 1

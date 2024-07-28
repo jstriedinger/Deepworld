@@ -115,7 +115,6 @@ public class CinematicsManager : MonoBehaviour
     
     private void AfterCinematicEnds()
     {
-        Debug.Log("Toggle bars");
         _uiManager.ToggleCinematicBars(false);
         _playerRef.playerInput.ActivateInput();
         _gameManager.ChangeGameState(GameState.Default);

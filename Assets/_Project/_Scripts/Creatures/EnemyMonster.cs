@@ -21,6 +21,7 @@ public class EnemyMonster : MonoBehaviour
     [SerializeField] private Transform patrolObject;
     [SerializeField] public MonsterState CurrentState { get; private set; }
     
+    [SerializeField] ParticleSystem vfxSwimBubbles;
     [SerializeField] private LineRenderer[] _tentacles;
     [SerializeField] private Transform _headObj;
     [SerializeField] private Light2D _headLight;
@@ -111,7 +112,11 @@ public class EnemyMonster : MonoBehaviour
         
     }
 
-  
+    private void OnEnable()
+    {
+        StartCoroutine("SwimBubbles");
+    }
+
 
     private void FixedUpdate()
     {
@@ -176,12 +181,11 @@ public class EnemyMonster : MonoBehaviour
     {
         if (monsterStats.IsReactive && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
         {
-            if (!_canReactToCall)
+            if (!_canReactToCall || CurrentState == MonsterState.Investigate) 
             {
+                Debug.Log("Reacting!");
                 //if mosnter is not chasing or following, it can react to player call
                 UpdateMonsterState(MonsterState.Investigate);
-                _behaviorTree.SetVariableValue("CanReactToCall",true);
-                _canReactToCall = true;
             }
         }
     }
@@ -231,12 +235,12 @@ public class EnemyMonster : MonoBehaviour
         if (CurrentState != MonsterState.Follow)
         {
             //it wasnt following, kill whatever animation is happening and go back to head scale
-            _headTween.Kill();
             _headObj.transform.localScale = Vector3.one;
         }
         
         //if there was a color transition, stop it
         _colorTweenSequence.Kill();
+        _headTween.Kill();
 
         switch (newState)
         {
@@ -502,6 +506,17 @@ public class EnemyMonster : MonoBehaviour
         //seq.Append(_headObj.DOPunchScale(new Vector3(.25f, 1f, 0), 0.75f, 5, 1));
         yield return new WaitForSecondsRealtime(2);
         _behaviorTree.EnableBehavior();
+    }
+    
+    IEnumerator SwimBubbles()
+    {
+        while(true)
+        {
+            vfxSwimBubbles.Play();
+            yield return new WaitForSeconds(5); 
+
+        }
+
     }
 }
 
