@@ -40,6 +40,10 @@ public class CameraManager : MonoBehaviour
         targetGroup.m_Targets[0].radius = camZoomPlayer;
         _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
+        
+        //framerate
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
     
     //set camera to follow specific target

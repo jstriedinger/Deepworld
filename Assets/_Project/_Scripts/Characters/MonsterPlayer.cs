@@ -196,12 +196,12 @@ public class MonsterPlayer : MonoBehaviour
         SlowTurn();
         if (Time.time >= _nextSwim + 1f)
             swimStage = false;
+        _rigidBody.AddForce(_finalMovement);
     }
 
     private void FixedUpdate()
     {
         //dot he final movement on fixedupdate since we are using rigidbody
-        _rigidBody.AddForce(_finalMovement);
     }
 
     //Main function that moves the player very very slowly
@@ -210,7 +210,7 @@ public class MonsterPlayer : MonoBehaviour
         Vector2 dir = _moveInputValue.normalized;
         float magnitude = _moveInputValue.magnitude;
         //myAnim.SetFloat("Speed", magnitude);
-        _finalMovement = ( slowSpeed * magnitude * Time.fixedDeltaTime * transform.up);
+        _finalMovement = ( slowSpeed * magnitude * Time.deltaTime * transform.up);
 
         
 

@@ -384,7 +384,6 @@ public class EnemyMonster : MonoBehaviour
     IEnumerator AnimateColorLoop(LineRenderer lineRendererToChange, float movementPerTick = .001f)
     {
         lineRendererToChange.colorGradient = AddInitialCopy(lineRendererToChange.colorGradient);
- 
         while(true)
         {
             List<GradientColorKey> currentColorKeys = RemoveFirstAndLast(lineRendererToChange.colorGradient);
@@ -421,7 +420,7 @@ public class EnemyMonster : MonoBehaviour
             Gradient tempGradient = lineRendererToChange.colorGradient;
             tempGradient.colorKeys = currentColorKeys.ToArray();
             lineRendererToChange.colorGradient = tempGradient;  
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
