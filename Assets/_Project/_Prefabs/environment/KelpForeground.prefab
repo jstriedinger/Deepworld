@@ -103,9 +103,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 487045279
-  m_SortingLayer: 5
-  m_SortingOrder: 51
+  m_SortingLayerID: -949640393
+  m_SortingLayer: 8
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8179ee51dde8e9146993b6e345090df3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -192,7 +192,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1472658723
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 50
   m_Positions:
   - {x: 975.6339, y: -481.75522, z: 0}
@@ -301,6 +301,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 10
   wiggleDir: {fileID: 5988090004038095400}
+  resettingFromPlayer: 0
 --- !u!114 &7656996763053965160
 MonoBehaviour:
   m_ObjectHideFlags: 0
