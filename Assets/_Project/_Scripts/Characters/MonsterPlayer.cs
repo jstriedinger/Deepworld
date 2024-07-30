@@ -192,6 +192,12 @@ public class MonsterPlayer : MonoBehaviour
     
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            //reset checkpoint
+            GameOver(null);
+        }
         Move();
         SlowTurn();
         if (Time.time >= _nextSwim + 1f)

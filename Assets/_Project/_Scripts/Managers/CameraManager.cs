@@ -124,26 +124,30 @@ public class CameraManager : MonoBehaviour
     //makes all other target with radius 0 so that it focus on the monster that just eat oyr player
     public void OnGameOver(GameObject monster)
     {
-        //reset targetgroup
-        int i = targetGroup.FindMember(monster.transform);
-        if (i > 0)
+        if (monster)
         {
-            //all other members will lerp to zero
-            Target monsterTarget = targetGroup.m_Targets[i];
-            monsterTarget.radius = camZoomPlayer;
-            for (int j = 0; j < targetGroup.m_Targets.Length; j++)
+            //reset targetgroup
+            int i = targetGroup.FindMember(monster.transform);
+            if (i > 0)
             {
-                if (j != i)
+                //all other members will lerp to zero
+                Target monsterTarget = targetGroup.m_Targets[i];
+                monsterTarget.radius = camZoomPlayer;
+                for (int j = 0; j < targetGroup.m_Targets.Length; j++)
                 {
-                    targetGroup.m_Targets[j].weight = 0;
-                    if (j > 0)
+                    if (j != i)
                     {
-                        EnemyMonster enemyMonster = targetGroup.m_Targets[j].target.GetComponent<EnemyMonster>();
-                        enemyMonster.inCamera = false;
-                        
+                        targetGroup.m_Targets[j].weight = 0;
+                        if (j > 0)
+                        {
+                            EnemyMonster enemyMonster = targetGroup.m_Targets[j].target.GetComponent<EnemyMonster>();
+                            enemyMonster.inCamera = false;
+                            
+                        }
                     }
                 }
             }
+            
         }
     }
 
