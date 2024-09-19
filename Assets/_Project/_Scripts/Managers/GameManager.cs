@@ -143,6 +143,11 @@ public class GameManager : MonoBehaviour
                 playerRef.ToggleEyeFollowTarget(true);
                 audioManager.ChangeBackgroundMusic(5);
                 break;
+            case StartSection.Checkpoint5:
+                playerRef.ToggleMonsterEyeDetection(true);
+                playerRef.ToggleEyeFollowTarget(true);
+                audioManager.ChangeBackgroundMusic(5);
+                break;
             
         }
         cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();

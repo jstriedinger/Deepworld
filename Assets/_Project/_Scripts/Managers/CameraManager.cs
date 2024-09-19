@@ -141,7 +141,8 @@ public class CameraManager : MonoBehaviour
                         if (j > 0)
                         {
                             EnemyMonster enemyMonster = targetGroup.m_Targets[j].target.GetComponent<EnemyMonster>();
-                            enemyMonster.inCamera = false;
+                            if(enemyMonster)
+                                enemyMonster.inCamera = false;
                             
                         }
                     }
