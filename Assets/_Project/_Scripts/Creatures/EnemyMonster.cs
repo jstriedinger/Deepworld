@@ -213,35 +213,33 @@ public class EnemyMonster : MonoBehaviour
         //only if we are not already chasing or following a player
         UpdateMonsterState(MonsterState.Investigate);
     }
+    
+    /**
+     * Function that updates the monster state visually
+     */
     public void UpdateMonsterState(MonsterState newState)
     {
+        //Kill all transitions and return to normal before deciding what to do
+        _chaseScaleTween.Rewind();
+        _headObj.transform.localScale = Vector3.one;
+        _colorTweenSequence.Kill();
+        _headTween.Kill();
+        
         if (CurrentState == MonsterState.Chasing)
         {
             //we were on a chase
             if(monsterStats.IsReactive)
                 _audioManager.UpdateMonstersChasing(false);
-            _chaseScaleTween.Rewind();
+            
         }
 
+        //If the new state is not Investigating then it can not react to Calls
         if (newState != MonsterState.Investigate)
         {
-            if (_canReactToCall)
-            {
-                _behaviorTree.SetVariableValue("CanReactToCall",false);
-                _canReactToCall = false;
-            }
-        }
-        //kill whatever is happening with head animation
-        if (CurrentState != MonsterState.Follow)
-        {
-            //it wasnt following, kill whatever animation is happening and go back to head scale
-            _headObj.transform.localScale = Vector3.one;
+            _behaviorTree.SetVariableValue("CanReactToCall",false);
+            _canReactToCall = false;
         }
         
-        //if there was a color transition, stop it
-        _colorTweenSequence.Kill();
-        _headTween.Kill();
-
         switch (newState)
         {
             case MonsterState.Default:

@@ -197,6 +197,7 @@ public class MonsterPlayer : MonoBehaviour
         {
             //reset checkpoint
             GameOver(null);
+            
         }
         Move();
         SlowTurn();
@@ -314,12 +315,11 @@ public class MonsterPlayer : MonoBehaviour
     //When player is ready to restart
     public void OnRestartingGame()
     {
+        isHidden = true;
         bodyPart.SetActive(true);
         _collider.enabled = true;
         transform.rotation = Quaternion.identity;
         playerInput.ActivateInput();
-        
-        //reset tentacles?
 
     }
 
@@ -339,9 +339,9 @@ public class MonsterPlayer : MonoBehaviour
         }
         FMODUnity.RuntimeManager.PlayOneShot(_sfxCallLastTime, transform.position);
         
+        //tell blue to do a call as well
         if (_blueRef && respond)
         {
-            //tell blue to do a call as well
             yield return new WaitForSeconds(Random.Range(1f, 1.75f));
             StartCoroutine(_blueRef.PlayCallSFX());
         }

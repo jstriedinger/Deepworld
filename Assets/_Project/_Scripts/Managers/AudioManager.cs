@@ -23,13 +23,13 @@ public class AudioManager : MonoBehaviour
 
     private StudioEventEmitter _sfxMonsterChaseLoop;
     
-    [FormerlySerializedAs("musicAmbientIntro")]
     [Header("Music")]
     [SerializeField] private EventReference musicIntro;
     [SerializeField] private EventReference musicBlue;
     [SerializeField] private EventReference musicMystery;
     [SerializeField] private EventReference musicCloseDanger;
     [SerializeField] private EventReference musicUnderworld;
+    [SerializeField] private int closeDangerRadius = 40;
     private FMOD.Studio.EventInstance _instanceMusicIntro, _instanceMusicUnderworld, _instanceMusicBlue, _currentInstancePlaying,
         _instanceCloseDanger, _instanceMusicMystery;
     // order of above 0 = ambient intro 1= danger 2=friend
@@ -40,26 +40,34 @@ public class AudioManager : MonoBehaviour
     
     [HideInInspector]
     public int numMonstersChasing;
+
+    private int _monterLayerIndex;
+    private ContactFilter2D _monsterContactFilder;
+    private Collider2D[] _closeMonstersOverlapReasults;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _closeMonstersOverlapReasults = new Collider2D[1];
+        _monsterContactFilder = new ContactFilter2D();
+        _monsterContactFilder.SetLayerMask(LayerMask.GetMask("Monster"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (numMonstersChasing > 0)
+        //always look for close monster for music
+        if (Physics2D.OverlapCircle(_playerRef.position,closeDangerRadius,_monsterContactFilder, _closeMonstersOverlapReasults) > 0)
         {
-            Collider2D col = Physics2D.OverlapCircle(_playerRef.position,40,LayerMask.GetMask("Monster"));
-            if (col)
-            {
-                //always look at the closest monster
-                _monsterPlayer.ToggleEyeFollowTarget(true,col.gameObject.transform);
-                float d = Vector3.Distance(_playerRef.position, col.transform.position) / 70;
-                _instanceCloseDanger.setParameterByName("Monster Distance", 1 - d);
-                
-            }
+            
+            //always look at the closest monster
+            _monsterPlayer.ToggleEyeFollowTarget(true,_closeMonstersOverlapReasults[0].gameObject.transform);
+            float d = Vector3.Distance(_playerRef.position, _closeMonstersOverlapReasults[0].transform.position) / closeDangerRadius;
+            _instanceCloseDanger.setParameterByName("Monster Distance", 1.2f - d);
+            
+        }
+        else
+        {
+            _instanceCloseDanger.setParameterByName("Monster Distance", 0);
         }
     }
 
@@ -84,6 +92,11 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(_instanceMusicBlue, _playerRef);
         RuntimeManager.AttachInstanceToGameObject(_instanceCloseDanger, _playerRef);
         RuntimeManager.AttachInstanceToGameObject(_instanceMusicMystery, _playerRef);
+        
+        //close danger is "always running"
+        _instanceCloseDanger.start();
+        _instanceCloseDanger.setVolume(1);
+        
     }
 
     public void TogglePauseAudio(bool p)
@@ -94,7 +107,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         _sfxMonsterChaseLoop = GetComponent<StudioEventEmitter>();
-        _sfxMonsterChaseLoop.EventInstance.setVolume(0.7f);
+        _sfxMonsterChaseLoop.EventInstance.setVolume(0.8f);
         _currentMusicIndex = -1;
     }
     
@@ -203,7 +216,7 @@ public class AudioManager : MonoBehaviour
                 seq.AppendCallback(() =>    
                 {
                     
-                    _instanceMusicUnderworld.setVolume(1);
+                    _instanceMusicUnderworld.setVolume(0.75f);
                     _instanceMusicUnderworld.start(); 
                     
                 });

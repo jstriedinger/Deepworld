@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false; 
         uiManager.Initialize(playerRef);
         _currentCheckPointIndex = (int)startSection;
         //now lets decide how to actually start the game
