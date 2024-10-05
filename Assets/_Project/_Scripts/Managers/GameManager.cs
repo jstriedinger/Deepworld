@@ -351,16 +351,16 @@ public class GameManager : MonoBehaviour
     }
 
     //Change the global lighting of the game.
-    public void ChangeLighting(float plusIntensity)
+    public void ChangeLighting(float sceneAddedLight)
     {
-        float envLight = globalEnvLight.intensity + plusIntensity;
-        float playerLight = globalPlayerLight.intensity + plusIntensity;
-        float propsLight = globalPropsLight.intensity + plusIntensity;
+        float envLight = globalEnvLight.intensity + sceneAddedLight;
+        float playerLight = globalPlayerLight.intensity + sceneAddedLight/3;
+        float propsLight = globalPropsLight.intensity + sceneAddedLight;
         Sequence seq = DOTween.Sequence();
-        seq.Append(DOTween.To(() => globalEnvLight.intensity, x => globalEnvLight.intensity = x, envLight, 0.5f));
+        seq.Append(DOTween.To(() => globalEnvLight.intensity, x => globalEnvLight.intensity = x, envLight, 0.75f));
         seq.Join(DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, playerLight,
             0.5f));
-        seq.Join(DOTween.To(() => globalPropsLight.intensity, x => globalPropsLight.intensity = x, propsLight, 0.5f));
+        seq.Join(DOTween.To(() => globalPropsLight.intensity, x => globalPropsLight.intensity = x, propsLight, 0.75f));
         
 
     }

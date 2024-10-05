@@ -436,6 +436,7 @@ public class CinematicsManager : MonoBehaviour
                 _blueNpc.transform.rotation = quaternion.identity;
                 _blueNpc.ResetProceduralBody();
                 _blueNpc.gameObject.SetActive(true);
+                _audioManager.ToggleCanPlayDangerMusic(true);
                 
             })
             .AppendInterval(2f)

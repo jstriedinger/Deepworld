@@ -37,7 +37,7 @@ public class EnemyMonster : MonoBehaviour
     private BehaviorTree _behaviorTree;
     private AIPath _aiPath;
     private StudioEventEmitter _monsterChaseMusicEmitter;
-    private Vector3 origWorldPos;
+    private Vector3 _origWorldPos;
     [HideInInspector]
     public bool isChasing = false, inCamera = false;
 
@@ -234,7 +234,7 @@ public class EnemyMonster : MonoBehaviour
         }
 
         //If the new state is not Investigating then it can not react to Calls
-        if (newState != MonsterState.Investigate)
+        if (newState != MonsterState.Investigate && monsterStats.IsReactive)
         {
             _behaviorTree.SetVariableValue("CanReactToCall",false);
             _canReactToCall = false;

@@ -44,19 +44,23 @@ public class AudioManager : MonoBehaviour
     private int _monterLayerIndex;
     private ContactFilter2D _monsterContactFilder;
     private Collider2D[] _closeMonstersOverlapReasults;
+
+    private bool _canPlayCloseDangerMusic = false;
     // Start is called before the first frame update
     void Start()
     {
         _closeMonstersOverlapReasults = new Collider2D[1];
         _monsterContactFilder = new ContactFilter2D();
         _monsterContactFilder.SetLayerMask(LayerMask.GetMask("Monster"));
+
+        _canPlayCloseDangerMusic = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         //always look for close monster for music
-        if (Physics2D.OverlapCircle(_playerRef.position,closeDangerRadius,_monsterContactFilder, _closeMonstersOverlapReasults) > 0)
+        if (_canPlayCloseDangerMusic && Physics2D.OverlapCircle(_playerRef.position,closeDangerRadius,_monsterContactFilder, _closeMonstersOverlapReasults) > 0)
         {
             
             //always look at the closest monster
@@ -69,6 +73,11 @@ public class AudioManager : MonoBehaviour
         {
             _instanceCloseDanger.setParameterByName("Monster Distance", 0);
         }
+    }
+
+    public void ToggleCanPlayDangerMusic(bool canPlay)
+    {
+        _canPlayCloseDangerMusic = canPlay;
     }
 
     public void Initialize(Transform playerRef)
