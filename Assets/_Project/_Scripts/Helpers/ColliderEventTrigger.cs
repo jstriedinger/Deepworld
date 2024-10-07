@@ -12,6 +12,8 @@ public class ColliderEventTrigger : MonoBehaviour
 
     [Tooltip("If selected it will trigger every time. If not, it will only happen once")]
     [SerializeField] private UnityEvent cinematicTriggerEvent;
+
+    [SerializeField] private bool triggerOnce = true;
     private bool _trigerred;
 
     // Start is called before the first frame update
@@ -23,10 +25,14 @@ public class ColliderEventTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && !_trigerred)
+        if(collision.gameObject.CompareTag("Player"))
         {
-            cinematicTriggerEvent.Invoke();
-            _trigerred = true;
+            if ((triggerOnce && !_trigerred) || !triggerOnce)
+            {
+                cinematicTriggerEvent.Invoke();
+                _trigerred = true;
+                
+            }
         }
     }
 

@@ -58,7 +58,7 @@ public class TargetLerpPlayer : MonoBehaviour
             }
             else{
                 
-                //Debug.Log("No current eyeTarget for player.");
+                //Debug.Log("No current eyeTarget for playerCharacter.");
                 //Debug.Log("eyeManager localPosition = " + eyeManager.transform.localPosition);
                 //Basically: Smoothdamp towards the default "forward" position
                 transform.position = Vector3.SmoothDamp(transform.position, eyeManager.transform.TransformPoint(eyeManager.transform.localPosition + new Vector3(0, 10, 0)), ref velocity, smoothTime);

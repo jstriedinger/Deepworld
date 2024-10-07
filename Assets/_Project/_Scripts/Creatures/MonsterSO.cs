@@ -7,7 +7,8 @@ using UnityEngine;
 public class MonsterSO : ScriptableObject
 {
     [field: Header("movement")]
-    [field: SerializeField] public bool IsReactive { get; private set; }
+    [field: SerializeField] public bool CanReactToPlayer { get; private set; }
+    [field: SerializeField] public bool CanAddChaseMusic { get; private set; }
     [field: SerializeField] public float PatrolSpeed { get; private set; }
     [field: SerializeField] public float FollowRange { get; private set; }
     [field: SerializeField] public float FollowSpeed { get; private set; }
@@ -16,6 +17,7 @@ public class MonsterSO : ScriptableObject
     
     [field: Header("sfx")]
     [field: SerializeField] public EventReference SfxMonsterReact { get; private set; }
+    [field: SerializeField] public bool PlayChaseMusic { get; private set; }
 
 
     [field:Header("Eye behavior")]

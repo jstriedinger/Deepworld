@@ -9,7 +9,7 @@ using UnityEngine;
 public class EyeTrackerPlayer : MonoBehaviour
 
 {
-        //Since the player currently cannot blink, this isn't necessary.
+        //Since the playerCharacter currently cannot blink, this isn't necessary.
     //public EyeManagerPlayer eyeManager;
 
     public GameObject target = null;
@@ -59,7 +59,7 @@ public class EyeTrackerPlayer : MonoBehaviour
     void FixedUpdate()
 
     {
-            //This condition will never be met if the player cannot blink
+            //This condition will never be met if the playerCharacter cannot blink
         /*
         if(eyeManager.CurrentState == EyeManagerPlayer.MonsterState.Blinking){
 

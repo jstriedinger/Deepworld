@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407751715453448178e11ae9b0bdebb0, type: 3}
+  m_Name: MonsterFinalChaseSO
+  m_EditorClassIdentifier: 
+  <CanReactToPlayer>k__BackingField: 0
+  <CanAddChaseMusic>k__BackingField: 1
+  <PatrolSpeed>k__BackingField: 10
+  <FollowRange>k__BackingField: 80
+  <FollowSpeed>k__BackingField: 14
+  <ChasingRange>k__BackingField: 70
+  <ChasingSpeed>k__BackingField: 18
+  <SfxMonsterReact>k__BackingField:
+    Guid:
+      Data1: 548043345
+      Data2: 1141115889
+      Data3: -1875364733
+      Data4: -434441116
+    Path: event:/SFX/sfx_monsteraggro_Impact_1
+  <PlayChaseMusic>k__BackingField: 0
+  <SpriteBall>k__BackingField: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+    type: 3}
+  <SpriteMaw>k__BackingField: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+    type: 3}
+  <SpritePupil>k__BackingField: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+    type: 3}
+  <PupilDropSpeed>k__BackingField: 0.175
+  <EyeBallShutSpeed>k__BackingField: 0.125
+  <DefaultColorGradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 0.023869388, g: 0.18867922, b: 0.00978996, a: 1}
+    key1: {r: 0.061304383, g: 0.18071927, b: 0.028440509, a: 1}
+    key2: {r: 0.0627451, g: 0.18039216, b: 0.02745098, a: 0.78431374}
+    key3: {r: 0.70796967, g: 0.043216318, b: 0.3506167, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19661
+    ctime2: 32768
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 32768
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 3
+  <DefaultLightColor>k__BackingField: {r: 0.8509804, g: 0.73333335, b: 0.22745098,
+    a: 0.3764706}
+  <FollowColorGradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.8173368, b: 0, a: 1}
+    key1: {r: 1, g: 0.3882353, b: 0, a: 1}
+    key2: {r: 1, g: 0.3882353, b: 0, a: 0.9019608}
+    key3: {r: 0.42352942, g: 0.015686275, b: 0.15294118, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 19822
+    ctime2: 32768
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 32768
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 3
+  <ChaseColorGradient>k__BackingField:
+    serializedVersion: 2
+    key0: {r: 0.16981131, g: 0, b: 0.0032656146, a: 1}
+    key1: {r: 0.2830189, g: 0.0040049767, b: 0.014736322, a: 1}
+    key2: {r: 0.8018868, g: 0, b: 0.021869618, a: 0}
+    key3: {r: 0.6037736, g: 0.019935932, b: 0.03847039, a: 0}
+    key4: {r: 1, g: 0.138937, b: 0.0141509175, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 135
+    ctime1: 16384
+    ctime2: 32498
+    ctime3: 49758
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  <ChaseLightColor>k__BackingField: {r: 0.59607846, g: 0.015686275, b: 0.015686275,
+    a: 0.56078434}
+  <DistanceToShowOnCamera>k__BackingField: 100

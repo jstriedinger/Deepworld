@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     [HideInInspector]
     public bool isPauseFading = false, isWorldUiActive = false;
 
-    private MonsterPlayer _playerRef;
+    private PlayerCharacter playerCharacterRef;
 
     private void Awake()
     {
@@ -54,12 +54,12 @@ public class UIManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        MonsterPlayer.PlayerOnControlsChanged += OnControlsChanged;
+        PlayerCharacter.PlayerOnControlsChanged += OnControlsChanged;
     }
 
     private void OnDisable()
     {
-        MonsterPlayer.PlayerOnControlsChanged -= OnControlsChanged;
+        PlayerCharacter.PlayerOnControlsChanged -= OnControlsChanged;
     }
 
     // Start is called before the first frame update
@@ -69,9 +69,9 @@ public class UIManager : MonoBehaviour
         blackout.DOFade(0, 3).SetEase(Ease.InQuad);
     }
 
-    public void Initialize(MonsterPlayer playerRef)
+    public void Initialize(PlayerCharacter playerCharacterRef)
     {
-        _playerRef = playerRef;
+        this.playerCharacterRef = playerCharacterRef;
     }
 
     // Update is called once per frame
@@ -211,7 +211,7 @@ public class UIManager : MonoBehaviour
     {
         if (isWorldUiActive)
         {
-            if (_playerRef.playerInput.currentControlScheme == "Gamepad")
+            if (playerCharacterRef.playerInput.currentControlScheme == "Gamepad")
             {
                 for (int i = 0; i < uiGamepadIcons.Length; i++)
                 {
@@ -220,7 +220,7 @@ public class UIManager : MonoBehaviour
                 }
                
             }
-            else if(_playerRef.playerInput.currentControlScheme.Contains("Keyboard"))
+            else if(playerCharacterRef.playerInput.currentControlScheme.Contains("Keyboard"))
             {
                 for (int i = 0; i < uiGamepadIcons.Length; i++)
                 {
@@ -233,7 +233,7 @@ public class UIManager : MonoBehaviour
     }
     
     
-    //Fadeout title logo + move icons after player moves in a little to the right
+    //Fadeout title logo + move icons after playerCharacter moves in a little to the right
     public void FadeOutUIPt1()
     {
         Sequence seq = DOTween.Sequence();

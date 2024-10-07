@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class TargetLerp : MonoBehaviour
 {
 
-    [SerializeField] EnemyMonster _enemyMonster;
+    [SerializeField] MonsterBase monsterBase;
     public Transform idealTarget;
     public float smoothTime;
     private Vector3 velocity = Vector3.zero;
@@ -15,7 +15,7 @@ public class TargetLerp : MonoBehaviour
 
     void Update()
     {
-        if(_enemyMonster && (_enemyMonster.CurrentState == MonsterState.Frustrated || _enemyMonster.CurrentState == MonsterState.Follow )  )
+        if(monsterBase && (monsterBase.CurrentState == MonsterState.Frustrated || monsterBase.CurrentState == MonsterState.Follow )  )
         {
             transform.position = Vector3.SmoothDamp(transform.position, idealTarget.position, ref velocity, smoothTime);
         }

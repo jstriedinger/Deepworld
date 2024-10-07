@@ -121,7 +121,7 @@ public class CameraManager : MonoBehaviour
             });
     }
 
-    //makes all other target with radius 0 so that it focus on the monster that just eat oyr player
+    //makes all other target with radius 0 so that it focus on the monster that just eat oyr playerCharacter
     public void OnGameOver(GameObject monster)
     {
         if (monster)
@@ -140,9 +140,9 @@ public class CameraManager : MonoBehaviour
                         targetGroup.m_Targets[j].weight = 0;
                         if (j > 0)
                         {
-                            EnemyMonster enemyMonster = targetGroup.m_Targets[j].target.GetComponent<EnemyMonster>();
-                            if(enemyMonster)
-                                enemyMonster.inCamera = false;
+                            MonsterReactive monsterReactive = targetGroup.m_Targets[j].target.GetComponent<MonsterReactive>();
+                            if(monsterReactive)
+                                monsterReactive.inCamera = false;
                             
                         }
                     }
@@ -154,7 +154,7 @@ public class CameraManager : MonoBehaviour
 
 
 
-    //reset to focus on player again
+    //reset to focus on playerCharacter again
     public void ResetTargetGroup()
     {
         targetGroup.m_Targets[0].weight = 1.25f;

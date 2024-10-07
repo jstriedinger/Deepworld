@@ -7,6 +7,7 @@ using UnityEngine;
 
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class FinalCinematic : MonoBehaviour
 
@@ -16,7 +17,7 @@ public class FinalCinematic : MonoBehaviour
 
     [SerializeField] GameObject blueObject;
 
-    [SerializeField] MonsterPlayer player;
+    [FormerlySerializedAs("player")] [SerializeField] PlayerCharacter playerCharacter;
 
     [SerializeField] float cinematicTime;
 
@@ -42,7 +43,7 @@ public class FinalCinematic : MonoBehaviour
     {
         blueRb = blueObject.GetComponent<Rigidbody2D>();
 
-        playerInput = player.gameObject.GetComponent<PlayerInput>();
+        playerInput = playerCharacter.gameObject.GetComponent<PlayerInput>();
 
     }
 
@@ -69,14 +70,14 @@ public class FinalCinematic : MonoBehaviour
         }
 
         playerInput.enabled = false;
-        player.StopMovement();
+        playerCharacter.StopMovement();
 
         ShowCinematicBars();
         GameManager gm = FindFirstObjectByType<GameManager>();
         
 
         Sequence finalCinematic = DOTween.Sequence()
-            .Append(player.transform.DOPath(playerVectors, cinematicTime, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Append(playerCharacter.transform.DOPath(playerVectors, cinematicTime, PathType.CatmullRom, PathMode.Sidescroller2D)
 
                 .SetEase(Ease.InOutSine)
 
@@ -86,7 +87,7 @@ public class FinalCinematic : MonoBehaviour
             (int waypointIndex) =>
             {
                 if (waypointIndex == 4 )
-                    StartCoroutine(player.PlayCallSFX(false));
+                    StartCoroutine(playerCharacter.PlayCallSFX(false));
 
             }))
             .AppendCallback(() => { StartCoroutine(blueNPC.PlayCallSFX()); })

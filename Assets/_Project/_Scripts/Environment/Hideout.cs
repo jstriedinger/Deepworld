@@ -26,8 +26,8 @@ public class Hideout : MonoBehaviour
     {
         if( collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
         {
-            MonsterPlayer monsterPlayer = collision.gameObject.GetComponent<MonsterPlayer>();
-            monsterPlayer.isHidden = true;
+            PlayerCharacter playerCharacter = collision.gameObject.GetComponent<PlayerCharacter>();
+            playerCharacter.isHidden = true;
             //Sound effect
             RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
 
@@ -35,11 +35,11 @@ public class Hideout : MonoBehaviour
             //lets tell the monster chasing that were near the shelter
             foreach (Collider2D monsterCollider in monsterHits)
             {
-                EnemyMonster enemyMonster = monsterCollider.GetComponent<EnemyMonster>();
-                if (enemyMonster.IsGameplayActiveMonster())
+                MonsterReactive monsterReactive = monsterCollider.GetComponent<MonsterReactive>();
+                if (monsterReactive.IsGameplayActiveMonster())
                 {
                     BehaviorTree tree = monsterCollider.gameObject.GetComponent<BehaviorTree>();
-                    enemyMonster?.UpdateMonsterState(MonsterState.Frustrated);
+                    monsterReactive?.UpdateMonsterState(MonsterState.Frustrated);
                     tree?.SendEvent("PlayerHidesDuringChase");
                     
                 }
@@ -64,8 +64,8 @@ public class Hideout : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
         {
-            MonsterPlayer monsterPlayer = collision.gameObject.GetComponent<MonsterPlayer>();
-            monsterPlayer.isHidden = false;
+            PlayerCharacter playerCharacter = collision.gameObject.GetComponent<PlayerCharacter>();
+            playerCharacter.isHidden = false;
             FMODUnity.RuntimeManager.PlayOneShot(configuration.SfxExit, transform.position);
             //metric handler
             MetricManagerScript.instance?.LogString("Hideout", "Exit");

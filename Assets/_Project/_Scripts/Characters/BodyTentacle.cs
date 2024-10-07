@@ -53,7 +53,7 @@ public class BodyTentacle : MonoBehaviour
                 bodyParts[i/10 - 1].transform.position = segmentPoses[i];
             }*/
 
-            //These conditions hardcode for body part positions on the player's model
+            //These conditions hardcode for body part positions on the playerCharacter's model
             if(i == upperBody){
                 bodyParts[0].transform.position = segmentPoses[i];
                 //lets rotate here the body part
@@ -85,7 +85,7 @@ public class BodyTentacle : MonoBehaviour
                 bodyParts[i/10 - 1].transform.position = segmentPoses[i];
             }*/
 
-            //These conditions hardcode for body part positions on the player's model
+            //These conditions hardcode for body part positions on the playerCharacter's model
             if(i == upperBody){
                 bodyParts[0].transform.position = segmentPoses[i];
             }

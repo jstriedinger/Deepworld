@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         Checkpoint3,
         Checkpoint4,
         Checkpoint5,
+        Checkpoint6,
         
     }
 
@@ -49,10 +50,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Light2D globalPlayerLight;
     [SerializeField] private Light2D globalEnvLight;
     [SerializeField] private Light2D globalPropsLight;
-    public MonsterPlayer playerRef;
+    public PlayerCharacter playerRef;
     public GameObject playerLastPosition;
 
-    
+    public bool skipTemp = true;
     [HideInInspector]
     public static bool IsPlayerDead;
     private int _currentCheckPointIndex = -1;
@@ -76,12 +77,12 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        MonsterPlayer.PlayerOnPause += TogglePauseGame;
+        PlayerCharacter.PlayerOnPause += TogglePauseGame;
     }
 
     private void OnDisable()
     {
-        MonsterPlayer.PlayerOnPause -= TogglePauseGame;
+        PlayerCharacter.PlayerOnPause -= TogglePauseGame;
     }
     
     public void StartGame()
@@ -93,66 +94,79 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false; 
-        uiManager.Initialize(playerRef);
-        _currentCheckPointIndex = (int)startSection;
-        //now lets decide how to actually start the game
-        Transform cp;
-        if (startSection != StartSection.Default)
+        Cursor.visible = false;
+        if (!skipTemp)
         {
-            //if not default lets change our camera tracking
-            cameraManager.ChangeCameraTracking();
-            cameraManager.ChangePlayerRadius(30, true);
-            ChangeGameState(GameState.Default);
-            playerRef.isHidden = true;
+            uiManager.Initialize(playerRef);
+            _currentCheckPointIndex = (int)startSection;
+            //now lets decide how to actually start the game
+            Transform cp;
+            if (startSection != StartSection.Default)
+            {
+                //if not default lets change our camera tracking
+                cameraManager.ChangeCameraTracking();
+                cameraManager.ChangePlayerRadius(30, true);
+                ChangeGameState(GameState.Default);
+                playerRef.isHidden = true;
+                
+            }
+            
+		    //Prepare everything to start from a checkpoint or something
+            switch (startSection)
+            {
+                case StartSection.Default:
+                    //playing the way it is supposed to be played
+                    //by default all sections are disable except the first one
+                    for (int i = 1; i < levelSections.Length; i++)
+                    {
+                        levelSections[i].SetActive(false);
+                    }
+                    LoadLevelSection(0);
+                    ChangeGameState(GameState.Cinematic);
+                    audioManager.ChangeBackgroundMusic(1);
+                    cinematicsManager.DoCinematicTitles();
+                    break;
+                case StartSection.Checkpoint1:
+                    uiManager.isWorldUiActive = true;
+                    audioManager.ChangeBackgroundMusic(1);
+                    cinematicsManager.PrepareBlueForMeetup();
+                    break;
+                case StartSection.Checkpoint2:
+                    uiManager.isWorldUiActive = true;
+                    audioManager.ChangeBackgroundMusic(3);
+                    //place blue in the first point of path
+                    cinematicsManager.PrepareBlueForMonsterEncounter();
+                    break;
+                case StartSection.Checkpoint3:
+                    playerRef.ToggleMonsterEyeDetection(true);
+                    playerRef.ToggleEyeFollowTarget(true);
+                    audioManager.ChangeBackgroundMusic(5);
+                    audioManager.ToggleCanPlayDangerMusic(true);
+                    break;
+                case StartSection.Checkpoint4:
+                    playerRef.ToggleMonsterEyeDetection(true);
+                    playerRef.ToggleEyeFollowTarget(true);
+                    audioManager.ChangeBackgroundMusic(5);
+                    audioManager.ToggleCanPlayDangerMusic(true);
+                    break;
+                case StartSection.Checkpoint5:
+                    playerRef.ToggleMonsterEyeDetection(true);
+                    playerRef.ToggleEyeFollowTarget(true);
+                    audioManager.ChangeBackgroundMusic(5);
+                    audioManager.ToggleCanPlayDangerMusic(true);
+                    break;
+                case StartSection.Checkpoint6:
+                    playerRef.ToggleMonsterEyeDetection(true);
+                    playerRef.ToggleEyeFollowTarget(true);
+                    audioManager.ChangeBackgroundMusic(5);
+                    audioManager.ToggleCanPlayDangerMusic(true);
+                    break;
+                
+            }
+            cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
+            playerRef.transform.position = cp.position;
             
         }
-        
-		//Prepare everything to start from a checkpoint or something
-        switch (startSection)
-        {
-            case StartSection.Default:
-                //playing the way it is supposed to be played
-                //by default all sections are disable except the first one
-                for (int i = 1; i < levelSections.Length; i++)
-                {
-                    levelSections[i].SetActive(false);
-                }
-                LoadLevelSection(0);
-                ChangeGameState(GameState.Cinematic);
-                audioManager.ChangeBackgroundMusic(1);
-                cinematicsManager.DoCinematicTitles();
-                break;
-            case StartSection.Checkpoint1:
-                uiManager.isWorldUiActive = true;
-                audioManager.ChangeBackgroundMusic(1);
-                cinematicsManager.PrepareBlueForMeetup();
-                break;
-            case StartSection.Checkpoint2:
-                uiManager.isWorldUiActive = true;
-                audioManager.ChangeBackgroundMusic(3);
-                //place blue in the first point of path
-                cinematicsManager.PrepareBlueForMonsterEncounter();
-                break;
-            case StartSection.Checkpoint3:
-                playerRef.ToggleMonsterEyeDetection(true);
-                playerRef.ToggleEyeFollowTarget(true);
-                audioManager.ChangeBackgroundMusic(5);
-                break;
-            case StartSection.Checkpoint4:
-                playerRef.ToggleMonsterEyeDetection(true);
-                playerRef.ToggleEyeFollowTarget(true);
-                audioManager.ChangeBackgroundMusic(5);
-                break;
-            case StartSection.Checkpoint5:
-                playerRef.ToggleMonsterEyeDetection(true);
-                playerRef.ToggleEyeFollowTarget(true);
-                audioManager.ChangeBackgroundMusic(5);
-                break;
-            
-        }
-        cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
-        playerRef.transform.position = cp.position;
     }
     
     
@@ -186,7 +200,7 @@ public class GameManager : MonoBehaviour
                         uiManager.PauseGame(false);
                     }
                     
-                    //always come back to player action map
+                    //always come back to playerCharacter action map
                     playerRef.ToggleInputMap(false);
                     Time.timeScale = 1;
                     break;
@@ -201,7 +215,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //When player gets eaten
+    //When playerCharacter gets eaten
     public void GameOver(GameObject monster)
     {
         IsPlayerDead = true;
@@ -213,7 +227,7 @@ public class GameManager : MonoBehaviour
         seq.Append(uiManager.blackout.DOFade(1, 2).SetEase(Ease.InCubic).OnComplete(
             () =>
             {
-                //Put player on checkpoint
+                //Put playerCharacter on checkpoint
                 if (_currentCheckPointIndex >= 0)
                 {
                     Transform cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
@@ -231,8 +245,8 @@ public class GameManager : MonoBehaviour
         {
             ChangeGameState(GameState.Default);
             audioManager.UpdateMonstersChasing(false,true);
-            playerRef.OnRestartingGame();
-            //OnRestartingGame?.Invoke();
+            //playerRef.OnRestartingGame();
+            OnRestartingGame?.Invoke();
         });
         seq.AppendInterval(1.5f);
         seq.Append(uiManager.blackout.DOFade(0, 2).OnComplete(

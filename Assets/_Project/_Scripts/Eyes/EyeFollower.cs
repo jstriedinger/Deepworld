@@ -81,7 +81,7 @@ public class EyeFollower : MonoBehaviour
         }
         else
         {
-            //if not tracking player, then move ir forward so it looks like is looking at the direction of the movemnet
+            //if not tracking playerCharacter, then move ir forward so it looks like is looking at the direction of the movemnet
             blinkProcess = 0;
             isBlinking = false;
         }

@@ -10,8 +10,8 @@ using System;
 /// <summary>
 /// This script is supposed to collect metrics from the game. Attach it to an empty object in your first scene.
 /// It considers 2 types of variable collection:
-/// Event based - to collect when something happens in the game. E.g. when the player picks an option, or when they defeat a boss.
-/// Time based - to collect in fixed time intervals. EX: Every 5 minutes, collect the player’s health.
+/// Event based - to collect when something happens in the game. E.g. when the playerCharacter picks an option, or when they defeat a boss.
+/// Time based - to collect in fixed time intervals. EX: Every 5 minutes, collect the playerCharacter’s health.
 /// The main difference is when it makes sense to collect certain variables.
 /// </summary>
 /// 
@@ -58,7 +58,7 @@ public class MetricManagerScript : MonoBehaviour
 
     StringBuilder _dataToWriteToFile;
     string _fileName;
-    string _timeStamp; //the file name will have the time stamp of when the player started playing
+    string _timeStamp; //the file name will have the time stamp of when the playerCharacter started playing
     FileInfo _file;
     StreamWriter _fileStreamWriter;
     bool ShouldCollectData
@@ -136,7 +136,7 @@ public class MetricManagerScript : MonoBehaviour
     {
         if (ShouldCollectData)
         {
-            //To collect the final state of the game and also know how long the player played
+            //To collect the final state of the game and also know how long the playerCharacter played
             MetricsEvents.CollectTimedData();
             WriteToFile();
             if (_fileStreamWriter != null)

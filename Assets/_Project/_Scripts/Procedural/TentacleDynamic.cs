@@ -11,7 +11,7 @@ public class TentacleDynamic : MonoBehaviour
 
 {
 
-    public MonsterPlayer monsterPlayer;
+    [FormerlySerializedAs("monsterPlayer")] public PlayerCharacter playerCharacter;
 
     public int length;
 
@@ -80,7 +80,7 @@ public class TentacleDynamic : MonoBehaviour
         //This script causes the wiggleMagnitude to range between two clamped values depending on the velocity of a character's head
         //This is what differentiates this script from "Tentacle"
         //two stages, either we are in  swim mode or not 
-        if (monsterPlayer && monsterPlayer.swimStage)
+        if (playerCharacter && playerCharacter.swimStage)
         {
             //Debug.Log("Speed before: " + wiggleSpeed);
             //we are swimming, we need to change everything

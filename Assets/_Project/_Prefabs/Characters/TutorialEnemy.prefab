@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 726143882038974761, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: monsterBase
+      value: 
+      objectReference: {fileID: 2116541481081042195}
+    - target: {fileID: 726143882038974761, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: monsterReactive
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 781208060262266928, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: smoothSpeed
@@ -63,6 +73,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2289235338297122811, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289235338297122811, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289235338297122811, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: constrainInsideGraph
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3921976907519975270, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: smoothSpeed
@@ -79,6 +104,16 @@ PrefabInstance:
       propertyPath: _canAffectCamera
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4203446126912004392, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: monsterBase
+      value: 
+      objectReference: {fileID: 2116541481081042195}
+    - target: {fileID: 4203446126912004392, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: monsterReactive
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4280019566030105874, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: smoothSpeed
@@ -87,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 4767542599160114223, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: graphMask.value
-      value: 1
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5039743520618852438, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -98,6 +133,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TutorialEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523740538617869691, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: m_Name
+      value: VfxDetect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: asynchronousLoad
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -112,6 +157,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
+      propertyPath: pauseWhenDisabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: restartWhenComplete
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
       propertyPath: showBehaviorDesignerGizmo
       value: 0
       objectReference: {fileID: 0}
@@ -123,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PatrolSpeed","IsShared":true,"SinglemValue":5}]}'
+      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"PatrolSpeed","IsShared":true,"SinglemValue":10},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"PatrolInfo","IsShared":true,"List`1mValue":[]}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -137,11 +192,111 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407431020621240944, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_Radius
+      value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8407431020621240944, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4013539651867559864, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5401863154645315687, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 2116541481081042195}
   m_SourcePrefab: {fileID: 100100000, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}
+--- !u!114 &269786178463461734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5679324004921067343, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &547257608458929742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5401863154645315687, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2116541481081042195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547257608458929742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557e47f424211470bb6fde51a3754c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterStats: {fileID: 11400000, guid: b211b289bb08f445c9343b19ed11a8ea, type: 2}
+  vfxSwimBubbles: {fileID: 1940917342075672384}
+  vfxDetect: {fileID: 1874794172322460929}
+  _tail: {fileID: 2689653209077813951}
+  _tentacles:
+  - {fileID: 6608015852520750061}
+  - {fileID: 7158709059754413989}
+  - {fileID: 2192906835249247335}
+  - {fileID: 2784949904793264579}
+  _headObj: {fileID: 3594665723558957417}
+  _headLight: {fileID: 269786178463461734}
+  patrolObject: {fileID: 0}
+--- !u!198 &1874794172322460929 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6299376254121673512, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1940917342075672384 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6305316572594725225, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &2192906835249247335 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 5981271975517618766, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2689653209077813951 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7511137049809134742, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &2784949904793264579 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 7766839229153368042, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3594665723558957417 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8975018061798418240, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &6608015852520750061 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 1646938015526981060, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &7158709059754413989 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 3330321730601023884, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 5579812663903696425}
+  m_PrefabAsset: {fileID: 0}

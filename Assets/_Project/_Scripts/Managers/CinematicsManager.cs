@@ -18,7 +18,7 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private CameraManager _cameraManager;
     
     [SerializeField] private BlueNPC _blueNpc;
-    [SerializeField] private MonsterPlayer _playerRef;
+    private PlayerCharacter _playerRef;
     
     [Header("Cinematic - Intro & main menu")]
     [SerializeField] private GameObject pathBlueTitles1;
@@ -50,8 +50,8 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private GameObject pathBlueMonster;
     [SerializeField] private GameObject pathBlueMonster2;
     [SerializeField] private GameObject pathBlueMonster3;
-    [SerializeField] private EnemyMonster TutorialMonster1;
-    [SerializeField] private EnemyMonster TutorialMonster2;
+    [SerializeField] private MonsterCinematic TutorialMonster1;
+    [SerializeField] private MonsterCinematic TutorialMonster2;
     [SerializeField] private GameObject path1Monster1;
     [SerializeField] private GameObject path1MiniMonster1;
     [SerializeField] private GameObject path2Monster1;
@@ -78,6 +78,9 @@ public class CinematicsManager : MonoBehaviour
         _gameManager = GetComponent<GameManager>();
         _audioManager = GetComponent<AudioManager>();
         _uiManager = GetComponent<UIManager>();
+        _playerRef = _gameManager.playerRef;
+
+
 
     }
 
@@ -121,7 +124,7 @@ public class CinematicsManager : MonoBehaviour
        
     }
     
-    //Start cinematic of blue encounter and wait for player input
+    //Start cinematic of blue encounter and wait for playerCharacter input
     public void CinematicBlueMeetupPt1()
     {
         PlayerInput pInput = _playerRef.playerInput;
@@ -246,7 +249,7 @@ public class CinematicsManager : MonoBehaviour
     public void DoCinematicMonsterEncounterPt2(InputAction.CallbackContext ctx)
     {
         PlayerInput pInput = _playerRef.playerInput;
-        //we disable it here so that player cna not spam it. Consequence is that the normal action is not called, gotta do it manually
+        //we disable it here so that playerCharacter cna not spam it. Consequence is that the normal action is not called, gotta do it manually
         pInput.actions.FindAction("Call").Disable();
         StartCoroutine(_playerRef.PlayCallSFX(false));
         
@@ -279,14 +282,14 @@ public class CinematicsManager : MonoBehaviour
         }
         
         
-        //Monster1 path 1 approaching player
+        //Monster1 path 1 approaching playerCharacter
         Transform[] tPath1MiniMonster1 = path1MiniMonster1.GetComponentsInChildren<Transform>();
         Vector3[] path1MiniMonster1Pos = new Vector3[tPath1MiniMonster1.Length-1];
         for (int i = 1; i < tPath1MiniMonster1.Length; i++)
         {
             path1MiniMonster1Pos[i-1] = tPath1MiniMonster1[i].position;
         }
-        //Monster2 path 1 approaching player
+        //Monster2 path 1 approaching playerCharacter
         Transform[] tPath1MiniMonster2 = path1MiniMonster2.GetComponentsInChildren<Transform>();
         Vector3[] path1MiniMonster2Pos = new Vector3[tPath1MiniMonster2.Length-1];
         for (int i = 1; i < tPath1MiniMonster2.Length; i++)
@@ -403,7 +406,7 @@ public class CinematicsManager : MonoBehaviour
                 .OnComplete(() => { _blueNpc.PlayScreamSFX();}))
             .JoinCallback(() =>
             {
-                TutorialMonster2.OnAIChasePlayer();
+                TutorialMonster2.UpdateMonsterState(MonsterState.Chasing);
                 //RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
                 
             })
@@ -414,7 +417,7 @@ public class CinematicsManager : MonoBehaviour
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 2)
-                            TutorialMonster1.OnAIChasePlayer();
+                            TutorialMonster1.UpdateMonsterState(MonsterState.Chasing);
                     }))
             .Join(TutorialMonster1.transform.DOPath(path3Monster1Pos, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -566,7 +569,7 @@ public class CinematicsManager : MonoBehaviour
             bluePath2EarthquakePos[i-1] = bluePath2EarthquakeTransforms[i].position;
         }
         
-        //path to near player
+        //path to near playerCharacter
         Vector3 dif = _blueNpc.GetFollowTarget().position - _blueNpc.transform.position;
         Vector3[] closeToPlayerPath = new Vector3[] { (_blueNpc.transform.position + dif * 0.8f) };
         
@@ -733,7 +736,7 @@ public class CinematicsManager : MonoBehaviour
         );
     }
     
-    //Cinematic when player press Start in the  Main Menu
+    //Cinematic when playerCharacter press Start in the  Main Menu
     public void DoCinematicStartGame()
     {
         //Blue little swim away
