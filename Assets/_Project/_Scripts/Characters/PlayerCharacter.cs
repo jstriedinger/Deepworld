@@ -300,9 +300,10 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
-    //Events when mosnter eats our playerCharacter
+    //Events when monster eats our playerCharacter
     private void GameOver(GameObject monster)
     {
+        _blueRef.ToggleFollow(false);
         StopMovement();
         playerInput.DeactivateInput();
         StartCoroutine(RumbleController());

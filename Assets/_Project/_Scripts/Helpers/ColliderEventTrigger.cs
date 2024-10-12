@@ -9,29 +9,30 @@ using UnityEngine.Serialization;
 
 public class ColliderEventTrigger : MonoBehaviour
 {
-
     [Tooltip("If selected it will trigger every time. If not, it will only happen once")]
     [SerializeField] private UnityEvent cinematicTriggerEvent;
 
     [SerializeField] private bool triggerOnce = true;
-    private bool _trigerred;
+    [SerializeField] private bool triggeredByBlue = false;
+    private bool _triggered;
 
     // Start is called before the first frame update
 
     void Start()
     {
-        _trigerred = false;
+        _triggered = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if ((triggerOnce && !_triggered) || !triggerOnce)
         {
-            if ((triggerOnce && !_trigerred) || !triggerOnce)
+            if((!triggeredByBlue && collision.gameObject.CompareTag("Player"))
+               || (triggeredByBlue && collision.gameObject.CompareTag("Blue")) )
             {
-                cinematicTriggerEvent.Invoke();
-                _trigerred = true;
                 
+                cinematicTriggerEvent.Invoke();
+                _triggered = true;
             }
         }
     }

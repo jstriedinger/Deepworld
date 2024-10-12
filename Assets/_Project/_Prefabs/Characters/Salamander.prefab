@@ -183,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 1178943914553801316}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.48500013, y: 9.39, z: 0}
+  m_LocalPosition: {x: -0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -463,11 +463,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48f967f3e8214982b3b94c35661daa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPart: {fileID: 0}
+  bodyPart: {fileID: 7164717680314026464}
   headPart: {fileID: 8353174683347167719}
   maxSpeed: 650
   slowSpeed: 500
-  rotationSpeed: 180
+  rotationSpeed: 210
   swimForce: 10
   timeBetweenSwim: 1
   vfxSwimBubbles: {fileID: 1439295562937837208}
@@ -537,7 +537,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _internalLight2D: {fileID: 0}
-  length: 8
+  length: 9
   segmentPoses:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -774,6 +774,7 @@ MonoBehaviour:
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 2222016238251829669}
+  resettingFromPlayer: 0
 --- !u!1 &2016397787896028428
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,6 +934,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 3415951992824199789}
+  resettingFromPlayer: 0
 --- !u!1 &2615078412047639528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _internalLight2D: {fileID: 0}
-  length: 8
+  length: 9
   segmentPoses:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -1131,6 +1133,7 @@ MonoBehaviour:
   wiggleSpeed: 5
   wiggleMagnitude: 10
   wiggleDir: {fileID: 7634606992920627336}
+  resettingFromPlayer: 0
 --- !u!1 &2848668902412410755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1190,7 @@ Transform:
   m_GameObject: {fileID: 3312446136030182985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1202,7 +1205,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7055298759358132506}
-  - component: {fileID: 2274541459283278322}
   m_Layer: 7
   m_Name: Arms
   m_TagString: Untagged
@@ -1227,20 +1229,6 @@ Transform:
   - {fileID: 4052131069822046913}
   m_Father: {fileID: 7196203181398277919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2274541459283278322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3528804789430632087}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92b5e3663db614241990aba0c46bb682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  target: {fileID: 7104198354756831741}
 --- !u!1 &3579636834221748157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1286,7 @@ Transform:
   m_GameObject: {fileID: 4131635678297749655}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4849999, y: 9.39, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6339,6 +6327,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 4567320990749767517}
+  resettingFromPlayer: 0
 --- !u!1 &4807751497390677264
 GameObject:
   m_ObjectHideFlags: 0
@@ -6348,8 +6337,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2880813587380899022}
-  - component: {fileID: 5570849090520567647}
-  - component: {fileID: 5793593833923998721}
   m_Layer: 7
   m_Name: Legs
   m_TagString: Untagged
@@ -6374,73 +6361,6 @@ Transform:
   - {fileID: 1294928673326788311}
   m_Father: {fileID: 7196203181398277919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5570849090520567647
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807751497390677264}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: -3979469354602351329, guid: 6cdcdd5e456fc7f47b1c21351653f62c,
-    type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.76, y: 3.26}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!114 &5793593833923998721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807751497390677264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92b5e3663db614241990aba0c46bb682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  target: {fileID: 3528804789430632087}
 --- !u!1 &5278061453918920970
 GameObject:
   m_ObjectHideFlags: 0
@@ -6589,8 +6509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5096b90bc059fe54087bda379774e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPlayer: {fileID: 7766123913844448042}
-  length: 16
+  playerCharacter: {fileID: 7766123913844448042}
+  length: 15
   head: {fileID: 5740145806345126017}
   lineRend: {fileID: 5046989612232128309}
   segmentPoses: []
@@ -6664,9 +6584,9 @@ Transform:
   m_GameObject: {fileID: 5440502421513338222}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8592282585909991437}
   - {fileID: 7384058489162201062}
@@ -6854,6 +6774,7 @@ MonoBehaviour:
   wiggleSpeed: 2
   wiggleMagnitude: 10
   wiggleDir: {fileID: 3474443084122066884}
+  resettingFromPlayer: 0
 --- !u!1 &5479194258880808542
 GameObject:
   m_ObjectHideFlags: 0
@@ -6928,7 +6849,7 @@ Transform:
   m_GameObject: {fileID: 5533858681786537401}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.48500013, y: 9.39, z: 0}
+  m_LocalPosition: {x: -0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7071,7 +6992,7 @@ Transform:
   m_GameObject: {fileID: 6289739440550211322}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4849999, y: 9.39, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7332,8 +7253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5096b90bc059fe54087bda379774e52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPlayer: {fileID: 7766123913844448042}
-  length: 16
+  playerCharacter: {fileID: 7766123913844448042}
+  length: 15
   head: {fileID: 5740145806345126017}
   lineRend: {fileID: 7060495200132920999}
   segmentPoses: []
@@ -7579,9 +7500,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.3
   m_Color: {r: 0.31954432, g: 0.9056604, b: 0.43445736, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: d1f3b6b137a365c7
@@ -7603,7 +7524,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 20
+  m_PointLightOuterRadius: 45
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

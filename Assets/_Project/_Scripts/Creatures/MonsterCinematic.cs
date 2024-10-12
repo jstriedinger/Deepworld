@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Pathfinding;
 
 public class MonsterCinematic : MonsterBase
 {
     //tutorialmonster
     private EyeTracker _eyeTracker;
+
+    private AIDestinationSetter _aiDestinationSetter;
     
     // Start is called before the first frame update
     protected override void Awake()
@@ -14,6 +17,7 @@ public class MonsterCinematic : MonsterBase
         base.Awake();
         _eyeTracker = GetComponentInChildren<EyeTracker>();
         _aiPath.canMove = false;
+        _aiDestinationSetter = GetComponent<AIDestinationSetter>();
     }
 
     protected override void Start()
@@ -27,6 +31,9 @@ public class MonsterCinematic : MonsterBase
         _eyeTracker.ToggleTrackTarget(obj);
     }
 
+    /**
+     * Toggle manual pursuit
+     */
     public void TogglePursuit(bool pursue)
     {
         if (pursue)
@@ -40,6 +47,13 @@ public class MonsterCinematic : MonsterBase
             UpdateMonsterState(MonsterState.Default);
             _aiPath.canMove = false;
         }
+    }
+
+    public void GoToPosition(Vector3 d)
+    {
+        _aiPath.canMove = true;
+        _aiDestinationSetter.enabled = false;
+        _aiPath.destination = d;
     }
     
     private void OnCollisionEnter2D(Collision2D other)

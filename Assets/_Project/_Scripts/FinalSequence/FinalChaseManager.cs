@@ -2,21 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FinalChaseManager : MonoBehaviour
 {
     [Header("Part1")] 
     [SerializeField] private MonsterCinematic Pt1Monster1;
     [SerializeField] private MonsterCinematic Pt1Monster2;
-    private Vector3 Pt1Monster1InitPos;
-    private Vector3 Pt1Monster2InitPos;
+    [SerializeField] private GameObject blockRock;
+    [SerializeField] private BlueNPC blueNpc;
+    private Vector3 _pt1Monster1Init;
+    private Vector3 _pt1Monster2Init;
         
     
     // Start is called before the first frame update
     private void OnEnable()
     {
-        Pt1Monster1InitPos = Pt1Monster1.transform.position;
-        Pt1Monster2InitPos = Pt1Monster2.transform.position;
+        _pt1Monster1Init = Pt1Monster1.transform.position;
+        _pt1Monster2Init = Pt1Monster2.transform.position;
         GameManager.OnRestartingGame += ResetFinalChasePt1;
     }
 
@@ -41,10 +44,13 @@ public class FinalChaseManager : MonoBehaviour
     public void ResetFinalChasePt1()
     {
         Pt1Monster1.TogglePursuit(false);
-        Pt1Monster1.transform.position = Pt1Monster1InitPos;
+        Pt1Monster1.transform.position = _pt1Monster1Init;
         
         Pt1Monster2.TogglePursuit(false);
-        Pt1Monster2.transform.position = Pt1Monster2InitPos;
+        Pt1Monster2.transform.position = _pt1Monster2Init;
+        
+        blueNpc.ToggleFollow(true);
+        
     }
 
 
@@ -54,5 +60,25 @@ public class FinalChaseManager : MonoBehaviour
             Pt1Monster1.TogglePursuit(true);
         else if(index == 2)
             Pt1Monster2.TogglePursuit(true);
+    }
+
+    public void Pt1EndMonsterChase()
+    {
+        StartCoroutine(EndPt1Chase());
+        // now we want to wait a little and make them go back
+    }
+
+    private IEnumerator EndPt1Chase()
+    {
+        blockRock.SetActive(true);
+        Pt1Monster1.TogglePursuit(false);
+        Pt1Monster2.TogglePursuit(false);
+        yield return new WaitForSeconds(1);
+        Pt1Monster1.GoToPosition(_pt1Monster1Init);
+        Pt1Monster2.GoToPosition(_pt1Monster2Init);
+        yield return new WaitForSeconds(4);
+        Destroy(Pt1Monster1.gameObject);
+        Destroy(Pt1Monster2.gameObject);
+
     }
 }

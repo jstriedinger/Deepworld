@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 public class BlueMovement : MonoBehaviour
@@ -80,23 +81,6 @@ public class BlueMovement : MonoBehaviour
         if (!canMove)
             return;
         
-        //always rotate to look at direction
-        Vector3 rotatedTemp = Quaternion.Euler(0, 0, 0) * movDirection;
-        Quaternion tempRotation = Quaternion.LookRotation(Vector3.forward, rotatedTemp);
-        float angles = Quaternion.Angle(transform.rotation, tempRotation);
-            
-        //Reduce head wobble a little
-        if (angles > 15)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!canMove)
-            return;
-        
         if (Time.time > _lastRepath + repathRate && _seeker.IsDone()) {
             _lastRepath = Time.time;
 
@@ -110,6 +94,7 @@ public class BlueMovement : MonoBehaviour
         }
         
         _reachedEndOfPath = false;
+        
         // The distance to the next waypoint in the path
         float distanceToWaypoint;
         while (true) {
@@ -126,19 +111,21 @@ public class BlueMovement : MonoBehaviour
                 break;
             }
         }
-
-        //always at least 10 units away to even move
         if ((target.position - transform.position).sqrMagnitude > _minDistancePow)
         {
-            // Direction to the next waypoint
-            movDirection = (_path.vectorPath[_currentWaypoint+1] - transform.position).normalized;
+            if (_currentWaypoint+1 < _path.vectorPath.Count)
+            {
+                // Direction to the next waypoint
+                movDirection = (_path.vectorPath[_currentWaypoint+1] - transform.position).normalized;
+                
+            }
             
             //if far away then swim
             if ((target.position - transform.position).sqrMagnitude >= _distanceToSwimPow && Time.time >= _nextSwim)
             {
-                    _rigidBody.AddForce((movDirection * swimForce ), ForceMode2D.Impulse);
-                    _blueNpc.SwimEffect(movDirection);
-                    _nextSwim = Time.time + timeBetweenSwim;
+                _rigidBody.AddForce((movDirection * swimForce ), ForceMode2D.Impulse);
+                _blueNpc.SwimEffect(movDirection);
+                _nextSwim = Time.time + timeBetweenSwim;
             }
             else
             {
@@ -146,13 +133,26 @@ public class BlueMovement : MonoBehaviour
                 // This value will smoothly go from 1 to 0 as the agent approaches the last waypoint in the path.
                 var speedFactor = _reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
                 
-                _finalMovement = ( moveSpeed * speedFactor * transform.up * Time.fixedDeltaTime);
+                _finalMovement = ( moveSpeed * speedFactor * transform.up * Time.deltaTime);
                 _rigidBody.AddForce(_finalMovement);
                 
             }
             
         }
-
+        
+        //Afte reverything
+        
+        //always rotate to look at direction
+        Vector3 rotatedTemp = Quaternion.Euler(0, 0, 0) * movDirection;
+        Quaternion tempRotation = Quaternion.LookRotation(Vector3.forward, rotatedTemp);
+        float angles = Quaternion.Angle(transform.rotation, tempRotation);
+            
+        //Reduce head wobble a little
+        if (angles > 15)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
+        }
+        //always at least X units away to even move
         _rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, maxSpeed);
         _finalMovement = Vector3.zero;
     }
@@ -161,6 +161,20 @@ public class BlueMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 11 );
+    }
+
+    public void MakeMovementFaster()
+    {
+        
+        movDirection = Vector3.zero;
+        nextWaypointDistance = 2;
+        minDistance -= 2;
+        distanceToSwim -= 5;
+        moveSpeed += 100;
+        maxSpeed += 100;
+        swimForce++;
+        _minDistancePow = minDistance * minDistance;
+        _distanceToSwimPow = distanceToSwim * distanceToSwim;
     }
     
 }

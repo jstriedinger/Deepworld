@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 
 public class BlueNPC : MonoBehaviour
 {
+    [SerializeField] private GameObject disposableTentacle;
     [Header("Swim")]
     [SerializeField] Transform headPart;
     [SerializeField] ParticleSystem VFXSwimBubbles;
@@ -129,6 +130,19 @@ public class BlueNPC : MonoBehaviour
     public void ToggleEyeFollowTarget(bool willFollow = false, Transform newTarget = null)
     {
         _eyeFollower.ToggleFollowTarget(willFollow,newTarget);
+    }
+
+    public void GetHurt()
+    {
+        Destroy(disposableTentacle);
+    }
+
+    /**
+     * Prepare blue to be faster in the last section of the game
+     */
+    public void MakeFaster()
+    {
+        _aiBlue.MakeMovementFaster();
     }
 
 }

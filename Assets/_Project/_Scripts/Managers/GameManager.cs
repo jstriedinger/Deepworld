@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Light2D globalPropsLight;
     public PlayerCharacter playerRef;
     public GameObject playerLastPosition;
+    public BlueNPC blueNpcRef;
 
     public bool skipTemp = true;
     [HideInInspector]
@@ -94,6 +95,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //framerate
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+
         Cursor.visible = false;
         if (!skipTemp)
         {
@@ -158,13 +163,20 @@ public class GameManager : MonoBehaviour
                 case StartSection.Checkpoint6:
                     playerRef.ToggleMonsterEyeDetection(true);
                     playerRef.ToggleEyeFollowTarget(true);
+                    playerRef.SetBlueReference(blueNpcRef);
                     audioManager.ChangeBackgroundMusic(5);
                     audioManager.ToggleCanPlayDangerMusic(true);
+                    blueNpcRef.ToggleFollow(true);
+                    blueNpcRef.GetHurt();
+                    blueNpcRef.MakeFaster();
                     break;
                 
             }
             cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
             playerRef.transform.position = cp.position;
+            Transform blueSpawn = checkPoints[_currentCheckPointIndex].GetBlueSpawnPoint();
+            if (blueSpawn)
+                blueNpcRef.transform.position = blueSpawn.position;
             
         }
     }
@@ -231,7 +243,10 @@ public class GameManager : MonoBehaviour
                 if (_currentCheckPointIndex >= 0)
                 {
                     Transform cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
+                    Transform blueSpawn = checkPoints[_currentCheckPointIndex].GetBlueSpawnPoint();
                     playerRef.transform.position = cp.position;
+                    if (blueSpawn)
+                        blueNpcRef.transform.position = blueSpawn.position;
                 }
                 else
                 {
