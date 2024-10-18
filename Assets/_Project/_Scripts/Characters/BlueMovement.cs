@@ -157,22 +157,16 @@ public class BlueMovement : MonoBehaviour
         _finalMovement = Vector3.zero;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 11 );
-    }
-
     public void MakeMovementFaster()
     {
         
         movDirection = Vector3.zero;
         nextWaypointDistance = 2;
-        minDistance -= 2;
-        distanceToSwim -= 5;
-        moveSpeed += 100;
-        maxSpeed += 100;
-        swimForce++;
+        minDistance -= 4;
+        distanceToSwim -= 6;
+        moveSpeed += 50;
+        maxSpeed += 200;
+        swimForce += 3;
         _minDistancePow = minDistance * minDistance;
         _distanceToSwimPow = distanceToSwim * distanceToSwim;
     }

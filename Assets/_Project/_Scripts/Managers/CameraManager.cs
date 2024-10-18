@@ -9,6 +9,8 @@ using Cinemachine;
 using static Cinemachine.CinemachineTargetGroup;
 using System;
 using DG.Tweening;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
@@ -20,6 +22,17 @@ public class CameraManager : MonoBehaviour
     [SerializeField] float lerpDuration = 1f;
     [SerializeField] int camZoomPlayer = 28;
     [SerializeField] int camZoomEnemy = 28;
+
+    [Header("Final chase cam")]
+    [SerializeField] private Transform chaseCamAnchor;
+    [SerializeField] private Transform chaseCamAnchor2;
+    [SerializeField] private int chaseCameDistance;
+    [SerializeField] private int maxAddRadiusChase1;
+    [SerializeField] private int maxAddRadiusChase2;
+    private bool _checkChaseCamDistance, _checkChaseCamDistance2;
+    private float _cameraStep, _cameraStep2;
+    private float _tmpCurrentZoomPlayer;
+    
 
 
     private int _numMonstersOnScreen = 0;
@@ -40,10 +53,40 @@ public class CameraManager : MonoBehaviour
         targetGroup.m_Targets[0].radius = camZoomPlayer;
         _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
-        
-        
+        _cameraStep = (float) maxAddRadiusChase1 / chaseCameDistance;
+        _cameraStep2 = (float) maxAddRadiusChase2 / chaseCameDistance;
+
+
+
     }
-    
+
+    private void Update()
+    {
+        //for final chase cam
+        if (_checkChaseCamDistance || _checkChaseCamDistance2)
+        {
+            
+            UpdateCameraZoomForFinalChase();
+        }
+    }
+
+    private void UpdateCameraZoomForFinalChase()
+    {
+        float currentAnchor = _checkChaseCamDistance ? chaseCamAnchor.position.y : chaseCamAnchor2.position.y;
+        float currentCamStep = _checkChaseCamDistance ? _cameraStep : _cameraStep2;
+        float currentMaxRadius = _checkChaseCamDistance ? maxAddRadiusChase1 : maxAddRadiusChase2;
+        if (_gameManager.playerRef.transform.position.y < currentAnchor)
+        {
+            float distanceY = Math.Abs(currentAnchor - _gameManager.playerRef.transform.position.y);
+            if (distanceY <= chaseCameDistance)
+            {
+                float addedRadius = distanceY * currentCamStep;
+                targetGroup.m_Targets[0].radius =  _tmpCurrentZoomPlayer + ( currentMaxRadius - addedRadius);
+                    
+            }
+        }
+    }
+
     //set camera to follow specific target
     public void ChangeCameraTracking(GameObject newTarget = null)
     {
@@ -69,7 +112,7 @@ public class CameraManager : MonoBehaviour
     public void AddTempFollowedObj(GameObject tmpObj)
     {
         _tmpExtraFollowedObject = tmpObj;
-        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer);
+        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer+8);
         int memberIndex = targetGroup.FindMember(tmpObj.transform);
         DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 1.8f, 2);
     }
@@ -294,15 +337,9 @@ public class CameraManager : MonoBehaviour
 
 
 
-    public void ChangePlayerRadius(float newRadius, bool snap = false)
+    public void ChangePlayerRadius(float newRadius)
     {
-        if (snap)
-            targetGroup.m_Targets[0].radius = newRadius;
-        else
-        {
-            DOTween.To(() => targetGroup.m_Targets[0].radius, x => targetGroup.m_Targets[0].radius = x, newRadius, 5);
-        }
-
+        DOTween.To(() => targetGroup.m_Targets[0].radius, x => targetGroup.m_Targets[0].radius = x, newRadius, 2);
     }
     
 
@@ -313,6 +350,43 @@ public class CameraManager : MonoBehaviour
         targetGroup.RemoveMember(obj.transform);
     }
 
+    /**
+     * Increaese/decrease the radius by 10
+     */
+    public void TogglePlayerCameraRadius(bool toggle)
+    {
+        if (toggle)
+        {
+            
+        }
+    }
+
+
+    /**
+     * 1st final chase camera zoom change
+     */
+    public void ToggleFinalChaseCamPt1(bool toggle)
+    {
+        _checkChaseCamDistance = toggle;
+        if (!toggle)
+        {
+            _tmpCurrentZoomPlayer = camZoomPlayer + maxAddRadiusChase1;
+            targetGroup.m_Targets[0].radius = _tmpCurrentZoomPlayer;
+
+        }
+        else
+            _tmpCurrentZoomPlayer = camZoomPlayer;
+    }
+    
+    /**
+     * 1st final chase camera zoom change
+     */
+    public void ToggleFinalChaseCamPt2(bool toggle)
+    {
+        _checkChaseCamDistance2 = toggle;
+        _checkChaseCamDistance = !toggle;
+
+    }
 
 
 

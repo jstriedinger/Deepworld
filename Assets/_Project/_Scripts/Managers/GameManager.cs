@@ -110,10 +110,15 @@ public class GameManager : MonoBehaviour
             {
                 //if not default lets change our camera tracking
                 cameraManager.ChangeCameraTracking();
-                cameraManager.ChangePlayerRadius(30, true);
+                //cameraManager.ChangePlayerRadius(30, true);
                 ChangeGameState(GameState.Default);
                 playerRef.isHidden = true;
                 
+            }
+
+            if (_currentCheckPointIndex > 3)
+            {
+                ToggleLigthing(true);
             }
             
 		    //Prepare everything to start from a checkpoint or something
@@ -380,16 +385,29 @@ public class GameManager : MonoBehaviour
     }
 
     //Change the global lighting of the game.
-    public void ChangeLighting(float sceneAddedLight)
+    public void ToggleLigthing(bool toogle)
     {
-        float envLight = globalEnvLight.intensity + sceneAddedLight;
-        float playerLight = globalPlayerLight.intensity + sceneAddedLight/3;
-        float propsLight = globalPropsLight.intensity + sceneAddedLight;
+        
+        float envLight, playerLight, propsLight;
+        if (toogle)
+        {
+            envLight = 0.1f;
+            propsLight = 0.25f;
+            playerLight = .45f;
+        }
+        else
+        {
+            envLight = 0.5f;
+            propsLight = 0.6f;
+            playerLight = .7f;
+        }
         Sequence seq = DOTween.Sequence();
-        seq.Append(DOTween.To(() => globalEnvLight.intensity, x => globalEnvLight.intensity = x, envLight, 0.75f));
-        seq.Join(DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, playerLight,
-            0.5f));
-        seq.Join(DOTween.To(() => globalPropsLight.intensity, x => globalPropsLight.intensity = x, propsLight, 0.75f));
+        seq.Append(DOTween.To(() => globalEnvLight.intensity, x => globalEnvLight.intensity = x, 
+            envLight, 1f));
+        seq.Join(DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 
+            playerLight, 1f));
+        seq.Join(DOTween.To(() => globalPropsLight.intensity, x => globalPropsLight.intensity = x, 
+            propsLight, 1f));
         
 
     }

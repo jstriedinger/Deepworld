@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1621f0c7c74d19043ab35589fcf0b069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disposableTentacle: {fileID: 0}
+  disposableTentacle: {fileID: 1841104425300396422}
   headPart: {fileID: 8353174683347167719}
   VFXSwimBubbles: {fileID: 1439295562937837208}
   SFXSwim:
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 5554609863960873956}
   - component: {fileID: 2274541459283278322}
   m_Layer: 6
-  m_Name: Body1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2344,8 +2344,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.025850296, y: -0.7719002, z: 0}
-    m_Extent: {x: 21.42835, y: 21.5579, z: 0}
+    m_Center: {x: -0.02175045, y: -0.7755995, z: 0}
+    m_Extent: {x: 21.42875, y: 21.5568, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

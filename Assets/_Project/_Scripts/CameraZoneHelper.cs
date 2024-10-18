@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraZoneHelper : MonoBehaviour
 {
     private CameraManager _cameraManager;
+    [SerializeField] private bool removePlayerFromCam = false;
     [SerializeField] private float desiredRadius;
     [Range(0,2)]
     [SerializeField] private float desiredWeight;
