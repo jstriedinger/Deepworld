@@ -1,17 +1,10 @@
 using System.Collections;
-
 using System.Collections.Generic;
-
 using UnityEngine;
-
-using Cinemachine;
-
+using Unity.Cinemachine;
 
 public class TargetLerpPlayer : MonoBehaviour
-
 {
-
-
         //since players can't blink right now, we only use eyeManager as an anchor point
     public EyeManagerPlayer eyeManager;
 
@@ -46,14 +39,14 @@ public class TargetLerpPlayer : MonoBehaviour
         if (targetGroup)
         {
             for(int i = 0; i < targetGroup.m_Targets.Length; i++){
-                if(targetGroup.m_Targets[i].weight > 0){
+                if(targetGroup.m_Targets[i].Weight > 0){
                     targetNum = i;
                     //Debug.Log("Target Identified!");
                 }
             }
 
             if(targetNum > 0){
-                idealTarget = targetGroup.m_Targets[targetNum].target.transform.position;
+                idealTarget = targetGroup.Targets[targetNum].Object.transform.position;
                 transform.position = Vector3.SmoothDamp(transform.position, idealTarget, ref velocity, smoothTime);
             }
             else{

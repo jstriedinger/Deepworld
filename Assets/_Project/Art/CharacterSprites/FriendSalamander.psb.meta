@@ -70,12 +70,13 @@ ScriptedImporter:
     compressionQualitySet: 0
     textureFormatSet: 0
     applyGammaDecoding: 0
-  spriteImportData:
+  singleSpriteImportData:
   - name: 
     originalName: 
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -92,13 +93,14 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
     spritePosition: {x: 0, y: 0}
-  mosaicSpriteImportData: []
-  rigSpriteImportData:
+  multiSpriteImportData: []
+  layeredSpriteImportData:
   - name: PupilL
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 59
@@ -120,6 +122,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 93
@@ -141,6 +144,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 200
@@ -162,6 +166,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -183,6 +188,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -204,6 +210,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 59
@@ -225,6 +232,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 93
@@ -246,6 +254,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 127
@@ -267,6 +276,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -288,6 +298,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 200
@@ -309,6 +320,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 314
@@ -330,6 +342,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -351,6 +364,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 314
@@ -372,6 +386,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 397
@@ -388,21 +403,340 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 397, y: 4}
     spritePosition: {x: 225, y: 100}
-  characterData:
-    bones: []
-    parts: []
-    dimension: {x: 0, y: 0}
-    characterGroups: []
+  spriteImportData:
+  - name: 
+    originalName: 
     pivot: {x: 0, y: 0}
-    boneReadOnly: 0
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  rigSpriteImportData:
+  - name: PupilL
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 59
+      y: 975
+      width: 20
+      height: 30
+    spriteID: fdc3e217d532bd34386fe48b19c2bab4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 59, y: 975}
+    spritePosition: {x: 240, y: 935}
+  - name: PupilR
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 93
+      y: 975
+      width: 20
+      height: 30
+    spriteID: 25c939280218ca34da79777cdcf9d19d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 93, y: 975}
+    spritePosition: {x: 340, y: 935}
+  - name: EyeLeft
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 200
+      y: 421
+      width: 47
+      height: 60
+    spriteID: 6f64402624d21844e9dc5e8ccf1dc527
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 200, y: 421}
+    spritePosition: {x: 228, y: 915}
+  - name: EyeRight
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 867
+      width: 47
+      height: 60
+    spriteID: 847585ac9e1f9734c8d51006bfb96fcb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 867}
+    spritePosition: {x: 325, y: 915}
+  - name: Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 302
+      height: 200
+    spriteID: b2f9da58b11643c449c3ccb26bfa5a85
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 149, y: 800}
+  - name: HeadTentacleLL
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 59
+      y: 867
+      width: 26
+      height: 100
+    spriteID: 4232788cbffb00d4fbb2496716957c46
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 59, y: 867}
+    spritePosition: {x: 162, y: 750}
+  - name: HeadTentacleMid
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 93
+      y: 867
+      width: 26
+      height: 100
+    spriteID: 9793a4f8d30b8b24abe249ba5dde1dcc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 93, y: 867}
+    spritePosition: {x: 287, y: 725}
+  - name: HeadTentacleLRR
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 127
+      y: 867
+      width: 26
+      height: 100
+    spriteID: d21ee6f617aadb643ab88cc85985b4e8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 127, y: 867}
+    spritePosition: {x: 412, y: 750}
+  - name: Body1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 212
+      width: 188
+      height: 313
+    spriteID: 925a3d8ad16e5c94f9cf32ef880b39ae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 212}
+    spritePosition: {x: 206, y: 584}
+  - name: TentacleBodyL
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 200
+      y: 212
+      width: 51
+      height: 201
+    spriteID: 736fb86405f3b5a408d269ed71903718
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 200, y: 212}
+    spritePosition: {x: 212, y: 587}
+  - name: TentacleBodyR
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 314
+      y: 550
+      width: 51
+      height: 201
+    spriteID: 559e74d85fd574b4088ab7316114afc6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 314, y: 550}
+    spritePosition: {x: 337, y: 587}
+  - name: Body2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 533
+      width: 176
+      height: 326
+    spriteID: 610b49374976e1c4287a840742130b18
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 533}
+    spritePosition: {x: 212, y: 437}
+  - name: TentacleMainR
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 314
+      y: 4
+      width: 75
+      height: 538
+    spriteID: bb7cddb31e68ad346b7f5395b329ccc9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 314, y: 4}
+    spritePosition: {x: 300, y: 100}
+  - name: TentacleMainL
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 397
+      y: 4
+      width: 75
+      height: 538
+    spriteID: b9ec53c40dabe0842b6c0ddf77ec28fe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 397, y: 4}
+    spritePosition: {x: 225, y: 100}
   sharedRigSpriteImportData: []
-  sharedRigCharacterData:
-    bones: []
-    parts: []
-    dimension: {x: 0, y: 0}
-    characterGroups: []
-    pivot: {x: 0, y: 0}
-    boneReadOnly: 0
+  mosaicSpriteImportData: []
   platformSettings:
   - name: DefaultTexturePlatform
     overridden: 0
@@ -461,15 +795,155 @@ ScriptedImporter:
   generatePhysicsShape: 0
   paperDollMode: 0
   keepDupilcateSpriteName: 1
+  padding: 4
+  spriteSizeExpand: 0
   skeletonAssetReferenceID: 
   pipeline: {instanceID: 0}
   pipelineVersion: 
-  padding: 4
-  spriteSizeExpand: 0
-  spriteCategoryList:
-    categories: []
   spritePackingTag: 
   resliceFromLayer: 0
+  pSDLayerImportSetting: []
+  psdLayers:
+  - name: PupilL
+    spriteName: PupilL
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fdc3e217d532bd34386fe48b19c2bab4
+    layerID: 0
+    mosaicPosition: {x: 59, y: 975}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: PupilR
+    spriteName: PupilR
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 25c939280218ca34da79777cdcf9d19d
+    layerID: -613875776
+    mosaicPosition: {x: 93, y: 975}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: EyeLeft
+    spriteName: EyeLeft
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6f64402624d21844e9dc5e8ccf1dc527
+    layerID: 882518466
+    mosaicPosition: {x: 200, y: 421}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: EyeRight
+    spriteName: EyeRight
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 847585ac9e1f9734c8d51006bfb96fcb
+    layerID: 459274293
+    mosaicPosition: {x: 4, y: 867}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b2f9da58b11643c449c3ccb26bfa5a85
+    layerID: -158744160
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: HeadTentacleLL
+    spriteName: HeadTentacleLL
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4232788cbffb00d4fbb2496716957c46
+    layerID: -685156078
+    mosaicPosition: {x: 59, y: 867}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: HeadTentacleMid
+    spriteName: HeadTentacleMid
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9793a4f8d30b8b24abe249ba5dde1dcc
+    layerID: 863717332
+    mosaicPosition: {x: 93, y: 867}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: HeadTentacleLRR
+    spriteName: HeadTentacleLRR
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d21ee6f617aadb643ab88cc85985b4e8
+    layerID: 1791245898
+    mosaicPosition: {x: 127, y: 867}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Body1
+    spriteName: Body1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 925a3d8ad16e5c94f9cf32ef880b39ae
+    layerID: -723767151
+    mosaicPosition: {x: 4, y: 212}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: TentacleBodyL
+    spriteName: TentacleBodyL
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 736fb86405f3b5a408d269ed71903718
+    layerID: -1896320724
+    mosaicPosition: {x: 200, y: 212}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: TentacleBodyR
+    spriteName: TentacleBodyR
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 559e74d85fd574b4088ab7316114afc6
+    layerID: -1896320742
+    mosaicPosition: {x: 314, y: 550}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Body2
+    spriteName: Body2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 610b49374976e1c4287a840742130b18
+    layerID: -723767152
+    mosaicPosition: {x: 4, y: 533}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: TentacleMainR
+    spriteName: TentacleMainR
+    isGroup: 0
+    parentIndex: -1
+    spriteID: bb7cddb31e68ad346b7f5395b329ccc9
+    layerID: 1370112661
+    mosaicPosition: {x: 314, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: TentacleMainL
+    spriteName: TentacleMainL
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b9ec53c40dabe0842b6c0ddf77ec28fe
+    layerID: 1370112683
+    mosaicPosition: {x: 397, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   mosaicPSDLayers: []
   rigPSDLayers:
   - name: PupilL
@@ -613,7 +1087,6 @@ ScriptedImporter:
     isImported: 1
     isVisible: 1
   sharedRigPSDLayers: []
-  pSDLayerImportSetting: []
   importFileNodeState: 1
   platformSettingsDirtyTick: 0
   spriteSizeExpandChanged: 0

@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         Checkpoint4,
         Checkpoint5,
         Checkpoint6,
+        Checkpoint7,
         
     }
 
@@ -119,6 +120,10 @@ public class GameManager : MonoBehaviour
             if (_currentCheckPointIndex > 3)
             {
                 ToggleLigthing(true);
+                playerRef.ToggleMonsterEyeDetection(true);
+                playerRef.ToggleEyeFollowTarget(true);
+                audioManager.ChangeBackgroundMusic(5);
+                audioManager.ToggleCanPlayDangerMusic(true);
             }
             
 		    //Prepare everything to start from a checkpoint or something
@@ -150,27 +155,19 @@ public class GameManager : MonoBehaviour
                 case StartSection.Checkpoint3:
                     playerRef.ToggleMonsterEyeDetection(true);
                     playerRef.ToggleEyeFollowTarget(true);
-                    audioManager.ChangeBackgroundMusic(5);
-                    audioManager.ToggleCanPlayDangerMusic(true);
                     break;
                 case StartSection.Checkpoint4:
-                    playerRef.ToggleMonsterEyeDetection(true);
-                    playerRef.ToggleEyeFollowTarget(true);
-                    audioManager.ChangeBackgroundMusic(5);
-                    audioManager.ToggleCanPlayDangerMusic(true);
                     break;
                 case StartSection.Checkpoint5:
-                    playerRef.ToggleMonsterEyeDetection(true);
-                    playerRef.ToggleEyeFollowTarget(true);
-                    audioManager.ChangeBackgroundMusic(5);
-                    audioManager.ToggleCanPlayDangerMusic(true);
                     break;
                 case StartSection.Checkpoint6:
-                    playerRef.ToggleMonsterEyeDetection(true);
-                    playerRef.ToggleEyeFollowTarget(true);
                     playerRef.SetBlueReference(blueNpcRef);
-                    audioManager.ChangeBackgroundMusic(5);
-                    audioManager.ToggleCanPlayDangerMusic(true);
+                    blueNpcRef.ToggleFollow(true);
+                    blueNpcRef.GetHurt();
+                    blueNpcRef.MakeFaster();
+                    break;
+                case StartSection.Checkpoint7:
+                    playerRef.SetBlueReference(blueNpcRef);
                     blueNpcRef.ToggleFollow(true);
                     blueNpcRef.GetHurt();
                     blueNpcRef.MakeFaster();

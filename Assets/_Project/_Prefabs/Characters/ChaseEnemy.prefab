@@ -132,5 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 1073741824
   target: {fileID: 0}
+  useRotation: 0

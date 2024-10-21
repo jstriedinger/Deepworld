@@ -176,7 +176,7 @@ public class PlayerCharacter : MonoBehaviour
     public void StopMovement()
     {
         _moveInputValue = Vector2.zero;
-        _rigidBody.velocity = Vector2.zero;
+        _rigidBody.linearVelocity = Vector2.zero;
     }
 
     public void ToggleEyeFollowTarget(bool willFollow = false, Transform newTarget = null)
@@ -253,7 +253,7 @@ public class PlayerCharacter : MonoBehaviour
             _finalMovement = (transform.up * swimForce * magnitude);
 
             _rigidBody.AddForce(_finalMovement, ForceMode2D.Impulse);
-            _rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, maxSpeed);
+            _rigidBody.linearVelocity = Vector3.ClampMagnitude(_rigidBody.linearVelocity, maxSpeed);
             _nextSwim = Time.time + timeBetweenSwim;
 
             //Head scale animation

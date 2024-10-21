@@ -1,12 +1,7 @@
 using System.Collections;
-
 using System.Collections.Generic;
-
 using UnityEngine;
-
-using Cinemachine;
-
-using static Cinemachine.CinemachineTargetGroup;
+using Unity.Cinemachine;
 using System;
 using DG.Tweening;
 using UnityEngine.Serialization;
@@ -17,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     private GameManager _gameManager;
     private AudioManager _audioManager;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private CinemachineCamera virtualCamera;
     [SerializeField] CinemachineTargetGroup targetGroup;
     [SerializeField] float lerpDuration = 1f;
     [SerializeField] int camZoomPlayer = 28;
@@ -44,13 +39,13 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        _cbmcp = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        _defaultNoiseAmplitude = _cbmcp.m_AmplitudeGain;
+        _cbmcp = virtualCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
+        _defaultNoiseAmplitude = _cbmcp.AmplitudeGain;
     }
     void Start()
     {
         
-        targetGroup.m_Targets[0].radius = camZoomPlayer;
+        targetGroup.Targets[0].Radius = camZoomPlayer;
         _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
         _cameraStep = (float) maxAddRadiusChase1 / chaseCameDistance;
@@ -81,7 +76,7 @@ public class CameraManager : MonoBehaviour
             if (distanceY <= chaseCameDistance)
             {
                 float addedRadius = distanceY * currentCamStep;
-                targetGroup.m_Targets[0].radius =  _tmpCurrentZoomPlayer + ( currentMaxRadius - addedRadius);
+                targetGroup.Targets[0].Radius =  _tmpCurrentZoomPlayer + ( currentMaxRadius - addedRadius);
                     
             }
         }
@@ -114,13 +109,13 @@ public class CameraManager : MonoBehaviour
         _tmpExtraFollowedObject = tmpObj;
         targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer+8);
         int memberIndex = targetGroup.FindMember(tmpObj.transform);
-        DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 1.8f, 2);
+        DOTween.To(() => targetGroup.Targets[memberIndex].Weight, x => targetGroup.Targets[memberIndex].Weight = x, 1.8f, 2);
     }
 
     public void RemoveTempFollowedObj()
     {
         int memberIndex = targetGroup.FindMember(_tmpExtraFollowedObject.transform);
-        DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, 0f, 2)
+        DOTween.To(() => targetGroup.Targets[memberIndex].Weight, x => targetGroup.Targets[memberIndex].Weight = x, 0f, 2)
             .OnComplete(() =>
             {
                 targetGroup.RemoveMember(_tmpExtraFollowedObject.transform);
@@ -134,31 +129,31 @@ public class CameraManager : MonoBehaviour
         
         if (toggle)
         {
-            DOTween.To(() => _cbmcp.m_AmplitudeGain,
-                        x => _cbmcp.m_AmplitudeGain = x,
+            DOTween.To(() => _cbmcp.AmplitudeGain,
+                        x => _cbmcp.AmplitudeGain = x,
                         _defaultNoiseAmplitude, 6);
             
         }
         else
         {
-            _cbmcp.m_AmplitudeGain = 0;
+            _cbmcp.AmplitudeGain = 0;
         }
         
     }
     
     public void ShakeCamera(float duration, int freq = 15)
     {
-        float beforeFreq = _cbmcp.m_FrequencyGain;
+        float beforeFreq = _cbmcp.FrequencyGain;
 
-        _cbmcp.m_AmplitudeGain = .5f;
+        _cbmcp.AmplitudeGain = .5f;
         Sequence seq = DOTween.Sequence();
-        seq.Append(DOTween.To(() => _cbmcp.m_FrequencyGain,
-                x => _cbmcp.m_FrequencyGain = x, freq, duration))
+        seq.Append(DOTween.To(() => _cbmcp.FrequencyGain,
+                x => _cbmcp.FrequencyGain = x, freq, duration))
             .AppendInterval(1)
-            .Append(DOTween.To(() => _cbmcp.m_FrequencyGain,
-                x => _cbmcp.m_FrequencyGain = x, beforeFreq, duration))
+            .Append(DOTween.To(() => _cbmcp.FrequencyGain,
+                x => _cbmcp.FrequencyGain = x, beforeFreq, duration))
             .OnComplete(() => { 
-                _cbmcp.m_AmplitudeGain = _defaultNoiseAmplitude;
+                _cbmcp.AmplitudeGain = _defaultNoiseAmplitude;
             });
     }
 
@@ -172,16 +167,16 @@ public class CameraManager : MonoBehaviour
             if (i > 0)
             {
                 //all other members will lerp to zero
-                Target monsterTarget = targetGroup.m_Targets[i];
-                monsterTarget.radius = camZoomPlayer;
-                for (int j = 0; j < targetGroup.m_Targets.Length; j++)
+                CinemachineTargetGroup.Target monsterTarget = targetGroup.Targets[i];
+                monsterTarget.Radius = camZoomPlayer;
+                for (int j = 0; j < targetGroup.Targets.Count; j++)
                 {
                     if (j != i)
                     {
-                        targetGroup.m_Targets[j].weight = 0;
+                        targetGroup.Targets[j].Weight = 0;
                         if (j > 0)
                         {
-                            MonsterReactive monsterReactive = targetGroup.m_Targets[j].target.GetComponent<MonsterReactive>();
+                            MonsterReactive monsterReactive = targetGroup.Targets[j].Object.GetComponent<MonsterReactive>();
                             if(monsterReactive)
                                 monsterReactive.inCamera = false;
                             
@@ -198,21 +193,21 @@ public class CameraManager : MonoBehaviour
     //reset to focus on playerCharacter again
     public void ResetTargetGroup()
     {
-        targetGroup.m_Targets[0].weight = 1.25f;
-        targetGroup.m_Targets[0].radius = camZoomPlayer;
+        targetGroup.Targets[0].Weight = 1.25f;
+        targetGroup.Targets[0].Radius = camZoomPlayer;
     }
 
 
 
     private void UpdateTargetGroupRadius()
     {
-        int numMonsters = targetGroup.m_Targets.Length - 1;
+        int numMonsters = targetGroup.Targets.Count - 1;
         int newRadius = camZoomEnemy;// + (camZoomMultiplier * _numMonstersOnScreen);
         if (numMonsters >= 1)
         {
-            for (int i = 1; i < targetGroup.m_Targets.Length; i++)
+            for (int i = 1; i < targetGroup.Targets.Count; i++)
             {
-                targetGroup.m_Targets[i].radius = newRadius;
+                targetGroup.Targets[i].Radius = newRadius;
             }
 
         }
@@ -255,7 +250,7 @@ public class CameraManager : MonoBehaviour
         //always stop the tween before using it again
         _cameraTween.Kill();
         int memberIndex = targetGroup.FindMember(member);
-        _cameraTween = DOTween.To(() => targetGroup.m_Targets[memberIndex].weight, x => targetGroup.m_Targets[memberIndex].weight = x, finalWeight, lerpDuration)
+        _cameraTween = DOTween.To(() => targetGroup.Targets[memberIndex].Weight, x => targetGroup.Targets[memberIndex].Weight = x, finalWeight, lerpDuration)
             .SetAutoKill(false)
             .OnComplete(() =>
             {
@@ -271,7 +266,7 @@ public class CameraManager : MonoBehaviour
             {
                 //if it was removing and ended unexpectedly, go to zero always
                 if (!isAdding)
-                    targetGroup.m_Targets[memberIndex].weight = 0;
+                    targetGroup.Targets[memberIndex].Weight = 0;
             });
         
     }
@@ -287,18 +282,18 @@ public class CameraManager : MonoBehaviour
         {
             //decreasing
             bool isDecreasing = true;
-            while (timeElapsed < duration && isDecreasing /*&targetGroup.m_Targets[memberIndex].radius == 21*/)
+            while (timeElapsed < duration && isDecreasing /*&targetGroup.Targets[memberIndex].radius == 21*/)
             {
                 weightLerped = Mathf.Lerp(start, end, timeElapsed / duration);
                 //change weight
-                targetGroup.m_Targets[memberIndex].weight = weightLerped;
+                targetGroup.Targets[memberIndex].Weight = weightLerped;
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
             if (isDecreasing)
             {
                 weightLerped = end;
-                targetGroup.m_Targets[memberIndex].weight = weightLerped;
+                targetGroup.Targets[memberIndex].Weight = weightLerped;
                 isDecreasing = false;
                 if(isMonster)
                     _numMonstersOnScreen--;
@@ -309,20 +304,20 @@ public class CameraManager : MonoBehaviour
         else
         {
             //increasing
-            //targetGroup.m_Targets[memberIndex].radius = 19;
+            //targetGroup.Targets[memberIndex].radius = 19;
             bool isIncreasing = true;
-            while (timeElapsed < duration && isIncreasing /*targetGroup.m_Targets[memberIndex].radius==19*/ )
+            while (timeElapsed < duration && isIncreasing /*targetGroup.Targets[memberIndex].radius==19*/ )
             {
                 weightLerped = Mathf.Lerp(start, end, timeElapsed / duration);
                 //change weight
-                targetGroup.m_Targets[memberIndex].weight = weightLerped;
+                targetGroup.Targets[memberIndex].Weight = weightLerped;
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
             if (isIncreasing)
             {
                 weightLerped = end;
-                targetGroup.m_Targets[memberIndex].weight = weightLerped;
+                targetGroup.Targets[memberIndex].Weight = weightLerped;
                 isIncreasing = false;
                 if(isMonster)
                     _numMonstersOnScreen++;
@@ -339,7 +334,7 @@ public class CameraManager : MonoBehaviour
 
     public void ChangePlayerRadius(float newRadius)
     {
-        DOTween.To(() => targetGroup.m_Targets[0].radius, x => targetGroup.m_Targets[0].radius = x, newRadius, 2);
+        DOTween.To(() => targetGroup.Targets[0].Radius, x => targetGroup.Targets[0].Radius = x, newRadius, 2);
     }
     
 
@@ -371,7 +366,7 @@ public class CameraManager : MonoBehaviour
         if (!toggle)
         {
             _tmpCurrentZoomPlayer = camZoomPlayer + maxAddRadiusChase1;
-            targetGroup.m_Targets[0].radius = _tmpCurrentZoomPlayer;
+            targetGroup.Targets[0].Radius = _tmpCurrentZoomPlayer;
 
         }
         else

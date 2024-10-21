@@ -153,7 +153,7 @@ public class BlueMovement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
         }
         //always at least X units away to even move
-        _rigidBody.velocity = Vector3.ClampMagnitude(_rigidBody.velocity, maxSpeed);
+        _rigidBody.linearVelocity = Vector3.ClampMagnitude(_rigidBody.linearVelocity, maxSpeed);
         _finalMovement = Vector3.zero;
     }
 

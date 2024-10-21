@@ -101,7 +101,7 @@ public class TentacleDynamic : MonoBehaviour
             //commented out for debug purposes
             /*wiggleSpeed = Mathf.Abs(wiggleSpeed);
             wiggleSpeed = Mathf.Lerp(wiggleSpeed, speedTarget, Mathf.Abs(wiggleSpeed - speedTarget)/wiggleSpeed * 10f);*/
-            float speedTarget = Mathf.Clamp(head.velocity.magnitude / 1.5f, speedMin, speedMax);
+            float speedTarget = Mathf.Clamp(head.linearVelocity.magnitude / 1.5f, speedMin, speedMax);
             wiggleSpeed = speedTarget;
 
         }

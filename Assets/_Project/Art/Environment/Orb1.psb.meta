@@ -70,12 +70,13 @@ ScriptedImporter:
     compressionQualitySet: 0
     textureFormatSet: 0
     applyGammaDecoding: 0
-  spriteImportData:
+  singleSpriteImportData:
   - name: 
     originalName: 
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -92,13 +93,14 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
     spritePosition: {x: 0, y: 0}
-  mosaicSpriteImportData: []
-  rigSpriteImportData:
+  multiSpriteImportData: []
+  layeredSpriteImportData:
   - name: MembraneNear
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 3283
@@ -120,6 +122,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 2075
@@ -141,6 +144,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 2075
@@ -162,6 +166,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -178,21 +183,120 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
     spritePosition: {x: 490, y: 0}
-  characterData:
-    bones: []
-    parts: []
-    dimension: {x: 0, y: 0}
-    characterGroups: []
+  spriteImportData:
+  - name: 
+    originalName: 
     pivot: {x: 0, y: 0}
-    boneReadOnly: 0
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  rigSpriteImportData:
+  - name: MembraneNear
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 3283
+      y: 4
+      width: 753
+      height: 1387
+    spriteID: f95941ae8155251408e095a7c0a5bc23
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 3283, y: 4}
+    spritePosition: {x: 1393, y: 0}
+  - name: Holes
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2075
+      y: 1212
+      width: 1008
+      height: 708
+    spriteID: ed96a9670e226e84aa6d6440d5992858
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2075, y: 1212}
+    spritePosition: {x: 1123, y: 1226}
+  - name: Orb
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2075
+      y: 4
+      width: 1200
+      height: 1200
+    spriteID: 290f68e74d9ab0f458005e026ed5a3e0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2075, y: 4}
+    spritePosition: {x: 1100, y: 880}
+  - name: MembraneFar
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 2063
+      height: 1450
+    spriteID: d0506fd85a216f14584e6a863a9d78ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 490, y: 0}
   sharedRigSpriteImportData: []
-  sharedRigCharacterData:
-    bones: []
-    parts: []
-    dimension: {x: 0, y: 0}
-    characterGroups: []
-    pivot: {x: 0, y: 0}
-    boneReadOnly: 0
+  mosaicSpriteImportData: []
   platformSettings: []
   mosaicLayers: 1
   characterMode: 1
@@ -203,15 +307,55 @@ ScriptedImporter:
   generatePhysicsShape: 0
   paperDollMode: 0
   keepDupilcateSpriteName: 1
+  padding: 4
+  spriteSizeExpand: 0
   skeletonAssetReferenceID: 
   pipeline: {instanceID: 0}
   pipelineVersion: 
-  padding: 4
-  spriteSizeExpand: 0
-  spriteCategoryList:
-    categories: []
   spritePackingTag: 
   resliceFromLayer: 0
+  pSDLayerImportSetting: []
+  psdLayers:
+  - name: MembraneNear
+    spriteName: MembraneNear
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f95941ae8155251408e095a7c0a5bc23
+    layerID: 0
+    mosaicPosition: {x: 3283, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Holes
+    spriteName: Holes
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ed96a9670e226e84aa6d6440d5992858
+    layerID: 1601842237
+    mosaicPosition: {x: 2075, y: 1212}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Orb
+    spriteName: Orb
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 290f68e74d9ab0f458005e026ed5a3e0
+    layerID: 386854427
+    mosaicPosition: {x: 2075, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: MembraneFar
+    spriteName: MembraneFar
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d0506fd85a216f14584e6a863a9d78ff
+    layerID: 1419028432
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   mosaicPSDLayers: []
   rigPSDLayers:
   - name: MembraneNear
@@ -255,7 +399,6 @@ ScriptedImporter:
     isImported: 1
     isVisible: 1
   sharedRigPSDLayers: []
-  pSDLayerImportSetting: []
   importFileNodeState: 1
   platformSettingsDirtyTick: 0
   spriteSizeExpandChanged: 0

@@ -97,10 +97,10 @@ Transform:
   - {fileID: 1049184352286508567}
   - {fileID: 7154512281988443241}
   - {fileID: 1740835217051956488}
-  - {fileID: 8242382004035849814}
   - {fileID: 5335836652397838011}
   - {fileID: 4435735507514712432}
   - {fileID: 3684964435982335343}
+  - {fileID: 8242382004035849814}
   m_Father: {fileID: 7196203181398277919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8132941885005647075
@@ -120,6 +120,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -206,6 +209,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -259,6 +265,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -294,6 +303,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!1 &1677000821367719073
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,27 +395,27 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 3e8c5dfb-5fc6-4434-817e-ef72f09e8f59
-    m_ActionName: Player/MoveLook[/XboxOneGampadMacOSWireless/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: 'Player/MoveLook[/XboxOneGampadMacOSWireless/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 7c2c06bf-6f0f-4c89-b9cc-8f791a28789d
-    m_ActionName: UI/Navigate[/XboxOneGampadMacOSWireless/leftStick/up,/XboxOneGampadMacOSWireless/rightStick/up,/XboxOneGampadMacOSWireless/leftStick/down,/XboxOneGampadMacOSWireless/rightStick/down,/XboxOneGampadMacOSWireless/leftStick/left,/XboxOneGampadMacOSWireless/rightStick/left,/XboxOneGampadMacOSWireless/leftStick/right,/XboxOneGampadMacOSWireless/rightStick/right,/XboxOneGampadMacOSWireless/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: 'UI/Navigate[/XboxOneGampadMacOSWireless/leftStick/up,/XboxOneGampadMacOSWireless/rightStick/up,/XboxOneGampadMacOSWireless/leftStick/down,/XboxOneGampadMacOSWireless/rightStick/down,/XboxOneGampadMacOSWireless/leftStick/left,/XboxOneGampadMacOSWireless/rightStick/left,/XboxOneGampadMacOSWireless/leftStick/right,/XboxOneGampadMacOSWireless/rightStick/right,/XboxOneGampadMacOSWireless/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 308a8b71-946b-4c44-a792-848f4a70c025
-    m_ActionName: UI/Submit[/Keyboard/enter,/XboxOneGampadMacOSWireless/buttonSouth]
+    m_ActionName: 'UI/Submit[/Keyboard/enter,/XboxOneGampadMacOSWireless/buttonSouth]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 0b4b3e85-d003-40ee-b4ed-c82d9dc1f258
-    m_ActionName: UI/Cancel[/Keyboard/escape,/XboxOneGampadMacOSWireless/buttonEast]
+    m_ActionName: 'UI/Cancel[/Keyboard/escape,/XboxOneGampadMacOSWireless/buttonEast]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 44678435-a84c-44f1-8200-ab5084d3f24e
-    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+    m_ActionName: 'UI/Point[/Mouse/position,/Pen/position]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f13bc6d2-04f6-4c63-ba82-f7801a42e3f2
-    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+    m_ActionName: 'UI/Click[/Mouse/leftButton,/Pen/tip]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7766123913844448042}
@@ -421,11 +431,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 31b975c8-23c4-40c8-913c-7dc566a5c5ba
-    m_ActionName: Player/Swim[/XboxOneGampadMacOSWireless/buttonSouth,/Keyboard/z]
+    m_ActionName: 'Player/Swim[/XboxOneGampadMacOSWireless/buttonSouth,/Keyboard/z]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: e120adc2-82ca-489e-87e4-56557c704695
-    m_ActionName: Player/Pause[/Keyboard/escape]
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 1840d9bc-88e1-41b2-bb0d-a4bd1c4cc11f
@@ -445,7 +455,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 97843bf9-f851-408b-86d6-2c6eb1f4a586
-    m_ActionName: Player/New action[/Keyboard/z]
+    m_ActionName: 'Player/New action[/Keyboard/z]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -516,7 +526,7 @@ MonoBehaviour:
   inmortal: 0
 --- !u!50 &5740145806345126017
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -527,8 +537,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 10
+  m_LinearDamping: 1
+  m_AngularDamping: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -549,6 +559,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677000821367719073}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -572,9 +583,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: -0.036363125, y: -0.61}
-  serializedVersion: 2
   m_Radius: 1.5696847
 --- !u!114 &3995722749069283882
 MonoBehaviour:
@@ -659,6 +670,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -827,6 +841,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1018,6 +1035,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6114,6 +6134,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6152,13 +6175,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -6220,6 +6245,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6413,6 +6441,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6667,6 +6698,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7015,6 +7049,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7068,6 +7105,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7103,6 +7143,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!1 &6784684105019156936
 GameObject:
   m_ObjectHideFlags: 0
@@ -7155,6 +7196,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7356,6 +7400,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7497,14 +7544,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
+  m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.3
   m_Color: {r: 0.31954432, g: 0.9056604, b: 0.43445736, a: 1}
   m_Intensity: 1.5
   m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
+  m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: d1f3b6b137a365c7
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
@@ -7514,8 +7561,10 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
+  m_ShadowsEnabled: 0
   m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0
+  m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
@@ -7697,6 +7746,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7782,6 +7834,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

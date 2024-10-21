@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028353, g: 0.22571383, b: 0.30692253, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -97,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -175,6 +171,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -428,6 +427,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -450,7 +452,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 181461883
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e6e17d5a33cc842e58363c896939b532, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -460,7 +462,7 @@ SpriteRenderer:
   m_Size: {x: 150, y: 12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &181288764
@@ -491,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxMultiplier: 0.5
-  vCam: {fileID: 1029316461}
+  vCam: {fileID: 0}
 --- !u!61 &181288767
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -500,6 +502,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181288762}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -523,7 +526,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: -5.1267405}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -534,7 +538,6 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 100, y: 1.935648}
   m_EdgeRadius: 0
 --- !u!1 &218374279
@@ -587,6 +590,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -631,6 +637,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218374279}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -654,7 +661,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -665,7 +673,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &290283845
@@ -694,6 +701,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290283845}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -717,9 +725,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 0.5
 --- !u!212 &290283847
 SpriteRenderer:
@@ -738,6 +746,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -839,6 +850,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -883,6 +897,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541861785}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -906,7 +921,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -917,7 +933,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &697532049
@@ -949,12 +964,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 1073741824
   data:
     dataString: UEsDBBQAAAgIAACAn+u+9Ui9UwIAABEFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzmXGuIEmvbVASA8EJrSTiy9CWmMNsuTRB18Z/ntXso0dOj3Z3n379N7uyh9EKFsBc9osjOBLzYF8H5DwTr4MuuQLnOhOq424QIt5F9wVAUQj5o06oTE+CmVWl+CMYD/UTgZwgkGvRK5NOec7mGrrLIZzKi1gymgXqhWGPgbkhI/hUyg5N6WX8Bxc8Y2BcmB6uLSBpZNPOK+YpGUFPCju4OPHljYdpxGo0E2DeQj8WkphGynEnatodVMVYCB45YKis6ggGC1A7AoX6Pq1qzy34Brthp5nwmCDalLyU9ddK6nd18IOVHqIkiZRUk26/Cc/HMV0bnT50p47SsIZrhBs/0bPjFrXa2s/PPss3KsjlXu6lfBegHrVC6O94ph0xodSbyGddZ83a9MC2L6L11Lvgr7qGn4/xeDhGt2fplKU2yaFnxupY7Pj4MHgWH6h3LgWtkFhNGj4Y+E33fX3p0k8C2MdphqPKojbam8ClMxjx4IX76baKDB9hgoUle68Rh53P8G73P+rnmm4Ks3pTa69AXclMdzhk+QutdbH26xsoY9LsMXKOykUdI0OiVds1FQrVS9Y31JbtvEmp6xXtvOCf94sMmH0KUm+JjBJHyaIHiYA6ZY9jFgyeeTfxmMSV08o9EnluhbatAfHpjpyhWvW/kEGC0OruOzc0ONCXEptO6RQud4wA6BWNcNNOBg8BO8kn3OBDdqAc0LFgZOPjEjN9sCzG1EWnc5PztCsY8lIJQ7ahUhGpvGvkZEQvq3y2sBBwDEc3pJdyfUvUEsDBBQAAAgIAACAn+tdXqZKbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSWXKipYGBsUGqmZGJWVpisq5BaqpRUrKJYbKBmUWKuampUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACAn+u+9Ui9UwIAABEFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACAn+tdXqZKbQAAAHgAAAAJACQAAAAAAAAAAAAAAKACAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAWAMAAAAA
-    upgradeData: 
     file_cachedStartup: {fileID: 0}
-    data_cachedStartup: 
     cacheStartup: 0
   showNavGraphs: 1
   showUnwalkableNodes: 0
@@ -1017,6 +1030,8 @@ MonoBehaviour:
   maxFrameTime: 1
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
+  navmeshUpdates:
+    updateInterval: 0
   euclideanEmbedding:
     mode: 0
     seed: 0
@@ -1145,7 +1160,7 @@ PrefabInstance:
         type: 3}
       propertyPath: virtualCam
       value: 
-      objectReference: {fileID: 1029316461}
+      objectReference: {fileID: 0}
     - target: {fileID: 1719056557817440040, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: HurtFeedback
@@ -1173,12 +1188,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1719056557817440040, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
-      propertyPath: dashSFX.Array.data[0]
+      propertyPath: 'dashSFX.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: add6a31139d244c5abd48b3f957d8b27, type: 3}
     - target: {fileID: 1719056557817440040, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
-      propertyPath: dashSFX.Array.data[1]
+      propertyPath: 'dashSFX.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 024cde733481d4fc2bfaea671863cda6, type: 3}
     - target: {fileID: 1742320412833410857, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
@@ -1253,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5311943907107007542, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5453095545212299414, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
@@ -1404,57 +1419,57 @@ PrefabInstance:
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_ActionName
-      value: Player/MoveLook[/XboxOneGampadMacOSWireless/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      value: 'Player/MoveLook[/XboxOneGampadMacOSWireless/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_ActionName
-      value: Player/Look[/XboxOneGampadMacOSWireless/rightStick,/Mouse/delta,/Pen/delta]
+      value: 'Player/Look[/XboxOneGampadMacOSWireless/rightStick,/Mouse/delta,/Pen/delta]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_ActionName
-      value: Player/Fire[/XboxOneGampadMacOSWireless/rightTrigger,/Mouse/leftButton]
+      value: 'Player/Fire[/XboxOneGampadMacOSWireless/rightTrigger,/Mouse/leftButton]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_ActionName
-      value: UI/Navigate[/XboxOneGampadMacOSWireless/leftStick/up,/XboxOneGampadMacOSWireless/rightStick/up,/XboxOneGampadMacOSWireless/leftStick/down,/XboxOneGampadMacOSWireless/rightStick/down,/XboxOneGampadMacOSWireless/leftStick/left,/XboxOneGampadMacOSWireless/rightStick/left,/XboxOneGampadMacOSWireless/leftStick/right,/XboxOneGampadMacOSWireless/rightStick/right,/XboxOneGampadMacOSWireless/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      value: 'UI/Navigate[/XboxOneGampadMacOSWireless/leftStick/up,/XboxOneGampadMacOSWireless/rightStick/up,/XboxOneGampadMacOSWireless/leftStick/down,/XboxOneGampadMacOSWireless/rightStick/down,/XboxOneGampadMacOSWireless/leftStick/left,/XboxOneGampadMacOSWireless/rightStick/left,/XboxOneGampadMacOSWireless/leftStick/right,/XboxOneGampadMacOSWireless/rightStick/right,/XboxOneGampadMacOSWireless/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_ActionName
-      value: UI/Submit[/Keyboard/enter,/XboxOneGampadMacOSWireless/buttonSouth]
+      value: 'UI/Submit[/Keyboard/enter,/XboxOneGampadMacOSWireless/buttonSouth]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_ActionName
-      value: UI/Cancel[/Keyboard/escape,/XboxOneGampadMacOSWireless/buttonEast]
+      value: 'UI/Cancel[/Keyboard/escape,/XboxOneGampadMacOSWireless/buttonEast]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_ActionName
-      value: UI/Point[/Mouse/position,/Pen/position]
+      value: 'UI/Point[/Mouse/position,/Pen/position]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionName
-      value: UI/Click[/Mouse/leftButton,/Pen/tip]
+      value: 'UI/Click[/Mouse/leftButton,/Pen/tip]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_ActionName
-      value: UI/ScrollWheel[/Mouse/scroll]
+      value: 'UI/ScrollWheel[/Mouse/scroll]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_ActionName
-      value: UI/MiddleClick[/Mouse/middleButton]
+      value: 'UI/MiddleClick[/Mouse/middleButton]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_ActionName
-      value: UI/RightClick[/Mouse/rightButton]
+      value: 'UI/RightClick[/Mouse/rightButton]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
@@ -1469,7 +1484,7 @@ PrefabInstance:
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_ActionName
-      value: Player/Dash[/XboxOneGampadMacOSWireless/buttonSouth,/Keyboard/z]
+      value: 'Player/Dash[/XboxOneGampadMacOSWireless/buttonSouth,/Keyboard/z]'
       objectReference: {fileID: 0}
     - target: {fileID: 7888187896192093785, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
@@ -1568,7 +1583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8983685256099248174, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8983685256099248174, guid: 7292a9df1662b4ed0b4b0de86370ab6d,
@@ -1642,9 +1657,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749201303}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -1694,8 +1708,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!4 &749201305
 Transform:
   m_ObjectHideFlags: 0
@@ -1768,6 +1786,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1790,7 +1811,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 181461883
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: fab06e0be9375cc4d823efa71629885c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1953,15 +1974,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2022,6 +2045,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2044,7 +2070,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 181461883
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 01f4f8d6d5e6a435caa21ebab277542b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2054,7 +2080,7 @@ SpriteRenderer:
   m_Size: {x: 150, y: 9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &818234766
@@ -2085,7 +2111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxMultiplier: 0.4
-  vCam: {fileID: 1029316461}
+  vCam: {fileID: 0}
 --- !u!1 &888027996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,6 +2149,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2155,7 +2184,7 @@ SpriteRenderer:
   m_Size: {x: 2.5, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &888027998
@@ -2188,17 +2217,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48f967f3e8214982b3b94c35661daa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camLerpSpeed: 0.05
-  virtualCam: {fileID: 0}
+  bodyPart: {fileID: 0}
+  headPart: {fileID: 0}
   maxSpeed: 0
   slowSpeed: 0
   rotationSpeed: 400
   swimForce: 0
   timeBetweenSwim: 0
-  HurtFeedback: {fileID: 0}
-  AttackFeedback: {fileID: 0}
-  dashSFX: []
-  hurtSFX: {fileID: 0}
+  vfxSwimBubbles: {fileID: 0}
+  vfxDeath: {fileID: 0}
+  sfxDeath:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sfxSwim:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  playerInput: {fileID: 0}
+  swimStage: 0
+  isHidden: 0
+  vfxVoice: {fileID: 0}
+  sfxCall1:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sfxCall2:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sfxCall3:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  callRadiusForEnemies: 0
+  inmortal: 0
 --- !u!114 &888028000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2232,7 +2300,7 @@ MonoBehaviour:
   m_Camera: {fileID: 0}
 --- !u!50 &888028001
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2243,8 +2311,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 10
+  m_LinearDamping: 1
+  m_AngularDamping: 10
   m_GravityScale: 0.005
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2282,6 +2350,7 @@ PolygonCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976710082}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2305,7 +2374,8 @@ PolygonCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -2348,9 +2418,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1029316462}
-  - component: {fileID: 1029316461}
   - component: {fileID: 1029316460}
   - component: {fileID: 1029316463}
+  - component: {fileID: 1029316465}
+  - component: {fileID: 1029316464}
   m_Layer: 0
   m_Name: Virtual Camera (1)
   m_TagString: Untagged
@@ -2370,48 +2441,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BoundingShape2D: {fileID: 976710083}
-  m_Damping: 0.5
-  m_MaxWindowSize: -1
---- !u!114 &1029316461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029316459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ExcludedPropertiesInInspector:
-  - m_Script
-  m_LockStageInInspector: 
-  m_StreamingVersion: 20170927
-  m_Priority: 10
-  m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 718474306}
-  m_Lens:
-    FieldOfView: 40
-    OrthographicSize: 12
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
-    Dutch: 0
-    ModeOverride: 0
-    LensShift: {x: 0, y: 0}
-    GateFit: 2
-    FocusDistance: 10
-    m_SensorSize: {x: 1, y: 1}
-  m_Transitions:
-    m_BlendHint: 0
-    m_InheritPosition: 0
-    m_OnCameraLive:
-      m_PersistentCalls:
-        m_Calls: []
-  m_LegacyBlendHint: 0
-  m_ComponentOwner: {fileID: 1124265132}
+  BoundingShape2D: {fileID: 976710083}
+  Damping: 0.5
+  SlowingDistance: 0
+  OversizeWindow:
+    Enabled: 0
+    MaxWindowSize: 0
+    Padding: 0
+  m_LegacyMaxWindowSize: -2
 --- !u!4 &1029316462
 Transform:
   m_ObjectHideFlags: 0
@@ -2424,8 +2461,7 @@ Transform:
   m_LocalPosition: {x: 1.42, y: 0.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1124265132}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1029316463
@@ -2440,16 +2476,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
-  m_UseLocalSpace: 1
-  m_ReactionSettings:
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseLocalSpace: 1
+  ReactionSettings:
     m_SecondaryNoise: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_Duration: 0
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 0
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &1029316464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029316459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraDistance: 10
+  DeadZoneDepth: 0
+  Composition:
+    ScreenPosition: {x: 0, y: 0}
+    DeadZone:
+      Enabled: 1
+      Size: {x: 0, y: 0}
+    HardLimits:
+      Enabled: 1
+      Size: {x: 0.8, y: 0.8}
+      Offset: {x: 0, y: 0}
+  CenterOnActivate: 1
+  TargetOffset: {x: 0, y: 0, z: 0}
+  Damping: {x: 1, y: 1, z: 1}
+  Lookahead:
+    Enabled: 0
+    Time: 0
+    Smoothing: 0
+    IgnoreY: 0
+--- !u!114 &1029316465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029316459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20170927
+  m_LegacyPriority: 10
+  Target:
+    TrackingTarget: {fileID: 718474306}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 1
+  Lens:
+    FieldOfView: 40
+    OrthographicSize: 12
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 1, y: 1}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &1087869812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,6 +2610,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2544,6 +2657,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087869812}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2567,7 +2681,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -2578,97 +2693,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1124265131
-GameObject:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1124265132}
-  - component: {fileID: 1124265134}
-  - component: {fileID: 1124265133}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1124265132
-Transform:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124265131}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1029316462}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1124265133
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124265131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
-  m_LookaheadIgnoreY: 0
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_TargetMovementOnly: 1
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_CameraDistance: 10
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
-  m_DeadZoneDepth: 0
-  m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
-  m_CenterOnActivate: 1
-  m_GroupFramingMode: 2
-  m_AdjustmentMode: 0
-  m_GroupFramingSize: 0.8
-  m_MaxDollyIn: 5000
-  m_MaxDollyOut: 5000
-  m_MinimumDistance: 1
-  m_MaximumDistance: 5000
-  m_MinimumFOV: 3
-  m_MaximumFOV: 60
-  m_MinimumOrthoSize: 1
-  m_MaximumOrthoSize: 5000
---- !u!114 &1124265134
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124265131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1239579634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,12 +2828,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &1239579639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2820,28 +2846,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  CustomBlends: {fileID: 0}
 --- !u!82 &1239579640
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2853,6 +2877,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a31356959ac1f436fab2ab383bb939e3, type: 3}
+  m_Resource: {fileID: 8300000, guid: a31356959ac1f436fab2ab383bb939e3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3042,6 +3067,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3934,6 +3962,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4120,6 +4149,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4297,7 +4329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 6644502976435952485}
+  center: {fileID: 6644502976435952485}
 --- !u!4 &93433897305877302
 Transform:
   m_ObjectHideFlags: 0
@@ -4331,6 +4363,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4385,6 +4420,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4491,6 +4529,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474403113272581912}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4514,9 +4553,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 1.6
 --- !u!4 &191495245942592154
 Transform:
@@ -4563,8 +4602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 9042581588867245127}
   segmentPoses: []
   targetDir: {fileID: 8023487309142271987}
   targetDist: 0.3
@@ -4572,6 +4611,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 8714064995779656972}
+  resettingFromPlayer: 0
 --- !u!1 &434709950971566988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4632,7 +4672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a6b77a1d1f7214a8e4f42d272ad964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 600791344954597693}
+  monsterBase: {fileID: 0}
   idealTarget: {fileID: 718474306}
   smoothTime: 0.25
 --- !u!1 &579604118989870067
@@ -4663,19 +4703,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423533c32e7448c40a2a563808e91ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  realEyeState: 0
-  pupil: {fileID: 8307212227407652926}
-  eyeBall: {fileID: 2006353120951772786}
+  _pupil: {fileID: 0}
+  _eyeBall: {fileID: 0}
   eyeRenderer: {fileID: 5474189426207342983}
-  spriteBall: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  spriteMaw: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
   pupilRenderer: {fileID: 2974048016024974044}
-  spritePupil: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  pupilDropSpeed: 0.175
-  eyeBallShutSpeed: 0.125
   timer: 3.25
 --- !u!4 &618336664627599436
 Transform:
@@ -4736,8 +4767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 8686820545703992197}
   segmentPoses: []
   targetDir: {fileID: 2352589095884817199}
   targetDist: 0.3
@@ -4745,6 +4776,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 4367084794164763877}
+  resettingFromPlayer: 0
 --- !u!4 &771272568580349632
 Transform:
   m_ObjectHideFlags: 0
@@ -4769,6 +4801,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686778545840781206}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4792,9 +4825,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 1.6
 --- !u!1 &827633924464354844
 GameObject:
@@ -4925,8 +4958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 157941102505916754}
   segmentPoses: []
   targetDir: {fileID: 5367504267024901067}
   targetDist: 0.3
@@ -4934,6 +4967,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 1334401843864761976}
+  resettingFromPlayer: 0
 --- !u!1 &1204570964117078582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,7 +5036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 5577844529452951070}
+  center: {fileID: 5577844529452951070}
 --- !u!4 &1302295792664834763
 Transform:
   m_ObjectHideFlags: 0
@@ -5116,6 +5150,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5185,6 +5222,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5220,6 +5260,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!4 &1508117659922712853
 Transform:
   m_ObjectHideFlags: 0
@@ -5248,19 +5289,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423533c32e7448c40a2a563808e91ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  realEyeState: 0
-  pupil: {fileID: 8021695008599664091}
-  eyeBall: {fileID: 7494745548324009112}
+  _pupil: {fileID: 0}
+  _eyeBall: {fileID: 0}
   eyeRenderer: {fileID: 3618357626414699782}
-  spriteBall: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  spriteMaw: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
   pupilRenderer: {fileID: 8463581333222231122}
-  spritePupil: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  pupilDropSpeed: 0.175
-  eyeBallShutSpeed: 0.125
   timer: 3.25
 --- !u!114 &1539487231852560261
 MonoBehaviour:
@@ -5274,8 +5306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 6420944207607599639}
   segmentPoses: []
   targetDir: {fileID: 8219877129436504277}
   targetDist: 0.3
@@ -5283,6 +5315,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 771272568580349632}
+  resettingFromPlayer: 0
 --- !u!1 &1624295061685389840
 GameObject:
   m_ObjectHideFlags: 0
@@ -5378,7 +5411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 5577844529452951070}
+  center: {fileID: 5577844529452951070}
 --- !u!212 &1862213519970721312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5396,6 +5429,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5535,6 +5571,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5570,6 +5609,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!114 &1993627155522729233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5582,7 +5622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a6b77a1d1f7214a8e4f42d272ad964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 3368509414318300321}
+  monsterBase: {fileID: 0}
   idealTarget: {fileID: 718474306}
   smoothTime: 0.25
 --- !u!1 &1997685294972314855
@@ -5632,8 +5672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 2037373052993559698}
   segmentPoses: []
   targetDir: {fileID: 8537229216170198896}
   targetDist: 0.3
@@ -5641,6 +5681,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 2594656019973680066}
+  resettingFromPlayer: 0
 --- !u!4 &2032528922335456103
 Transform:
   m_ObjectHideFlags: 0
@@ -5675,6 +5716,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5817,7 +5861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8543b5042968874da5ce26b3cfc4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 3368509414318300321}
+  monsterBase: {fileID: 0}
   target: {fileID: 2401080036666655870}
   pupil: {fileID: 7327475151588119382}
   offMod: 0.25
@@ -5849,8 +5893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 7523503536308197024}
   segmentPoses: []
   targetDir: {fileID: 7736652819910740027}
   targetDist: 0.3
@@ -5858,6 +5902,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 4719196500368515284}
+  resettingFromPlayer: 0
 --- !u!1 &2401080036666655870
 GameObject:
   m_ObjectHideFlags: 0
@@ -5952,8 +5997,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 6953161589158712958}
   segmentPoses: []
   targetDir: {fileID: 4188819547399813232}
   targetDist: 0.3
@@ -5961,6 +6006,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 4086077407786630581}
+  resettingFromPlayer: 0
 --- !u!212 &2650432993595892068
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5978,6 +6024,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6141,7 +6190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 5577844529452951070}
+  center: {fileID: 5577844529452951070}
 --- !u!4 &2919829377644693324
 Transform:
   m_ObjectHideFlags: 0
@@ -6191,6 +6240,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6245,6 +6297,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6390,7 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 2640594867860419625}
+  center: {fileID: 2640594867860419625}
 --- !u!114 &3295204392125875920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6403,7 +6458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8543b5042968874da5ce26b3cfc4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 5230805188752979915}
+  monsterBase: {fileID: 0}
   target: {fileID: 1935838404001385737}
   pupil: {fileID: 5287876458456200477}
   offMod: 0.25
@@ -6420,8 +6475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 7079371176323506570}
   segmentPoses: []
   targetDir: {fileID: 3402471191993059998}
   targetDist: 0.3
@@ -6429,6 +6484,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 8819362193563474876}
+  resettingFromPlayer: 0
 --- !u!114 &3357672383403539126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6441,8 +6497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 5165049127348368686}
   segmentPoses: []
   targetDir: {fileID: 4291460952543840251}
   targetDist: 0.3
@@ -6450,6 +6506,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 3078289571991736201}
+  resettingFromPlayer: 0
 --- !u!114 &3368509414318300321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6462,19 +6519,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423533c32e7448c40a2a563808e91ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  realEyeState: 0
-  pupil: {fileID: 7327475151588119382}
-  eyeBall: {fileID: 1062028556428058415}
+  _pupil: {fileID: 0}
+  _eyeBall: {fileID: 0}
   eyeRenderer: {fileID: 7798931791298055952}
-  spriteBall: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  spriteMaw: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
   pupilRenderer: {fileID: 1862213519970721312}
-  spritePupil: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  pupilDropSpeed: 0.175
-  eyeBallShutSpeed: 0.125
   timer: 3.25
 --- !u!4 &3395084467123553882
 Transform:
@@ -6568,8 +6616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 5796094527070545927}
   segmentPoses: []
   targetDir: {fileID: 4600613064604154700}
   targetDist: 0.3
@@ -6577,6 +6625,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 5492499562561145387}
+  resettingFromPlayer: 0
 --- !u!212 &3618357626414699782
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6594,6 +6643,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6952,8 +7004,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 5698111526767002994}
   segmentPoses: []
   targetDir: {fileID: 8610930083632926808}
   targetDist: 0.3
@@ -6961,6 +7013,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 6171662081987917022}
+  resettingFromPlayer: 0
 --- !u!1 &4446455874969377089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7088,7 +7141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 93433897305877302}
+  center: {fileID: 93433897305877302}
 --- !u!114 &4641751202138222413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7102,7 +7155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 93433897305877302}
+  center: {fileID: 93433897305877302}
 --- !u!120 &4716815301485474910
 LineRenderer:
   serializedVersion: 2
@@ -7121,6 +7174,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7423,6 +7479,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7549,19 +7608,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423533c32e7448c40a2a563808e91ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  realEyeState: 0
-  pupil: {fileID: 5287876458456200477}
-  eyeBall: {fileID: 1907555096032910205}
+  _pupil: {fileID: 0}
+  _eyeBall: {fileID: 0}
   eyeRenderer: {fileID: 1440586281742103709}
-  spriteBall: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  spriteMaw: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
   pupilRenderer: {fileID: 6622209975487296548}
-  spritePupil: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
-    type: 3}
-  pupilDropSpeed: 0.175
-  eyeBallShutSpeed: 0.125
   timer: 3.25
 --- !u!4 &5238815379314778640
 Transform:
@@ -7672,7 +7722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 6644502976435952485}
+  center: {fileID: 6644502976435952485}
 --- !u!4 &5367504267024901067
 Transform:
   m_ObjectHideFlags: 0
@@ -7721,6 +7771,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7969,6 +8022,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8134,6 +8190,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8261,7 +8320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a6b77a1d1f7214a8e4f42d272ad964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 5230805188752979915}
+  monsterBase: {fileID: 0}
   idealTarget: {fileID: 718474306}
   smoothTime: 0.25
 --- !u!114 &5901505378716006174
@@ -8277,7 +8336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 2640594867860419625}
+  center: {fileID: 2640594867860419625}
 --- !u!1 &5925676666055734670
 GameObject:
   m_ObjectHideFlags: 0
@@ -8362,6 +8421,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8426,8 +8488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 2985292468508028789}
   segmentPoses: []
   targetDir: {fileID: 4780053165314797353}
   targetDist: 0.3
@@ -8435,6 +8497,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 9014054882860977474}
+  resettingFromPlayer: 0
 --- !u!114 &6271939423032791681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8447,7 +8510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8543b5042968874da5ce26b3cfc4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 1516406306629582859}
+  monsterBase: {fileID: 0}
   target: {fileID: 5626945878580428156}
   pupil: {fileID: 8021695008599664091}
   offMod: 0.25
@@ -8505,7 +8568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 2640594867860419625}
+  center: {fileID: 2640594867860419625}
 --- !u!120 &6420944207607599639
 LineRenderer:
   serializedVersion: 2
@@ -8524,6 +8587,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8727,6 +8793,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8792,7 +8861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 5577844529452951070}
+  center: {fileID: 5577844529452951070}
 --- !u!4 &6644502976435952485
 Transform:
   m_ObjectHideFlags: 0
@@ -8839,7 +8908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 93433897305877302}
+  center: {fileID: 93433897305877302}
 --- !u!58 &6771507367281786517
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8848,6 +8917,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138118361641164356}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -8871,9 +8941,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 1.6
 --- !u!212 &6861685020688554053
 SpriteRenderer:
@@ -8892,6 +8962,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8945,6 +9018,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8980,6 +9056,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!120 &6953161589158712958
 LineRenderer:
   serializedVersion: 2
@@ -8998,6 +9075,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9127,7 +9207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 93433897305877302}
+  center: {fileID: 93433897305877302}
 --- !u!120 &7079371176323506570
 LineRenderer:
   serializedVersion: 2
@@ -9146,6 +9226,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9324,8 +9407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 8050535185767760311}
   segmentPoses: []
   targetDir: {fileID: 1417000680429100681}
   targetDist: 0.3
@@ -9333,6 +9416,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 5481737602340874937}
+  resettingFromPlayer: 0
 --- !u!114 &7328541194774434236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9345,8 +9429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 9199229411154225846}
   segmentPoses: []
   targetDir: {fileID: 7845635279298140123}
   targetDist: 0.3
@@ -9354,6 +9438,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 7466697902634438986}
+  resettingFromPlayer: 0
 --- !u!4 &7466697902634438986
 Transform:
   m_ObjectHideFlags: 0
@@ -9406,6 +9491,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9512,6 +9600,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7996948672438365300}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -9535,9 +9624,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 1.6
 --- !u!1 &7690607564470519877
 GameObject:
@@ -9587,6 +9676,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9670,6 +9762,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9705,6 +9800,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!1 &7996948672438365300
 GameObject:
   m_ObjectHideFlags: 0
@@ -9773,6 +9869,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9899,7 +9998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 6644502976435952485}
+  center: {fileID: 6644502976435952485}
 --- !u!1 &8307212227407652926
 GameObject:
   m_ObjectHideFlags: 0
@@ -9945,7 +10044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8543b5042968874da5ce26b3cfc4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 600791344954597693}
+  monsterBase: {fileID: 0}
   target: {fileID: 1997685294972314855}
   pupil: {fileID: 8307212227407652926}
   offMod: 0.25
@@ -9967,6 +10066,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10046,7 +10148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a6b77a1d1f7214a8e4f42d272ad964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeManager: {fileID: 1516406306629582859}
+  monsterBase: {fileID: 0}
   idealTarget: {fileID: 718474306}
   smoothTime: 0.25
 --- !u!4 &8610930083632926808
@@ -10098,6 +10200,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10232,6 +10337,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10407,7 +10515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 6644502976435952485}
+  center: {fileID: 6644502976435952485}
 --- !u!1 &8906832395568313223
 GameObject:
   m_ObjectHideFlags: 0
@@ -10454,7 +10562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 2640594867860419625}
+  center: {fileID: 2640594867860419625}
 --- !u!1 &8958177934245235184
 GameObject:
   m_ObjectHideFlags: 0
@@ -10515,8 +10623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 8669679859731863085}
   segmentPoses: []
   targetDir: {fileID: 443610835694287614}
   targetDist: 0.3
@@ -10524,6 +10632,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 2032528922335456103}
+  resettingFromPlayer: 0
 --- !u!4 &9026625418519091349
 Transform:
   m_ObjectHideFlags: 0
@@ -10574,6 +10683,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10747,8 +10859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _internalLight2D: {fileID: 0}
   length: 50
-  lineRend: {fileID: 4716815301485474910}
   segmentPoses: []
   targetDir: {fileID: 9060883004753691485}
   targetDist: 0.3
@@ -10756,6 +10868,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 6042901841890005039}
+  resettingFromPlayer: 0
 --- !u!1 &9156017878284038263
 GameObject:
   m_ObjectHideFlags: 0
@@ -10790,6 +10903,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

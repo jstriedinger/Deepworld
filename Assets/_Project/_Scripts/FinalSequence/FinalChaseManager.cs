@@ -7,31 +7,36 @@ using UnityEngine.Serialization;
 public class FinalChaseManager : MonoBehaviour
 {
     [Header("Part1")] 
-    [SerializeField] private MonsterCinematic Pt1Monster1;
-    [SerializeField] private MonsterCinematic Pt1Monster2;
+    [SerializeField] private MonsterCinematic[] monsters;
     [SerializeField] private GameObject blockRock;
     [SerializeField] private BlueNPC blueNpc;
-    private Vector3 _pt1Monster1Init;
-    private Vector3 _pt1Monster2Init;
+    
+    private Vector3[] _monstersPos;
         
     
     // Start is called before the first frame update
     private void OnEnable()
     {
-        _pt1Monster1Init = Pt1Monster1.transform.position;
-        _pt1Monster2Init = Pt1Monster2.transform.position;
-        GameManager.OnRestartingGame += ResetFinalChasePt1;
+        int index = 0;
+        _monstersPos = new Vector3[monsters.Length];
+        foreach (MonsterCinematic monsterCinematic in monsters)
+        {
+            _monstersPos[index] = monsterCinematic.transform.position;
+            index++;
+        }
+        //blueNpc.ToggleFollow(true);
+        GameManager.OnRestartingGame += ResetFinalChase;
     }
 
     private void OnDisable()
     {
-        GameManager.OnRestartingGame -= ResetFinalChasePt1;
+        GameManager.OnRestartingGame -= ResetFinalChase;
     }
 
     //manually remove the action
     public void RemoveRestartAction()
     {
-        GameManager.OnRestartingGame -= ResetFinalChasePt1;
+        GameManager.OnRestartingGame -= ResetFinalChase;
     }
 
     // Update is called once per frame
@@ -40,26 +45,31 @@ public class FinalChaseManager : MonoBehaviour
         
     }
 
-    //when player dies
-    public void ResetFinalChasePt1()
+    /**
+     * Reset actin when player dies in Final Chase Pt1
+     */
+    public void ResetFinalChase()
     {
-        Pt1Monster1.TogglePursuit(false);
-        Pt1Monster1.transform.position = _pt1Monster1Init;
-        
-        Pt1Monster2.TogglePursuit(false);
-        Pt1Monster2.transform.position = _pt1Monster2Init;
-        
+        int index = 0;
+        foreach (MonsterCinematic monsterCinematic in monsters)
+        {
+            monsterCinematic.TogglePursuit(false);
+            monsterCinematic.transform.position = _monstersPos[index];
+            index++;
+        }
         blueNpc.ToggleFollow(true);
         
     }
-
-
+    
+    /**
+     * Used for final chase pt1. Meaning the first 2 monsters
+     */
     public void Pt1TriggerMonsterChase(int index)
     {
         if(index == 1)
-            Pt1Monster1.TogglePursuit(true);
+            monsters[0].TogglePursuit(true);
         else if(index == 2)
-            Pt1Monster2.TogglePursuit(true);
+            monsters[1].TogglePursuit(true);
     }
 
     public void Pt1EndMonsterChase()
@@ -68,17 +78,37 @@ public class FinalChaseManager : MonoBehaviour
         // now we want to wait a little and make them go back
     }
 
+    /**
+     * Trigger the monsters of the second part of the final chase
+     */
+    public void Pt2TriggerMonsters(int index)
+    {
+        switch (index)
+        {
+            case 1 :
+                monsters[2].TogglePursuit(true);
+                monsters[3].TogglePursuit(true);
+                break;
+            case 2:
+                monsters[4].TogglePursuit(true);
+                break;
+            case 3:
+                monsters[5].TogglePursuit(true);
+                break;
+            case 4:
+                monsters[6].TogglePursuit(true);
+                break;
+        }
+    }
+
     private IEnumerator EndPt1Chase()
     {
         blockRock.SetActive(true);
-        Pt1Monster1.TogglePursuit(false);
-        Pt1Monster2.TogglePursuit(false);
+        monsters[0].TogglePursuit(false);
+        monsters[1].TogglePursuit(false);
         yield return new WaitForSeconds(1);
-        Pt1Monster1.GoToPosition(_pt1Monster1Init);
-        Pt1Monster2.GoToPosition(_pt1Monster2Init);
-        yield return new WaitForSeconds(4);
-        Destroy(Pt1Monster1.gameObject);
-        Destroy(Pt1Monster2.gameObject);
+        monsters[0].GoToPosition(_monstersPos[0]);
+        monsters[1].GoToPosition(_monstersPos[1]);
 
     }
 }

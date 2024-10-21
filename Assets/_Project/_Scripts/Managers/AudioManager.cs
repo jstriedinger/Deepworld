@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference sfxFirstMonsterAppear;
     public EventReference sfxMonsterScream;
     [SerializeField] private EventReference sfxBlueCall;
+    [SerializeField] private EventReference sfxBlueCall2;
     [SerializeField] private EventReference sfxBlueScream;
     public AudioClip uiButtonFocus;
     public AudioClip uiButtonSelected;
@@ -397,18 +398,27 @@ public class AudioManager : MonoBehaviour
         Sequence seq = DOTween.Sequence()
             .AppendCallback(() =>
             {
+                ChangeBackgroundMusic(-1);
+            })
+            .AppendInterval(2)
+            .AppendCallback(() =>
+            {
                 RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
             })
             .AppendInterval(1f)
             .AppendCallback(() =>
             {
-                RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
-                ChangeBackgroundMusic(3);
+                RuntimeManager.PlayOneShot(sfxBlueCall, transform.position);
             })
-            .AppendInterval(2f)
+            .AppendInterval(1.5f)
             .AppendCallback(() =>
             {
-                RuntimeManager.PlayOneShot(sfxBlueCall, transform.position);
+                RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
+            })
+            .AppendInterval(0.5f)
+            .AppendCallback(() =>
+            {
+                RuntimeManager.PlayOneShot(sfxBlueCall2, transform.position);
             });
     }
 
