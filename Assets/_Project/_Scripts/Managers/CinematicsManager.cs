@@ -717,7 +717,7 @@ public class CinematicsManager : MonoBehaviour
             .Join(_uiManager.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(4f ));
 
         Sequence introMover = DOTween.Sequence()
-        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y, 27)
+        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 27)
             .SetEase(Ease.InOutSine))
         .Join(logosFollowCamObj.DOMoveY(playerPathC0Transforms[^1].position.y, 27).SetEase(Ease.InOutSine).OnComplete(
             () => {
