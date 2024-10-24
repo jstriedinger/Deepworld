@@ -33,7 +33,7 @@ public class CameraManager : MonoBehaviour
     private int _numMonstersOnScreen = 0;
     private float _defaultNoiseAmplitude;
     private CinemachineBasicMultiChannelPerlin _cbmcp;
-    private GameObject _tmpExtraFollowedObject;
+    private Transform _tmpExtraFollowedObject;
     private Tween _cameraTween;
 
     // Start is called before the first frame update
@@ -104,21 +104,31 @@ public class CameraManager : MonoBehaviour
     }
 
     //Add an extra obj to be followed. Used for camera changes on cinemachine target group
-    public void AddTempFollowedObj(GameObject tmpObj)
+    public void AddTempFollowedObj(Transform tmpObj, bool replace = false, int extraRadius = 0)
     {
         _tmpExtraFollowedObject = tmpObj;
-        targetGroup.AddMember(_tmpExtraFollowedObject.transform, 0, camZoomPlayer+8);
+        targetGroup.AddMember(_tmpExtraFollowedObject, 0, camZoomPlayer+extraRadius);
         int memberIndex = targetGroup.FindMember(tmpObj.transform);
-        DOTween.To(() => targetGroup.Targets[memberIndex].Weight, x => targetGroup.Targets[memberIndex].Weight = x, 1.8f, 2);
+        if (replace)
+        {
+            //inmediate and reduce player
+            targetGroup.Targets[0].Weight = 0;
+            targetGroup.Targets[memberIndex].Weight = 1.25f;
+        }
+        else
+        {
+            DOTween.To(() => targetGroup.Targets[memberIndex].Weight, x => targetGroup.Targets[memberIndex].Weight = x, 1.8f, 2);
+        }
     }
 
     public void RemoveTempFollowedObj()
     {
-        int memberIndex = targetGroup.FindMember(_tmpExtraFollowedObject.transform);
+        int memberIndex = targetGroup.FindMember(_tmpExtraFollowedObject);
+        targetGroup.Targets[0].Weight = 1.25f;
         DOTween.To(() => targetGroup.Targets[memberIndex].Weight, x => targetGroup.Targets[memberIndex].Weight = x, 0f, 2)
             .OnComplete(() =>
             {
-                targetGroup.RemoveMember(_tmpExtraFollowedObject.transform);
+                targetGroup.RemoveMember(_tmpExtraFollowedObject);
                 _tmpExtraFollowedObject = null;
             });
     }
@@ -384,6 +394,30 @@ public class CameraManager : MonoBehaviour
     }
 
 
+    public void FollowFocusBlue(bool toggle)
+    {
+        if (toggle)
+        {
+            targetGroup.AddMember(_gameManager.blueNpcRef.transform,1.25f, camZoomPlayer);
+            targetGroup.Targets[0].Weight = 0;
+        }
+        else
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Append(
+                    DOTween.To(() => targetGroup.Targets[0].Weight, x => targetGroup.Targets[0].Weight = x, 1.25f, 2f)
+                )
+                .Join(
+                    DOTween.To(() => targetGroup.Targets[1].Weight, x => targetGroup.Targets[1].Weight = x, 0f, 2f)
+                )
+                .OnComplete(() =>
+                {
+                    targetGroup.RemoveMember(_gameManager.blueNpcRef.transform);
+                    targetGroup.Targets[0].Weight = 1.25f;
+                });
 
+
+        }
+    }
 }
 

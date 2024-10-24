@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
     {
         //framerate
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
 
         Cursor.visible = false;
         if (!skipTemp)
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case StartSection.Checkpoint2:
                     uiManager.isWorldUiActive = true;
-                    audioManager.ChangeBackgroundMusic(3);
+                    audioManager.ChangeBackgroundMusic(-1);
                     //place blue in the first point of path
                     cinematicsManager.PrepareBlueForMonsterEncounter();
                     break;

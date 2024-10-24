@@ -410,12 +410,26 @@ public class AudioManager : MonoBehaviour
             {
                 RuntimeManager.PlayOneShot(sfxBlueCall, transform.position);
             })
-            .AppendInterval(1.5f)
+            .AppendInterval(2f)
             .AppendCallback(() =>
             {
                 RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
             })
-            .AppendInterval(0.5f)
+            .AppendInterval(1f)
+            .AppendCallback(() =>
+            {
+                RuntimeManager.PlayOneShot(sfxBlueCall2, transform.position);
+            });
+    }
+
+    public void DoCinematicTunnelScreams2()
+    {
+        Sequence seq = DOTween.Sequence()
+            .AppendCallback(() =>
+            {
+                RuntimeManager.PlayOneShot(sfxMonsterScream, transform.position);
+            })
+            .AppendInterval(1f)
             .AppendCallback(() =>
             {
                 RuntimeManager.PlayOneShot(sfxBlueCall2, transform.position);

@@ -344,7 +344,7 @@ public class PlayerCharacter : MonoBehaviour
         //tell blue to do a call as well
         if (_blueRef && respond)
         {
-            yield return new WaitForSeconds(Random.Range(1f, 1.75f));
+            yield return new WaitForSeconds(Random.Range(1.5f, 2.5f));
             StartCoroutine(_blueRef.PlayCallSFX());
         }
 

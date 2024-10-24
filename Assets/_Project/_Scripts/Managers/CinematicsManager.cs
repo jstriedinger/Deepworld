@@ -18,6 +18,7 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private CameraManager _cameraManager;
     
     [SerializeField] private BlueNPC _blueNpc;
+    [SerializeField] private Transform camPivotHelper;
     private PlayerCharacter _playerRef;
     
     [Header("Cinematic - Intro & main menu")]
@@ -62,7 +63,7 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private GameObject path2Monster2;
     [SerializeField] private GameObject path2MiniMonster2;
     [SerializeField] private GameObject path3Monster2;
-    [SerializeField] private GameObject encounterFollowCamObj;
+    [SerializeField] private Transform encounterFollowCamObj;
     [SerializeField] private GameObject pathPlayer1;
     [SerializeField] private GameObject pathPlayer2;
     [SerializeField] private Transform finalBlueSpot;
@@ -494,7 +495,8 @@ public class CinematicsManager : MonoBehaviour
         Sequence seq = DOTween.Sequence()
             .AppendCallback(() =>
             {
-                _cameraManager.AddTempFollowedObj(encounterFollowCamObj);
+                _audioManager.ChangeBackgroundMusic(3);
+                _cameraManager.AddTempFollowedObj(encounterFollowCamObj, false, 8);
                 TutorialMonster1.ToggleTrackTarget(_blueNpc.gameObject);
                 TutorialMonster2.ToggleTrackTarget(_blueNpc.gameObject);
             })
@@ -581,6 +583,8 @@ public class CinematicsManager : MonoBehaviour
             bluePathMonsterPos[i-1] = tBluePathMonster[i].position;
         }
         
+        camPivotHelper.position = _playerRef.transform.position;
+        _cameraManager.AddTempFollowedObj(camPivotHelper, true, 0);
         Sequence seq = DOTween.Sequence()
             .Append(_blueNpc.transform.DOPath(closeToPlayerPath, 2, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -588,7 +592,7 @@ public class CinematicsManager : MonoBehaviour
             .JoinCallback(() => {_audioManager.ToggleMusicVolume(true);})
             .AppendCallback(() =>
             {
-                _cameraManager.ShakeCamera(2);
+                _cameraManager.ShakeCamera(2,30);
                 AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.9f );
 
             })
@@ -596,6 +600,8 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() =>
             {
                 _playerRef.ToggleEyeFollowTarget(true,_blueNpc.transform);
+               
+                //_cameraManager.FollowFocusBlue(true);
             })
             .Append(_blueNpc.transform.DOPath(bluePathEarthquakePos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -604,8 +610,8 @@ public class CinematicsManager : MonoBehaviour
                 {
                     StartCoroutine(_blueNpc.PlayCallSFX());
                 }))
-            .AppendInterval(1)
-            .Append(_blueNpc.transform.DOPath(bluePath2EarthquakePos, 4, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .AppendInterval(0.6f)
+            .Append(_blueNpc.transform.DOPath(bluePath2EarthquakePos, 6f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnWaypointChange(
@@ -616,12 +622,18 @@ public class CinematicsManager : MonoBehaviour
                             StartCoroutine(_playerRef.PlayCallSFX(false));
                             _blueNpc.ToggleEyeFollowTarget(false);
                         }
-                        else if(waypointIndex == 1)
-                            StartCoroutine(_blueNpc.PlayCallSFX());
+                        
                     }))
+            .Join(camPivotHelper.transform.DOMove(bluePath2EarthquakePos[bluePath2EarthquakePos.Length-3],4f, false).SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    camPivotHelper.transform.DOMove(_playerRef.transform.position, 2, false).SetEase(Ease.InOutSine);
+                }))
+            .AppendInterval(1.5f)
             .OnComplete(
                 () =>
                 {
+                    _cameraManager.RemoveTempFollowedObj();
                     _playerRef.ToggleEyeFollowTarget(false);
                     _playerRef.SetBlueReference(null);
                     _blueNpc.transform.position = bluePathMonsterPos[0];
@@ -810,6 +822,7 @@ public class CinematicsManager : MonoBehaviour
     {
         _cameraManager.ShakeCamera(1,10);
         AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f);
+        
         rockWallLevel4Before.SetActive(false);
         rockWallLevel4After.SetActive(true);
         _gameManager.UnloadLevelSection(1);
