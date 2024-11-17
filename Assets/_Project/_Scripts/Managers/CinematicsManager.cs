@@ -231,6 +231,7 @@ public class CinematicsManager : MonoBehaviour
                     _playerRef.SetBlueReference(_blueNpc);
                     _gameManager.LoadLevelSection(2);
                     _playerRef.ToggleEyeFollowTarget(false);
+                    _cameraManager.ChangePlayerRadius(28);
                 }
             );
 
@@ -570,6 +571,8 @@ public class CinematicsManager : MonoBehaviour
         {
             bluePath2EarthquakePos[i-1] = bluePath2EarthquakeTransforms[i].position;
         }
+        Vector3[] camPivotPath = new Vector3[bluePath2EarthquakePos.Length-1];
+        Array.Copy(bluePath2EarthquakePos, camPivotPath, camPivotPath.Length);
         
         //path to near playerCharacter
         Vector3 dif = _blueNpc.GetFollowTarget().position - _blueNpc.transform.position;
@@ -624,7 +627,9 @@ public class CinematicsManager : MonoBehaviour
                         }
                         
                     }))
-            .Join(camPivotHelper.transform.DOMove(bluePath2EarthquakePos[bluePath2EarthquakePos.Length-3],4f, false).SetEase(Ease.InOutSine)
+            //.Join(camPivotHelper.transform.DOPath(camPivotPath, 6f, PathType.CatmullRom, PathMode.Sidescroller2D)
+              //  .SetEase(Ease.InOutSine)
+            .Join(camPivotHelper.transform.DOMove(bluePath2EarthquakePos[bluePath2EarthquakePos.Length-2],4f, false).SetEase(Ease.InOutSine)
                 .OnComplete(() =>
                 {
                     camPivotHelper.transform.DOMove(_playerRef.transform.position, 2, false).SetEase(Ease.InOutSine);
@@ -816,6 +821,7 @@ public class CinematicsManager : MonoBehaviour
         RuntimeManager.PlayOneShot(_audioManager.sfxMonsterScream, transform.position);
         tunnelRocks.SetActive(true);
         _gameManager.UnloadLevelSection(0);
+        _gameManager.UnloadLevelSection(1);
         
     }
     public void DoCinematicRockWallLevel4()
@@ -825,7 +831,6 @@ public class CinematicsManager : MonoBehaviour
         
         rockWallLevel4Before.SetActive(false);
         rockWallLevel4After.SetActive(true);
-        _gameManager.UnloadLevelSection(1);
         _gameManager.UnloadLevelSection(2);
     }
 

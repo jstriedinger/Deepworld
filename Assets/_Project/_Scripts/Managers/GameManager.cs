@@ -358,6 +358,7 @@ public class GameManager : MonoBehaviour
     public void UnloadLevelSection(int level)
     {
         levelSections[level].SetActive(false);
+        Destroy(levelSections[level]);
     }
 
     private void OnApplicationQuit()

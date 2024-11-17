@@ -44,6 +44,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 5957001610819021266, guid: bf983c5fdab8d4a9bb0e0b66da6d7f3f,
+        type: 3}
+      propertyPath: radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6008657331143865740, guid: bf983c5fdab8d4a9bb0e0b66da6d7f3f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -113,6 +118,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6076450396879064627}
+    - targetCorrespondingSourceObject: {fileID: 547257608458929742, guid: bf983c5fdab8d4a9bb0e0b66da6d7f3f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4918970014091420990}
   m_SourcePrefab: {fileID: 100100000, guid: bf983c5fdab8d4a9bb0e0b66da6d7f3f, type: 3}
 --- !u!1 &2378839848576939178 stripped
 GameObject:
@@ -135,3 +144,30 @@ MonoBehaviour:
   version: 1073741824
   target: {fileID: 0}
   useRotation: 0
+--- !u!114 &4918970014091420990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2378839848576939178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1073741824
+  radiusBackingField: 0.5
+  heightBackingField: 2
+  centerBackingField: 1
+  locked: 0
+  lockWhenNotMoving: 0
+  agentTimeHorizon: 2
+  obstacleTimeHorizon: 0.5
+  maxNeighbours: 10
+  layer: 1
+  collidesWith: -1
+  wallAvoidForce: 1
+  wallAvoidFalloff: 1
+  priority: 0.5
+  debug: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,6 +11,9 @@ public class FinalChaseManager : MonoBehaviour
     [SerializeField] private MonsterCinematic[] monsters;
     [SerializeField] private GameObject blockRock;
     [SerializeField] private BlueNPC blueNpc;
+
+    [Header("Part2")] 
+    [SerializeField] private GameObject[] monstersPath;
     
     private Vector3[] _monstersPos;
         
@@ -86,19 +90,45 @@ public class FinalChaseManager : MonoBehaviour
         switch (index)
         {
             case 1 :
-                monsters[2].TogglePursuit(true);
-                monsters[3].TogglePursuit(true);
+                TriggerMonster(2, monstersPath[0]);
                 break;
             case 2:
-                monsters[4].TogglePursuit(true);
+                TriggerMonster(3, monstersPath[1]);
                 break;
             case 3:
-                monsters[5].TogglePursuit(true);
+                TriggerMonster(4, monstersPath[2]);
                 break;
             case 4:
-                monsters[6].TogglePursuit(true);
+                TriggerMonster(5, monstersPath[3]);
+                TriggerMonster(6, monstersPath[4]);
+                break;
+            case 5:
+                TriggerMonster(7, monstersPath[5]);
+                TriggerMonster(8, monstersPath[6]);
+                break;
+            case 6:
+                TriggerMonster(9, monstersPath[7]);
+                TriggerMonster(10, monstersPath[8]);
                 break;
         }
+    }
+
+    private void TriggerMonster(int index, GameObject pathObj)
+    {
+        Transform[] monsterTransforms = pathObj.GetComponentsInChildren<Transform>();
+        Vector3[] monsterPathPos = new Vector3[monsterTransforms.Length-1];
+        for (int i = 1; i < monsterTransforms.Length; i++)
+        {
+            monsterPathPos[i-1] = monsterTransforms[i].position;
+        }
+        
+        Sequence seq = DOTween.Sequence();
+        seq.Append(monsters[index].transform.DOPath(monsterPathPos, 2, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .SetEase(Ease.InOutSine));
+        seq.OnComplete(() =>
+        {
+            monsters[index].TogglePursuit(true);
+        });
     }
 
     private IEnumerator EndPt1Chase()

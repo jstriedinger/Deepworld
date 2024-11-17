@@ -20,12 +20,10 @@ public class CameraManager : MonoBehaviour
 
     [Header("Final chase cam")]
     [SerializeField] private Transform chaseCamAnchor;
-    [SerializeField] private Transform chaseCamAnchor2;
     [SerializeField] private int chaseCameDistance;
-    [SerializeField] private int maxAddRadiusChase1;
-    [SerializeField] private int maxAddRadiusChase2;
-    private bool _checkChaseCamDistance, _checkChaseCamDistance2;
-    private float _cameraStep, _cameraStep2;
+    [SerializeField] private int maxAddRadiusChase;
+    private bool _checkChaseCamDistance;
+    private float _cameraStep;
     private float _tmpCurrentZoomPlayer;
     
 
@@ -48,17 +46,16 @@ public class CameraManager : MonoBehaviour
         targetGroup.Targets[0].Radius = camZoomPlayer;
         _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
-        _cameraStep = (float) maxAddRadiusChase1 / chaseCameDistance;
-        _cameraStep2 = (float) maxAddRadiusChase2 / chaseCameDistance;
+        _cameraStep = (float) maxAddRadiusChase / chaseCameDistance;
 
 
 
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         //for final chase cam
-        if (_checkChaseCamDistance || _checkChaseCamDistance2)
+        if (_checkChaseCamDistance)
         {
             
             UpdateCameraZoomForFinalChase();
@@ -67,16 +64,14 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateCameraZoomForFinalChase()
     {
-        float currentAnchor = _checkChaseCamDistance ? chaseCamAnchor.position.y : chaseCamAnchor2.position.y;
-        float currentCamStep = _checkChaseCamDistance ? _cameraStep : _cameraStep2;
-        float currentMaxRadius = _checkChaseCamDistance ? maxAddRadiusChase1 : maxAddRadiusChase2;
-        if (_gameManager.playerRef.transform.position.y < currentAnchor)
+        if (_gameManager.playerRef.transform.position.y < chaseCamAnchor.position.y)
         {
-            float distanceY = Math.Abs(currentAnchor - _gameManager.playerRef.transform.position.y);
+            float distanceY = Math.Abs(chaseCamAnchor.position.y - _gameManager.playerRef.transform.position.y);
             if (distanceY <= chaseCameDistance)
             {
-                float addedRadius = distanceY * currentCamStep;
-                targetGroup.Targets[0].Radius =  _tmpCurrentZoomPlayer + ( currentMaxRadius - addedRadius);
+                float addedRadius = distanceY * _cameraStep;
+                Debug.Log("Adding radius: "+addedRadius);
+                targetGroup.Targets[0].Radius =  camZoomPlayer + ( maxAddRadiusChase - addedRadius);
                     
             }
         }
@@ -342,9 +337,13 @@ public class CameraManager : MonoBehaviour
 
 
 
-    public void ChangePlayerRadius(float newRadius)
+    public void ChangePlayerRadius(int newRadius)
     {
-        DOTween.To(() => targetGroup.Targets[0].Radius, x => targetGroup.Targets[0].Radius = x, newRadius, 2);
+        DOTween.To(() => targetGroup.Targets[0].Radius, x => targetGroup.Targets[0].Radius = x, newRadius, 2)
+            .OnComplete(() =>
+            {
+                camZoomPlayer = newRadius;
+            });
     }
     
 
@@ -370,29 +369,17 @@ public class CameraManager : MonoBehaviour
     /**
      * 1st final chase camera zoom change
      */
-    public void ToggleFinalChaseCamPt1(bool toggle)
+    public void ToggleFinalChaseCam(bool toggle)
     {
         _checkChaseCamDistance = toggle;
         if (!toggle)
         {
-            _tmpCurrentZoomPlayer = camZoomPlayer + maxAddRadiusChase1;
-            targetGroup.Targets[0].Radius = _tmpCurrentZoomPlayer;
+            _tmpCurrentZoomPlayer = camZoomPlayer + maxAddRadiusChase;
+            targetGroup.Targets[0].Radius = camZoomPlayer + maxAddRadiusChase;
 
         }
-        else
-            _tmpCurrentZoomPlayer = camZoomPlayer;
     }
     
-    /**
-     * 1st final chase camera zoom change
-     */
-    public void ToggleFinalChaseCamPt2(bool toggle)
-    {
-        _checkChaseCamDistance2 = toggle;
-        _checkChaseCamDistance = !toggle;
-
-    }
-
 
     public void FollowFocusBlue(bool toggle)
     {
