@@ -41,8 +41,12 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private GameObject pathBlueMeetup2;
     [SerializeField] private GameObject pathPlayerMeetup1;
     [SerializeField] private GameObject pathPlayerMeetup2;
-    
+
     [Header("Cinematic - earthquake & tunnel")] 
+    [SerializeField] Rigidbody2D rockFall;
+    [SerializeField] Transform rockFallPivot;
+    [SerializeField] ParticleSystem rockFallBubbles1;
+    [SerializeField] ParticleSystem rockFallBubbles2;
     [SerializeField] AudioClip sfxExplosion;
     [SerializeField] GameObject pathBlueEarthquake;
     [SerializeField] GameObject pathBlueEarthquake2;
@@ -593,48 +597,51 @@ public class CinematicsManager : MonoBehaviour
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right))
             .JoinCallback(() => {_audioManager.ToggleMusicVolume(true);})
+            .Append( camPivotHelper.transform.DOMove(rockFallPivot.position, 2.5f, false).SetEase(Ease.InOutSine) )
             .AppendCallback(() =>
             {
                 _cameraManager.ShakeCamera(2,30);
                 AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.9f );
+                rockFall.bodyType = RigidbodyType2D.Dynamic;
 
             })
-            .AppendInterval(2.5f)
+            .AppendInterval(3.5f)
+            .AppendCallback(() =>
+            {
+                rockFallBubbles1.Play();
+            })
+            .AppendInterval(0.25f)
+            .AppendCallback(() =>
+            {
+                rockFallBubbles2.Play();
+            })
+            .AppendInterval(1)
+            .Append( camPivotHelper.transform.DOMove(_gameManager.playerRef.transform.position, 2.5f, false).SetEase(Ease.InOutSine) )
             .AppendCallback(() =>
             {
                 _playerRef.ToggleEyeFollowTarget(true,_blueNpc.transform);
-               
-                //_cameraManager.FollowFocusBlue(true);
             })
-            .Append(_blueNpc.transform.DOPath(bluePathEarthquakePos, 3.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .Append(_blueNpc.transform.DOPath(bluePathEarthquakePos, 3f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnComplete(() =>
                 {
                     StartCoroutine(_blueNpc.PlayCallSFX());
                 }))
-            .AppendInterval(0.6f)
-            .Append(_blueNpc.transform.DOPath(bluePath2EarthquakePos, 6f, PathType.CatmullRom, PathMode.Sidescroller2D)
+            .AppendInterval(0.3f)
+            .Append(_blueNpc.transform.DOPath(bluePath2EarthquakePos, 5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnWaypointChange(
                     (int waypointIndex) =>
                     {
-                        if (waypointIndex == 0)
+                        if (waypointIndex == 1)
                         {
                             StartCoroutine(_playerRef.PlayCallSFX(false));
                             _blueNpc.ToggleEyeFollowTarget(false);
                         }
                         
                     }))
-            //.Join(camPivotHelper.transform.DOPath(camPivotPath, 6f, PathType.CatmullRom, PathMode.Sidescroller2D)
-              //  .SetEase(Ease.InOutSine)
-            .Join(camPivotHelper.transform.DOMove(bluePath2EarthquakePos[bluePath2EarthquakePos.Length-2],4f, false).SetEase(Ease.InOutSine)
-                .OnComplete(() =>
-                {
-                    camPivotHelper.transform.DOMove(_playerRef.transform.position, 2, false).SetEase(Ease.InOutSine);
-                }))
-            .AppendInterval(1.5f)
             .OnComplete(
                 () =>
                 {
