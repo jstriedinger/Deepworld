@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager.HideMainMenu();
         cinematicsManager.DoCinematicStartGame();
+        audioManager.OnStartGame();
     }
 
 

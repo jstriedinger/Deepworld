@@ -1,3 +1,4 @@
+#if !UNITY_6000_0_OR_NEWER
 using UnityEngine;
 
 namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody
@@ -32,7 +33,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody
                 return TaskStatus.Failure;
             }
 
-            storeValue.Value = rigidbody.linearVelocity;
+            storeValue.Value = rigidbody.velocity;
 
             return TaskStatus.Success;
         }
@@ -44,3 +45,4 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody
         }
     }
 }
+#endif

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWhenEnabled: 0
+  startWhenEnabled: 1
   asynchronousLoad: 0
   pauseWhenDisabled: 1
   restartWhenComplete: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"Fishes","IsShared":true,"List`1mValue":[]}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"Fishes","IsShared":true,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FlockSpeed","IsShared":true,"SinglemValue":0}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -72,7 +72,7 @@ MonoBehaviour:
         byteDataArray: 
       Version: 1.7.7
   gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 0
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &643594031526293270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a325a5967344a70813dfa061aee272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerRef: {fileID: 0}
+  playerRef: {fileID: 0}
   numFishes: 14
   fishPrefab: {fileID: 3069541806291960988, guid: 389689c5bffc84d8ba102cd6f5cc2126,
     type: 3}
+  reactToPlayer: 1
+  speed: 3
+  initialFlockRadius: 3

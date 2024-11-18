@@ -130,6 +130,18 @@ public class AudioManager : MonoBehaviour
         _instanceCloseDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
+    //Reduce volume for initial music when game starts
+    public void OnStartGame()
+    {
+        float vol = 0;
+        DOTween.To(() =>
+            {
+                _instanceMusicIntro.getVolume(out vol);
+                return vol;
+            },
+            x => { _instanceMusicIntro.setVolume(x); }, 0.7f, 1);
+    }
+
     //Change background music smoothly.
     //1 = intro, 2=Blue 3=mystery 4=closeDanger 5=underworld
     public void ChangeBackgroundMusic(int newMusic)

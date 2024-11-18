@@ -368,7 +368,7 @@ public abstract class MonsterBase : MonoBehaviour
 
 public class MonsterReactive : MonsterBase
 {
-    [SerializeField] private bool _canAffectCamera = true;
+    //[SerializeField] private bool _canAffectCamera = true;
     
     private CameraManager _cameraManager;
     private GameManager _gameManager;

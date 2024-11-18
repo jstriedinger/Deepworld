@@ -253,6 +253,20 @@ namespace BehaviorDesigner.Runtime.Tasks
             return text;
         }
 
+        public override void OnDrawGizmos()
+        {
+            if (conditionals == null) {
+                return;
+            }
+
+            for (int i = 0; i < conditionals.Length; ++i) {
+                if (conditionals[i] == null) {
+                    continue;
+                }
+                conditionals[i].OnDrawGizmos();
+            }
+        }
+
         public override void OnReset()
         {
             if (conditionals == null) {

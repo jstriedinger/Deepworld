@@ -116,7 +116,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowMainMenu()
     {
-        Debug.Log("show menu");
         mainMenu.gameObject.SetActive(true);
         _mainMenuStartBtn.Select();
         Sequence seq = DOTween.Sequence()

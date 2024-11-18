@@ -45,8 +45,7 @@ public class CinematicsManager : MonoBehaviour
     [Header("Cinematic - earthquake & tunnel")] 
     [SerializeField] Rigidbody2D rockFall;
     [SerializeField] Transform rockFallPivot;
-    [SerializeField] ParticleSystem rockFallBubbles1;
-    [SerializeField] ParticleSystem rockFallBubbles2;
+    [SerializeField] ParticleSystem[] rockFallBubbles;
     [SerializeField] AudioClip sfxExplosion;
     [SerializeField] GameObject pathBlueEarthquake;
     [SerializeField] GameObject pathBlueEarthquake2;
@@ -440,21 +439,18 @@ public class CinematicsManager : MonoBehaviour
                 pInput.actions.FindAction("Call").Enable();
                 pInput.actions.FindAction("Move").Enable();
                 _playerRef.ToggleMonsterEyeDetection(true);
-                _audioManager.ChangeBackgroundMusic(5);
                 _blueNpc.transform.position = finalBlueSpot.position;
                 _blueNpc.transform.rotation = quaternion.identity;
                 _blueNpc.ResetProceduralBody();
                 _blueNpc.gameObject.SetActive(true);
                 _audioManager.ToggleCanPlayDangerMusic(true);
-                
-            })
-            .AppendInterval(2f)
-            .OnComplete(() =>
-            {
-                
                 _cameraManager.ShakeCamera(1,10);
                 AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f );
-
+            })
+            .AppendInterval(1f)
+            .OnComplete(() =>
+            {
+                _audioManager.ChangeBackgroundMusic(5);
             });
     }
 
@@ -603,17 +599,16 @@ public class CinematicsManager : MonoBehaviour
                 _cameraManager.ShakeCamera(2,30);
                 AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.9f );
                 rockFall.bodyType = RigidbodyType2D.Dynamic;
+                
+                rockFallBubbles[0].Play();
+                rockFallBubbles[1].Play();
 
             })
             .AppendInterval(3.5f)
             .AppendCallback(() =>
             {
-                rockFallBubbles1.Play();
-            })
-            .AppendInterval(0.25f)
-            .AppendCallback(() =>
-            {
-                rockFallBubbles2.Play();
+                rockFallBubbles[2].Play();
+                rockFallBubbles[3].Play();
             })
             .AppendInterval(1)
             .Append( camPivotHelper.transform.DOMove(_gameManager.playerRef.transform.position, 2.5f, false).SetEase(Ease.InOutSine) )
@@ -831,6 +826,8 @@ public class CinematicsManager : MonoBehaviour
         _gameManager.UnloadLevelSection(1);
         
     }
+    
+    //When everthing becomes darkes. Not going back
     public void DoCinematicRockWallLevel4()
     {
         _cameraManager.ShakeCamera(1,10);

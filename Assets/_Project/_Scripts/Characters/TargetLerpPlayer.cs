@@ -38,8 +38,8 @@ public class TargetLerpPlayer : MonoBehaviour
         }*/
         if (targetGroup)
         {
-            for(int i = 0; i < targetGroup.m_Targets.Length; i++){
-                if(targetGroup.m_Targets[i].Weight > 0){
+            for(int i = 0; i < targetGroup.Targets.Count; i++){
+                if(targetGroup.Targets[i].Weight > 0){
                     targetNum = i;
                     //Debug.Log("Target Identified!");
                 }
