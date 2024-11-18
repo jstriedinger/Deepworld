@@ -17,17 +17,30 @@ public class PolypTracker : MonoBehaviour
     
     Segment[] _segments;
     LineRenderer _lineRenderer;
-    private Tentacle tentacle;
+    private Tentacle _tentacle;
+    private LayerMask _layerMask;
+    private bool _onlyCheckPlayer = false;
+    
  
     void Start()
     {
+        _tentacle = GetComponent<Tentacle>();
         InitializeSegments();
+    }
+
+    public void Setup(LayerMask layerMask, Transform targetP = null)
+    {
+        _layerMask = layerMask;
+        if (targetP)
+        {
+            target = targetP;
+            _onlyCheckPlayer = true;
+        }
     }
  
     void InitializeSegments()
     {
-        if(!target)
-            target = GameObject.Find("Player").transform;
+        
         _lineRenderer = this.GetComponent<LineRenderer>();
         _segments = new Segment[segmentAmount];
         for(int i = 0; i<segmentAmount;i++)
@@ -43,21 +56,40 @@ public class PolypTracker : MonoBehaviour
  
     void Update()
     {
-        tentacle = GetComponent<Tentacle>();
-
-
-
-        //Check if the playerCharacter is within our target distance
-        //If not, skip eveything else in this script
-        if(distTrigger < Math.Abs(Vector3.Distance(targetSearchLocation.transform.position, target.transform.position))){
-            if(!tentacle.enabled){
-                tentacle.enabled = true;
-                tentacle.RecalcPos(_segments);
-                StartCoroutine(tentacle.resetFromPlayer());
-                //tentacle.ResetPos();
+        if (_onlyCheckPlayer && target)
+        {
+            
+            //Check if the playerCharacter is within our target distance
+            //If not, skip eveything else in this script
+        
+            if(distTrigger < Math.Abs(Vector3.Distance(targetSearchLocation.transform.position, target.transform.position))){
+                if(!_tentacle.enabled){
+                    _tentacle.enabled = true;
+                    _tentacle.RecalcPos(_segments);
+                    StartCoroutine(_tentacle.resetFromPlayer());
+                    //tentacle.ResetPos();
+                }
+                return;
             }
-            return;
         }
+        else
+        {
+            Collider2D hit = Physics2D.OverlapCircle(transform.position,distTrigger, _layerMask.value);
+            if (!hit)
+            {
+                Debug.Log("No Hit");
+                if(!_tentacle.enabled){
+                    _tentacle.enabled = true;
+                    _tentacle.RecalcPos(_segments);
+                    StartCoroutine(_tentacle.resetFromPlayer());
+                    //tentacle.ResetPos();
+                }
+
+                return;
+            }
+            target = hit.transform;
+        }
+        
 
         //playerCharacter within our reach!
         if(segmentAmount!=_segments.Length)
@@ -65,12 +97,12 @@ public class PolypTracker : MonoBehaviour
             InitializeSegments(); //reinitialize if amount changed
         }
         
-        if(tentacle.enabled){
+        if(_tentacle.enabled){
             //Call RecalcSegments with tentacle.segmentposes
-            RecalcSegments(tentacle.segmentPoses);
+            RecalcSegments(_tentacle.segmentPoses);
         }
 
-        tentacle.enabled = false;
+        _tentacle.enabled = false;
         targetPosition = target.transform.position;
         Follow();        
         DrawSegments(_segments);
@@ -113,4 +145,10 @@ public class PolypTracker : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(transform.position,distTrigger);
+        
+    }
 }
