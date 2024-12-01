@@ -45,14 +45,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Particles
-    uniqueID: 3791271617
-    locked: 0
   - name: Background
     uniqueID: 2981557201
     locked: 0
   - name: PropsBackground
     uniqueID: 3216684679
+    locked: 0
+  - name: Particles
+    uniqueID: 3791271617
     locked: 0
   - name: Blue
     uniqueID: 979170433

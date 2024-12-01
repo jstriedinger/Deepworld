@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1313410095
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d6ce7d49872b44d89898fe015a172227, type: 3}
   m_Color: {r: 0.2021627, g: 0.54467434, b: 0.7264151, a: 1}
@@ -327,8 +327,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &1097211570005691376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +364,8 @@ MonoBehaviour:
   agentTimeHorizon: 2
   obstacleTimeHorizon: 0.5
   maxNeighbours: 10
-  layer: 1
-  collidesWith: -1
+  layer: 4
+  collidesWith: 4
   wallAvoidForce: 1
   wallAvoidFalloff: 1
   priority: 0.5

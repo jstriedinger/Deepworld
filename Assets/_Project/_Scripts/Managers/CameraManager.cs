@@ -70,7 +70,7 @@ public class CameraManager : MonoBehaviour
             if (distanceY <= chaseCameDistance)
             {
                 float addedRadius = distanceY * _cameraStep;
-                Debug.Log("Adding radius: "+addedRadius);
+                //Debug.Log("Adding radius: "+addedRadius);
                 targetGroup.Targets[0].Radius =  camZoomPlayer + ( maxAddRadiusChase - addedRadius);
                     
             }

@@ -18,7 +18,7 @@ MonoBehaviour:
   <FollowRange>k__BackingField: 80
   <FollowSpeed>k__BackingField: 14
   <ChasingRange>k__BackingField: 70
-  <ChasingSpeed>k__BackingField: 19
+  <ChasingSpeed>k__BackingField: 20
   <SfxMonsterReact>k__BackingField:
     Guid:
       Data1: 548043345

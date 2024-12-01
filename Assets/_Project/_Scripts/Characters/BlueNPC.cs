@@ -93,7 +93,7 @@ public class BlueNPC : MonoBehaviour
     }
 
     //Swim effects with adding the force
-    public void SwimEffect(Vector3 dir)
+    public void SwimEffect()
     {
         //Head scale animation
         VFXSwimBubbles.Play();

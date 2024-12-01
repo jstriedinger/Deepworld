@@ -124,7 +124,7 @@ public class BlueMovement : MonoBehaviour
             if ((target.position - transform.position).sqrMagnitude >= _distanceToSwimPow && Time.time >= _nextSwim)
             {
                 _rigidBody.AddForce((movDirection * swimForce ), ForceMode2D.Impulse);
-                _blueNpc.SwimEffect(movDirection);
+                _blueNpc.SwimEffect();
                 _nextSwim = Time.time + timeBetweenSwim;
             }
             else
@@ -132,7 +132,6 @@ public class BlueMovement : MonoBehaviour
                 // Slow down smoothly upon approaching the end of the path
                 // This value will smoothly go from 1 to 0 as the agent approaches the last waypoint in the path.
                 var speedFactor = _reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
-                
                 _finalMovement = ( moveSpeed * speedFactor * transform.up * Time.deltaTime);
                 _rigidBody.AddForce(_finalMovement);
                 
@@ -159,14 +158,13 @@ public class BlueMovement : MonoBehaviour
 
     public void MakeMovementFaster()
     {
-        
         movDirection = Vector3.zero;
         nextWaypointDistance = 2;
-        minDistance -= 4;
-        distanceToSwim -= 6;
-        moveSpeed += 50;
-        maxSpeed += 200;
-        swimForce += 3;
+        minDistance -= 7;
+        distanceToSwim -= 7;
+        moveSpeed += 250;
+        maxSpeed += 550;
+        swimForce += 4f;
         _minDistancePow = minDistance * minDistance;
         _distanceToSwimPow = distanceToSwim * distanceToSwim;
     }

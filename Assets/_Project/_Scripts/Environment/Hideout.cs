@@ -60,7 +60,7 @@ public class Hideout : MonoBehaviour
             foreach (Collider2D monsterCollider in monsterHits)
             {
                 MonsterReactive monsterReactive = monsterCollider.GetComponent<MonsterReactive>();
-                if (monsterReactive.IsGameplayActiveMonster())
+                if (monsterReactive.CanReactToPlayer())
                 {
                     BehaviorTree tree = monsterCollider.gameObject.GetComponent<BehaviorTree>();
                     monsterReactive?.UpdateMonsterState(MonsterState.Frustrated);

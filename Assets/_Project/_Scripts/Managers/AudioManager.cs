@@ -139,7 +139,7 @@ public class AudioManager : MonoBehaviour
                 _instanceMusicIntro.getVolume(out vol);
                 return vol;
             },
-            x => { _instanceMusicIntro.setVolume(x); }, 0.7f, 1);
+            x => { _instanceMusicIntro.setVolume(x); }, 0.5f, 1);
     }
 
     //Change background music smoothly.

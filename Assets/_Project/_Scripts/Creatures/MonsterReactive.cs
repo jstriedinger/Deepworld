@@ -25,10 +25,15 @@ public abstract class MonsterBase : MonoBehaviour
     [SerializeField] protected Transform _tail;
     protected LineRenderer[] _tentacles;
     protected IEnumerator[] _attackColorTentacleLoop;
-    //[SerializeField] protected LineRenderer[] _tentacles;
     [SerializeField] protected Transform _headObj;
     [SerializeField] protected Light2D _headLight;
     [SerializeField] protected Transform patrolObject;
+    [Header("Reactions")]
+    [SerializeField] protected bool canReactToPlayer;
+    [SerializeField] protected bool canReactToCamera;
+    [SerializeField] protected bool canAddChaseMusic;
+    [SerializeField] private bool addForceWhenKillPlayer = true;
+    public bool isKillingPlayer = false;
 
     //protected IEnumerator _attackColorAnimationLoop1,_attackColorAnimationLoop2,_attackColorAnimationLoop3,_attackColorAnimationLoop4;
     protected EyeManager _eyeManager;
@@ -57,8 +62,9 @@ public abstract class MonsterBase : MonoBehaviour
         _monsterChaseMusicEmitter = GetComponent<StudioEventEmitter>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _eyeManager = GetComponent<EyeManager>();
-        
-        _chaseScaleTween = _headObj.DOScale(1.2f, 0.3f).SetLoops(-1, LoopType.Yoyo).SetAutoKill(false).Pause();
+
+        float currentScale = _headObj.localScale.x;
+        _chaseScaleTween = _headObj.DOScale(currentScale + 0.2f, 0.3f).SetLoops(-1, LoopType.Yoyo).SetAutoKill(false).Pause();
 
         _tentacles = _tail.GetComponentsInChildren<LineRenderer>();
         _attackColorTentacleLoop = new IEnumerator[_tentacles.Length];
@@ -144,7 +150,7 @@ public abstract class MonsterBase : MonoBehaviour
       /**
      * Function that updates the monster state visually
      */
-    public void UpdateMonsterState(MonsterState newState)
+    public void UpdateMonsterState(MonsterState newState, bool withSound = true)
     {
         //Kill all transitions and return to normal before deciding what to do
         _chaseScaleTween.Rewind();
@@ -155,13 +161,13 @@ public abstract class MonsterBase : MonoBehaviour
         if (CurrentState == MonsterState.Chasing)
         {
             //we were on a chase
-            if(monsterStats.CanAddChaseMusic)
+            if(canAddChaseMusic)
                 _audioManager.UpdateMonstersChasing(false);
             
         }
 
         //If the new state is not Investigating then it can not react to Calls
-        if (newState != MonsterState.Investigate && monsterStats.CanReactToPlayer)
+        if (newState != MonsterState.Investigate && canReactToPlayer)
         {
             _behaviorTree.SetVariableValue("CanReactToCall",false);
             _canReactToCall = true;
@@ -175,25 +181,29 @@ public abstract class MonsterBase : MonoBehaviour
                 break;
             case MonsterState.Follow:
                 UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false,  monsterStats.DefaultLightColor);
-                StartCoroutine(PlayReactSound(true, true));
+                if(withSound)
+                    StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Investigate:
                 _behaviorTree?.SetVariableValue("CanReactToCall",true);
                 _canReactToCall = true;
                 
                 UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false,  monsterStats.DefaultLightColor);
-                StartCoroutine(PlayReactSound(true, true));
+                if(withSound)
+                    StartCoroutine(PlayReactSound(true, true));
                 break;
             case MonsterState.Chasing:
-                if (monsterStats.CanAddChaseMusic)
+                if (canAddChaseMusic)
                     _audioManager.UpdateMonstersChasing(true);
                 _chaseScaleTween.Play();
                 
                 UpdateColorsAndToggleAnimation(monsterStats.ChaseColorGradient,true,  monsterStats.ChaseLightColor);
-                StartCoroutine(PlayReactSound(false, false));
+                if(withSound)
+                    StartCoroutine(PlayReactSound(false, false));
                 break;
             case MonsterState.Frustrated:
-                StartCoroutine(PlayReactSound(false, false));
+                if(withSound)
+                    StartCoroutine(PlayReactSound(false, false));
                 break;
             
         }
@@ -362,17 +372,47 @@ public abstract class MonsterBase : MonoBehaviour
     }
     
     #endregion
-    
-    
+
+    public void AttackPlayerAnim()
+    {
+        _chaseScaleTween.Rewind();
+        Sequence seq = DOTween.Sequence();
+        seq.SetEase(Ease.OutCubic);
+        seq.Append(_headObj.DOScaleY(2f, 0.65f));
+        seq.Append(_headObj.DOScaleY(1f, 0.65f  * 1.5f));
+    }
+    public void EatPlayerAnimation()
+    {
+        _chaseScaleTween.Rewind();
+        if (addForceWhenKillPlayer)
+        {
+            _rigidbody2D.AddForce(transform.up * 20f, ForceMode2D.Impulse);
+        }
+        Sequence seq = DOTween.Sequence();
+        seq.AppendCallback(() =>
+        {
+            isKillingPlayer = true;
+            _behaviorTree.DisableBehavior();
+        });
+        seq.SetEase(Ease.OutCubic);
+        seq.Append(_headObj.DOScaleY(1.7f, 0.5f));
+        seq.Append(_headObj.DOScaleY(1f, 0.5f  * 1.5f));
+        //seq.Append(_headObj.DOPunchScale(new Vector3(1f, .25f, 0), 0.5f, 5, 1));
+        seq.Append(_headObj.DOPunchRotation(new Vector3(0,0,80), 1f, 5, 1));
+        seq.AppendInterval(2);
+        seq.AppendCallback(() =>
+        {
+            _behaviorTree.EnableBehavior();
+            isKillingPlayer = false;
+        });
+    }
 }
 
 public class MonsterReactive : MonsterBase
 {
-    //[SerializeField] private bool _canAffectCamera = true;
-    
     private CameraManager _cameraManager;
     private GameManager _gameManager;
-
+    
     [HideInInspector]
     public bool inCamera = false;
     
@@ -380,14 +420,14 @@ public class MonsterReactive : MonsterBase
     {
         base.Awake();
 
-        if (monsterStats.CanReactToPlayer)
+        if (canReactToPlayer)
         {
             _behaviorTree.SetVariableValue("PatrolSpeed",monsterStats.PatrolSpeed);
             _behaviorTree.SetVariableValue("FollowSpeed",monsterStats.FollowSpeed);
             _behaviorTree.SetVariableValue("ChasingSpeed",monsterStats.ChasingSpeed);
             _behaviorTree.SetVariableValue("ChasingRange",monsterStats.ChasingRange);
             _behaviorTree.SetVariableValue("FollowRange",monsterStats.FollowRange);
-            _behaviorTree.SetVariableValue("isPatrolType",monsterStats.CanReactToPlayer);
+            _behaviorTree.SetVariableValue("isPatrolType",true);
         }
         
     }
@@ -396,7 +436,7 @@ public class MonsterReactive : MonsterBase
     protected override void Start()
     {
         base.Start();
-        if (monsterStats.CanReactToPlayer )
+        if (canReactToPlayer )
         {
             _gameManager = GameObject.FindFirstObjectByType<GameManager>();
             _cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
@@ -408,7 +448,7 @@ public class MonsterReactive : MonsterBase
     
     private void FixedUpdate()
     {
-        if(monsterStats.CanReactToPlayer && !GameManager.IsPlayerDead)
+        if(canReactToCamera && !GameManager.IsPlayerDead)
             UpdateEnemyInCamera();
     }
     
@@ -423,9 +463,9 @@ public class MonsterReactive : MonsterBase
         _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
     }*/
 
-    public bool IsGameplayActiveMonster()
+    public bool CanReactToPlayer()
     {
-        return monsterStats.CanReactToPlayer;
+        return canReactToPlayer;
     }
     
 
@@ -457,7 +497,7 @@ public class MonsterReactive : MonsterBase
     //react to playerCharacter call, go investigate a position using a lastpos object since btree needs an object
     public void ReactToPlayerCall()
     {
-        if (monsterStats.CanReactToPlayer && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
+        if (canReactToPlayer && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
         {
             if (_canReactToCall || CurrentState == MonsterState.Investigate) 
             {
@@ -506,35 +546,20 @@ public class MonsterReactive : MonsterBase
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && monsterStats.CanReactToPlayer)
+        if (other.gameObject.CompareTag("Player") && canReactToPlayer)
         {
             //biting game feel
             _audioManager.StopChaseMusic();
-            StartCoroutine(EatPlayerAnimation());
+            EatPlayerAnimation();
             //signal to the tree that we killed the playerCharacter
             //_behaviorTree.SendEvent("PlayerKilled");
         }
     }
 
-    IEnumerator EatPlayerAnimation()
-    {
-        _chaseScaleTween.Rewind();
-        _behaviorTree.DisableBehavior();
-        _rigidbody2D.AddForce(transform.up * 20f, ForceMode2D.Impulse);
-        Sequence seq = DOTween.Sequence();
-        seq.SetEase(Ease.OutCubic);
-        seq.Append(_headObj.DOScaleY(1.7f, 0.5f));
-        seq.Append(_headObj.DOScaleY(1f, 0.5f  * 1.5f));
-        //seq.Append(_headObj.DOPunchScale(new Vector3(1f, .25f, 0), 0.5f, 5, 1));
-        seq.Append(_headObj.DOPunchRotation(new Vector3(0,0,80), 1f, 5, 1));
-        yield return new WaitForSecondsRealtime(2);
-        _behaviorTree.EnableBehavior();
-    }
-    
     //show distance on camera
     private void OnDrawGizmosSelected()
     {
-        if(monsterStats.CanReactToPlayer)
+        if(canReactToPlayer)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, monsterStats.DistanceToShowOnCamera);

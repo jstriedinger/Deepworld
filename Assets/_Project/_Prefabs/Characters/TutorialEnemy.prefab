@@ -247,6 +247,13 @@ MonoBehaviour:
   _headObj: {fileID: 3594665723558957417}
   _headLight: {fileID: 269786178463461734}
   patrolObject: {fileID: 0}
+  canReactToPlayer: 0
+  canReactToCamera: 0
+  canAddChaseMusic: 0
+  addForceWhenKillPlayer: 1
+  isKillingPlayer: 0
+  target: {fileID: 0}
+  speed: 0
 --- !u!198 &1874794172322460929 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6299376254121673512, guid: 6b9c9de70c2fa48a78fb272e58575661,

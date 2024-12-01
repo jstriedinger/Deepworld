@@ -12,7 +12,6 @@ public class PlayerCharacter : MonoBehaviour
 {
 
     public static event Action PlayerOnControlsChanged;
-    public static event Action OnPlayerDeath;
     public static event Action PlayerOnPause;
     //managers
     private GameManager gameManager;
@@ -71,6 +70,7 @@ public class PlayerCharacter : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         _normalSwimSfxEmitter = GetComponent<StudioEventEmitter>();
+        _normalSwimSfxEmitter.EventInstance.setVolume(0.5f);
 
         _proceduralDynamicTentacles = GetComponentsInChildren<TentacleDynamic>();
         _proceduralTentacles = GetComponentsInChildren<Tentacle>();
@@ -109,7 +109,10 @@ public class PlayerCharacter : MonoBehaviour
     private void OnSwim(InputValue inputValue)
     {
         if (inputValue.isPressed)
+        {
+            Debug.Log("Swim");
             Swim();
+        }
     }
 
     private void OnCall(InputValue inputValue)
@@ -260,7 +263,11 @@ public class PlayerCharacter : MonoBehaviour
             if (magnitude > 0)
             {
                 vfxSwimBubbles.Play();
-                FMODUnity.RuntimeManager.PlayOneShot(sfxSwim, transform.position);
+                //FMODUnity.RuntimeManager.PlayOneShot(sfxSwim, transform.position);
+                var instance = FMODUnity.RuntimeManager.CreateInstance(sfxSwim);
+                instance.setVolume(0.75f);
+                instance.start();
+                instance.release();
                 Sequence seq = DOTween.Sequence();
                 seq.SetEase(Ease.OutCubic);
                 seq.Append(headPart.DOScaleY(1.5f, 0.5f));
@@ -355,11 +362,14 @@ public class PlayerCharacter : MonoBehaviour
             
             for (int i = 0; i < enemies.Length; i++)
             {
-                MonsterReactive monsterReactive = enemies[i].GetComponent<MonsterReactive>();
-                if (monsterReactive && monsterReactive.CurrentState == MonsterState.Default || monsterReactive.CurrentState == MonsterState.Investigate)
+                if (enemies[i].TryGetComponent(out MonsterReactive monsterReactive))
                 {
-                    Debug.Log("Trying to react");
-                    monsterReactive.ReactToPlayerCall();
+                    if (monsterReactive.CurrentState == MonsterState.Default || monsterReactive.CurrentState == MonsterState.Investigate)
+                    {
+                        Debug.Log("Trying to react");
+                        monsterReactive.ReactToPlayerCall();
+                    }
+                    // Do something with gameManager
                 }
                 //tell to check a position
             }

@@ -77,7 +77,7 @@ public class PolypTracker : MonoBehaviour
             Collider2D hit = Physics2D.OverlapCircle(transform.position,distTrigger, _layerMask.value);
             if (!hit)
             {
-                Debug.Log("No Hit");
+                //Debug.Log("No Hit");
                 if(!_tentacle.enabled){
                     _tentacle.enabled = true;
                     _tentacle.RecalcPos(_segments);

@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
     {
         //framerate
         QualitySettings.vSyncCount = 0;
-        //Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        Application.targetFrameRate = 60;
 
         Cursor.visible = false;
         if (!skipTemp)

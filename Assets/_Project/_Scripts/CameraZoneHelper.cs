@@ -25,11 +25,6 @@ public class CameraZoneHelper : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead && inCamera)
@@ -42,10 +37,21 @@ public class CameraZoneHelper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead && !inCamera)
+        if (!inCamera && other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead )
         {
             //add to target group 
             _cameraManager.AddObjectToCameraView(gameObject.transform, false, true, desiredRadius, desiredWeight);
+            inCamera = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        //extra thing to check in case of death and restart
+        if (!inCamera && other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead )
+        {
+            //add to target group 
+            _cameraManager.AddObjectToCameraView(gameObject.transform, false, false, desiredRadius, desiredWeight);
             inCamera = true;
         }
     }
