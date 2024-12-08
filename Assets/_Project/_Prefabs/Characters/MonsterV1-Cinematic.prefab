@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: monsterBase
       value: 
       objectReference: {fileID: 4634066108872917021}
+    - target: {fileID: 4203446126912004392, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: followOverride
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5401863154645315687, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Name
@@ -106,6 +111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
+      propertyPath: showBehaviorDesignerGizmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
       propertyPath: mBehaviorSource.behaviorName
       value: MonsterCinematic
       objectReference: {fileID: 0}
@@ -117,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"chasingSpeed","IsShared":true,"SinglemValue":20},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"target","IsShared":true}]}'
+      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"speed","IsShared":true,"SinglemValue":50},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"target","IsShared":true}]}'
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4013539651867559864, guid: 6b9c9de70c2fa48a78fb272e58575661, type: 3}

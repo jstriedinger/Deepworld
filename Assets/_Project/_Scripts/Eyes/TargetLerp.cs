@@ -7,6 +7,7 @@ public class TargetLerp : MonoBehaviour
 {
 
     [SerializeField] MonsterBase monsterBase;
+    [SerializeField] private bool followOverride;
     public Transform idealTarget;
     public float smoothTime;
     private Vector3 velocity = Vector3.zero;

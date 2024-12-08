@@ -77,6 +77,7 @@ public abstract class MonsterBase : MonoBehaviour
             i++;
         }
         _headLight.color = monsterStats.DefaultLightColor;
+        UpdateMonsterState(MonsterState.Default);
         
         //testing color animation for attacking
         /*_attackColorAnimationLoop1 = AnimateColorLoop(_tentacles[0],0.03f);
