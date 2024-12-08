@@ -177,7 +177,7 @@ Material:
     - _MyDstMode: 10
     - _MySrcMode: 5
     - _NegativeAmount: 1
-    - _NormalStrength: 1
+    - _NormalStrength: 0
     - _OffsetUvX: 0
     - _OffsetUvY: 0
     - _OnlyInnerOutline: 0
@@ -256,3 +256,4 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -83,23 +83,7 @@ public class CinematicsManager : MonoBehaviour
         _audioManager = GetComponent<AudioManager>();
         _uiManager = GetComponent<UIManager>();
         _playerRef = _gameManager.playerRef;
-
-
-
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     //stuff that happens before starting a blocking cinematic
     private void BeforeCinematicStarts(bool bars = true, bool deactivateInput = true)
@@ -672,7 +656,9 @@ public class CinematicsManager : MonoBehaviour
         _cameraManager.ToggleDefaultNoise(false);
         
         Transform[] playerPathC0Transforms = pathPlayerTitles.GetComponentsInChildren<Transform>();
+        _playerRef.transform.position = playerPathC0Transforms[0].position;
         Transform[] bluePathC0Transforms = pathBlueTitles1.GetComponentsInChildren<Transform>();
+        _blueNpc.transform.position = bluePathC0Transforms[0].position;
         Vector3[] bluePathC0Pos = new Vector3[bluePathC0Transforms.Length-1];
         for (int i = 1; i < bluePathC0Transforms.Length; i++)
         {
@@ -777,7 +763,6 @@ public class CinematicsManager : MonoBehaviour
         //we need the first point of the next Blue cinematic to position her
         Transform[] nextBlueCinematicTransforms = pathBlueMeetup1.GetComponentsInChildren<Transform>();
        
-
         Sequence startGameCinematic = DOTween.Sequence()
             .AppendInterval(0.5f)
             .AppendCallback(() =>

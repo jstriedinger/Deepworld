@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks.Movement;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,6 +19,8 @@ public class MonsterLaunchMechanic : MonoBehaviour
     private Coroutine _resetAIMove;
     private GameManager _gameManager;
     private MonsterBase _monsterBase;
+    private float chasingRange;
+    private bool _isChasing = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,7 +35,9 @@ public class MonsterLaunchMechanic : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time >= _nextLaunch && !_gameManager.playerRef.isHidden)
+        //check if it can see me
+        //MovementUtility.WithinSight2D(transform, Vector3.zero, 360, _monsterBase.GetMonsterStats().ChasingRange, _gameManager.playerRef.gameObject, Vector3.zero, 0, LayerMask.GetMask("Monster"), false, null, true);
+        if (Time.time >= _nextLaunch && (bool)_behaviorTree.GetVariable("isChasing").GetValue())
         {
             Collider2D col = Physics2D.OverlapCircle(transform.position, launchRadius, LayerMask.GetMask("Player"));
             if (col != null)
@@ -65,11 +70,6 @@ public class MonsterLaunchMechanic : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenLaunch+0.1f);
         if(!_monsterBase.isKillingPlayer)
             _behaviorTree.EnableBehavior();
-    }
-    
-    public void LaunchMonster()
-    {
-        
     }
 
     private void OnDrawGizmosSelected()

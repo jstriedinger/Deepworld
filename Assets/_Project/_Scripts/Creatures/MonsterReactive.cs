@@ -33,6 +33,7 @@ public abstract class MonsterBase : MonoBehaviour
     [SerializeField] protected bool canReactToCamera;
     [SerializeField] protected bool canAddChaseMusic;
     [SerializeField] private bool addForceWhenKillPlayer = true;
+    [HideInInspector]
     public bool isKillingPlayer = false;
 
     //protected IEnumerator _attackColorAnimationLoop1,_attackColorAnimationLoop2,_attackColorAnimationLoop3,_attackColorAnimationLoop4;

@@ -21,6 +21,6 @@ public class DataTrackingMonsterCount : MonoBehaviour
                 count++;
             }
         }
-        //MetricManagerScript.instance?.LogString("MonsterCount",count.ToString());
+        MetricManagerScript.instance?.LogString("MonsterCount",count.ToString());
     }
 }
