@@ -53,7 +53,7 @@ MonoBehaviour:
   audioManager: {fileID: 1765660057177189511}
   uiManager: {fileID: 2931836815834029951}
   cinematicsManager: {fileID: 5754947249081926405}
-  startSection: 2
+  startSection: 0
   levelSections:
   - {fileID: 0}
   - {fileID: 0}
@@ -66,9 +66,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   globalPlayerLight: {fileID: 0}
+  globalEnvLight: {fileID: 0}
+  globalPropsLight: {fileID: 0}
   playerRef: {fileID: 0}
   playerLastPosition: {fileID: 0}
+  blueNpcRef: {fileID: 0}
+  skipTemp: 0
 --- !u!114 &2931836815834029951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraManager: {fileID: 0}
   _blueNpc: {fileID: 0}
-  _playerRef: {fileID: 0}
+  camPivotHelper: {fileID: 0}
   pathBlueTitles1: {fileID: 0}
   pathBlueTitles2: {fileID: 0}
   pathBlueTitles3: {fileID: 0}
@@ -136,6 +142,13 @@ MonoBehaviour:
   pathBlueMeetup2: {fileID: 0}
   pathPlayerMeetup1: {fileID: 0}
   pathPlayerMeetup2: {fileID: 0}
+  rockFall: {fileID: 0}
+  rockFallPivot: {fileID: 0}
+  rockFallBubbles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   sfxExplosion: {fileID: 8300000, guid: 50e913f4a563741208eed268bf38df66, type: 3}
   pathBlueEarthquake: {fileID: 0}
   pathBlueEarthquake2: {fileID: 0}
@@ -194,6 +207,13 @@ MonoBehaviour:
       Data3: 2085527176
       Data4: 1516434663
     Path: event:/SFX/sfx_blue_dial1
+  sfxBlueCall2:
+    Guid:
+      Data1: -1941300518
+      Data2: 1315381756
+      Data3: 566323081
+      Data4: -545134794
+    Path: event:/SFX/sfx_blue_dial2
   sfxBlueScream:
     Guid:
       Data1: -125076453
@@ -238,6 +258,7 @@ MonoBehaviour:
       Data3: 794727318
       Data4: -1354514175
     Path: event:/Music/MX_Ambient
+  closeDangerRadius: 60
   numMonstersChasing: 0
 --- !u!114 &2232003874651656951
 MonoBehaviour:
@@ -284,7 +305,7 @@ MonoBehaviour:
   StopEvent: 2
   AllowFadeout: 1
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0

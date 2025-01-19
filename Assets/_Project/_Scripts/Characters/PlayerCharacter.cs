@@ -60,6 +60,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private EventReference sfxCall3;
     private EventReference _sfxCallLastTime;
     [SerializeField] private float callRadiusForEnemies;
+    [SerializeField] private float callRadiusDoor;
 
     [Header("Cheatcodes")] public bool inmortal = false;
 
@@ -375,6 +376,13 @@ public class PlayerCharacter : MonoBehaviour
             }
             
         }
+        //Check for door switcher
+        Collider2D switcherHit = Physics2D.OverlapCircle(transform.position, callRadiusDoor, LayerMask.GetMask("DoorSwitcher"));
+        Debug.Log(switcherHit);
+        if (switcherHit && switcherHit.transform.parent.gameObject.TryGetComponent<TentacleGate>(out TentacleGate door))
+        {
+            door.Open();
+        }
         
         
         
@@ -390,8 +398,11 @@ public class PlayerCharacter : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         //show call radius
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position,callRadiusForEnemies);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position,callRadiusDoor);
+        
     }
 }
 

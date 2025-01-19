@@ -433,7 +433,7 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
-    value: 513
+    value: 1537
 --- !u!114 &393324275603114831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
   canMove: 1
   target: {fileID: 0}
   minDistance: 10
-  moveSpeed: 700
+  moveSpeed: 500
   maxSpeed: 850
   rotationSpeed: 270
   nextWaypointDistance: 3
@@ -1585,7 +1585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 0}
   length: 13
-  head: {fileID: 0}
+  head: {fileID: 1621192019370241180}
   lineRend: {fileID: 3834719674707235548}
   segmentPoses: []
   targetDir: {fileID: 6867972390828481456}
@@ -1689,7 +1689,7 @@ Transform:
   m_GameObject: {fileID: 5440502421513338222}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.229, z: 0}
+  m_LocalPosition: {x: 0, y: 0.229, z: -0.1}
   m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2377,8 +2377,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.02175045, y: -0.7755995, z: 0}
-    m_Extent: {x: 21.42875, y: 21.5568, z: 0}
+    m_Center: {x: -0.021699905, y: -0.7734995, z: 0}
+    m_Extent: {x: 21.4296, y: 21.5652, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 0}
   length: 13
-  head: {fileID: 0}
+  head: {fileID: 1621192019370241180}
   lineRend: {fileID: 4345526195462612607}
   segmentPoses: []
   targetDir: {fileID: 8066251015197025986}
