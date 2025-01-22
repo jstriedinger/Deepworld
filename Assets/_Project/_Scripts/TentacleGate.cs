@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class TentacleGate : MonoBehaviour
 {
     [SerializeField] private TentacleToggler[] tentacles;
-    [SerializeField] private TentacleDoorSwitcher tentacleDoorSwitcher;
+    [SerializeField] private TentacleGateSwitcher tentacleGateSwitcher;
     [SerializeField] private float openedTime;
     [SerializeField] private float switchTime;
     private float _nextCloseTime;
@@ -26,10 +27,8 @@ public class TentacleGate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Next close: "+_nextCloseTime+" and time is: "+Time.time);
         if (_isOpen && Time.time >= _nextCloseTime && _canCloseGate)
         {
-            Debug.Log("Trying to close");
             StartCoroutine(Close());
         }
     }
@@ -45,7 +44,7 @@ public class TentacleGate : MonoBehaviour
             //every two tentacles
             seq.AppendCallback(() =>
             {
-                tentacleDoorSwitcher.Open();
+                tentacleGateSwitcher.Open();
             });
             seq.AppendInterval(.5f);
             seq.AppendCallback(
@@ -93,7 +92,7 @@ public class TentacleGate : MonoBehaviour
 
             yield return new WaitForSeconds(switchTime);
             _canOpenGate = true;
-            tentacleDoorSwitcher.Close();
+            tentacleGateSwitcher.Close();
 
 
         }
@@ -115,5 +114,17 @@ public class TentacleGate : MonoBehaviour
             _canCloseGate = true;
             Debug.Log("Can close gate");
         }
+    }
+
+    //Feedback when player is close and can activate the Gate
+    public void ClosePlayerFeedback(bool toggle)
+    {
+        if(toggle && _canOpenGate)
+            tentacleGateSwitcher.ToggleLightAnim(true);
+        else
+        {
+            tentacleGateSwitcher.ToggleLightAnim(false);
+        }
+        
     }
 }

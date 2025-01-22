@@ -21,6 +21,7 @@ public class PlayerCharacter : MonoBehaviour
     private TentacleDynamic[] _proceduralDynamicTentacles;
     private BodyTentacle _proceduralBody;
     private EyeFollower _eyeFollower;
+    private TentacleGate _closeTentacleGate;
 
     [Header("Movement settings")] 
     [SerializeField] private GameObject bodyPart;
@@ -377,15 +378,10 @@ public class PlayerCharacter : MonoBehaviour
             
         }
         //Check for door switcher
-        Collider2D switcherHit = Physics2D.OverlapCircle(transform.position, callRadiusDoor, LayerMask.GetMask("DoorSwitcher"));
-        Debug.Log(switcherHit);
-        if (switcherHit && switcherHit.transform.parent.gameObject.TryGetComponent<TentacleGate>(out TentacleGate door))
+        if (_closeTentacleGate)
         {
-            door.Open();
+            _closeTentacleGate.Open();
         }
-        
-        
-        
 
     }
 
@@ -403,6 +399,25 @@ public class PlayerCharacter : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position,callRadiusDoor);
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("TentacleGate") )
+        {
+            _closeTentacleGate = other.transform.parent.GetComponent<TentacleGate>();
+            _closeTentacleGate.ClosePlayerFeedback(true);
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("TentacleGate") && _closeTentacleGate)
+        {
+            _closeTentacleGate.ClosePlayerFeedback(false);
+            _closeTentacleGate = null;
+        }
     }
 }
 

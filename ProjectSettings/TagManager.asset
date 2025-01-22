@@ -8,6 +8,7 @@ TagManager:
   - Hideout
   - Blue
   - PlayerLastPos
+  - TentacleGate
   layers:
   - Default
   - TransparentFX

@@ -212,6 +212,11 @@ public class UIManager : MonoBehaviour
         {
             if (playerCharacterRef.playerInput.currentControlScheme == "Gamepad")
             {
+                //nnow to see if xbox or another
+                if (playerCharacterRef.playerInput.devices[0].name.Contains("dualshock",StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.Log("PS controller");
+                }
                 for (int i = 0; i < uiGamepadIcons.Length; i++)
                 {
                     uiKeyboardIcons[i].gameObject.SetActive(false);
