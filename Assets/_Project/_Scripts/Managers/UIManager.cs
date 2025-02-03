@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour
     //1. move 2.dash 3.call
     [SerializeField] private SpriteRenderer[] uiKeyboardIcons;
     [SerializeField] private SpriteRenderer[] uiGamepadIcons;
+    [SerializeField] private SpriteRenderer[] uiXboxIcons;
     [SerializeField] private RectTransform topCinematicBar;
     [SerializeField] private RectTransform bottomCinematicBar;
 
@@ -56,6 +58,7 @@ public class UIManager : MonoBehaviour
     {
         PlayerCharacter.PlayerOnControlsChanged += OnControlsChanged;
     }
+
 
     private void OnDisable()
     {
@@ -162,7 +165,7 @@ public class UIManager : MonoBehaviour
         Color transparent = new Color(255, 255, 255, 0);
         for (int i = 0; i < uiKeyboardIcons.Length; i++)
         {
-            uiKeyboardIcons[i].color =  uiGamepadIcons[i].color = transparent;
+            uiKeyboardIcons[i].color =  uiGamepadIcons[i].color = uiXboxIcons[i].color = transparent;
         }
     }
     
@@ -174,8 +177,10 @@ public class UIManager : MonoBehaviour
             .Append(uiKeyboardIcons[0].DOFade(1, 0.5f))
             .Join(uiKeyboardIcons[1].DOFade(1, 0.5f))
             .Join(uiGamepadIcons[0].DOFade(1, 0.5f))
-            .Join(uiGamepadIcons[1].DOFade(1, 0.5f));
-       
+            .Join(uiGamepadIcons[1].DOFade(1, 0.5f))
+            .Join(uiXboxIcons[0].DOFade(1, 0.5f))
+            .Join(uiXboxIcons[1].DOFade(1, 0.5f));
+
     }
 
     public void PrepareBlueMeetupCinematic()
@@ -186,21 +191,34 @@ public class UIManager : MonoBehaviour
 
     public void ToggleCallIcons(bool toggle)
     {
+        Debug.Log("Toggle call icons");
         if (toggle)
         {
             uiGamepadIcons[2].DOFade(1, 0.75f);
+            uiXboxIcons[2].DOFade(1, 0.75f);
             uiKeyboardIcons[2].DOFade(1, 0.75f);
             
             uiGamepadIcons[3].DOFade(1, 0.75f);
+            uiXboxIcons[3].DOFade(1, 0.75f);
             uiKeyboardIcons[3].DOFade(1, 0.75f);
+            
+            uiGamepadIcons[4].DOFade(1, 0.75f);
+            uiXboxIcons[4].DOFade(1, 0.75f);
+            uiKeyboardIcons[4].DOFade(1, 0.75f);
         }
         else
         {
             uiGamepadIcons[2].DOFade(0, 0.75f);
+            uiXboxIcons[2].DOFade(0, 0.75f);
             uiKeyboardIcons[2].DOFade(0, 0.75f);
             
             uiGamepadIcons[3].DOFade(0, 0.75f);
+            uiXboxIcons[3].DOFade(0, 0.75f);
             uiKeyboardIcons[3].DOFade(0, 0.75f);
+            
+            uiGamepadIcons[4].DOFade(0, 0.75f);
+            uiXboxIcons[4].DOFade(0, 0.75f);
+            uiKeyboardIcons[4].DOFade(0, 0.75f);
         }
     }
     
@@ -213,14 +231,27 @@ public class UIManager : MonoBehaviour
             if (playerCharacterRef.playerInput.currentControlScheme == "Gamepad")
             {
                 //nnow to see if xbox or another
-                if (playerCharacterRef.playerInput.devices[0].name.Contains("dualshock",StringComparison.OrdinalIgnoreCase))
+                //Debug.Log(playerCharacterRef.playerInput.devices[0].name);
+                if (playerCharacterRef.playerInput.devices[0].name.Contains("windows",StringComparison.OrdinalIgnoreCase))
                 {
-                    Debug.Log("PS controller");
+                    //xbox gamepad
+                    for (int i = 0; i < uiGamepadIcons.Length; i++)
+                    {
+                        uiKeyboardIcons[i].gameObject.SetActive(false);
+                        uiGamepadIcons[i].gameObject.SetActive(false);
+                        uiXboxIcons[i].gameObject.SetActive(true);
+                    }
                 }
-                for (int i = 0; i < uiGamepadIcons.Length; i++)
+                else
                 {
-                    uiKeyboardIcons[i].gameObject.SetActive(false);
-                    uiGamepadIcons[i].gameObject.SetActive(true);
+                    Debug.Log("Default gamepad");
+                    //default gamepad
+                    for (int i = 0; i < uiGamepadIcons.Length; i++)
+                    {
+                        uiKeyboardIcons[i].gameObject.SetActive(false);
+                        uiXboxIcons[i].gameObject.SetActive(false);
+                        uiGamepadIcons[i].gameObject.SetActive(true);
+                    }
                 }
                
             }
@@ -230,6 +261,7 @@ public class UIManager : MonoBehaviour
                 {
                     uiKeyboardIcons[i].gameObject.SetActive(true);
                     uiGamepadIcons[i].gameObject.SetActive(false);
+                    uiXboxIcons[i].gameObject.SetActive(false);
                 }
             }
             
@@ -245,7 +277,8 @@ public class UIManager : MonoBehaviour
         seq.Append(logoTitle.transform.DOScale(logoTitle.transform.localScale.x - .1f, 5))
             .Join(logoTitle.DOFade(0, 3f))
             .Join(uiKeyboardIcons[0].DOFade(0, 4f))
-            .Join(uiGamepadIcons[0].DOFade(0, 4f));
+            .Join(uiGamepadIcons[0].DOFade(0, 4f))
+            .Join(uiXboxIcons[0].DOFade(0, 4f));
 
         seq.OnComplete(() =>
         {
@@ -259,7 +292,8 @@ public class UIManager : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.OutCubic);
         seq.Append(uiKeyboardIcons[1].DOFade(0, 4f))
-            .Join(uiGamepadIcons[1].DOFade(0, 4f));
+            .Join(uiGamepadIcons[1].DOFade(0, 4f))
+            .Join(uiXboxIcons[1].DOFade(0, 4f));
     }
     
     

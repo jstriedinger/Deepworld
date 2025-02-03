@@ -656,9 +656,9 @@ public class CinematicsManager : MonoBehaviour
         _cameraManager.ToggleDefaultNoise(false);
         
         Transform[] playerPathC0Transforms = pathPlayerTitles.GetComponentsInChildren<Transform>();
-        _playerRef.transform.position = playerPathC0Transforms[0].position;
+        _playerRef.transform.position = playerPathC0Transforms[1].position;
         Transform[] bluePathC0Transforms = pathBlueTitles1.GetComponentsInChildren<Transform>();
-        _blueNpc.transform.position = bluePathC0Transforms[0].position;
+        _blueNpc.transform.position = bluePathC0Transforms[1].position;
         Vector3[] bluePathC0Pos = new Vector3[bluePathC0Transforms.Length-1];
         for (int i = 1; i < bluePathC0Transforms.Length; i++)
         {
@@ -722,9 +722,9 @@ public class CinematicsManager : MonoBehaviour
             .Join(_uiManager.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(4f ));
 
         Sequence introMover = DOTween.Sequence()
-        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 27)
+        .Append(mainMenuObject.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 28)
             .SetEase(Ease.InOutSine))
-        .Join(logosFollowCamObj.DOMoveY(playerPathC0Transforms[^1].position.y, 27).SetEase(Ease.InOutSine).OnComplete(
+        .Join(logosFollowCamObj.DOMoveY(playerPathC0Transforms[^1].position.y, 28).SetEase(Ease.InOutSine).OnComplete(
             () => {
                 mainMenuObject.parent = null;
             }

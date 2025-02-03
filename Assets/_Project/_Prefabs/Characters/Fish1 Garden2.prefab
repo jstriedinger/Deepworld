@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 794797975850526692, guid: 389689c5bffc84d8ba102cd6f5cc2126,
         type: 3}
       propertyPath: graphMask.value
-      value: 128
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 806489411478294813, guid: 389689c5bffc84d8ba102cd6f5cc2126,
         type: 3}

@@ -3064,18 +3064,6 @@ SpriteShapeRenderer:
     m_Center: {x: -173.79643, y: 11.520248, z: 0}
     m_Extent: {x: 118.12929, y: 65.893326, z: 0}
   m_SpriteSortPoint: 0
---- !u!114 &847600537 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8344820919811803490, guid: a7b6121d753ea224388d9e7675c8b793,
-    type: 3}
-  m_PrefabInstance: {fileID: 2581565908929385955}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01ca91e4f4494d344a8eee3f3e312c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &866351376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5449,41 +5437,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 351912003910672161, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 835690813599538529, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_TagString
-      value: TentacleGate
-      objectReference: {fileID: 0}
-    - target: {fileID: 908122128061459373, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057949970776400987, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4315320813951117056, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_Radius
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4315320813951117056, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4397952744262410565, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: tentacleGateSwitcher
-      value: 
-      objectReference: {fileID: 847600537}
     - target: {fileID: 4506394579470722625, guid: a7b6121d753ea224388d9e7675c8b793,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5534,30 +5487,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5017170103341605021, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5017170103341605021, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5391090548945787638, guid: a7b6121d753ea224388d9e7675c8b793,
         type: 3}
       propertyPath: m_Name
       value: TentacleGate
-      objectReference: {fileID: 0}
-    - target: {fileID: 5712691179858303798, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8344820919811803490, guid: a7b6121d753ea224388d9e7675c8b793,
-        type: 3}
-      propertyPath: tentacleLightIntensity
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

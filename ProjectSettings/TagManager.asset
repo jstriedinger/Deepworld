@@ -73,6 +73,9 @@ TagManager:
   - name: PropsForeground
     uniqueID: 2822308573
     locked: 0
+  - name: Foreground2
+    uniqueID: 1397710965
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

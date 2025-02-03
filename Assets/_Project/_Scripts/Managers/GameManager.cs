@@ -118,8 +118,10 @@ public class GameManager : MonoBehaviour
                 
             }
 
-            if (_currentCheckPointIndex > 3)
+            if (_currentCheckPointIndex >= 3)
             {
+                uiManager.SetupWorldUIForTitles();
+                uiManager.OnControlsChanged();
                 ToggleLigthing(true);
                 playerRef.ToggleMonsterEyeDetection(true);
                 playerRef.ToggleEyeFollowTarget(true);
@@ -146,6 +148,7 @@ public class GameManager : MonoBehaviour
                     uiManager.isWorldUiActive = true;
                     audioManager.ChangeBackgroundMusic(1);
                     cinematicsManager.PrepareBlueForMeetup();
+                    blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
                 case StartSection.Checkpoint2:
                     uiManager.isWorldUiActive = true;
@@ -165,13 +168,13 @@ public class GameManager : MonoBehaviour
                     playerRef.SetBlueReference(blueNpcRef);
                     blueNpcRef.ToggleFollow(true);
                     blueNpcRef.GetHurt();
-                    blueNpcRef.MakeFaster();
+                    blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
                 case StartSection.Checkpoint7:
                     playerRef.SetBlueReference(blueNpcRef);
                     blueNpcRef.ToggleFollow(true);
                     blueNpcRef.GetHurt();
-                    blueNpcRef.MakeFaster();
+                    blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
                 
             }
@@ -391,7 +394,7 @@ public class GameManager : MonoBehaviour
         if (toogle)
         {
             envLight = 0.1f;
-            propsLight = 0.25f;
+            propsLight = 0.4f;
             playerLight = .45f;
         }
         else

@@ -112,7 +112,6 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (inputValue.isPressed)
         {
-            Debug.Log("Swim");
             Swim();
         }
     }

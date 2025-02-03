@@ -14,7 +14,6 @@ namespace USCG.Core
     public class Debugger : MonoBehaviour
     {
         float fps;
-        float updateTimer = 0.2f;
 
 
         [Tooltip("Pressing the combination of these keys will reload all currently open scenes.")]

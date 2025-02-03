@@ -133,38 +133,46 @@ public class BlueMovement : MonoBehaviour
                 // This value will smoothly go from 1 to 0 as the agent approaches the last waypoint in the path.
                 var speedFactor = _reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
                 _finalMovement = ( moveSpeed * speedFactor * transform.up * Time.deltaTime);
+
+                // Vector2 dir = (target.position - transform.position).normalized;
+                // float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                // Quaternion rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                // transform.rotation = rotation;
                 _rigidBody.AddForce(_finalMovement);
                 
+            }
+            //Afte reverything
+            
+            //always rotate to look at direction
+            Vector3 rotatedTemp = Quaternion.Euler(0, 0, 0) * ( (target.position - transform.position).normalized);
+            Quaternion tempRotation = Quaternion.LookRotation(Vector3.forward, rotatedTemp);
+            float angles = Quaternion.Angle(transform.rotation, tempRotation);
+                
+            //Reduce head wobble a little
+            if (angles > 15)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
             }
             
         }
         
-        //Afte reverything
-        
-        //always rotate to look at direction
-        Vector3 rotatedTemp = Quaternion.Euler(0, 0, 0) * movDirection;
-        Quaternion tempRotation = Quaternion.LookRotation(Vector3.forward, rotatedTemp);
-        float angles = Quaternion.Angle(transform.rotation, tempRotation);
-            
-        //Reduce head wobble a little
-        if (angles > 15)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
-        }
         //always at least X units away to even move
         _rigidBody.linearVelocity = Vector3.ClampMagnitude(_rigidBody.linearVelocity, maxSpeed);
         _finalMovement = Vector3.zero;
     }
+    
+    //Update Blue stats
 
-    public void MakeMovementFaster()
+    public void ChangeBlueStats(Transform newTarget)
     {
+        target = newTarget;
         movDirection = Vector3.zero;
-        nextWaypointDistance = 2;
-        minDistance -= 7;
-        distanceToSwim -= 7;
-        moveSpeed += 250;
-        maxSpeed += 550;
-        swimForce += 4f;
+        //nextWaypointDistance = 1;
+        minDistance -= 6;
+        distanceToSwim -= 5;
+        moveSpeed += 100;
+        maxSpeed += 650;
+        swimForce += 3f;
         _minDistancePow = minDistance * minDistance;
         _distanceToSwimPow = distanceToSwim * distanceToSwim;
     }

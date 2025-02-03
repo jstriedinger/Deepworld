@@ -1302,7 +1302,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  endReachedDistance: 0.5
+  endReachedDistance: 1.5
   whenCloseToDestination: 0
   rvoDensityBehavior:
     enabled: 0
@@ -1325,8 +1325,8 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0
-  pickNextWaypointDist: 2
-  alwaysDrawGizmos: 1
+  pickNextWaypointDist: 4
+  alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   preventMovingBackwards: 0
   constrainInsideGraph: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
         byteDataArray: 
       Version: 1.7.7
   gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 0
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &3009734831059661653
 MonoBehaviour:
   m_ObjectHideFlags: 0

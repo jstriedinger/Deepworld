@@ -19,8 +19,6 @@ public class MonsterLaunchMechanic : MonoBehaviour
     private Coroutine _resetAIMove;
     private GameManager _gameManager;
     private MonsterBase _monsterBase;
-    private float chasingRange;
-    private bool _isChasing = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -27,7 +27,7 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "e120adc2-82ca-489e-87e4-56557c704695",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,7 +36,7 @@
                     "name": "Call",
                     "type": "Button",
                     "id": "c3845f40-6976-4af4-92d4-8584b989931a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -47,6 +47,17 @@
                     "name": "",
                     "id": "f880c890-1d08-40a9-9a49-7aa40e9721d6",
                     "path": "<XInputController>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf910e29-bb5b-4efa-b586-fd898f8da65b",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -201,6 +212,17 @@
                     "name": "",
                     "id": "1c593705-37b3-49dc-96c6-bc0af6e87a9c",
                     "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "562092e7-94c4-4832-be84-7e8c6af73da2",
+                    "path": "<DualShockGamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

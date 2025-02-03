@@ -117,6 +117,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -139,29 +142,29 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078282617
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 46
   m_Positions:
-  - {x: 1091.4501, y: -400.64523, z: 0}
-  - {x: 1091.2267, y: -400.08835, z: 0}
-  - {x: 1091.0033, y: -399.53146, z: 0}
-  - {x: 1090.7799, y: -398.97458, z: 0}
-  - {x: 1090.5565, y: -398.4177, z: 0}
-  - {x: 1090.3331, y: -397.8608, z: 0}
-  - {x: 1090.1097, y: -397.30392, z: 0}
-  - {x: 1089.8864, y: -396.74704, z: 0}
-  - {x: 1089.663, y: -396.19016, z: 0}
-  - {x: 1089.4396, y: -395.63327, z: 0}
-  - {x: 1089.2162, y: -395.0764, z: 0}
-  - {x: 1088.9928, y: -394.5195, z: 0}
-  - {x: 1088.7694, y: -393.96262, z: 0}
-  - {x: 1088.546, y: -393.40573, z: 0}
-  - {x: 1088.3226, y: -392.84885, z: 0}
-  - {x: 1088.0992, y: -392.29196, z: 0}
-  - {x: 1087.8759, y: -391.73508, z: 0}
-  - {x: 1087.6525, y: -391.1782, z: 0}
-  - {x: 1087.4291, y: -390.6213, z: 0}
-  - {x: 1087.2057, y: -390.06442, z: 0}
+  - {x: 1488.7771, y: -477.70203, z: 0}
+  - {x: 1488.2472, y: -477.42056, z: 0}
+  - {x: 1487.7173, y: -477.1391, z: 0}
+  - {x: 1487.1874, y: -476.85764, z: 0}
+  - {x: 1486.6575, y: -476.57617, z: 0}
+  - {x: 1486.1276, y: -476.2947, z: 0}
+  - {x: 1485.5977, y: -476.01324, z: 0}
+  - {x: 1485.0677, y: -475.73178, z: 0}
+  - {x: 1484.5378, y: -475.45032, z: 0}
+  - {x: 1484.0079, y: -475.16885, z: 0}
+  - {x: 1483.478, y: -474.8874, z: 0}
+  - {x: 1482.9481, y: -474.60593, z: 0}
+  - {x: 1482.4182, y: -474.32446, z: 0}
+  - {x: 1481.8883, y: -474.043, z: 0}
+  - {x: 1481.3584, y: -473.76154, z: 0}
+  - {x: 1480.8285, y: -473.48007, z: 0}
+  - {x: 1480.2986, y: -473.1986, z: 0}
+  - {x: 1479.7687, y: -472.91714, z: 0}
+  - {x: 1479.2388, y: -472.63568, z: 0}
+  - {x: 1478.7089, y: -472.35422, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2.452282
@@ -184,7 +187,7 @@ LineRenderer:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0.0148024, g: 0.2905661, b: 0.28285244, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -192,7 +195,7 @@ LineRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 0
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -200,14 +203,14 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -275,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064995cca7ca9044c911c5151aab1d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   isFixed: 1
   anchoredStart: {fileID: 6076551981611327697}

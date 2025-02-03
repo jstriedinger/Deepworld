@@ -932,27 +932,27 @@ PrefabInstance:
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.15
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.15
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.15
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 111.7
+      value: 148.36
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -63
+      value: 58.1
       objectReference: {fileID: 0}
     - target: {fileID: 1640569811670402890, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -1328,7 +1328,7 @@ PrefabInstance:
     - target: {fileID: 4013539651867559864, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: canReactToCamera
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4013539651867559864, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -1354,6 +1354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: wiggleMagnitude
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4767542599160114223, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: graphMask.value
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5038222169594272408, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -1549,7 +1554,7 @@ PrefabInstance:
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: showBehaviorDesignerGizmo
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6934382207847963032, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}

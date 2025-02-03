@@ -103,8 +103,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 644
+      x: 974
+      y: 4
       width: 1007
       height: 333
     spriteID: 84a40fbf643074607b3c6482398846a6
@@ -115,9 +115,9 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 644}
-    spritePosition: {x: 9, y: 1062}
-  - name: Gamepad-move
+    uvTransform: {x: 974, y: 4}
+    spritePosition: {x: 9, y: 1422}
+  - name: Xbox-swim
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -126,29 +126,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 985
-      width: 425
-      height: 384
-    spriteID: 36ac02da4e3f74a68bd015699ccbae48
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 985}
-    spritePosition: {x: 9, y: 633}
-  - name: Gamepad-swim
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 1377
+      y: 1036
       width: 387
       height: 387
     spriteID: 3c08129d27c80424aaf234d771d19bbc
@@ -159,8 +137,30 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 1377}
-    spritePosition: {x: 477, y: 631}
+    uvTransform: {x: 4, y: 1036}
+    spritePosition: {x: 477, y: 991}
+  - name: Gamepad-Swim
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 437
+      y: 644
+      width: 359
+      height: 354
+    spriteID: c4118d67f37973a42a61c4817af8141d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 437, y: 644}
+    spritePosition: {x: 36, y: 171}
   - name: Keyboard-move
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -182,7 +182,29 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 31, y: 1424}
+    spritePosition: {x: 31, y: 1784}
+  - name: Gamepad-move
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 644
+      width: 425
+      height: 384
+    spriteID: 36ac02da4e3f74a68bd015699ccbae48
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 644}
+    spritePosition: {x: 9, y: 993}
   - name: Keyboard-call
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -192,7 +214,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 437
-      y: 1380
+      y: 1368
       width: 300
       height: 300
     spriteID: df43125ccb6674c77a3801d990694407
@@ -203,9 +225,9 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 437, y: 1380}
-    spritePosition: {x: 72, y: 259}
-  - name: Gamepad-call
+    uvTransform: {x: 437, y: 1368}
+    spritePosition: {x: 72, y: 619}
+  - name: Xbox-call
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -213,8 +235,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 437
-      y: 985
+      x: 4
+      y: 1431
       width: 387
       height: 387
     spriteID: 943fc632eb1e24cf488678e15e4da9bf
@@ -225,8 +247,30 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 437, y: 985}
-    spritePosition: {x: 469, y: 215}
+    uvTransform: {x: 4, y: 1431}
+    spritePosition: {x: 469, y: 575}
+  - name: Gamepad-Call
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 437
+      y: 1006
+      width: 359
+      height: 354
+    spriteID: a2308164794c6ae4bb7dd3f974be73a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 437, y: 1006}
+    spritePosition: {x: 477, y: 171}
   spriteImportData:
   - name: 
     originalName: 
@@ -392,7 +436,7 @@ ScriptedImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0
     crunchedCompression: 0
@@ -458,27 +502,27 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 84a40fbf643074607b3c6482398846a6
     layerID: 43
-    mosaicPosition: {x: 4, y: 644}
+    mosaicPosition: {x: 974, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: Gamepad-move
-    spriteName: Gamepad-move
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 36ac02da4e3f74a68bd015699ccbae48
-    layerID: 50
-    mosaicPosition: {x: 4, y: 985}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: Gamepad-swim
-    spriteName: Gamepad-swim
+  - name: Xbox-swim
+    spriteName: Xbox-swim
     isGroup: 0
     parentIndex: -1
     spriteID: 3c08129d27c80424aaf234d771d19bbc
     layerID: 64
-    mosaicPosition: {x: 4, y: 1377}
+    mosaicPosition: {x: 4, y: 1036}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamepad-Swim
+    spriteName: Gamepad-Swim
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c4118d67f37973a42a61c4817af8141d
+    layerID: 95
+    mosaicPosition: {x: 437, y: 644}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -492,23 +536,43 @@ ScriptedImporter:
     flatten: 0
     isImported: 1
     isVisible: 1
+  - name: Gamepad-move
+    spriteName: Gamepad-move
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 36ac02da4e3f74a68bd015699ccbae48
+    layerID: 50
+    mosaicPosition: {x: 4, y: 644}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: Keyboard-call
     spriteName: Keyboard-call
     isGroup: 0
     parentIndex: -1
     spriteID: df43125ccb6674c77a3801d990694407
     layerID: 74
-    mosaicPosition: {x: 437, y: 1380}
+    mosaicPosition: {x: 437, y: 1368}
     flatten: 0
     isImported: 1
     isVisible: 1
-  - name: Gamepad-call
-    spriteName: Gamepad-call
+  - name: Xbox-call
+    spriteName: Xbox-call
     isGroup: 0
     parentIndex: -1
     spriteID: 943fc632eb1e24cf488678e15e4da9bf
     layerID: 72
-    mosaicPosition: {x: 437, y: 985}
+    mosaicPosition: {x: 4, y: 1431}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gamepad-Call
+    spriteName: Gamepad-Call
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a2308164794c6ae4bb7dd3f974be73a8
+    layerID: 104
+    mosaicPosition: {x: 437, y: 1006}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -525,7 +589,7 @@ ScriptedImporter:
   - name: A
     spriteName: 
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 8
     spriteID: b1c556f8dba7b4e1b9b28d0d92e650b8
     layerID: 63
     mosaicPosition: {x: 0, y: 0}
@@ -535,7 +599,7 @@ ScriptedImporter:
   - name: Ellipse 1
     spriteName: 
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 8
     spriteID: f42f56ce1241049139a2ab670ee178c4
     layerID: 52
     mosaicPosition: {x: 0, y: 0}
@@ -545,7 +609,7 @@ ScriptedImporter:
   - name: SPACE
     spriteName: 
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 8
     spriteID: c9b546baf2aac4aa5a0205a6e707cb17
     layerID: 13
     mosaicPosition: {x: 0, y: 0}
@@ -555,7 +619,7 @@ ScriptedImporter:
   - name: Rectangle 1
     spriteName: 
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 8
     spriteID: e508c28616cb84676996a2e99628afe0
     layerID: 8
     mosaicPosition: {x: 0, y: 0}
@@ -565,7 +629,7 @@ ScriptedImporter:
   - name: Q
     spriteName: 
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 8
     spriteID: 71fbf6cdc3ecd42ce894ff29077939b3
     layerID: 73
     mosaicPosition: {x: 0, y: 0}
@@ -575,7 +639,7 @@ ScriptedImporter:
   - name: Rectangle 2 copy
     spriteName: 
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 8
     spriteID: ff8c72e85861e4f45b406db21292c6db
     layerID: 35
     mosaicPosition: {x: 0, y: 0}
@@ -716,7 +780,7 @@ ScriptedImporter:
     isVisible: 0
   sharedRigPSDLayers: []
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638741174187359803
   spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 

@@ -140,9 +140,9 @@ public class BlueNPC : MonoBehaviour
     /**
      * Prepare blue to be faster in the last section of the game
      */
-    public void MakeFaster()
+    public void ChangeBlueStats(Transform newTarget)
     {
-        _aiBlue.MakeMovementFaster();
+        _aiBlue.ChangeBlueStats(newTarget);
     }
 
 }
