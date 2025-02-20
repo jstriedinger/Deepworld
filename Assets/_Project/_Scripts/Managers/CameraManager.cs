@@ -9,9 +9,8 @@ using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
-
-    private GameManager _gameManager;
-    private AudioManager _audioManager;
+    public static CameraManager Instance { get; private set; }
+    
     [SerializeField] private CinemachineCamera virtualCamera;
     [SerializeField] CinemachineTargetGroup targetGroup;
     [SerializeField] float lerpDuration = 1f;
@@ -34,18 +33,26 @@ public class CameraManager : MonoBehaviour
     private Transform _tmpExtraFollowedObject;
     private Tween _cameraTween;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        _cbmcp = virtualCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
-        _defaultNoiseAmplitude = _cbmcp.AmplitudeGain;
+    private void Awake() 
+    { 
+        // If there is an instance, and it's not me, delete myself.
+    
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
     }
+   
     void Start()
     {
         
+        _cbmcp = virtualCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
+        _defaultNoiseAmplitude = _cbmcp.AmplitudeGain;
         targetGroup.Targets[0].Radius = camZoomPlayer;
-        _gameManager = GameObject.FindFirstObjectByType<GameManager>();
-        _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
         _cameraStep = (float) maxAddRadiusChase / chaseCameDistance;
 
 
@@ -64,9 +71,9 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateCameraZoomForFinalChase()
     {
-        if (_gameManager.playerRef.transform.position.y < chaseCamAnchor.position.y)
+        if (GameManager.Instance.playerRef.transform.position.y < chaseCamAnchor.position.y)
         {
-            float distanceY = Math.Abs(chaseCamAnchor.position.y - _gameManager.playerRef.transform.position.y);
+            float distanceY = Math.Abs(chaseCamAnchor.position.y - GameManager.Instance.playerRef.transform.position.y);
             if (distanceY <= chaseCameDistance)
             {
                 float addedRadius = distanceY * _cameraStep;
@@ -91,6 +98,12 @@ public class CameraManager : MonoBehaviour
     {
         targetGroup.transform.position = lastFollow.position;
         virtualCamera.Follow = targetGroup.transform;
+    }
+
+    public void toggleVCamDeadZone(bool toggle)
+    {
+        var cam = virtualCamera.GetComponent<CinemachinePositionComposer>();
+        cam.Composition.DeadZone.Enabled = toggle;
     }
 
     public void ChangeFollowedObject(Transform newFollow)
@@ -225,7 +238,7 @@ public class CameraManager : MonoBehaviour
     public void AddObjectToCameraView(Transform objectToAdd, bool isMonster, bool makeNoise, float radius = 0, float weight = 1)
     {
         if(_numMonstersOnScreen == 0 && (isMonster || makeNoise) )
-            StartCoroutine(_audioManager.PlayMonsterAppearSfx());
+            StartCoroutine(AudioManager.Instance.PlayMonsterAppearSfx());
         
         //if not added already
         if (targetGroup.FindMember(objectToAdd) == -1)
@@ -385,7 +398,7 @@ public class CameraManager : MonoBehaviour
     {
         if (toggle)
         {
-            targetGroup.AddMember(_gameManager.blueNpcRef.transform,1.25f, camZoomPlayer);
+            targetGroup.AddMember(GameManager.Instance.blueNpcRef.transform,1.25f, camZoomPlayer);
             targetGroup.Targets[0].Weight = 0;
         }
         else
@@ -399,7 +412,7 @@ public class CameraManager : MonoBehaviour
                 )
                 .OnComplete(() =>
                 {
-                    targetGroup.RemoveMember(_gameManager.blueNpcRef.transform);
+                    targetGroup.RemoveMember(GameManager.Instance.blueNpcRef.transform);
                     targetGroup.Targets[0].Weight = 1.25f;
                 });
 

@@ -14,9 +14,9 @@ public class TentacleGateSwitcher : MonoBehaviour
     [SerializeField] private float defaultLightIntensity;
     
     [Header("UX circle")]
-    [FormerlySerializedAs("visualFeedback")] [SerializeField] private SpriteRenderer circleSprite;
-    [FormerlySerializedAs("spriteRotateSpeed")] [SerializeField] private float circleRotateSpeed;
-    [FormerlySerializedAs("blinkingSpeed")] [SerializeField] private float circleScaleSpeed;
+    [SerializeField] private SpriteRenderer circleSprite;
+    [SerializeField] private float circleRotateDuration;
+    [SerializeField] private float circleScaleDuration;
     [FormerlySerializedAs("spriteHighAlpha")] [SerializeField] private float circleHighAlpha;
 
     private Tween _spriteScaleTween;
@@ -39,13 +39,13 @@ public class TentacleGateSwitcher : MonoBehaviour
         circleSprite.transform.localScale = _spriteScaleHigh;
         
         _spriteScaleTween = circleSprite.transform.DOScale(
-                _spriteScaleHigh - (Vector3.one * .25f),
-                circleScaleSpeed)
+                _spriteScaleHigh - (Vector3.one * .2f),
+                circleScaleDuration)
             .SetAutoKill(false).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
         
         _spriteRotateTween = circleSprite.transform.DORotate(
                 new Vector3(0, 0, 360),
-                circleRotateSpeed,
+                circleRotateDuration,
                 RotateMode.FastBeyond360)
             .SetRelative(true)
             .SetEase(Ease.Linear)

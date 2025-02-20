@@ -144,7 +144,7 @@ Material:
     - _GradIsRadial: 0
     - _GrassManualAnim: 1
     - _GrassManualToggle: 0
-    - _GrassRadialBend: 0.1
+    - _GrassRadialBend: 0.3
     - _GrassSpeed: 2
     - _GrassWind: 20
     - _GreyscaleBlend: 1
@@ -221,8 +221,8 @@ Material:
     - _WaveAmount: 7
     - _WaveSpeed: 10
     - _WaveStrength: 7.5
-    - _WaveX: 0
-    - _WaveY: 0.5
+    - _WaveX: 0.256
+    - _WaveY: 0.244
     - _ZTestMode: 4
     - _ZWrite: 0
     - _ZoomUvAmount: 0.5

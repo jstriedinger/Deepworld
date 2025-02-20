@@ -9,7 +9,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Tentacle : MonoBehaviour
 {
-
+    [SerializeField] private bool nonReactive = false;
     private LineRenderer _lineRenderer;
     private Vector3[] segmentV;
     [SerializeField] Light2D _internalLight2D;
@@ -25,7 +25,6 @@ public class Tentacle : MonoBehaviour
     public float wiggleMagnitude;
     public Transform wiggleDir;
     [HideInInspector] public bool resettingFromPlayer;
-    private Segment[] _segmentsFromFollowPlayer;
 
     private void Awake()
     {
@@ -62,23 +61,50 @@ public class Tentacle : MonoBehaviour
         resettingFromPlayer = false;
     }
 
+    private void FixedUpdate()
+    {
+        if (nonReactive)
+        {
+            //non reactiove, lets move it on fixed update and slower with Lerp. performant
+            wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
+            segmentPoses[0] = targetDir.position;
+            for(int i = 1; i < segmentPoses.Length; i++)
+            {
+                segmentPoses[i] = Vector3.Lerp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, Time.fixedDeltaTime * smoothSpeed);
+                //segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
+                //  resettingFromPlayer? 0.15f : smoothSpeed);
+            }
+            
+            //light always follows last point in line renderer
+            if (_internalLight2D is not null)
+                _internalLightParent.position = segmentPoses[^1];
+
+            _lineRenderer.SetPositions(segmentPoses);
+        }
+    }
+
 
     private void Update()
     {
-        wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
-        segmentPoses[0] = targetDir.position;
-
-        for(int i = 1; i < segmentPoses.Length; i++)
+        if (!nonReactive)
         {
-            segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
-                resettingFromPlayer? 0.15f : smoothSpeed);
+            wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
+            segmentPoses[0] = targetDir.position;
+
+            for(int i = 1; i < segmentPoses.Length; i++)
+            {
+                segmentPoses[i] = Vector3.Lerp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, Time.deltaTime * smoothSpeed);
+                segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
+                  resettingFromPlayer? 0.15f : smoothSpeed);
+            }
+
+            //light always follows last point in line renderer
+            if (_internalLight2D is not null)
+                _internalLightParent.position = segmentPoses[^1];
+
+            _lineRenderer.SetPositions(segmentPoses);
+            
         }
-
-        //light always follows last point in line renderer
-        if (_internalLight2D is not null)
-            _internalLightParent.position = segmentPoses[^1];
-
-        _lineRenderer.SetPositions(segmentPoses);
     }
 
     public void ResetPos()
@@ -95,7 +121,7 @@ public class Tentacle : MonoBehaviour
     {
         resettingFromPlayer = true;
         segmentPoses[0] = segments[0].startingPosition;
-        for(int i = 0; i < segments.Length; i++){
+        for(int i = 0; i < segments.Length -1; i++){
             segmentPoses[i+1] = segments[i].endingPosition;
         }
     }

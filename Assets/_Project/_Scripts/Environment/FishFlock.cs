@@ -15,6 +15,9 @@ public class FishFlock : MonoBehaviour
     [SerializeField] private GameObject fishPrefab;
     [SerializeField] private bool reactToPlayer = true;
     [SerializeField] private float speed = 3;
+    [SerializeField] private float alignment = .25f;
+    [SerializeField] private float cohesion = .6f;
+    [SerializeField] private float separation = .3f;
     [SerializeField] private float initialFlockRadius = 3;
     private List<GameObject> _fishes = new List<GameObject>();
     private BehaviorTree _behaviorTree;
@@ -43,6 +46,9 @@ public class FishFlock : MonoBehaviour
         //setup the fish var of the tree
         _behaviorTree.SetVariable("Fishes",(SharedGameObjectList)_fishes);
         _behaviorTree.SetVariableValue("FlockSpeed",speed);
+        _behaviorTree.SetVariableValue("Cohesion",cohesion);
+        _behaviorTree.SetVariableValue("Separation",separation);
+        _behaviorTree.SetVariableValue("Alignment",alignment);
         
         //lets run it again
         _behaviorTree.EnableBehavior();

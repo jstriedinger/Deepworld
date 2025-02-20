@@ -48,7 +48,6 @@ public abstract class MonsterBase : MonoBehaviour
     protected Tween _chaseScaleTween;
     protected bool _canReactToCall = false;
     
-    protected AudioManager _audioManager;
     
     public MonsterSO GetMonsterStats()
     {
@@ -99,7 +98,6 @@ public abstract class MonsterBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        _audioManager = GameObject.FindFirstObjectByType<AudioManager>();
         _colorTweenSequence = DOTween.Sequence();
     }
 
@@ -164,7 +162,7 @@ public abstract class MonsterBase : MonoBehaviour
         {
             //we were on a chase
             if(canAddChaseMusic)
-                _audioManager.UpdateMonstersChasing(false);
+                AudioManager.Instance.UpdateMonstersChasing(false);
             
         }
 
@@ -196,7 +194,7 @@ public abstract class MonsterBase : MonoBehaviour
                 break;
             case MonsterState.Chasing:
                 if (canAddChaseMusic)
-                    _audioManager.UpdateMonstersChasing(true);
+                    AudioManager.Instance.UpdateMonstersChasing(true);
                 _chaseScaleTween.Play();
                 
                 UpdateColorsAndToggleAnimation(monsterStats.ChaseColorGradient,true,  monsterStats.ChaseLightColor);
@@ -412,9 +410,6 @@ public abstract class MonsterBase : MonoBehaviour
 
 public class MonsterReactive : MonsterBase
 {
-    private CameraManager _cameraManager;
-    private GameManager _gameManager;
-    
     [HideInInspector]
     public bool inCamera = false;
     
@@ -440,10 +435,8 @@ public class MonsterReactive : MonsterBase
         base.Start();
         if (canReactToPlayer )
         {
-            _gameManager = GameObject.FindFirstObjectByType<GameManager>();
-            _cameraManager = GameObject.FindFirstObjectByType<CameraManager>();
-            _behaviorTree.SetVariableValue("playerRef",_gameManager.playerRef.gameObject);
-            _behaviorTree.SetVariableValue("playerLastPosition",_gameManager.playerLastPosition);
+            _behaviorTree.SetVariableValue("playerRef",GameManager.Instance.playerRef.gameObject);
+            _behaviorTree.SetVariableValue("playerLastPosition",GameManager.Instance.playerLastPosition);
         }
     }
 
@@ -481,14 +474,14 @@ public class MonsterReactive : MonsterBase
             if(!inCamera)
             {
                 //add to the
-                _cameraManager.AddObjectToCameraView(transform, true, false);
+                CameraManager.Instance.AddObjectToCameraView(transform, true, false);
                 inCamera = true;
 
             }
         }
         else if(inCamera)
         {
-            _cameraManager.RemoveObjectFromCameraView(transform, true);
+            CameraManager.Instance.RemoveObjectFromCameraView(transform, true);
             inCamera = false;
         }
 
@@ -497,13 +490,14 @@ public class MonsterReactive : MonsterBase
 
 
     //react to playerCharacter call, go investigate a position using a lastpos object since btree needs an object
-    public void ReactToPlayerCall()
+    public IEnumerator ReactToPlayerCall()
     {
         if (canReactToPlayer && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
         {
             if (_canReactToCall || CurrentState == MonsterState.Investigate) 
             {
                 //if mosnter is not chasing or following, it can react to playerCharacter call
+                yield return new WaitForSeconds(.75f);
                 UpdateMonsterState(MonsterState.Investigate);
             }
         }
@@ -551,7 +545,7 @@ public class MonsterReactive : MonsterBase
         if (other.gameObject.CompareTag("Player") && canReactToPlayer)
         {
             //biting game feel
-            _audioManager.StopChaseMusic();
+            AudioManager.Instance.StopChaseMusic();
             EatPlayerAnimation();
             //signal to the tree that we killed the playerCharacter
             //_behaviorTree.SendEvent("PlayerKilled");

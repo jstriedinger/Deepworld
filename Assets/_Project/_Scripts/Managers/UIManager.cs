@@ -10,6 +10,22 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
+    private void Awake() 
+    { 
+        // If there is an instance, and it's not me, delete myself.
+    
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
+    
     [Header("In-world UI")]
     public SpriteRenderer logoUsc;
     public SpriteRenderer logoBerklee;
@@ -36,24 +52,6 @@ public class UIManager : MonoBehaviour
     [HideInInspector]
     public bool isPauseFading = false, isWorldUiActive = false;
 
-    private PlayerCharacter playerCharacterRef;
-
-    private void Awake()
-    {
-        //UI stuff
-        
-        blackout.gameObject.SetActive(true);
-        pauseGroup.gameObject.SetActive(false);
-        mainMenuBack.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(true);
-        pauseGroup.alpha = mainMenu.alpha = mainMenuBack.alpha = 0;
-        _mainMenuBackBtn = mainMenuBack.GetComponentInChildren<Button>();
-        _mainMenuStartBtn = mainMenu.GetComponentInChildren<Button>();
-        _pauseContinueBtn = pauseGroup.GetComponentInChildren<Button>();
-
-
-
-    }
     private void OnEnable()
     {
         PlayerCharacter.PlayerOnControlsChanged += OnControlsChanged;
@@ -68,14 +66,19 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        blackout.gameObject.SetActive(true);
+        pauseGroup.gameObject.SetActive(false);
+        mainMenuBack.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
+        pauseGroup.alpha = mainMenu.alpha = mainMenuBack.alpha = 0;
+        _mainMenuBackBtn = mainMenuBack.GetComponentInChildren<Button>();
+        _mainMenuStartBtn = mainMenu.GetComponentInChildren<Button>();
+        _pauseContinueBtn = pauseGroup.GetComponentInChildren<Button>();
         //regardless of what happens, we start with a smooth fadeout
         blackout.DOFade(0, 3).SetEase(Ease.InQuad);
     }
 
-    public void Initialize(PlayerCharacter playerCharacterRef)
-    {
-        this.playerCharacterRef = playerCharacterRef;
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -170,17 +173,29 @@ public class UIManager : MonoBehaviour
     }
     
     //After Intro cinematic
-    public void ShowMoveControls()
+    public void TutorialShowControlsUI()
     {
         OnControlsChanged();
         Sequence seq = DOTween.Sequence()
-            .Append(uiKeyboardIcons[0].DOFade(1, 0.5f))
-            .Join(uiKeyboardIcons[1].DOFade(1, 0.5f))
-            .Join(uiGamepadIcons[0].DOFade(1, 0.5f))
-            .Join(uiGamepadIcons[1].DOFade(1, 0.5f))
-            .Join(uiXboxIcons[0].DOFade(1, 0.5f))
-            .Join(uiXboxIcons[1].DOFade(1, 0.5f));
+            .Append(uiKeyboardIcons[0].DOFade(1, 0.75f))
+            .Join(uiGamepadIcons[0].DOFade(1, 0.75f))
+            .Join(uiXboxIcons[0].DOFade(1, 0.75f));
+        //Add the UI feedback
 
+    }
+
+    public void TutorialShowSwimUI()
+    {
+        Sequence seq = DOTween.Sequence()
+        .Join(uiKeyboardIcons[1].DOFade(1, 0.75f))
+        .Join(uiGamepadIcons[1].DOFade(1, 0.75f))
+        .Join(uiXboxIcons[1].DOFade(1, 0.75f))
+        .OnComplete(() =>
+        {
+            ToggleOnSwimUIFeedback(true);
+        });
+
+        //Add the UI feedback
     }
 
     public void PrepareBlueMeetupCinematic()
@@ -228,11 +243,11 @@ public class UIManager : MonoBehaviour
     {
         if (isWorldUiActive)
         {
-            if (playerCharacterRef.playerInput.currentControlScheme == "Gamepad")
+            if (GameManager.Instance.playerRef.playerInput.currentControlScheme == "Gamepad")
             {
                 //nnow to see if xbox or another
                 //Debug.Log(playerCharacterRef.playerInput.devices[0].name);
-                if (playerCharacterRef.playerInput.devices[0].name.Contains("windows",StringComparison.OrdinalIgnoreCase))
+                if (GameManager.Instance.playerRef.playerInput.devices[0].name.Contains("windows",StringComparison.OrdinalIgnoreCase))
                 {
                     //xbox gamepad
                     for (int i = 0; i < uiGamepadIcons.Length; i++)
@@ -255,7 +270,7 @@ public class UIManager : MonoBehaviour
                 }
                
             }
-            else if(playerCharacterRef.playerInput.currentControlScheme.Contains("Keyboard"))
+            else if(GameManager.Instance.playerRef.playerInput.currentControlScheme.Contains("Keyboard"))
             {
                 for (int i = 0; i < uiGamepadIcons.Length; i++)
                 {
@@ -270,30 +285,39 @@ public class UIManager : MonoBehaviour
     
     
     //Fadeout title logo + move icons after playerCharacter moves in a little to the right
-    public void FadeOutUIPt1()
+    public void TutorialFadeoutMoveSwimUI()
     {
+        
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.OutCubic);
-        seq.Append(logoTitle.transform.DOScale(logoTitle.transform.localScale.x - .1f, 5))
-            .Join(logoTitle.DOFade(0, 3f))
-            .Join(uiKeyboardIcons[0].DOFade(0, 4f))
+        seq.Append(uiKeyboardIcons[0].DOFade(0, 4f))
+            .Join(uiKeyboardIcons[1].DOFade(0, 4f))
             .Join(uiGamepadIcons[0].DOFade(0, 4f))
-            .Join(uiXboxIcons[0].DOFade(0, 4f));
+            .Join(uiGamepadIcons[1].DOFade(0, 4f))
+            .Join(uiXboxIcons[0].DOFade(0, 4f))
+            .Join(uiXboxIcons[1].DOFade(0, 4f));
 
         seq.OnComplete(() =>
         {
-            Destroy(logoTitle.gameObject);
+            ToggleOnSwimUIFeedback(false);
         });
     }
     
-    //fading out the dash + call icons
-    public void FadeOutUIPt2()
+    public void ToggleOnSwimUIFeedback(bool toggle)
+    {
+        if(toggle)
+            PlayerCharacter.OnPlayerSwim += UIOnSwimFeedback;
+        else
+            PlayerCharacter.OnPlayerSwim -= UIOnSwimFeedback;
+    }
+
+    public void UIOnSwimFeedback()
     {
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.OutCubic);
-        seq.Append(uiKeyboardIcons[1].DOFade(0, 4f))
-            .Join(uiGamepadIcons[1].DOFade(0, 4f))
-            .Join(uiXboxIcons[1].DOFade(0, 4f));
+        seq.Append(uiKeyboardIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1))
+            .Join(uiGamepadIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1))
+            .Join(uiXboxIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1));
     }
     
     

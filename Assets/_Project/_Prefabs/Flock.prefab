@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8304555354998477485}
-  - component: {fileID: 7964055190183044095}
   - component: {fileID: 643594031526293270}
+  - component: {fileID: 7964055190183044095}
   m_Layer: 0
   m_Name: Flock
   m_TagString: Untagged
@@ -33,6 +33,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &643594031526293270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778009942967661898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a325a5967344a70813dfa061aee272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRef: {fileID: 0}
+  numFishes: 14
+  fishPrefab: {fileID: 3069541806291960988, guid: 7e45e7b14cdcb48bc968ba75e753d2da,
+    type: 3}
+  reactToPlayer: 0
+  speed: 7
+  alignment: 0.35
+  cohesion: 0.6
+  separation: 0.3
+  initialFlockRadius: 3.5
 --- !u!114 &7964055190183044095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +83,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"Fishes","IsShared":true,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FlockSpeed","IsShared":true,"SinglemValue":0}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"Fishes","IsShared":true,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FlockSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Alignment","IsShared":true,"SinglemValue":0.25},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Cohesion","IsShared":true,"SinglemValue":0.6},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Separation","IsShared":true,"SinglemValue":0.3}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -70,25 +92,6 @@ MonoBehaviour:
         unityObjects: []
         byteData: 
         byteDataArray: 
-      Version: 1.7.7
+      Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &643594031526293270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778009942967661898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a325a5967344a70813dfa061aee272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRef: {fileID: 0}
-  numFishes: 14
-  fishPrefab: {fileID: 3069541806291960988, guid: 389689c5bffc84d8ba102cd6f5cc2126,
-    type: 3}
-  reactToPlayer: 1
-  speed: 3
-  initialFlockRadius: 3

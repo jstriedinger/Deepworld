@@ -11,7 +11,6 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
     private Button _btn;
     private TextMeshProUGUI _btnText;
     private Camera _mainCamera;
-    private AudioManager _audioManager;
     // Start is called before the first frame updat
     // Update is called once per frame
     void Update()
@@ -28,7 +27,6 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
     private void Start()
     {
         _mainCamera = Camera.main;
-        _audioManager = FindFirstObjectByType<AudioManager>();
         _btn.onClick.AddListener(OnClickedBtn);
     }
 
@@ -37,11 +35,11 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            AudioSource.PlayClipAtPoint(_audioManager.uiButtonSelected, _mainCamera.transform.position, 0.05f);
+            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonSelected, _mainCamera.transform.position, 0.05f);
             Time.timeScale = 0;
         }
         else
-            AudioSource.PlayClipAtPoint(_audioManager.uiButtonSelected, _mainCamera.transform.position, 0.05f);
+            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonSelected, _mainCamera.transform.position, 0.05f);
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -50,11 +48,11 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            AudioSource.PlayClipAtPoint(_audioManager.uiButtonFocus, _mainCamera.transform.position, 0.02f);
+            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonFocus, _mainCamera.transform.position, 0.02f);
             Time.timeScale = 0;
         }
         else
-            AudioSource.PlayClipAtPoint(_audioManager.uiButtonFocus, _mainCamera.transform.position, 0.02f);
+            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonFocus, _mainCamera.transform.position, 0.02f);
     }
     public void OnDeselect(BaseEventData eventData)
     {

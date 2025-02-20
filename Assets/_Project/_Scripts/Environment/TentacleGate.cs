@@ -3,16 +3,18 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
+using FMODUnity;
+using UnityEngine.Rendering.Universal;
 
 public class TentacleGate : MonoBehaviour
 {
+    [SerializeField] private GateSO config;
     [SerializeField] private GameObject tentaclesObj;
     [SerializeField] private Collider2D door1;
     [SerializeField] private Collider2D door2;
+    [SerializeField] private Light2D gateLight;
     private TentacleToggler[] _tentacleTogglers;
     [SerializeField] private TentacleGateSwitcher tentacleGateSwitcher;
-    [SerializeField] private float openedTime;
-    [SerializeField] private float switchTime;
     
     private float _nextCloseTime;
     private bool _canCloseGate;
@@ -44,25 +46,34 @@ public class TentacleGate : MonoBehaviour
         if (!_isOpen && _canOpenGate )
         {
             _isOpen = true;
-            _nextCloseTime = Time.time + openedTime;
+            _nextCloseTime = Time.time + config.GateOpenTime;
             Sequence seq = DOTween.Sequence();
             seq.SetEase(Ease.InOutSine);
             //every two tentacles
             seq.AppendCallback(() =>
             {
                 tentacleGateSwitcher.DisableSwitcher();
+                //playone shot with volume
+                var instance = RuntimeManager.CreateInstance(config.SfxActivate);
+                instance.set3DAttributes(RuntimeUtils.To3DAttributes(tentacleGateSwitcher.transform.position));
+                instance.setVolume(.75f);
+                instance.start();
+                instance.release();
             });
             seq.AppendInterval(.75f);
             seq.AppendCallback(
                 () =>
                 {
+                    
                     foreach (TentacleToggler toggler in _tentacleTogglers)
                     {
                         toggler.Open();
                     }
 
                 });
-            seq.Append(DOTween.To(() => door1.offset.y, x => door1.offset = new Vector2(1, x), -2,
+            seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 2,
+                1.5f));
+            seq.Join(DOTween.To(() => door1.offset.y, x => door1.offset = new Vector2(1, x), -2,
                 1));
             seq.Join(DOTween.To(() => door2.offset.y, x => door2.offset = new Vector2(1, x), -2,
                 1));
@@ -85,12 +96,14 @@ public class TentacleGate : MonoBehaviour
             }
 
             Sequence seq = DOTween.Sequence();
-            seq.Append(DOTween.To(() => door1.offset.y, x => door1.offset = new Vector2(1, x), 1,
+            seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 0,
+                1.5f));
+            seq.Join(DOTween.To(() => door1.offset.y, x => door1.offset = new Vector2(1, x), 1,
                 1));
             seq.Join(DOTween.To(() => door2.offset.y, x => door2.offset = new Vector2(1, x), 1,
                 1));
             
-            yield return new WaitForSeconds(switchTime);
+            yield return new WaitForSeconds(config.SwitchResetTime);
             _canOpenGate = true;
             tentacleGateSwitcher.EnableSwitcher();
 

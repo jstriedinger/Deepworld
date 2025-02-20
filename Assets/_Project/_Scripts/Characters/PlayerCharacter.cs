@@ -13,10 +13,9 @@ public class PlayerCharacter : MonoBehaviour
 
     public static event Action PlayerOnControlsChanged;
     public static event Action PlayerOnPause;
-    //managers
-    private GameManager gameManager;
 
-    
+    public static event Action OnPlayerSwim;
+    //managers
     private Tentacle[] _proceduralTentacles;
     private TentacleDynamic[] _proceduralDynamicTentacles;
     private BodyTentacle _proceduralBody;
@@ -91,14 +90,6 @@ public class PlayerCharacter : MonoBehaviour
         GameManager.OnRestartingGame -= OnRestartingGame;
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
-    }
-
-
     #region InputSystem
     /**
      * Function triggeres when theres a movement input. 
@@ -113,7 +104,17 @@ public class PlayerCharacter : MonoBehaviour
         if (inputValue.isPressed)
         {
             Swim();
+            
         }
+    }
+
+    public IEnumerator AddImpulseForceToPlayer(Vector3 dir, float force)
+    {
+        StopMovement();
+        _rigidBody.AddForce(dir * force,ForceMode2D.Impulse);
+        playerInput.actions.FindAction("Move").Disable();
+        yield return new WaitForSeconds(0.25F);
+        playerInput.actions.FindAction("Move").Enable();
     }
 
     private void OnCall(InputValue inputValue)
@@ -273,6 +274,8 @@ public class PlayerCharacter : MonoBehaviour
                 seq.SetEase(Ease.OutCubic);
                 seq.Append(headPart.DOScaleY(1.5f, 0.5f));
                 seq.Append(headPart.DOScaleY(1f, 0.5f  * 1.5f));
+                
+                OnPlayerSwim?.Invoke();
             }
 
 
@@ -317,7 +320,7 @@ public class PlayerCharacter : MonoBehaviour
         StartCoroutine(RumbleController());
         Instantiate(vfxDeath, transform.position, quaternion.identity);
         FMODUnity.RuntimeManager.PlayOneShot(sfxDeath, transform.position);
-        gameManager.GameOver(monster);
+        GameManager.Instance.GameOver(monster);
         bodyPart.SetActive(false);
         _collider.enabled = false;
     }
@@ -356,7 +359,7 @@ public class PlayerCharacter : MonoBehaviour
             StartCoroutine(_blueRef.PlayCallSFX());
         }
 
-        gameManager.playerLastPosition.transform.position =  transform.position;
+        GameManager.Instance.playerLastPosition.transform.position =  transform.position;
         if (!isHidden)
         {
             Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, callRadiusForEnemies, LayerMask.GetMask("Monster"));
@@ -368,7 +371,7 @@ public class PlayerCharacter : MonoBehaviour
                     if (monsterReactive.CurrentState == MonsterState.Default || monsterReactive.CurrentState == MonsterState.Investigate)
                     {
                         Debug.Log("Trying to react");
-                        monsterReactive.ReactToPlayerCall();
+                        StartCoroutine(monsterReactive.ReactToPlayerCall());
                     }
                     // Do something with gameManager
                 }

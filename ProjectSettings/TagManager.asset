@@ -22,7 +22,7 @@ TagManager:
   - Monster
   - Cover
   - Background
-  - TutorialMonster
+  - PlayerStopper
   - Fishes
   - PlayerPos
   - BigFish

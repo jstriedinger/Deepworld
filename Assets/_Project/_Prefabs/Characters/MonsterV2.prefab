@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 50
   segmentPoses: []
@@ -266,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 50
   segmentPoses: []

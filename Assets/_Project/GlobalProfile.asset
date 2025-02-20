@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.4
   response:
     m_OverrideState: 0
     m_Value: 0.8
@@ -148,8 +148,8 @@ MonoBehaviour:
   - {fileID: -2954793779419796657}
   - {fileID: -3644980942256000277}
   - {fileID: 1865904402286267183}
-  - {fileID: 4209735428215371250}
   - {fileID: -3322548162460351728}
+  - {fileID: 7437396110279202198}
 --- !u!114 &1865904402286267183
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -178,7 +178,7 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &4209735428215371250
+--- !u!114 &7437396110279202198
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,10 +187,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
-  m_Name: ChromaticAberration
+  m_Script: {fileID: 11500000, guid: c1f83681ef12547498b362aa7adec64e, type: 3}
+  m_Name: Ripples
   m_EditorClassIdentifier: 
-  active: 0
-  intensity:
+  active: 1
+  mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
+  strength:
+    m_OverrideState: 1
+    m_Value: 0.1
+  distance:
+    m_OverrideState: 0
+    m_Value: 5.93
+  speed:
+    m_OverrideState: 0
+    m_Value: 1.4
+  width:
+    m_OverrideState: 0
+    m_Value: 1.5
+  height:
+    m_OverrideState: 0
+    m_Value: 1
+  shader: {fileID: 0}

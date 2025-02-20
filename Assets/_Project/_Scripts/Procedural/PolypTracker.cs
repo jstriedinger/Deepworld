@@ -9,7 +9,6 @@ public class PolypTracker : MonoBehaviour
     public Vector3 targetPosition;
     public bool isFixed;
     public GameObject anchoredStart;
-    public int segmentAmount = 10; 
     public float segmentsLength = 1;
     public GameObject targetSearchLocation;
     public float distTrigger;
@@ -17,6 +16,7 @@ public class PolypTracker : MonoBehaviour
     
     Segment[] _segments;
     LineRenderer _lineRenderer;
+    private int _segmentAmount = 10; 
     private Tentacle _tentacle;
     private LayerMask _layerMask;
     private bool _onlyCheckPlayer = false;
@@ -42,8 +42,10 @@ public class PolypTracker : MonoBehaviour
     {
         
         _lineRenderer = this.GetComponent<LineRenderer>();
-        _segments = new Segment[segmentAmount];
-        for(int i = 0; i<segmentAmount;i++)
+        _segmentAmount = _tentacle.length;
+        _segments = new Segment[_segmentAmount];
+        
+        for(int i = 0; i<_segmentAmount;i++)
         {
             Segment segment = new Segment();
             //segment.startingPosition = Vector3.zero+(Vector3.up*segmentsLength*(i));
@@ -92,7 +94,7 @@ public class PolypTracker : MonoBehaviour
         
 
         //playerCharacter within our reach!
-        if(segmentAmount!=_segments.Length)
+        if(_segmentAmount!=_segments.Length)
         {
             InitializeSegments(); //reinitialize if amount changed
         }
@@ -110,8 +112,8 @@ public class PolypTracker : MonoBehaviour
  
     void Follow()
     {
-        _segments[segmentAmount-1].Follow(targetPosition, smoothFactor);
-        for(int i = segmentAmount-2; i>=0;i--)
+        _segments[_segmentAmount-1].Follow(targetPosition, smoothFactor);
+        for(int i = _segmentAmount-2; i>=0;i--)
         {
             _segments[i].Follow(_segments[i+1], smoothFactor);
         }
@@ -119,7 +121,7 @@ public class PolypTracker : MonoBehaviour
         if(isFixed)
         {
             _segments[0].AnchorStartAt(anchoredStart.transform.position);
-            for(int i = 1 ; i<segmentAmount;i++)
+            for(int i = 1 ; i<_segmentAmount;i++)
             {
                 _segments[i].AnchorStartAt(_segments[i-1].endingPosition);
             }
@@ -128,13 +130,13 @@ public class PolypTracker : MonoBehaviour
  
     void DrawSegments(Segment[] segments)
     {
-        _lineRenderer.positionCount = segmentAmount+1;
+        _lineRenderer.positionCount = _segmentAmount+1;
         List<Vector3> points = new List<Vector3>();
-        for(int i = 0; i < segmentAmount;i++)
+        for(int i = 0; i < _segmentAmount;i++)
         {
             points.Add(segments[i].startingPosition);
         }
-        points.Add(segments[segmentAmount-1].endingPosition);
+        points.Add(segments[_segmentAmount-1].endingPosition);
         _lineRenderer.SetPositions(points.ToArray());
     }
 

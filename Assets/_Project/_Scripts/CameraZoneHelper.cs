@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class CameraZoneHelper : MonoBehaviour
 {
-    private CameraManager _cameraManager;
     [SerializeField] private float desiredRadius;
     [Range(0,2)]
     [SerializeField] private float desiredWeight;
+
+    [SerializeField] private bool makeNoise = true;
     
 
     private bool inCamera;
     // Start is called before the first frame update
     void Start()
     {
-        _cameraManager = FindFirstObjectByType<CameraManager>();
         inCamera = false;
     }
 
@@ -30,7 +30,7 @@ public class CameraZoneHelper : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead && inCamera)
         {
             //add to target group 
-            _cameraManager.RemoveObjectFromCameraView(gameObject.transform, false);
+            CameraManager.Instance.RemoveObjectFromCameraView(gameObject.transform, false);
             inCamera = false;
         }
     }
@@ -40,7 +40,7 @@ public class CameraZoneHelper : MonoBehaviour
         if (!inCamera && other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead )
         {
             //add to target group 
-            _cameraManager.AddObjectToCameraView(gameObject.transform, false, true, desiredRadius, desiredWeight);
+            CameraManager.Instance.AddObjectToCameraView(gameObject.transform, false, makeNoise, desiredRadius, desiredWeight);
             inCamera = true;
         }
     }
@@ -51,7 +51,7 @@ public class CameraZoneHelper : MonoBehaviour
         if (!inCamera && other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead )
         {
             //add to target group 
-            _cameraManager.AddObjectToCameraView(gameObject.transform, false, false, desiredRadius, desiredWeight);
+            CameraManager.Instance.AddObjectToCameraView(gameObject.transform, false, false, desiredRadius, desiredWeight);
             inCamera = true;
         }
     }

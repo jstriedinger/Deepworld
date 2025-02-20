@@ -11,6 +11,22 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 //this class conrols everythign that happens when you are chased by monsters
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
+    private void Awake() 
+    { 
+        // If there is an instance, and it's not me, delete myself.
+    
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
+    
     [Header("Audio sfx")]
     [SerializeField] private EventReference sfxFirstMonsterAppear;
     public EventReference sfxMonsterScream;
@@ -50,6 +66,10 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _sfxMonsterChaseLoop = GetComponent<StudioEventEmitter>();
+        _sfxMonsterChaseLoop.EventInstance.setVolume(0.8f);
+        _currentMusicIndex = -1;
+        
         _closeMonstersOverlapReasults = new Collider2D[1];
         _monsterContactFilder = new ContactFilter2D();
         _monsterContactFilder.SetLayerMask(LayerMask.GetMask("Monster"));
@@ -113,13 +133,7 @@ public class AudioManager : MonoBehaviour
     {
         RuntimeManager.PauseAllEvents(p);
     }
-
-    private void Awake()
-    {
-        _sfxMonsterChaseLoop = GetComponent<StudioEventEmitter>();
-        _sfxMonsterChaseLoop.EventInstance.setVolume(0.8f);
-        _currentMusicIndex = -1;
-    }
+    
     
     //Stop al background music instances
     public void StopAllFMODInstances()

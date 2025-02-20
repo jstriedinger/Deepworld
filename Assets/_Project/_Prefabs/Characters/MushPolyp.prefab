@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 357983887604422357}
   - component: {fileID: 5848401080638167691}
   - component: {fileID: 5313386468524722187}
-  - component: {fileID: 1210358693159156862}
   - component: {fileID: 2610057797567158517}
   m_Layer: 7
   m_Name: MushPolyp
@@ -209,25 +208,26 @@ LineRenderer:
   m_SortingLayer: 9
   m_SortingOrder: 9
   m_Positions:
-  - {x: 1499.2496, y: -483.69757, z: 0}
-  - {x: 1498.9496, y: -483.6977, z: 0}
-  - {x: 1498.6495, y: -483.6978, z: 0}
-  - {x: 1498.3495, y: -483.69794, z: 0}
-  - {x: 1498.0494, y: -483.69806, z: 0}
-  - {x: 1497.7494, y: -483.69818, z: 0}
-  - {x: 1497.4493, y: -483.6983, z: 0}
-  - {x: 1497.1493, y: -483.69843, z: 0}
-  - {x: 1496.8492, y: -483.69855, z: 0}
-  - {x: 1496.5492, y: -483.69867, z: 0}
-  - {x: 1496.2491, y: -483.6988, z: 0}
-  - {x: 1495.9491, y: -483.6989, z: 0}
-  - {x: 1495.649, y: -483.69904, z: 0}
-  - {x: 1495.349, y: -483.69916, z: 0}
-  - {x: 1495.049, y: -483.69928, z: 0}
-  - {x: 1494.7489, y: -483.6994, z: 0}
-  - {x: 1494.4489, y: -483.69952, z: 0}
-  - {x: 1494.1488, y: -483.69965, z: 0}
-  - {x: 1493.8488, y: -483.69977, z: 0}
+  - {x: 42.5, y: 20.1, z: 0}
+  - {x: 42.5, y: 20.4, z: 0}
+  - {x: 42.5, y: 20.699999, z: 0}
+  - {x: 42.5, y: 20.999998, z: 0}
+  - {x: 42.5, y: 21.299997, z: 0}
+  - {x: 42.5, y: 21.599997, z: 0}
+  - {x: 42.5, y: 21.899996, z: 0}
+  - {x: 42.5, y: 22.199995, z: 0}
+  - {x: 42.5, y: 22.499994, z: 0}
+  - {x: 42.5, y: 22.799994, z: 0}
+  - {x: 42.5, y: 23.099993, z: 0}
+  - {x: 42.5, y: 23.399992, z: 0}
+  - {x: 42.5, y: 23.699991, z: 0}
+  - {x: 42.5, y: 23.99999, z: 0}
+  - {x: 42.5, y: 24.29999, z: 0}
+  - {x: 42.5, y: 24.599989, z: 0}
+  - {x: 42.5, y: 24.899988, z: 0}
+  - {x: 42.5, y: 25.199987, z: 0}
+  - {x: 42.5, y: 25.499987, z: 0}
+  - {x: 42.5, y: 25.799986, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2.9272702
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 1
   _internalLight2D: {fileID: 0}
   length: 20
   segmentPoses:
@@ -324,32 +325,11 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   targetDir: {fileID: 7952395136278865154}
   targetDist: 0.3
-  smoothSpeed: 0.1
+  smoothSpeed: 14
   wiggleSpeed: 1.67
   wiggleMagnitude: 10
   wiggleDir: {fileID: 2676425013465898529}
   resettingFromPlayer: 0
---- !u!114 &1210358693159156862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9190509482503729405}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 064995cca7ca9044c911c5151aab1d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  isFixed: 1
-  anchoredStart: {fileID: 7159232929035148527}
-  segmentAmount: 19
-  segmentsLength: 0.3
-  targetSearchLocation: {fileID: 5288612003932202808}
-  distTrigger: 2
-  smoothFactor: 0.02
 --- !u!114 &2610057797567158517
 MonoBehaviour:
   m_ObjectHideFlags: 0

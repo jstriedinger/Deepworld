@@ -17,7 +17,6 @@ public class MonsterLaunchMechanic : MonoBehaviour
     Rigidbody2D _rigidbody;
     private float _nextLaunch;
     private Coroutine _resetAIMove;
-    private GameManager _gameManager;
     private MonsterBase _monsterBase;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,7 +24,6 @@ public class MonsterLaunchMechanic : MonoBehaviour
     {
         _aiPath = GetComponent<AIPath>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        _gameManager = GameObject.FindFirstObjectByType<GameManager>();
         _behaviorTree = GetComponent<BehaviorTree>();
         _monsterBase =  GetComponent<MonsterBase>();
         
@@ -34,7 +32,7 @@ public class MonsterLaunchMechanic : MonoBehaviour
     private void Update()
     {
         //check if it can see me
-        //MovementUtility.WithinSight2D(transform, Vector3.zero, 360, _monsterBase.GetMonsterStats().ChasingRange, _gameManager.playerRef.gameObject, Vector3.zero, 0, LayerMask.GetMask("Monster"), false, null, true);
+        //MovementUtility.WithinSight2D(transform, Vector3.zero, 360, _monsterBase.GetMonsterStats().ChasingRange, GameManager.Instance.playerRef.gameObject, Vector3.zero, 0, LayerMask.GetMask("Monster"), false, null, true);
         if (Time.time >= _nextLaunch && (bool)_behaviorTree.GetVariable("isChasing").GetValue())
         {
             Collider2D col = Physics2D.OverlapCircle(transform.position, launchRadius, LayerMask.GetMask("Player"));

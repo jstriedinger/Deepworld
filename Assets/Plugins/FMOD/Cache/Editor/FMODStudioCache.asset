@@ -232,7 +232,7 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638514177293516722
+  lastModified: 638745258991166496
   FileSizes: []
   Exists: 1
 --- !u!114 &-3074462226683292851
@@ -277,7 +277,7 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638514177293791594
+  lastModified: 638745258991760416
   FileSizes: []
   Exists: 1
 --- !u!114 &-2074214064063209705
@@ -376,10 +376,10 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638514177293526741
+  lastModified: 638745258991185691
   FileSizes:
   - Name: 
-    Value: 1944
+    Value: 1990
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -422,12 +422,13 @@ MonoBehaviour:
   - {fileID: 6656686853560623902}
   - {fileID: 956646628356651725}
   - {fileID: 6798551333433890447}
+  - {fileID: 7420667893567458061}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3817822993745296562}
   StringsBanks:
   - {fileID: -5432930024993847}
-  cacheTime: 638514177293868531
+  cacheTime: 638745258992260999
   cacheVersion: 131618
 --- !u!114 &956646628356651725
 MonoBehaviour:
@@ -723,6 +724,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
+--- !u!114 &7420667893567458061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_Gate
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_Gate
+  Guid:
+    Data1: 1279453717
+    Data2: 1175780359
+    Data3: -227318651
+    Data4: 262849109
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1900
 --- !u!114 &7467037968471604609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,6 +793,6 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638514177293868531
+  lastModified: 638745258992260999
   FileSizes: []
   Exists: 1

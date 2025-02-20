@@ -20,6 +20,9 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
+   
     private enum StartSection
     {
         Default,
@@ -35,13 +38,6 @@ public class GameManager : MonoBehaviour
 
     public static event Action OnRestartingGame;
     
-    [Header("Systems")]
-    [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private AudioManager audioManager;
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private CinematicsManager cinematicsManager;
-    
-
     [Header("Level management")] 
     [SerializeField] private StartSection startSection;
     [SerializeField] private GameObject[] levelSections;
@@ -62,19 +58,18 @@ public class GameManager : MonoBehaviour
     private GameState _gameState;
     private Vector3 _originPos;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        //all sections are off except for the first one
-        
-        
-        _originPos = playerRef.transform.position;
-        IsPlayerDead = false;
-        _gameState = GameState.Cinematic;
-
-        playerLastPosition.transform.position = _originPos;
-        
-        audioManager.Initialize(playerRef.transform);
+    private void Awake() 
+    { 
+        // If there is an instance, and it's not me, delete myself.
+    
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
     }
 
     private void OnEnable()
@@ -89,9 +84,9 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
-        uiManager.HideMainMenu();
-        cinematicsManager.DoCinematicStartGame();
-        audioManager.OnStartGame();
+        UIManager.Instance.HideMainMenu();
+        CinematicsManager.Instance.DoCinematicStartGame();
+        AudioManager.Instance.OnStartGame();
     }
 
 
@@ -100,19 +95,26 @@ public class GameManager : MonoBehaviour
         //framerate
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+        
+        //Setting up
+        _originPos = playerRef.transform.position;
+        IsPlayerDead = false;
+        _gameState = GameState.Cinematic;
+        playerLastPosition.transform.position = _originPos;
+        
+        AudioManager.Instance.Initialize(playerRef.transform);
 
         Cursor.visible = false;
         if (!skipTemp)
         {
-            uiManager.Initialize(playerRef);
             _currentCheckPointIndex = (int)startSection;
             //now lets decide how to actually start the game
             Transform cp;
             if (startSection != StartSection.Default)
             {
                 //if not default lets change our camera tracking
-                cameraManager.ChangeCameraTracking();
-                //cameraManager.ChangePlayerRadius(30, true);
+                CameraManager.Instance.ChangeCameraTracking();
+                //CameraManager.Instance.ChangePlayerRadius(30, true);
                 ChangeGameState(GameState.Default);
                 playerRef.isHidden = true;
                 
@@ -120,13 +122,18 @@ public class GameManager : MonoBehaviour
 
             if (_currentCheckPointIndex >= 3)
             {
-                uiManager.SetupWorldUIForTitles();
-                uiManager.OnControlsChanged();
+                UIManager.Instance.SetupWorldUIForTitles();
+                UIManager.Instance.OnControlsChanged();
                 ToggleLigthing(true);
                 playerRef.ToggleMonsterEyeDetection(true);
                 playerRef.ToggleEyeFollowTarget(true);
-                audioManager.ChangeBackgroundMusic(5);
-                audioManager.ToggleCanPlayDangerMusic(true);
+                AudioManager.Instance.ChangeBackgroundMusic(5);
+                
+            }
+
+            if (_currentCheckPointIndex == 6)
+            {
+                AudioManager.Instance.ToggleCanPlayDangerMusic(false);
             }
             
 		    //Prepare everything to start from a checkpoint or something
@@ -141,20 +148,20 @@ public class GameManager : MonoBehaviour
                     }
                     LoadLevelSection(0);
                     ChangeGameState(GameState.Cinematic);
-                    audioManager.ChangeBackgroundMusic(1);
-                    cinematicsManager.DoCinematicTitles();
+                    
+                    CinematicsManager.Instance.DoCinematicTitles();
                     break;
                 case StartSection.Checkpoint1:
-                    uiManager.isWorldUiActive = true;
-                    audioManager.ChangeBackgroundMusic(1);
-                    cinematicsManager.PrepareBlueForMeetup();
+                    UIManager.Instance.isWorldUiActive = true;
+                    AudioManager.Instance.ChangeBackgroundMusic(1);
+                    CinematicsManager.Instance.PrepareBlueForMeetup();
                     blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
                 case StartSection.Checkpoint2:
-                    uiManager.isWorldUiActive = true;
-                    audioManager.ChangeBackgroundMusic(-1);
+                    UIManager.Instance.isWorldUiActive = true;
+                    AudioManager.Instance.ChangeBackgroundMusic(-1);
                     //place blue in the first point of path
-                    cinematicsManager.PrepareBlueForMonsterEncounter();
+                    CinematicsManager.Instance.PrepareBlueForMonsterEncounter();
                     break;
                 case StartSection.Checkpoint3:
                     playerRef.ToggleMonsterEyeDetection(true);
@@ -207,15 +214,15 @@ public class GameManager : MonoBehaviour
                     break;
                 case GameState.Paused:
                     playerRef.ToggleInputMap(true);
-                    audioManager.TogglePauseAudio(true);
-                    uiManager.PauseGame(true);
+                    AudioManager.Instance.TogglePauseAudio(true);
+                    UIManager.Instance.PauseGame(true);
                     break;
                 case GameState.Default:
-                    audioManager.TogglePauseAudio(false);
+                    AudioManager.Instance.TogglePauseAudio(false);
                     playerRef.ToggleInputMap(false);
                     if (_gameState == GameState.Paused)
                     {
-                        uiManager.PauseGame(false);
+                        UIManager.Instance.PauseGame(false);
                     }
                     
                     //always come back to playerCharacter action map
@@ -237,12 +244,12 @@ public class GameManager : MonoBehaviour
     public void GameOver(GameObject monster)
     {
         IsPlayerDead = true;
-        cameraManager.OnGameOver(monster);
+        CameraManager.Instance.OnGameOver(monster);
         ChangeGameState(GameState.Cinematic);
         //MetricManagerScript.instance?.LogString("Death", "1");
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1);
-        seq.Append(uiManager.blackout.DOFade(1, 2).SetEase(Ease.InCubic).OnComplete(
+        seq.Append(UIManager.Instance.blackout.DOFade(1, 2).SetEase(Ease.InCubic).OnComplete(
             () =>
             {
                 //Put playerCharacter on checkpoint
@@ -258,23 +265,23 @@ public class GameManager : MonoBehaviour
                 {
                     playerRef.transform.position = _originPos;
                 }
-                cameraManager.ResetTargetGroup();
+                CameraManager.Instance.ResetTargetGroup();
 
             }
         ));
         seq.AppendCallback(() =>
         {
             ChangeGameState(GameState.Default);
-            audioManager.UpdateMonstersChasing(false,true);
+            AudioManager.Instance.UpdateMonstersChasing(false,true);
             //playerRef.OnRestartingGame();
             OnRestartingGame?.Invoke();
         });
         seq.AppendInterval(1.5f);
-        seq.Append(uiManager.blackout.DOFade(0, 2).OnComplete(
+        seq.Append(UIManager.Instance.blackout.DOFade(0, 2).OnComplete(
             () =>
             {
                 IsPlayerDead = false;
-                audioManager.numMonstersChasing = 0;
+                AudioManager.Instance.numMonstersChasing = 0;
             }
         ));
        
@@ -284,7 +291,7 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         //stop all music
-        audioManager.StopAllFMODInstances();
+        AudioManager.Instance.StopAllFMODInstances();
         SceneManager.LoadScene(0);
         _currentCheckPointIndex = 0;
         
@@ -303,7 +310,7 @@ public class GameManager : MonoBehaviour
     #region UI
     public void TogglePauseGame()
     {
-        if (!uiManager.isPauseFading)
+        if (!UIManager.Instance.isPauseFading)
         {
             //only pause if we are not in a cinematic
             if (_gameState != GameState.Cinematic && _gameState != GameState.MainMenu)
@@ -328,18 +335,18 @@ public class GameManager : MonoBehaviour
     public void ShowMainMenuFirstTime()
     {
         ChangeGameState(GameState.MainMenu);
-        uiManager.ShowMainMenu();
+        UIManager.Instance.ShowMainMenu();
         
     }
 
     public void UIShowCredits()
     {
-        uiManager.ShowMenuCredits();
+        UIManager.Instance.ShowMenuCredits();
     }
 
     public void UIShowMenu()
     {
-        uiManager.ShowMainMenu();
+        UIManager.Instance.ShowMainMenu();
     }
     
     

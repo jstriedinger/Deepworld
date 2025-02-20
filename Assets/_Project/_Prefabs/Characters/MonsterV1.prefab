@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 45
   segmentPoses: []
@@ -519,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 45
   segmentPoses: []
@@ -858,6 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 45
   segmentPoses: []
@@ -1110,7 +1113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8543b5042968874da5ce26b3cfc4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterBase: {fileID: 0}
+  monsterBase: {fileID: 4013539651867559864}
   target: {fileID: 8644200576770049404}
   pupil: {fileID: 9086030757828695908}
   offMod: 0.1
@@ -2411,7 +2414,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -2849,8 +2852,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 1}
-        key1: {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 1}
+        key0: {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 0.78431374}
+        key1: {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 0.39215687}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -2866,8 +2869,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 32768
-        atime2: 65535
+        atime1: 22432
+        atime2: 57343
         atime3: 65535
         atime4: 0
         atime5: 0
@@ -2909,8 +2912,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -3028,7 +3031,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 9d99587d1b4afa94aa6df060d29ba951, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -6321,7 +6324,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 638064f95bc194378bdfc82b2739a359, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6342,7 +6345,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: -1078282617
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_RenderMode: 3
+  m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -6365,7 +6368,7 @@ ParticleSystemRenderer:
   m_VertexStreams: 00010304
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -7071,6 +7074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 45
   segmentPoses: []

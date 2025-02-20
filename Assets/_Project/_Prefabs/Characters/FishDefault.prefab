@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f9e7fd12d536441a7a8bc9eb62f0eac3, type: 2}
+  - {fileID: 2100000, guid: b93d97d5f89b7314e86bc19257a0139c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d6ce7d49872b44d89898fe015a172227, type: 3}
-  m_Color: {r: 0.2021627, g: 0.54467434, b: 0.7264151, a: 1}
+  m_Color: {r: 0.20392157, g: 0.7254902, b: 0.6638038, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1073741824
-  radius: 0.7
+  radius: 0.5
   height: 1
   canMove: 1
   maxSpeed: 4
@@ -168,10 +168,10 @@ MonoBehaviour:
     maximumPeriod: 1
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: 10
+  maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0
-  pickNextWaypointDist: 1
+  pickNextWaypointDist: 2
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   preventMovingBackwards: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
-    value: 1023
+    value: 330
 --- !u!114 &4042353508971603808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.7
+  m_Radius: 0.4
 --- !u!50 &8723988111937849810
 Rigidbody2D:
   serializedVersion: 5
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3069541806291960988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
@@ -342,6 +342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 4541520141479711640}
+  fishMats:
+  - {fileID: 2100000, guid: f9e7fd12d536441a7a8bc9eb62f0eac3, type: 2}
+  - {fileID: 2100000, guid: b93d97d5f89b7314e86bc19257a0139c, type: 2}
   randomSizes: 1
 --- !u!114 &498781679580504054
 MonoBehaviour:

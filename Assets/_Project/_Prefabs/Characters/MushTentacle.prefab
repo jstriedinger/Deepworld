@@ -145,26 +145,19 @@ LineRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 46
   m_Positions:
-  - {x: 1488.7771, y: -477.70203, z: 0}
-  - {x: 1488.2472, y: -477.42056, z: 0}
-  - {x: 1487.7173, y: -477.1391, z: 0}
-  - {x: 1487.1874, y: -476.85764, z: 0}
-  - {x: 1486.6575, y: -476.57617, z: 0}
-  - {x: 1486.1276, y: -476.2947, z: 0}
-  - {x: 1485.5977, y: -476.01324, z: 0}
-  - {x: 1485.0677, y: -475.73178, z: 0}
-  - {x: 1484.5378, y: -475.45032, z: 0}
-  - {x: 1484.0079, y: -475.16885, z: 0}
-  - {x: 1483.478, y: -474.8874, z: 0}
-  - {x: 1482.9481, y: -474.60593, z: 0}
-  - {x: 1482.4182, y: -474.32446, z: 0}
-  - {x: 1481.8883, y: -474.043, z: 0}
-  - {x: 1481.3584, y: -473.76154, z: 0}
-  - {x: 1480.8285, y: -473.48007, z: 0}
-  - {x: 1480.2986, y: -473.1986, z: 0}
-  - {x: 1479.7687, y: -472.91714, z: 0}
-  - {x: 1479.2388, y: -472.63568, z: 0}
-  - {x: 1478.7089, y: -472.35422, z: 0}
+  - {x: 1199.1263, y: -422.49332, z: 0}
+  - {x: 1199.3132, y: -421.92316, z: 0}
+  - {x: 1199.5001, y: -421.353, z: 0}
+  - {x: 1199.687, y: -420.78284, z: 0}
+  - {x: 1199.8739, y: -420.21268, z: 0}
+  - {x: 1200.0608, y: -419.64252, z: 0}
+  - {x: 1200.2477, y: -419.07236, z: 0}
+  - {x: 1200.4346, y: -418.5022, z: 0}
+  - {x: 1200.6215, y: -417.93204, z: 0}
+  - {x: 1200.8083, y: -417.36188, z: 0}
+  - {x: 1200.9952, y: -416.79172, z: 0}
+  - {x: 1201.1821, y: -416.22156, z: 0}
+  - {x: 1201.369, y: -415.6514, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2.452282
@@ -186,15 +179,15 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0.0148024, g: 0.2905661, b: 0.28285244, a: 1}
+      key1: {r: 0.97903365, g: 0.97903365, b: 0.97903365, a: 1}
+      key2: {r: 0.5622641, g: 0.5622641, b: 0.5622641, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 26872
       ctime2: 65535
       ctime3: 0
       ctime4: 0
@@ -211,7 +204,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -237,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _internalLight2D: {fileID: 0}
-  length: 20
+  length: 13
   segmentPoses:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -282,10 +275,10 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   isFixed: 1
   anchoredStart: {fileID: 6076551981611327697}
-  segmentAmount: 19
+  segmentAmount: 13
   segmentsLength: 0.3
   targetSearchLocation: {fileID: 3559799598047333730}
-  distTrigger: 8
+  distTrigger: 5
   smoothFactor: 0.03
 --- !u!114 &4707792565024266519
 MonoBehaviour:

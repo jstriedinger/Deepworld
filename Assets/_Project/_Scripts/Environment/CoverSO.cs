@@ -9,5 +9,6 @@ public class CoverSO : ScriptableObject
     [field: Header("Sound")]
     [field: SerializeField] public EventReference SfxEnter { get; private set; }
     [field: SerializeField] public EventReference SfxExit { get; private set; }
+    [field: SerializeField] public int CoverForce { get; private set; }
     
 }

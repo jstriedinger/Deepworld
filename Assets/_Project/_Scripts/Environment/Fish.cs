@@ -13,6 +13,7 @@ public class Fish : MonoBehaviour
     private bool evadingPlayer;
     private Flock _flockParentTask;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Material[] fishMats;
 
     [SerializeField]
     private bool randomSizes = true;
@@ -21,14 +22,26 @@ public class Fish : MonoBehaviour
     private void Awake()
     {
         evadingPlayer = false;
-        //randome sizing ourselves
-        if (randomSizes)
+        if (_spriteRenderer)
         {
-            float r1 = Random.Range(1, 1.51f);
-            float r2 = Random.Range(1, 1.51f);
-            transform.localScale = new Vector3(r1,r2,1);
+            //randome sizing ourselves
+            if (randomSizes)
+            {
+                float r1 = GetRandomStepFloat(1, 2f, 0.2f);
+                float r2 = GetRandomStepFloat(1, 1.4f, 0.1f);
+                transform.localScale = new Vector3(r1,r2,1);
+            }
+            _spriteRenderer.material = fishMats[Random.Range(0, fishMats.Length)];
+            _behaviorTree = GetComponent<BehaviorTree>();
+            
         }
-        _behaviorTree = GetComponent<BehaviorTree>();
+        
+    }
+    private float GetRandomStepFloat(float min, float max, float step)
+    {
+        int steps = Mathf.RoundToInt((max - min) / step); // Total possible steps
+        int randomStep = Random.Range(0, steps + 1); // Random step index
+        return min + (randomStep * step); // Convert step index to float
     }
 
     public void Initialize(BehaviorTree parentFlockTree, Flock parentFlockTask, bool reactToPlayer, GameObject playerRef)
