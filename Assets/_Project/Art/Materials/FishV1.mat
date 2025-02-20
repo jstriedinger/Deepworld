@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ATLAS_ON
+  - BLUR_ON
   - GLOWLIGHT_ON
   - GRADIENT2COL_ON
   - GRADIENT_ON
@@ -96,7 +97,7 @@ Material:
     - _AlphaRoundThreshold: 1
     - _BillboardY: 0
     - _BlurHD: 0
-    - _BlurIntensity: 0
+    - _BlurIntensity: 100
     - _Brightness: 0
     - _ChromAberrAlpha: 0.4
     - _ChromAberrAmount: 1

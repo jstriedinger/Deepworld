@@ -15,8 +15,11 @@ public class FishFlock : MonoBehaviour
     [SerializeField] private GameObject fishPrefab;
     [SerializeField] private bool reactToPlayer = true;
     [SerializeField] private float speed = 3;
+    [Tooltip("The greater the alignmentWeight is the more likely it is that the agents will be facing the same direction")]
     [SerializeField] private float alignment = .25f;
+    [Tooltip("The greater the cohesionWeight is the more likely it is that the agents will be moving towards a common position")]
     [SerializeField] private float cohesion = .6f;
+    [Tooltip("The greater the separationWeight is the more likely it is that the agents will be separated")]
     [SerializeField] private float separation = .3f;
     [SerializeField] private float initialFlockRadius = 3;
     private List<GameObject> _fishes = new List<GameObject>();
