@@ -688,15 +688,19 @@ public class CinematicsManager : MonoBehaviour
         }
 
         Sequence fishes = DOTween.Sequence();
-        fishes.AppendInterval(8);
+        fishes.AppendInterval(10);
         fishes.Append(fish1Titles.DOPath(fishPathPos, 25, PathType.CatmullRom, PathMode.Sidescroller2D)
             .SetEase(Ease.InOutSine)
             .SetLookAt(0.001f, transform.forward, Vector3.right));
         fishes.Join(fish2Titles.DOPath(fish2PathPos, 14, PathType.CatmullRom, PathMode.Sidescroller2D)
             .SetEase(Ease.InOutSine)
-            .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(8));
+            .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(10));
         
         Sequence introBlue = DOTween.Sequence()
+            .AppendInterval(5)
+            .AppendCallback(() => { 
+                AudioManager.Instance.ChangeBackgroundMusic(1);
+            })
             .AppendInterval(9)
             .Append(_blueNpc.transform.DOPath(bluePathC0Pos, blueC0Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -714,18 +718,15 @@ public class CinematicsManager : MonoBehaviour
             .Join(_blueNpc.transform
                 .DOPath(bluePathC1Pos, blueC01Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(4))
+                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(5))
             .Join(UIManager.Instance.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(10f ));
 
+        CameraManager.Instance.toggleVCamDeadZone(false);
         Sequence introMover = DOTween.Sequence()
-            .Append(UIManager.Instance.blackout.DOFade(0, 3))
-            .AppendInterval(1)
-            .AppendCallback(() => { 
-                AudioManager.Instance.ChangeBackgroundMusic(1);
-                CameraManager.Instance.toggleVCamDeadZone(false);
-            })
-            .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 40)
+            .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 45)
                 .SetEase(Ease.InOutSine))
+            .Join(UIManager.Instance.blackout.DOFade(0, 3))
+           
             .Join(introBlue)
             .OnComplete(
                 () =>

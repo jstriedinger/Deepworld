@@ -15,6 +15,7 @@ public class TentacleGate : MonoBehaviour
     [SerializeField] private Light2D gateLight;
     private TentacleToggler[] _tentacleTogglers;
     [SerializeField] private TentacleGateSwitcher tentacleGateSwitcher;
+    [SerializeField] private GateTentacles gateTentacles;
     
     private float _nextCloseTime;
     private bool _canCloseGate;
@@ -56,19 +57,15 @@ public class TentacleGate : MonoBehaviour
                 //playone shot with volume
                 var instance = RuntimeManager.CreateInstance(config.SfxActivate);
                 instance.set3DAttributes(RuntimeUtils.To3DAttributes(tentacleGateSwitcher.transform.position));
-                instance.setVolume(.75f);
+                instance.setVolume(.9f);
                 instance.start();
                 instance.release();
             });
-            seq.AppendInterval(.75f);
+            seq.AppendInterval(.25f);
             seq.AppendCallback(
                 () =>
                 {
-                    
-                    foreach (TentacleToggler toggler in _tentacleTogglers)
-                    {
-                        toggler.Open();
-                    }
+                    gateTentacles.ToggleGateTentacles(true);
 
                 });
             seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 2,
@@ -90,10 +87,7 @@ public class TentacleGate : MonoBehaviour
             _isOpen = false;
             Debug.Log("Closing gate");
 
-            foreach (TentacleToggler toggler in _tentacleTogglers)
-            {
-                toggler.Close();
-            }
+            gateTentacles.ToggleGateTentacles(false);
 
             Sequence seq = DOTween.Sequence();
             seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 0,
@@ -116,7 +110,6 @@ public class TentacleGate : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _canCloseGate = false;
-            Debug.Log("Cnat close gate");
         }
     }
 
@@ -125,19 +118,18 @@ public class TentacleGate : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _canCloseGate = true;
-            Debug.Log("Can close gate");
         }
     }
 
     //Feedback when player is close and can activate the Gate
     public void ClosePlayerFeedback(bool toggle)
     {
-        if(toggle && _canOpenGate)
+        /*if(toggle && _canOpenGate)
             tentacleGateSwitcher.PlayerCloseFeedback(true);
         else
         {
             tentacleGateSwitcher.PlayerCloseFeedback(false);
-        }
+        }*/
         
     }
 }

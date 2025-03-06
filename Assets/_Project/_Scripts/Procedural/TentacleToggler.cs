@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TentacleToggler : MonoBehaviour
 {
-    private Tentacle _tentacle;
+    private TentacleInfo _tentacle;
 
     private float _targetDistDefault;
 
@@ -16,8 +16,8 @@ public class TentacleToggler : MonoBehaviour
 
     private void Awake()
     {
-        _tentacle = GetComponent<Tentacle>();
-        _targetDistDefault = _tentacle.targetDist;
+        _tentacle = GetComponent<TentacleInfo>();
+        _targetDistDefault = _tentacle.minPointGap;
     }
 
     // Update is called once per frame
@@ -29,11 +29,12 @@ public class TentacleToggler : MonoBehaviour
 
     public void Close()
     {
-        _tentacle.targetDist = _targetDistDefault;
+        _tentacle.currentPointGap = _tentacle.minPointGap;
     }
 
     public void Open()
     {
-        _tentacle.targetDist = 0.1f;
+        _tentacle.currentPointGap = 0.05f;
     }
+    
 }

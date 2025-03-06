@@ -68,8 +68,9 @@ public class Hideout : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if( collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
+        if( collision.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead)
         {
+            GlobalVariables.Instance.SetVariableValue("isPlayerHidden", true);
             GameManager.Instance.playerRef.isHidden = true;
             _punchDownTween.Rewind();
             _punchDownTween.Play();
@@ -83,18 +84,14 @@ public class Hideout : MonoBehaviour
             RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
             _lastContactPos = collision.transform.position;
 
-            Collider2D[] monsterHits = Physics2D.OverlapCircleAll(transform.position, 40, LayerMask.GetMask("Monster"));
+            Collider2D[] monsterHits = Physics2D.OverlapCircleAll(collision.transform.position, 100, LayerMask.GetMask("Monster"));
             //lets tell the monster chasing that were near the shelter
             foreach (Collider2D monsterCollider in monsterHits)
             {
+                Debug.Log("Found monster: "+monsterCollider.gameObject.name);
                 MonsterReactive monsterReactive = monsterCollider.GetComponent<MonsterReactive>();
-                if (monsterReactive.CanReactToPlayer())
-                {
-                    BehaviorTree tree = monsterCollider.gameObject.GetComponent<BehaviorTree>();
-                    monsterReactive?.UpdateMonsterState(MonsterState.Frustrated);
-                    tree?.SendEvent("PlayerHidesDuringChase");
-                    
-                }
+                monsterReactive.OnPlayerHides();
+                
             }
 
             //metric handler
@@ -114,11 +111,12 @@ public class Hideout : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead)
+        if (collision.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead)
         {
             _punchUpTween.Rewind();
             _punchUpTween.Play();
             
+            GlobalVariables.Instance.SetVariableValue("isPlayerHidden", false);
             GameManager.Instance.playerRef.isHidden = false;
             //Add force for player away
             Vector3 d = (collision.transform.position - transform.position).normalized;

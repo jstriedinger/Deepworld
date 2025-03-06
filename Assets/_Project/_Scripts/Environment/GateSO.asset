@@ -20,4 +20,4 @@ MonoBehaviour:
       Data4: 262849109
     Path: event:/SFX/sfx_Gate
   <GateOpenTime>k__BackingField: 9
-  <SwitchResetTime>k__BackingField: 2
+  <SwitchResetTime>k__BackingField: 1

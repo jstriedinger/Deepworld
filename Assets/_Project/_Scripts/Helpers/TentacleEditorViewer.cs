@@ -11,6 +11,7 @@ public class TentacleEditorViewer : MonoBehaviour
 {
 
     private Tentacle _tentacle;
+    private TentacleInfo _tentacleInfo;
     private Light2D _light2D;
     private BodyTentacle _bodyTentacle;
     private Dangler _dangler;
@@ -55,6 +56,7 @@ public class TentacleEditorViewer : MonoBehaviour
             _lineRenderer = GetComponent<LineRenderer>();
             _tentacle = GetComponent<Tentacle>();
             _bodyTentacle = GetComponent<BodyTentacle>();
+            _tentacleInfo = GetComponent<TentacleInfo>();
             _dangler = GetComponent<Dangler>();
             if (_tentacle)
             {
@@ -77,6 +79,12 @@ public class TentacleEditorViewer : MonoBehaviour
                 length = _dangler.length;
                 targetDir = _dangler.targetDir;
                 targetDist = _dangler.targetDist;
+            }
+            else if (_tentacleInfo)
+            {
+                length = _tentacleInfo.tentacleLength;
+                targetDir = _tentacleInfo.targetDir;
+                targetDist = _tentacleInfo.minPointGap;
             }
         }
     }

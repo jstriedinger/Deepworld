@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     public SpriteRenderer logoUsc;
     public SpriteRenderer logoBerklee;
     public SpriteRenderer logoTitle;
+    public ParticleSystem swimTutorialFeedback;
     //1. move 2.dash 3.call
     [SerializeField] private SpriteRenderer[] uiKeyboardIcons;
     [SerializeField] private SpriteRenderer[] uiGamepadIcons;
@@ -287,7 +288,7 @@ public class UIManager : MonoBehaviour
     //Fadeout title logo + move icons after playerCharacter moves in a little to the right
     public void TutorialFadeoutMoveSwimUI()
     {
-        
+        ToggleOnSwimUIFeedback(false);
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.OutCubic);
         seq.Append(uiKeyboardIcons[0].DOFade(0, 4f))
@@ -297,10 +298,6 @@ public class UIManager : MonoBehaviour
             .Join(uiXboxIcons[0].DOFade(0, 4f))
             .Join(uiXboxIcons[1].DOFade(0, 4f));
 
-        seq.OnComplete(() =>
-        {
-            ToggleOnSwimUIFeedback(false);
-        });
     }
     
     public void ToggleOnSwimUIFeedback(bool toggle)
@@ -313,6 +310,7 @@ public class UIManager : MonoBehaviour
 
     public void UIOnSwimFeedback()
     {
+        swimTutorialFeedback.Play();
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.OutCubic);
         seq.Append(uiKeyboardIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1))

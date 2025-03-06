@@ -10,13 +10,14 @@ public class CameraZoneHelper : MonoBehaviour
     [SerializeField] private float desiredWeight;
 
     [SerializeField] private bool makeNoise = true;
-    
 
-    private bool inCamera;
+    private bool _trigerred;
+    private bool _inCamera;
     // Start is called before the first frame update
     void Start()
     {
-        inCamera = false;
+        _inCamera = false;
+        _trigerred = false;
     }
 
     // Update is called once per frame
@@ -27,32 +28,34 @@ public class CameraZoneHelper : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead && inCamera)
+        if (other.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead && _inCamera)
         {
             //add to target group 
             CameraManager.Instance.RemoveObjectFromCameraView(gameObject.transform, false);
-            inCamera = false;
+            _inCamera = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!inCamera && other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead )
+        if (!_inCamera && other.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead )
         {
             //add to target group 
-            CameraManager.Instance.AddObjectToCameraView(gameObject.transform, false, makeNoise, desiredRadius, desiredWeight);
-            inCamera = true;
+            CameraManager.Instance.AddObjectToCameraView(gameObject.transform, false,
+                (!_trigerred && makeNoise) ? true : false, desiredRadius, desiredWeight);
+            _inCamera = true;
+            _trigerred = true;
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         //extra thing to check in case of death and restart
-        if (!inCamera && other.gameObject.CompareTag("Player") && !GameManager.IsPlayerDead )
+        if (!_inCamera && other.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead )
         {
             //add to target group 
             CameraManager.Instance.AddObjectToCameraView(gameObject.transform, false, false, desiredRadius, desiredWeight);
-            inCamera = true;
+            _inCamera = true;
         }
     }
 }

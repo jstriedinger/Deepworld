@@ -74,8 +74,10 @@ public class BlueNPC : MonoBehaviour
         {
             _sfxLastTime = sfxCall1;
         }
-
         FMODUnity.RuntimeManager.PlayOneShot(_sfxLastTime, transform.position);
+        //visual feedback
+        transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.2f);
+
     }
 
     public void ResetProceduralBody()

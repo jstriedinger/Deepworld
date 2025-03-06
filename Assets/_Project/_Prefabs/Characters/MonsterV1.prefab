@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2165228734457889701}
-  - component: {fileID: 5832026689471570019}
+  - component: {fileID: 3260330841579852735}
   m_Layer: 9
-  m_Name: Tail4
+  m_Name: Tail3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -26,14 +26,14 @@ Transform:
   m_GameObject: {fileID: 105534937593617927}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8871505537441694640}
   m_Father: {fileID: 7511137049809134742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5832026689471570019
+--- !u!114 &3260330841579852735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +42,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 105534937593617927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddd34d811a5d814eac2f23ad9ccd6ec, type: 3}
+  m_Script: {fileID: 11500000, guid: c268ddf9f36153246a87ba1a2f3b6163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  center: {fileID: 1824785459058989857}
+  randomize: 1
+  tentacleLength: 40
+  lineRenderer: {fileID: 7766839229153368042}
+  targetDir: {fileID: 6044630155847732619}
+  wiggleDir: {fileID: 6567151680263472929}
+  minDistBetweenPoints: 0.21
+  minWiggleSpeed: 3.1
+  currentWiggleSpeed: 0
 --- !u!1 &138620560737598105
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +146,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2451072184835876938}
-  - component: {fileID: 7229075155926953987}
   - component: {fileID: 3330321730601023884}
   m_Layer: 9
   m_Name: Tentacle
@@ -165,29 +170,6 @@ Transform:
   - {fileID: 7731861231031968431}
   m_Father: {fileID: 6418021139593947388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7229075155926953987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229967711980109048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonReactive: 0
-  _internalLight2D: {fileID: 0}
-  length: 45
-  segmentPoses: []
-  targetDir: {fileID: 3567410348307882826}
-  targetDist: 0.2
-  smoothSpeed: 0.05
-  wiggleSpeed: 2
-  wiggleMagnitude: 60
-  wiggleDir: {fileID: 7731861231031968431}
-  resettingFromPlayer: 0
 --- !u!120 &3330321730601023884
 LineRenderer:
   serializedVersion: 2
@@ -212,7 +194,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 4a83a857404a198489cd1425b64304d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -232,7 +214,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 862094791
   m_SortingLayer: 6
-  m_SortingOrder: 5
+  m_SortingOrder: 4
   m_Positions:
   - {x: 1119.2999, y: -374.8, z: 0}
   - {x: 1118.9999, y: -374.8, z: 0}
@@ -286,7 +268,7 @@ LineRenderer:
   - {x: 1104.5975, y: -374.8, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2.9703496
+    widthMultiplier: 4.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -300,8 +282,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0.08
+        time: 0.8
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -382,6 +364,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1824785459058989857}
+  - {fileID: 8551760104901833387}
   - {fileID: 6557561463741752968}
   - {fileID: 345475535437851572}
   - {fileID: 6831751346759868666}
@@ -483,7 +466,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6963636515948846870}
-  - component: {fileID: 4280019566030105874}
   - component: {fileID: 1646938015526981060}
   m_Layer: 9
   m_Name: Tentacle
@@ -508,29 +490,6 @@ Transform:
   - {fileID: 1667678333124123414}
   m_Father: {fileID: 7198926105143099718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4280019566030105874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063804294455187889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonReactive: 0
-  _internalLight2D: {fileID: 0}
-  length: 45
-  segmentPoses: []
-  targetDir: {fileID: 7220749084569027762}
-  targetDist: 0.2
-  smoothSpeed: 0.05
-  wiggleSpeed: 2
-  wiggleMagnitude: 60
-  wiggleDir: {fileID: 1667678333124123414}
-  resettingFromPlayer: 0
 --- !u!120 &1646938015526981060
 LineRenderer:
   serializedVersion: 2
@@ -555,7 +514,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 4a83a857404a198489cd1425b64304d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -575,7 +534,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 862094791
   m_SortingLayer: 6
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Positions:
   - {x: 1119.2999, y: -374, z: 0}
   - {x: 1118.9999, y: -374, z: 0}
@@ -629,7 +588,7 @@ LineRenderer:
   - {x: 1104.5975, y: -374, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2.9703496
+    widthMultiplier: 3.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -643,8 +602,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0.08
+        time: 0.8
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -823,7 +782,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8871505537441694640}
-  - component: {fileID: 781208060262266928}
   - component: {fileID: 7766839229153368042}
   m_Layer: 9
   m_Name: Tentacle
@@ -848,29 +806,6 @@ Transform:
   - {fileID: 6567151680263472929}
   m_Father: {fileID: 2165228734457889701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &781208060262266928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1728671101987608964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonReactive: 0
-  _internalLight2D: {fileID: 0}
-  length: 45
-  segmentPoses: []
-  targetDir: {fileID: 6044630155847732619}
-  targetDist: 0.2
-  smoothSpeed: 0.05
-  wiggleSpeed: 2
-  wiggleMagnitude: 60
-  wiggleDir: {fileID: 6567151680263472929}
-  resettingFromPlayer: 0
 --- !u!120 &7766839229153368042
 LineRenderer:
   serializedVersion: 2
@@ -895,7 +830,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 4a83a857404a198489cd1425b64304d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -969,7 +904,7 @@ LineRenderer:
   - {x: 1104.9976, y: -374.40002, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2.9703496
+    widthMultiplier: 4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -983,8 +918,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0.08
+        time: 0.8
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1066,6 +1001,37 @@ Transform:
   m_Children:
   - {fileID: 7220749084569027762}
   m_Father: {fileID: 6963636515948846870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3308747307455150530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8551760104901833387}
+  m_Layer: 9
+  m_Name: HeadPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8551760104901833387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308747307455150530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8975018061798418240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3704756681455462400
 GameObject:
@@ -1160,11 +1126,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 728086530730403629}
-  - component: {fileID: 1070843045889017767}
+  - component: {fileID: 2971716223832604460}
   m_Layer: 9
-  m_Name: Tail3
+  m_Name: Tail2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1177,14 +1143,14 @@ Transform:
   m_GameObject: {fileID: 5384671800632494852}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8281274613855689255}
   m_Father: {fileID: 7511137049809134742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1070843045889017767
+--- !u!114 &2971716223832604460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1193,11 +1159,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5384671800632494852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddd34d811a5d814eac2f23ad9ccd6ec, type: 3}
+  m_Script: {fileID: 11500000, guid: c268ddf9f36153246a87ba1a2f3b6163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  center: {fileID: 1824785459058989857}
+  randomize: 1
+  tentacleLength: 40
+  lineRenderer: {fileID: 5981271975517618766}
+  targetDir: {fileID: 8647625367464663147}
+  wiggleDir: {fileID: 3767183701739463978}
+  minDistBetweenPoints: 0.21
+  minWiggleSpeed: 3.1
+  currentWiggleSpeed: 0
 --- !u!1 &5401863154645315687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,6 +1227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterStats: {fileID: 11400000, guid: af124119e7d5a461c9fbc0d2ea5c2f11, type: 2}
+  monsterTails: {fileID: 6272807196478843425}
   vfxSwimBubbles: {fileID: 6305316572594725225}
   vfxDetect: {fileID: 6299376254121673512}
   _tail: {fileID: 7511137049809134742}
@@ -1326,7 +1299,7 @@ MonoBehaviour:
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
-  rotationSpeed: 360
+  rotationSpeed: 270
   slowdownDistance: 0
   pickNextWaypointDist: 4
   alwaysDrawGizmos: 0
@@ -6418,6 +6391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7511137049809134742}
+  - component: {fileID: 6272807196478843425}
   m_Layer: 9
   m_Name: Tails
   m_TagString: Untagged
@@ -6439,11 +6413,32 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7198926105143099718}
-  - {fileID: 6418021139593947388}
   - {fileID: 728086530730403629}
   - {fileID: 2165228734457889701}
+  - {fileID: 6418021139593947388}
   m_Father: {fileID: 1640569811670402890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6272807196478843425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5854433926204753316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2d90dfb29d52548ab2e2a4fc99e142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleCenterPivot: {fileID: 1824785459058989857}
+  huntCenterPivot: {fileID: 8551760104901833387}
+  aiPath: {fileID: 2289235338297122811}
+  rotateToCenterSpeed: 5
+  extraDistBetweenPoints: 0.02
+  extraWiggleSpeed: 0.4
+  extraLength: 3
+  smoothSpeed: 0.04
+  idleWiggleMagnitude: 55
 --- !u!1 &5874175611909132038
 GameObject:
   m_ObjectHideFlags: 0
@@ -6568,7 +6563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7198926105143099718}
-  - component: {fileID: 1381848429674875383}
+  - component: {fileID: 1077372563254578892}
   m_Layer: 9
   m_Name: Tail
   m_TagString: Untagged
@@ -6592,7 +6587,7 @@ Transform:
   - {fileID: 6963636515948846870}
   m_Father: {fileID: 7511137049809134742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1381848429674875383
+--- !u!114 &1077372563254578892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6601,11 +6596,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6934382207847963032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddd34d811a5d814eac2f23ad9ccd6ec, type: 3}
+  m_Script: {fileID: 11500000, guid: c268ddf9f36153246a87ba1a2f3b6163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  center: {fileID: 1824785459058989857}
+  randomize: 0
+  tentacleLength: 35
+  lineRenderer: {fileID: 1646938015526981060}
+  targetDir: {fileID: 7220749084569027762}
+  wiggleDir: {fileID: 1667678333124123414}
+  minDistBetweenPoints: 0.2
+  minWiggleSpeed: 3.2
+  currentWiggleSpeed: 0
 --- !u!1 &7145990796068668100
 GameObject:
   m_ObjectHideFlags: 0
@@ -6615,11 +6616,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6418021139593947388}
-  - component: {fileID: 6098455532041112780}
+  - component: {fileID: 6744927768474618233}
   m_Layer: 9
-  m_Name: Tail2
+  m_Name: Tail4
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6632,14 +6633,14 @@ Transform:
   m_GameObject: {fileID: 7145990796068668100}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2451072184835876938}
   m_Father: {fileID: 7511137049809134742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6098455532041112780
+--- !u!114 &6744927768474618233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6648,11 +6649,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7145990796068668100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddd34d811a5d814eac2f23ad9ccd6ec, type: 3}
+  m_Script: {fileID: 11500000, guid: c268ddf9f36153246a87ba1a2f3b6163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  center: {fileID: 1824785459058989857}
+  randomize: 1
+  tentacleLength: 43
+  lineRenderer: {fileID: 3330321730601023884}
+  targetDir: {fileID: 3567410348307882826}
+  wiggleDir: {fileID: 7731861231031968431}
+  minDistBetweenPoints: 0.21
+  minWiggleSpeed: 3
+  currentWiggleSpeed: 0
 --- !u!1 &7232508873316604347
 GameObject:
   m_ObjectHideFlags: 0
@@ -7037,7 +7044,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8281274613855689255}
-  - component: {fileID: 3921976907519975270}
   - component: {fileID: 5981271975517618766}
   m_Layer: 9
   m_Name: Tentacle
@@ -7062,29 +7068,6 @@ Transform:
   - {fileID: 3767183701739463978}
   m_Father: {fileID: 728086530730403629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3921976907519975270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9176903837018877538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonReactive: 0
-  _internalLight2D: {fileID: 0}
-  length: 45
-  segmentPoses: []
-  targetDir: {fileID: 8647625367464663147}
-  targetDist: 0.2
-  smoothSpeed: 0.05
-  wiggleSpeed: 2
-  wiggleMagnitude: 60
-  wiggleDir: {fileID: 3767183701739463978}
-  resettingFromPlayer: 0
 --- !u!120 &5981271975517618766
 LineRenderer:
   serializedVersion: 2
@@ -7109,7 +7092,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 4a83a857404a198489cd1425b64304d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7183,7 +7166,7 @@ LineRenderer:
   - {x: 1104.1976, y: -374.40002, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2.9703496
+    widthMultiplier: 4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -7197,8 +7180,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 0.08
+        time: 0.8
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0

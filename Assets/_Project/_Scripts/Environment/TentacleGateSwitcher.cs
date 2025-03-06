@@ -12,19 +12,20 @@ public class TentacleGateSwitcher : MonoBehaviour
     [SerializeField] private Light2D bulbLight;
     [SerializeField] private float activeLightIntensity;
     [SerializeField] private float defaultLightIntensity;
+    [SerializeField] private GateTentacles gateSwitchTentacles;
     
     [Header("UX circle")]
     [SerializeField] private SpriteRenderer circleSprite;
     [SerializeField] private float circleRotateDuration;
-    [SerializeField] private float circleScaleDuration;
-    [FormerlySerializedAs("spriteHighAlpha")] [SerializeField] private float circleHighAlpha;
+    [SerializeField] private float tweenDuration;
 
     private Tween _spriteScaleTween;
     private Tween _spriteRotateTween;
     private Tween _lightTween;
+    private Sequence _playerFeedbackTween;
 
 
-    private Vector3 _spriteScaleHigh;
+    private Vector3 _spriteScaleDefault;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,15 +35,34 @@ public class TentacleGateSwitcher : MonoBehaviour
 
     private void Init()
     {
-        _spriteScaleHigh = circleSprite.transform.localScale;
+        _spriteScaleDefault = circleSprite.transform.localScale;
         circleSprite.transform.rotation = quaternion.identity;
-        circleSprite.transform.localScale = _spriteScaleHigh;
+        circleSprite.transform.localScale = _spriteScaleDefault;
+
+        circleSprite.color = new Color(circleSprite.color.r, circleSprite.color.g, circleSprite.color.b, 0);
+        _playerFeedbackTween = DOTween.Sequence();
+        _playerFeedbackTween.Append(circleSprite.transform.DOScale(
+            1.5f,
+            tweenDuration));
+        _playerFeedbackTween.Join(DOTween.To(() => circleSprite.color.a, x =>
+                {
+                    Color tmp = circleSprite.color;
+                    tmp.a = x;
+                    circleSprite.color = tmp;
+                },
+                0.075f, tweenDuration));
+        _playerFeedbackTween.Join(DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x,
+            activeLightIntensity,
+            tweenDuration));
+        _playerFeedbackTween.SetAutoKill(false).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
         
-        _spriteScaleTween = circleSprite.transform.DOScale(
-                _spriteScaleHigh - (Vector3.one * .2f),
-                circleScaleDuration)
-            .SetAutoKill(false).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
-        
+        // _spriteScaleTween = circleSprite.transform.DOScale(
+        //         _spriteScaleHigh - (Vector3.one * .4f),
+        //         circleScaleDuration)
+        //     .SetAutoKill(false).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        // _lightTween = DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x, activeLightIntensity,
+        //     circleScaleDuration).SetAutoKill(false).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        //
         _spriteRotateTween = circleSprite.transform.DORotate(
                 new Vector3(0, 0, 360),
                 circleRotateDuration,
@@ -50,6 +70,7 @@ public class TentacleGateSwitcher : MonoBehaviour
             .SetRelative(true)
             .SetEase(Ease.Linear)
             .SetLoops(-1);
+        
 
         
         
@@ -57,20 +78,15 @@ public class TentacleGateSwitcher : MonoBehaviour
 
     public void DisableSwitcher()
     {
-        
+        gateSwitchTentacles.ToggleSwitchTentacles(true);
+        _playerFeedbackTween.Rewind();
         //Now make bulb small and turn off light
-        Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(.75f);
-        seq.Append(bulb.DOScaleY(0.5f, 1f));
-        seq.Join(DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x, 0.25f,
-            .75f));
-
     }
 
     private void OnDisable()
     {
-        _spriteScaleTween.Kill();
-        _spriteRotateTween.Kill();
+        //_spriteScaleTween.Kill();
+        //_spriteRotateTween.Kill();
     }
 
     private void OnEnable()
@@ -80,14 +96,8 @@ public class TentacleGateSwitcher : MonoBehaviour
 
     public void EnableSwitcher()
     {
-        Sequence seq = DOTween.Sequence();
-        seq.Append(bulb.DOScaleY(0.9f, .75f));
-        seq.Join(DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x, defaultLightIntensity,
-            .75f));
-        seq.Join(circleSprite.transform.DOScale(
-            _spriteScaleHigh,
-            .75f));  
-        
+        gateSwitchTentacles.ToggleSwitchTentacles(false);
+        _playerFeedbackTween.Play();
         
     }
 

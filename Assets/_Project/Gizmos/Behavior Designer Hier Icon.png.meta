@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5b5f458971c6fd5459c51a7b8079bc3b
+guid: f011c2328e41d994b83d3c757e68904c
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -37,6 +37,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 15277
   packageName: Behavior Designer - Behavior Trees for Everyone
-  packageVersion: 1.7.11
-  assetPath: Assets/Gizmos/Behavior Designer Scene Icon.png
-  uploadId: 702801
+  packageVersion: 1.7.12
+  assetPath: Assets/Gizmos/Behavior Designer Hier Icon.png
+  uploadId: 732694

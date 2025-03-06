@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterStats: {fileID: 11400000, guid: b211b289bb08f445c9343b19ed11a8ea, type: 2}
+  monsterTails: {fileID: 0}
   vfxSwimBubbles: {fileID: 1940917342075672384}
   vfxDetect: {fileID: 1874794172322460929}
   _tail: {fileID: 2689653209077813951}

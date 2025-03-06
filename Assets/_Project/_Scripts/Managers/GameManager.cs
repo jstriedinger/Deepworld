@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public bool skipTemp = true;
     [HideInInspector]
-    public static bool IsPlayerDead;
+    public bool isPlayerDead;
     private int _currentCheckPointIndex = -1;
     private GameState _gameState;
     private Vector3 _originPos;
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         
         //Setting up
         _originPos = playerRef.transform.position;
-        IsPlayerDead = false;
+        isPlayerDead = false;
         _gameState = GameState.Cinematic;
         playerLastPosition.transform.position = _originPos;
         
@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
     //When playerCharacter gets eaten
     public void GameOver(GameObject monster)
     {
-        IsPlayerDead = true;
+        isPlayerDead = true;
         CameraManager.Instance.OnGameOver(monster);
         ChangeGameState(GameState.Cinematic);
         //MetricManagerScript.instance?.LogString("Death", "1");
@@ -280,7 +280,7 @@ public class GameManager : MonoBehaviour
         seq.Append(UIManager.Instance.blackout.DOFade(0, 2).OnComplete(
             () =>
             {
-                IsPlayerDead = false;
+                isPlayerDead = false;
                 AudioManager.Instance.numMonstersChasing = 0;
             }
         ));
@@ -400,13 +400,13 @@ public class GameManager : MonoBehaviour
         float envLight, playerLight, propsLight;
         if (toogle)
         {
-            envLight = 0.1f;
-            propsLight = 0.4f;
-            playerLight = .45f;
+            envLight = 0.3f;
+            propsLight = 0.35f;
+            playerLight = .5f;
         }
         else
         {
-            envLight = 0.5f;
+            envLight = 0.6f;
             propsLight = 0.6f;
             playerLight = .7f;
         }

@@ -41,13 +41,14 @@ public class AudioManager : MonoBehaviour
     private StudioEventEmitter _sfxMonsterChaseLoop;
     
     [Header("Music")]
+    [SerializeField] private EventReference musicUnderwaterLoop;
     [SerializeField] private EventReference musicIntro;
     [SerializeField] private EventReference musicBlue;
     [SerializeField] private EventReference musicMystery;
     [SerializeField] private EventReference musicCloseDanger;
     [SerializeField] private EventReference musicUnderworld;
     [SerializeField] private int closeDangerRadius = 40;
-    private FMOD.Studio.EventInstance _instanceMusicIntro, _instanceMusicUnderworld, _instanceMusicBlue, _currentInstancePlaying,
+    private FMOD.Studio.EventInstance _instanceMusicUnderwaterLoop, _instanceMusicIntro, _instanceMusicUnderworld, _instanceMusicBlue, _currentInstancePlaying,
         _instanceCloseDanger, _instanceMusicMystery;
     // order of above 0 = ambient intro 1= danger 2=friend
     private int _currentMusicIndex;
@@ -105,6 +106,7 @@ public class AudioManager : MonoBehaviour
     {
         _playerRef = playerRef;
         playerCharacter = _playerRef.GetComponent<PlayerCharacter>();
+        _instanceMusicUnderwaterLoop = RuntimeManager.CreateInstance(musicUnderwaterLoop.Guid);
         _instanceMusicIntro = RuntimeManager.CreateInstance(musicIntro.Guid);
         _instanceMusicBlue = RuntimeManager.CreateInstance(musicBlue.Guid);
         _instanceMusicMystery = RuntimeManager.CreateInstance(musicMystery.Guid);
@@ -126,7 +128,10 @@ public class AudioManager : MonoBehaviour
         //close danger is "always running"
         _instanceCloseDanger.start();
         _instanceCloseDanger.setVolume(1);
-        
+
+        //Underwater loop is always running
+        _instanceMusicUnderwaterLoop.start();
+
     }
 
     public void TogglePauseAudio(bool p)

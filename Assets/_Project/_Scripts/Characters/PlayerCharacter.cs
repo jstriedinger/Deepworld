@@ -198,13 +198,6 @@ public class PlayerCharacter : MonoBehaviour
     
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            //reset checkpoint
-            GameOver(null);
-            
-        }
         Move();
         SlowTurn();
         if (Time.time >= _nextSwim + 1f)
@@ -305,7 +298,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") && !GameManager.IsPlayerDead && !inmortal)
+        if(collision.gameObject.CompareTag("Enemy") && !GameManager.Instance.isPlayerDead && !inmortal)
         {
             GameOver(collision.gameObject);
         }
@@ -340,6 +333,7 @@ public class PlayerCharacter : MonoBehaviour
 
     public IEnumerator PlayCallSFX(bool respond)
     {
+        //vfx
         vfxVoice.Play();
         yield return new WaitForSeconds(0.25f);
         if(_sfxCallLastTime.Equals(sfxCall1))
@@ -350,7 +344,10 @@ public class PlayerCharacter : MonoBehaviour
         {
             _sfxCallLastTime = sfxCall1;
         }
+        //audio
         FMODUnity.RuntimeManager.PlayOneShot(_sfxCallLastTime, transform.position);
+         //visual feedback
+         transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.25f);
         
         //tell blue to do a call as well
         if (_blueRef && respond)

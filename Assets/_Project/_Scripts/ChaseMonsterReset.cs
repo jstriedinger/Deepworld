@@ -20,7 +20,7 @@ public class ChaseMonsterReset : MonoBehaviour
     void Update()
     {
         if(!isCountingDown){
-            if(GameManager.IsPlayerDead){
+            if(GameManager.Instance.isPlayerDead){
                 isCountingDown = true;
                 return;
             }

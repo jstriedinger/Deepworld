@@ -38,7 +38,6 @@ public class MonsterLaunchMechanic : MonoBehaviour
             Collider2D col = Physics2D.OverlapCircle(transform.position, launchRadius, LayerMask.GetMask("Player"));
             if (col != null)
             {
-                Debug.Log("LAUNCHED!");
                 if(_resetAIMove != null)
                     StopCoroutine(_resetAIMove);
                 _behaviorTree.DisableBehavior();
