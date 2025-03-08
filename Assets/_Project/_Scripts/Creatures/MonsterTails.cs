@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class MonsterTails : MonoBehaviour
 {
+    [SerializeField] private bool rotateToPoint = true;
     [SerializeField] private Transform idleCenterPivot;
     [SerializeField] private Transform huntCenterPivot;
     private Transform _currentPivot;
@@ -66,11 +67,16 @@ public class MonsterTails : MonoBehaviour
                 smoothSpeed);
             }
             t.lineRenderer.SetPositions(_tentaclesSegmentPoses[i]);
-            //Rotate tail to center
-            Vector2 direction = _currentPivot.transform.position - t.transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            t.transform.rotation = Quaternion.Slerp(t.transform.rotation, rotation, rotateToCenterSpeed * Time.deltaTime);      
+
+            if (rotateToPoint)
+            {
+                //Rotate tail to center
+                Vector2 direction = _currentPivot.transform.position - t.transform.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                t.transform.rotation = Quaternion.Slerp(t.transform.rotation, rotation, rotateToCenterSpeed * Time.deltaTime);      
+                
+            }
 
         }
 

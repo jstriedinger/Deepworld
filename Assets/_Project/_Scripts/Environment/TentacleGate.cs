@@ -124,12 +124,12 @@ public class TentacleGate : MonoBehaviour
     //Feedback when player is close and can activate the Gate
     public void ClosePlayerFeedback(bool toggle)
     {
-        /*if(toggle && _canOpenGate)
+        if(toggle && _canOpenGate)
             tentacleGateSwitcher.PlayerCloseFeedback(true);
         else
         {
             tentacleGateSwitcher.PlayerCloseFeedback(false);
-        }*/
+        }
         
     }
 }

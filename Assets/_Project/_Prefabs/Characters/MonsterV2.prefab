@@ -145,8 +145,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 0.5
+        time: 0.95
+        value: 0.15
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -342,8 +342,8 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 0.5
+        time: 0.95
+        value: 0.15
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -444,8 +444,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 3193010164016236739}
   targetDir: {fileID: 1567205916258971181}
   wiggleDir: {fileID: 611182324834843274}
-  minDistBetweenPoints: 0.2
+  minPointGap: 0.2
   minWiggleSpeed: 3.25
+  currentPointGap: 0
   currentWiggleSpeed: 0
 --- !u!1 &4257062136931509442
 GameObject:
@@ -591,8 +592,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 509188661733444728}
   targetDir: {fileID: 6698553932636188075}
   wiggleDir: {fileID: 4957992515611063169}
-  minDistBetweenPoints: 0.2
+  minPointGap: 0.2
   minWiggleSpeed: 3.2
+  currentPointGap: 0
   currentWiggleSpeed: 0
 --- !u!1 &8344494512434008301
 GameObject:
@@ -1182,6 +1184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971716223832604460, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
+      propertyPath: minPointGap
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971716223832604460, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
       propertyPath: minWiggleSpeed
       value: 3.2
       objectReference: {fileID: 0}
@@ -1358,12 +1365,12 @@ PrefabInstance:
     - target: {fileID: 3330321730601023884, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
-      value: 0.8
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 3330321730601023884, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 0.5
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3567410348307882826, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -1625,12 +1632,12 @@ PrefabInstance:
     - target: {fileID: 5981271975517618766, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
-      value: 0.8
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 5981271975517618766, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 0.5
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6098455532041112780, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -1680,12 +1687,17 @@ PrefabInstance:
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: showBehaviorDesignerGizmo
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6744927768474618233, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: randomize
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744927768474618233, guid: 6b9c9de70c2fa48a78fb272e58575661,
+        type: 3}
+      propertyPath: minPointGap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6744927768474618233, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -1886,12 +1898,12 @@ PrefabInstance:
     - target: {fileID: 7766839229153368042, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
-      value: 0.8
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 7766839229153368042, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 0.5
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8647625367464663147, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}

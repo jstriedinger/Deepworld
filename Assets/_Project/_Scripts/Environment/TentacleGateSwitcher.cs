@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -23,9 +24,11 @@ public class TentacleGateSwitcher : MonoBehaviour
     private Tween _spriteRotateTween;
     private Tween _lightTween;
     private Sequence _playerFeedbackTween;
+    private TentacleGate _tentacleGate;
 
 
     private Vector3 _spriteScaleDefault;
+    private bool playerInRange;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,18 +42,17 @@ public class TentacleGateSwitcher : MonoBehaviour
         circleSprite.transform.rotation = quaternion.identity;
         circleSprite.transform.localScale = _spriteScaleDefault;
 
-        circleSprite.color = new Color(circleSprite.color.r, circleSprite.color.g, circleSprite.color.b, 0);
         _playerFeedbackTween = DOTween.Sequence();
-        _playerFeedbackTween.Append(circleSprite.transform.DOScale(
+        /*_playerFeedbackTween.Append(circleSprite.transform.DOScale(
             1.5f,
-            tweenDuration));
+            tweenDuration));*/
         _playerFeedbackTween.Join(DOTween.To(() => circleSprite.color.a, x =>
                 {
                     Color tmp = circleSprite.color;
                     tmp.a = x;
                     circleSprite.color = tmp;
                 },
-                0.075f, tweenDuration));
+                0.15f, tweenDuration));
         _playerFeedbackTween.Join(DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x,
             activeLightIntensity,
             tweenDuration));
@@ -115,6 +117,41 @@ public class TentacleGateSwitcher : MonoBehaviour
             _lightTween.Kill();
             _lightTween = DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x, defaultLightIntensity,
                 .5f).SetAutoKill(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInRange = true;
+            StartCoroutine(TogglePlayerInRangeFeedback());
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInRange = false;
+            _playerFeedbackTween.Restart();
+
+        }
+    }
+
+    IEnumerator TogglePlayerInRangeFeedback()
+    {
+        yield return new WaitForSeconds(0.25f);
+        if (playerInRange)
+        {
+            _playerFeedbackTween.Rewind();
+            Color tmp = circleSprite.color;
+            tmp.a = 0.15f;
+            circleSprite.color = tmp;
+
+            bulbLight.intensity = activeLightIntensity;
+
         }
     }
 }

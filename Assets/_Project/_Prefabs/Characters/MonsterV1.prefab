@@ -50,8 +50,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 7766839229153368042}
   targetDir: {fileID: 6044630155847732619}
   wiggleDir: {fileID: 6567151680263472929}
-  minDistBetweenPoints: 0.21
+  minPointGap: 0.21
   minWiggleSpeed: 3.1
+  currentPointGap: 0
   currentWiggleSpeed: 0
 --- !u!1 &138620560737598105
 GameObject:
@@ -282,13 +283,13 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
+        time: 0.95
+        value: 0.25
+        inSlope: -1.2341218
+        outSlope: -1.2341218
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.14266798
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -602,13 +603,13 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
+        time: 0.95
+        value: 0.25
+        inSlope: -1.2341218
+        outSlope: -1.2341218
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.14266798
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -918,13 +919,13 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
+        time: 0.95
+        value: 0.25
+        inSlope: -1.2341218
+        outSlope: -1.2341218
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.14266798
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -1167,8 +1168,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 5981271975517618766}
   targetDir: {fileID: 8647625367464663147}
   wiggleDir: {fileID: 3767183701739463978}
-  minDistBetweenPoints: 0.21
+  minPointGap: 0.21
   minWiggleSpeed: 3.1
+  currentPointGap: 0
   currentWiggleSpeed: 0
 --- !u!1 &5401863154645315687
 GameObject:
@@ -1458,7 +1460,7 @@ MonoBehaviour:
         byteDataArray: 
       Version: 1.7.7
   gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
+  showBehaviorDesignerGizmo: 0
 --- !u!114 &3009734831059661653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6430,6 +6432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2d90dfb29d52548ab2e2a4fc99e142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateToPoint: 1
   idleCenterPivot: {fileID: 1824785459058989857}
   huntCenterPivot: {fileID: 8551760104901833387}
   aiPath: {fileID: 2289235338297122811}
@@ -6604,8 +6607,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 1646938015526981060}
   targetDir: {fileID: 7220749084569027762}
   wiggleDir: {fileID: 1667678333124123414}
-  minDistBetweenPoints: 0.2
+  minPointGap: 0.2
   minWiggleSpeed: 3.2
+  currentPointGap: 0
   currentWiggleSpeed: 0
 --- !u!1 &7145990796068668100
 GameObject:
@@ -6657,8 +6661,9 @@ MonoBehaviour:
   lineRenderer: {fileID: 3330321730601023884}
   targetDir: {fileID: 3567410348307882826}
   wiggleDir: {fileID: 7731861231031968431}
-  minDistBetweenPoints: 0.21
+  minPointGap: 0.21
   minWiggleSpeed: 3
+  currentPointGap: 0
   currentWiggleSpeed: 0
 --- !u!1 &7232508873316604347
 GameObject:
@@ -7180,13 +7185,13 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.8
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
+        time: 0.95
+        value: 0.25
+        inSlope: -1.2341218
+        outSlope: -1.2341218
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.14266798
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

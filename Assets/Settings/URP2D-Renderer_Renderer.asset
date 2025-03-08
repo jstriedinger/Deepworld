@@ -17,6 +17,23 @@ MonoBehaviour:
     executionOrder: 0
     alwaysEnable: 0
     cameraTypes: 5
+--- !u!114 &-6038826895426182977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd7de23ae8245d4bb4b286ac8e88842, type: 3}
+  m_Name: '[SCPE] RadialBlurRenderer'
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    executionOrder: 0
+    alwaysEnable: 0
+    cameraTypes: 5
 --- !u!114 &-44146855554041217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +82,8 @@ MonoBehaviour:
   - {fileID: 4974289843277731425}
   - {fileID: -44146855554041217}
   - {fileID: 1986329307137304351}
+  - {fileID: -6038826895426182977}
+  - {fileID: 146857252526358007}
   m_RendererFeatureMap: 
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 0
@@ -94,6 +113,23 @@ MonoBehaviour:
   m_DefaultMaterialType: 0
   m_DefaultCustomMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3,
     type: 2}
+--- !u!114 &146857252526358007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88484802267f2548ad84d0108298b39, type: 3}
+  m_Name: '[SCPE] KaleidoscopeRenderer'
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    executionOrder: 0
+    alwaysEnable: 0
+    cameraTypes: 3
 --- !u!114 &1986329307137304351
 MonoBehaviour:
   m_ObjectHideFlags: 0

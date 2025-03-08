@@ -52,6 +52,7 @@ public class MonsterCinematic : MonsterBase
                 UpdateMonsterState(MonsterState.Follow);
                 _aiPath.canMove = true;
                 _behaviorTree.EnableBehavior();
+                _behaviorTree.Start();
             });
             seq.AppendInterval(timeOffset);
             seq.AppendCallback(() =>

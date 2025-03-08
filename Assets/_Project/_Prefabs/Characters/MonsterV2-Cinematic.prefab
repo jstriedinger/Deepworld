@@ -138,16 +138,6 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.m_NumColorKeys
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 626339596628039061, guid: fe7d832f6ab6dd04bb9a2006bd83ecdf,
-        type: 3}
-      propertyPath: showBehaviorDesignerGizmo
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626339596628039061, guid: fe7d832f6ab6dd04bb9a2006bd83ecdf,
-        type: 3}
-      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"speed","IsShared":true,"SinglemValue":50},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"target","IsShared":true}]}'
-      objectReference: {fileID: 0}
     - target: {fileID: 1951333236065612892, guid: fe7d832f6ab6dd04bb9a2006bd83ecdf,
         type: 3}
       propertyPath: m_Color.a

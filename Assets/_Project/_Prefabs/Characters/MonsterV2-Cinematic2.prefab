@@ -21,6 +21,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 966973991698398316, guid: e56d4fa6d0167f04698a13da756a9a66,
         type: 3}
+      propertyPath: showBehaviorDesignerGizmo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 966973991698398316, guid: e56d4fa6d0167f04698a13da756a9a66,
+        type: 3}
       propertyPath: mBehaviorSource.mTaskData.Version
       value: 1.7.11
       objectReference: {fileID: 0}
@@ -83,6 +88,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488588763609924547, guid: e56d4fa6d0167f04698a13da756a9a66,
+        type: 3}
+      propertyPath: monsterBase
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7659060431408528322, guid: e56d4fa6d0167f04698a13da756a9a66,
         type: 3}

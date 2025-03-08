@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
                     UIManager.Instance.isWorldUiActive = true;
                     AudioManager.Instance.ChangeBackgroundMusic(1);
                     CinematicsManager.Instance.PrepareBlueForMeetup();
-                    blueNpcRef.ChangeBlueStats(playerRef.transform);
+                    //blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
                 case StartSection.Checkpoint2:
                     UIManager.Instance.isWorldUiActive = true;
