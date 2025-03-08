@@ -16,6 +16,7 @@ public class TentacleGate : MonoBehaviour
     private TentacleToggler[] _tentacleTogglers;
     [SerializeField] private TentacleGateSwitcher tentacleGateSwitcher;
     [SerializeField] private GateTentacles gateTentacles;
+    [SerializeField] private Transform coralSprite;
     
     private float _nextCloseTime;
     private bool _canCloseGate;
@@ -46,6 +47,9 @@ public class TentacleGate : MonoBehaviour
     {
         if (!_isOpen && _canOpenGate )
         {
+            coralSprite.DOScaleX(0, 1).SetEase(Ease.OutSine);
+            coralSprite.DOScaleY(0, 0.9f).SetEase(Ease.OutSine);
+            
             _isOpen = true;
             _nextCloseTime = Time.time + config.GateOpenTime;
             Sequence seq = DOTween.Sequence();
