@@ -165,10 +165,13 @@ MonoBehaviour:
   bulbLight: {fileID: 5017170103341605021}
   activeLightIntensity: 6
   defaultLightIntensity: 1
+  activeFeedbackAlpha: 0
+  defaultFeedbackAlpha: 0
   gateSwitchTentacles: {fileID: 9075175233974475321}
   circleSprite: {fileID: 5720555964839487633}
   circleRotateDuration: 25
   tweenDuration: 1.5
+  playerInRange: 0
 --- !u!58 &4315320813951117056
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -633,6 +636,7 @@ MonoBehaviour:
   tentacleGateSwitcher: {fileID: 8344820919811803490}
   gateTentacles: {fileID: 8471660484419029539}
   coralSprite: {fileID: 0}
+  canOpenGate: 0
 --- !u!61 &4868071540001578746
 BoxCollider2D:
   m_ObjectHideFlags: 0

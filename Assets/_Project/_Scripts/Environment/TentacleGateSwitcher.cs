@@ -13,6 +13,8 @@ public class TentacleGateSwitcher : MonoBehaviour
     [SerializeField] private Light2D bulbLight;
     [SerializeField] private float activeLightIntensity;
     [SerializeField] private float defaultLightIntensity;
+    [SerializeField] private float activeFeedbackAlpha;
+    [SerializeField] private float defaultFeedbackAlpha;
     [SerializeField] private GateTentacles gateSwitchTentacles;
     
     [Header("UX circle")]
@@ -20,27 +22,28 @@ public class TentacleGateSwitcher : MonoBehaviour
     [SerializeField] private float circleRotateDuration;
     [SerializeField] private float tweenDuration;
 
+    public bool playerInRange;
+    
     private Tween _spriteScaleTween;
     private Tween _spriteRotateTween;
     private Tween _lightTween;
     private Sequence _playerFeedbackTween;
     private TentacleGate _tentacleGate;
 
-
-    private Vector3 _spriteScaleDefault;
-    private bool playerInRange;
+    private bool _feedbackActive;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        _tentacleGate = transform.parent.GetComponent<TentacleGate>();
     }
 
     private void Init()
     {
-        _spriteScaleDefault = circleSprite.transform.localScale;
         circleSprite.transform.rotation = quaternion.identity;
-        circleSprite.transform.localScale = _spriteScaleDefault;
+        Color tmp = circleSprite.color;
+        tmp.a = defaultFeedbackAlpha;
+        circleSprite.color = tmp;
 
         _playerFeedbackTween = DOTween.Sequence();
         /*_playerFeedbackTween.Append(circleSprite.transform.DOScale(
@@ -52,7 +55,7 @@ public class TentacleGateSwitcher : MonoBehaviour
                     tmp.a = x;
                     circleSprite.color = tmp;
                 },
-                0.15f, tweenDuration));
+                activeFeedbackAlpha, tweenDuration));
         _playerFeedbackTween.Join(DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x,
             activeLightIntensity,
             tweenDuration));
@@ -80,15 +83,20 @@ public class TentacleGateSwitcher : MonoBehaviour
 
     public void DisableSwitcher()
     {
+        //puts tentacles on top
         gateSwitchTentacles.ToggleSwitchTentacles(true);
-        _playerFeedbackTween.Rewind();
-        //Now make bulb small and turn off light
-    }
+        //stop regular player feedback
+        //_playerFeedbackTween.Rewind();
+        _feedbackActive = false;
 
-    private void OnDisable()
-    {
-        //_spriteScaleTween.Kill();
-        //_spriteRotateTween.Kill();
+        //
+        // bulbLight.intensity = defaultLightIntensity;
+        // Color tmp = circleSprite.color;
+        // tmp.a = defaultFeedbackAlpha;
+        // circleSprite.color = tmp;
+        
+        Debug.Log("Disabling switcher");
+        //Now make bulb small and turn off light
     }
 
     private void OnEnable()
@@ -103,30 +111,23 @@ public class TentacleGateSwitcher : MonoBehaviour
         
     }
 
-    public void PlayerCloseFeedback(bool toggle)
-    {
-        if (toggle)
-        {
-            _lightTween.Kill();
-            _lightTween = DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x, activeLightIntensity,
-                .5f).SetAutoKill(false);
-            
-        }
-        else
-        {
-            _lightTween.Kill();
-            _lightTween = DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x, defaultLightIntensity,
-                .5f).SetAutoKill(false);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
+            _tentacleGate.canOpenGate = true;
             StartCoroutine(TogglePlayerInRangeFeedback());
 
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player") && playerInRange && !_feedbackActive && _tentacleGate.canOpenGate)
+        {
+            _feedbackActive = true;
+            StartCoroutine(TogglePlayerInRangeFeedback());
         }
     }
 
@@ -135,22 +136,47 @@ public class TentacleGateSwitcher : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
-            _playerFeedbackTween.Restart();
+            _tentacleGate.canOpenGate = false;
+            _feedbackActive = false;
+
+            _playerFeedbackTween.Pause();
+            Sequence seq = DOTween.Sequence();
+            seq.Append(DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x,
+                defaultLightIntensity,
+                tweenDuration/3));
+
+            seq.Join(DOTween.To(() => circleSprite.color.a, x =>
+                {
+                    Color tmp = circleSprite.color;
+                    tmp.a = x;
+                    circleSprite.color = tmp;
+                },
+                defaultFeedbackAlpha, tweenDuration / 3));
+            seq.OnComplete(() => { _playerFeedbackTween.Restart(); });
 
         }
     }
 
+    //When player in range we stop regular feedback and just put bulb and ux lit
     IEnumerator TogglePlayerInRangeFeedback()
     {
-        yield return new WaitForSeconds(0.25f);
-        if (playerInRange)
+        yield return new WaitForSeconds(0.1f);
+        if (playerInRange && _tentacleGate.canOpenGate)
         {
-            _playerFeedbackTween.Rewind();
-            Color tmp = circleSprite.color;
-            tmp.a = 0.15f;
-            circleSprite.color = tmp;
+            _playerFeedbackTween.Pause();
+            DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x,
+                activeLightIntensity,
+                tweenDuration/3);
 
-            bulbLight.intensity = activeLightIntensity;
+            DOTween.To(() => circleSprite.color.a, x =>
+                {
+                    Color tmp = circleSprite.color;
+                    tmp.a = x;
+                    circleSprite.color = tmp;
+                },
+                activeFeedbackAlpha, tweenDuration / 3);
+            
+            _feedbackActive = true;
 
         }
     }

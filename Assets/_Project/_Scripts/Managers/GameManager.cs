@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         
         AudioManager.Instance.Initialize(playerRef.transform);
 
-        Cursor.visible = false;
+        //Cursor.visible = false;
         if (!skipTemp)
         {
             _currentCheckPointIndex = (int)startSection;

@@ -20,7 +20,7 @@ public class TentacleGate : MonoBehaviour
     
     private float _nextCloseTime;
     private bool _canCloseGate;
-    private bool _canOpenGate;
+    public bool canOpenGate;
 
     private bool _isOpen;
 
@@ -29,7 +29,7 @@ public class TentacleGate : MonoBehaviour
     {
         _nextCloseTime = 0;
         _canCloseGate = true;
-        _canOpenGate = true;
+        canOpenGate = true;
 
         _tentacleTogglers = tentaclesObj.GetComponentsInChildren<TentacleToggler>();
     }
@@ -43,13 +43,25 @@ public class TentacleGate : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        PlayerCharacter.OnPlayerCall += Open;
+    }
+
+    private void OnDisable()
+    {
+        PlayerCharacter.OnPlayerCall -= Open;
+    }
+
     public void Open()
     {
-        if (!_isOpen && _canOpenGate )
+        if (!_isOpen && canOpenGate && tentacleGateSwitcher.playerInRange)
         {
             coralSprite.DOScaleX(0, 1).SetEase(Ease.OutSine);
             coralSprite.DOScaleY(0, 0.9f).SetEase(Ease.OutSine);
             
+            tentacleGateSwitcher.DisableSwitcher();
+            canOpenGate = false;
             _isOpen = true;
             _nextCloseTime = Time.time + config.GateOpenTime;
             Sequence seq = DOTween.Sequence();
@@ -57,19 +69,18 @@ public class TentacleGate : MonoBehaviour
             //every two tentacles
             seq.AppendCallback(() =>
             {
-                tentacleGateSwitcher.DisableSwitcher();
-                //playone shot with volume
-                var instance = RuntimeManager.CreateInstance(config.SfxActivate);
-                instance.set3DAttributes(RuntimeUtils.To3DAttributes(tentacleGateSwitcher.transform.position));
-                instance.setVolume(.9f);
-                instance.start();
-                instance.release();
+                // var instance = RuntimeManager.CreateInstance(config.SfxActivate);
+                // instance.set3DAttributes(RuntimeUtils.To3DAttributes(tentacleGateSwitcher.transform.position));
+                // instance.setVolume(.9f);
+                // instance.start();
+                // instance.release();
             });
-            seq.AppendInterval(.25f);
+            seq.AppendInterval(.2f);
             seq.AppendCallback(
                 () =>
                 {
                     gateTentacles.ToggleGateTentacles(true);
+                    RuntimeManager.PlayOneShot(config.SfxActivate);
 
                 });
             seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 2,
@@ -87,7 +98,6 @@ public class TentacleGate : MonoBehaviour
     {
         if (_isOpen)
         {
-            _canOpenGate = false;
             _isOpen = false;
             Debug.Log("Closing gate");
 
@@ -102,7 +112,7 @@ public class TentacleGate : MonoBehaviour
                 1));
             
             yield return new WaitForSeconds(config.SwitchResetTime);
-            _canOpenGate = true;
+            canOpenGate = true;
             tentacleGateSwitcher.EnableSwitcher();
 
 
@@ -125,15 +135,4 @@ public class TentacleGate : MonoBehaviour
         }
     }
 
-    //Feedback when player is close and can activate the Gate
-    public void ClosePlayerFeedback(bool toggle)
-    {
-        if(toggle && _canOpenGate)
-            tentacleGateSwitcher.PlayerCloseFeedback(true);
-        else
-        {
-            tentacleGateSwitcher.PlayerCloseFeedback(false);
-        }
-        
-    }
 }
