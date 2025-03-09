@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 public class TentacleEditorViewer : MonoBehaviour
 {
 
+    private CoralLimb _coralLimb;
     private Tentacle _tentacle;
     private TentacleInfo _tentacleInfo;
     private Light2D _light2D;
@@ -57,6 +58,7 @@ public class TentacleEditorViewer : MonoBehaviour
             _tentacle = GetComponent<Tentacle>();
             _bodyTentacle = GetComponent<BodyTentacle>();
             _tentacleInfo = GetComponent<TentacleInfo>();
+            _coralLimb = GetComponent<CoralLimb>();
             _dangler = GetComponent<Dangler>();
             if (_tentacle)
             {
@@ -85,6 +87,12 @@ public class TentacleEditorViewer : MonoBehaviour
                 length = _tentacleInfo.tentacleLength;
                 targetDir = _tentacleInfo.targetDir;
                 targetDist = _tentacleInfo.minPointGap;
+            }
+            else if (_coralLimb)
+            {
+                length = _coralLimb.length;
+                targetDir = _coralLimb.transform;
+                targetDist = _coralLimb.currentDistBetweenPoints;
             }
         }
     }

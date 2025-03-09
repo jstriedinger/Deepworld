@@ -15,7 +15,7 @@ public class TentacleGateSwitcher : MonoBehaviour
     [SerializeField] private float defaultLightIntensity;
     [SerializeField] private float activeFeedbackAlpha;
     [SerializeField] private float defaultFeedbackAlpha;
-    [SerializeField] private GateTentacles gateSwitchTentacles;
+    [FormerlySerializedAs("gateSwitchCorals")] [FormerlySerializedAs("gateSwitchTentacles")] [SerializeField] private CoralsController switchCoralsController;
     
     [Header("UX circle")]
     [SerializeField] private SpriteRenderer circleSprite;
@@ -84,7 +84,7 @@ public class TentacleGateSwitcher : MonoBehaviour
     public void DisableSwitcher()
     {
         //puts tentacles on top
-        gateSwitchTentacles.ToggleSwitchTentacles(true);
+        //gateSwitchCorals.ToggleCorals(true);
         //stop regular player feedback
         //_playerFeedbackTween.Rewind();
         _feedbackActive = false;
@@ -106,7 +106,7 @@ public class TentacleGateSwitcher : MonoBehaviour
 
     public void EnableSwitcher()
     {
-        gateSwitchTentacles.ToggleSwitchTentacles(false);
+        //gateSwitchCorals.ToggleCorals(false);
         _playerFeedbackTween.Play();
         
     }

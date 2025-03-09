@@ -71,9 +71,9 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   singleSpriteImportData:
-  - name: 
+  - name: CoralGate copy_1
     originalName: 
-    pivot: {x: 0, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -81,8 +81,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 0
-      height: 0
+      width: 1400
+      height: 1600
     spriteID: ab7ffc41ce91b401a8eebaff13ac4c2a
     spriteBone: []
     spriteOutline: []
@@ -370,7 +370,7 @@ ScriptedImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0
     crunchedCompression: 0
@@ -540,7 +540,7 @@ ScriptedImporter:
   rigPSDLayers: []
   sharedRigPSDLayers: []
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638770638155497146
   spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 

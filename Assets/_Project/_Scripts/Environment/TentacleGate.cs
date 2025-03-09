@@ -10,12 +10,11 @@ public class TentacleGate : MonoBehaviour
 {
     [SerializeField] private GateSO config;
     [SerializeField] private GameObject tentaclesObj;
-    [SerializeField] private Collider2D door1;
-    [SerializeField] private Collider2D door2;
+    [SerializeField] private Collider2D gateCollider;
     [SerializeField] private Light2D gateLight;
     private TentacleToggler[] _tentacleTogglers;
     [SerializeField] private TentacleGateSwitcher tentacleGateSwitcher;
-    [SerializeField] private GateTentacles gateTentacles;
+    [FormerlySerializedAs("gateCorals")] [SerializeField] private CoralsController coralsController;
     [SerializeField] private Transform coralSprite;
     
     private float _nextCloseTime;
@@ -79,15 +78,13 @@ public class TentacleGate : MonoBehaviour
             seq.AppendCallback(
                 () =>
                 {
-                    gateTentacles.ToggleGateTentacles(true);
+                    coralsController.ToggleCorals(true);
                     RuntimeManager.PlayOneShot(config.SfxActivate);
 
                 });
             seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 2,
                 1.5f));
-            seq.Join(DOTween.To(() => door1.offset.y, x => door1.offset = new Vector2(1, x), -2,
-                1));
-            seq.Join(DOTween.To(() => door2.offset.y, x => door2.offset = new Vector2(1, x), -2,
+            seq.Join(DOTween.To(() => gateCollider.offset.y, x => gateCollider.offset = new Vector2(1, x), -2,
                 1));
 
         }
@@ -101,14 +98,12 @@ public class TentacleGate : MonoBehaviour
             _isOpen = false;
             Debug.Log("Closing gate");
 
-            gateTentacles.ToggleGateTentacles(false);
+            coralsController.ToggleCorals(false);
 
             Sequence seq = DOTween.Sequence();
             seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 0,
                 1.5f));
-            seq.Join(DOTween.To(() => door1.offset.y, x => door1.offset = new Vector2(1, x), 1,
-                1));
-            seq.Join(DOTween.To(() => door2.offset.y, x => door2.offset = new Vector2(1, x), 1,
+            seq.Join(DOTween.To(() => gateCollider.offset.y, x => gateCollider.offset = new Vector2(1, x), 1,
                 1));
             
             yield return new WaitForSeconds(config.SwitchResetTime);
