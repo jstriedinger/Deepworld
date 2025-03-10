@@ -15,6 +15,8 @@ public class PlayerCharacter : MonoBehaviour
     public static event Action PlayerOnPause;
 
     public static event Action OnPlayerSwim;
+
+    public static event Action OnPlayerCall;
     //managers
     private Tentacle[] _proceduralTentacles;
     private TentacleDynamic[] _proceduralDynamicTentacles;
@@ -377,10 +379,7 @@ public class PlayerCharacter : MonoBehaviour
             
         }
         //Check for door switcher
-        if (_closeTentacleGate)
-        {
-            _closeTentacleGate.Open();
-        }
+        OnPlayerCall?.Invoke();
 
     }
 
@@ -400,24 +399,6 @@ public class PlayerCharacter : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("TentacleGate") )
-        {
-            _closeTentacleGate = other.transform.parent.GetComponent<TentacleGate>();
-            _closeTentacleGate.ClosePlayerFeedback(true);
-
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("TentacleGate") && _closeTentacleGate)
-        {
-            _closeTentacleGate.ClosePlayerFeedback(false);
-            _closeTentacleGate = null;
-        }
-    }
 }
 
 
