@@ -28,12 +28,7 @@ public class Dangler : MonoBehaviour
             _internalLightParent = internalLight2D.transform.parent;
         ResetPos();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public void ResetPos()
     {
         _segmentPoses[0] = targetDir.position;

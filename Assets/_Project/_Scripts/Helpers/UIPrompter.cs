@@ -8,13 +8,6 @@ public class UIPrompter : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void TogglePrompt(bool toggle)
     {
         

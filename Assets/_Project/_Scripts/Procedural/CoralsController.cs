@@ -25,10 +25,12 @@ public class CoralsController : MonoBehaviour
         {
             CoralLimb t = _corals[i];
             _coralsSegmentPoses[i][0] = t.transform.position;
+            t.wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * t.wiggleSpeed) * wiggleMagnitude);
+
             for(int j = 1; j < t.length; j++)
             {
                 _coralsSegmentPoses[i][j] = Vector3.SmoothDamp(_coralsSegmentPoses[i][j], _coralsSegmentPoses[i][j-1] + 
-                    (t.transform.up * t.currentDistBetweenPoints), ref _coralsSegmentV[i][j], 
+                    (t.wiggleTarget.up * t.currentDistBetweenPoints), ref _coralsSegmentV[i][j], 
                     t.currentSpeed);
             }
             t.lineRenderer.SetPositions(_coralsSegmentPoses[i]);
@@ -48,7 +50,7 @@ public class CoralsController : MonoBehaviour
 
             for(int j = 1; j < t.length; j++)
             {
-                _coralsSegmentPoses[i][j] = _coralsSegmentPoses[i][j-1] + t.transform.up * t.currentDistBetweenPoints;
+                _coralsSegmentPoses[i][j] = _coralsSegmentPoses[i][j-1] + t.wiggleTarget.up * t.currentDistBetweenPoints;
                 //segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
                 //  resettingFromPlayer? 0.15f : smoothSpeed);
             }

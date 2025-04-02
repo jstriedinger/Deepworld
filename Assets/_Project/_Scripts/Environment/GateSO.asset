@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a690f7adb4b4aa46990d6c61f878076, type: 3}
   m_Name: GateSO
   m_EditorClassIdentifier: 
-  <SfxActivate>k__BackingField:
+  <SfxSwitch>k__BackingField:
+    Guid:
+      Data1: -1446787255
+      Data2: 1116806093
+      Data3: -715390830
+      Data4: -942008543
+    Path: event:/SFX/sfx_GateSwitch
+  <SfxOpen>k__BackingField:
     Guid:
       Data1: 1279453717
       Data2: 1175780359
       Data3: -227318651
       Data4: 262849109
-    Path: event:/SFX/sfx_Gate
+    Path: event:/SFX/sfx_GateOpen
   <GateOpenTime>k__BackingField: 9
   <SwitchResetTime>k__BackingField: 1

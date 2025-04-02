@@ -338,7 +338,7 @@ public class CinematicsManager : MonoBehaviour
             {
                 TutorialMonster1.ToggleBehaviorTree(false);
                 TutorialMonster1.ToggleTrackTarget(GameManager.Instance.playerRef.gameObject);
-                StartCoroutine(TutorialMonster1.PlayReactSound(true,true));
+                StartCoroutine(TutorialMonster1.PlayReactSfx(true,true));
             })
             .AppendInterval(.25f)
             .Join(TutorialMonster1.transform.DOPath(path1MiniMonster1Pos, 1f, PathType.CatmullRom, PathMode.Sidescroller2D)
@@ -380,7 +380,7 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() =>
             {
                 TutorialMonster2.ToggleTrackTarget(_blueNpc.gameObject);
-                StartCoroutine(TutorialMonster2.PlayReactSound(true,true));
+                StartCoroutine(TutorialMonster2.PlayReactSfx(true,true));
             })
             .AppendInterval(0.5f)
             .AppendCallback(() =>

@@ -5,7 +5,6 @@ using UnityEngine;
 using FMODUnity;
 using DG.Tweening;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 //this class conrols everythign that happens when you are chased by monsters
@@ -55,6 +54,11 @@ public class AudioManager : MonoBehaviour
     private Transform _playerRef;
     private PlayerCharacter playerCharacter;
     private Transform currentClosestMonster;
+
+    [Header("Final chase")] 
+    [SerializeField] private Transform finalAnchor;
+    [HideInInspector] public int finalCloseDangerRadius;
+    
     
     [HideInInspector]
     public int numMonstersChasing;
@@ -81,19 +85,40 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //always look for close monster for music
-        if (_canPlayCloseDangerMusic && Physics2D.OverlapCircle(_playerRef.position,closeDangerRadius,_monsterContactFilder, _closeMonstersOverlapReasults) > 0)
+        //final chase danger audio
+        if (FinalChaseManager.Instance.inFinalChase)
         {
-            
-            //always look at the closest monster
-            playerCharacter.ToggleEyeFollowTarget(true,_closeMonstersOverlapReasults[0].gameObject.transform);
-            float d = Vector3.Distance(_playerRef.position, _closeMonstersOverlapReasults[0].transform.position) / closeDangerRadius;
-            _instanceCloseDanger.setParameterByName("Monster Distance", 1.2f - d);
+            float d = Mathf.Clamp(Vector2.Distance(_playerRef.position, finalAnchor.transform.position) / finalCloseDangerRadius, 0,1) ;
+            _instanceCloseDanger.setParameterByName("Monster Distance", 1.3f - d);
+            Debug.Log("Distance: "+d);
             
         }
         else
         {
-            _instanceCloseDanger.setParameterByName("Monster Distance", 0);
+            //always look for close monster for music
+            if (_canPlayCloseDangerMusic && Physics2D.OverlapCircle(_playerRef.position,closeDangerRadius,_monsterContactFilder, _closeMonstersOverlapReasults) > 0)
+            {
+                
+                //always look at the closest monster
+                playerCharacter.ToggleEyeFollowTarget(true,_closeMonstersOverlapReasults[0].gameObject.transform);
+                float d = Vector2.Distance(_playerRef.position, _closeMonstersOverlapReasults[0].transform.position) / closeDangerRadius;
+                _instanceCloseDanger.setParameterByName("Monster Distance", 1.2f - d);
+                
+            }
+            else
+            {
+                _instanceCloseDanger.setParameterByName("Monster Distance", 0);
+            }
+        }
+    }
+
+    public void TriggerFinalChaseAudio(bool trigger)
+    {
+        if (trigger)
+        {
+            //start chase music
+            _sfxMonsterChaseLoop.Play();
+            _instanceCloseDanger.start();
         }
     }
 
@@ -266,7 +291,16 @@ public class AudioManager : MonoBehaviour
 
         _currentMusicIndex = newMusic;
     }
-    
+
+    //toggles the close danger music. The loop musics that playes depending on how close mosnters are
+    public void ToggleCloseDangerMusic(bool toggle)
+    {
+        if(toggle)
+            _instanceCloseDanger.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        else
+            _instanceCloseDanger.start();
+        
+    }
     #region Monsters
 
     //for level 1 tutorial encounter. Fade in danger/friend music
@@ -338,6 +372,13 @@ public class AudioManager : MonoBehaviour
         {
             RuntimeManager.PlayOneShot(sfxFirstMonsterAppear.Guid, transform.position);
         }
+    }
+
+    public void FinalChaseBackgroundAudio()
+    {
+        //mosnter chasing audio
+        //mosnter disntance handle
+        
     }
     
     //updates mosnter chasing and plays audio if needed

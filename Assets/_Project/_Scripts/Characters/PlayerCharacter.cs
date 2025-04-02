@@ -323,6 +323,7 @@ public class PlayerCharacter : MonoBehaviour
     //When playerCharacter is ready to restart
     public void OnRestartingGame()
     {
+        Debug.Log("Restarting Action");
         isHidden = true;
         bodyPart.SetActive(true);
         _collider.enabled = true;

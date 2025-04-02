@@ -239,11 +239,11 @@ MonoBehaviour:
   virtualCamera: {fileID: 2336080942270599487}
   targetGroup: {fileID: 3911235152976901046}
   lerpDuration: 2.5
-  camZoomPlayer: 24
-  camZoomEnemy: 24
+  camZoomPlayer: 26
+  camZoomEnemy: 26
   chaseCamAnchor: {fileID: 0}
   chaseCameDistance: 200
-  maxAddRadiusChase: 15
+  maxAddRadiusChase: 20
 --- !u!1 &4773832264463855681
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,10 +367,10 @@ GameObject:
   - component: {fileID: 2265145591650690846}
   - component: {fileID: 2336080942270599487}
   - component: {fileID: 6874595921128700977}
+  - component: {fileID: 5461911089872098839}
   - component: {fileID: 2169356750386202610}
   - component: {fileID: 3782521397927249240}
   - component: {fileID: 2669516758053595758}
-  - component: {fileID: 5461911089872098839}
   - component: {fileID: 5148004106464173538}
   m_Layer: 0
   m_Name: Virtual Camera
@@ -388,7 +388,7 @@ Transform:
   m_GameObject: {fileID: 7253303692650444840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -994.634, y: 564.9357, z: -180}
+  m_LocalPosition: {x: 0, y: 87.100006, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -469,6 +469,19 @@ MonoBehaviour:
     Time: 0.5
     Smoothing: 1
     IgnoreY: 0
+--- !u!114 &5461911089872098839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253303692650444840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: 0
 --- !u!114 &2169356750386202610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,19 +541,6 @@ MonoBehaviour:
   AmplitudeGain: 2
   FrequencyGain: 0.5
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!114 &5461911089872098839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7253303692650444840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damping: 0
 --- !u!114 &5148004106464173538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,9 +574,7 @@ GameObject:
   - component: {fileID: 6700567254371377496}
   - component: {fileID: 4441881915006823324}
   - component: {fileID: 1476688263560082622}
-  - component: {fileID: 8764243144653010519}
   - component: {fileID: 30563616782966064}
-  - component: {fileID: 5869746765668019172}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -593,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 7574655857494226001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -994.634, y: 564.9357, z: -180}
+  m_LocalPosition: {x: 0, y: 87.100006, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -726,103 +724,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!82 &8764243144653010519
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7574655857494226001}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cd13405d9ced04aa2803bc6d0f57b6e9, type: 3}
-  m_Resource: {fileID: 8300000, guid: cd13405d9ced04aa2803bc6d0f57b6e9, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &30563616782966064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,14 +737,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
---- !u!81 &5869746765668019172
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7574655857494226001}
-  m_Enabled: 1
 --- !u!1 &8916493613574645936
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +763,7 @@ Transform:
   m_GameObject: {fileID: 8916493613574645936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 523.9261, y: 75.37573, z: 0}
+  m_LocalPosition: {x: 1470.4, y: -475.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

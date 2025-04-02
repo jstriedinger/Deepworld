@@ -18,7 +18,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] int camZoomEnemy = 28;
 
     [Header("Final chase cam")]
-    [SerializeField] private Transform chaseCamAnchor;
+    public Transform finalChaseCamAnchor;
     [SerializeField] private int chaseCameDistance;
     [SerializeField] private int maxAddRadiusChase;
     private bool _checkChaseCamDistance;
@@ -71,9 +71,9 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateCameraZoomForFinalChase()
     {
-        if (GameManager.Instance.playerRef.transform.position.y < chaseCamAnchor.position.y)
+        if (GameManager.Instance.playerRef.transform.position.y < finalChaseCamAnchor.position.y)
         {
-            float distanceY = Math.Abs(chaseCamAnchor.position.y - GameManager.Instance.playerRef.transform.position.y);
+            float distanceY = Math.Abs(finalChaseCamAnchor.position.y - GameManager.Instance.playerRef.transform.position.y);
             if (distanceY <= chaseCameDistance)
             {
                 float addedRadius = distanceY * _cameraStep;
@@ -83,6 +83,8 @@ public class CameraManager : MonoBehaviour
             }
         }
     }
+    
+    
 
     //set camera to follow specific target
     public void ChangeCameraTracking(GameObject newTarget = null)

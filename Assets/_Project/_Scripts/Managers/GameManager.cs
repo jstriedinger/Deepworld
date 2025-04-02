@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerCharacter.PlayerOnPause -= TogglePauseGame;
+        DOTween.KillAll();
     }
     
     public void StartGame()
@@ -120,20 +121,25 @@ public class GameManager : MonoBehaviour
                 
             }
 
-            if (_currentCheckPointIndex >= 3)
+            if (_currentCheckPointIndex >= 3 )
             {
                 UIManager.Instance.SetupWorldUIForTitles();
                 UIManager.Instance.OnControlsChanged();
                 ToggleLigthing(true);
                 playerRef.ToggleMonsterEyeDetection(true);
                 playerRef.ToggleEyeFollowTarget(true);
-                AudioManager.Instance.ChangeBackgroundMusic(5);
                 
+            }
+
+            if (_currentCheckPointIndex >= 3 && _currentCheckPointIndex < 6)
+            {
+                AudioManager.Instance.ChangeBackgroundMusic(5);
             }
 
             if (_currentCheckPointIndex == 6)
             {
                 AudioManager.Instance.ToggleCanPlayDangerMusic(false);
+                AudioManager.Instance.ToggleCloseDangerMusic(false);
             }
             
 		    //Prepare everything to start from a checkpoint or something

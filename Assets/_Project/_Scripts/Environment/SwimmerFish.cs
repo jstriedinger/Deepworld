@@ -25,9 +25,5 @@ public class SwimmerFish : MonoBehaviour
         _behaviorTree.SetVariableValue("PatrolInfo",patrolPoints);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

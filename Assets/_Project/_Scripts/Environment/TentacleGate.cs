@@ -13,9 +13,8 @@ public class TentacleGate : MonoBehaviour
     [SerializeField] private Collider2D gateCollider;
     [SerializeField] private Light2D gateLight;
     private TentacleToggler[] _tentacleTogglers;
-    [SerializeField] private TentacleGateSwitcher tentacleGateSwitcher;
+    [FormerlySerializedAs("tentacleGateSwitcher")] [SerializeField] private CoralGateSwitcher coralGateSwitcher;
     [FormerlySerializedAs("gateCorals")] [SerializeField] private CoralsController coralsController;
-    [SerializeField] private Transform coralSprite;
     
     private float _nextCloseTime;
     private bool _canCloseGate;
@@ -52,52 +51,45 @@ public class TentacleGate : MonoBehaviour
         PlayerCharacter.OnPlayerCall -= Open;
     }
 
+    //Open the coral gate
     public void Open()
     {
-        if (!_isOpen && canOpenGate && tentacleGateSwitcher.playerInRange)
+        if (!_isOpen && canOpenGate && coralGateSwitcher.playerInRange)
         {
-            coralSprite.DOScaleX(0, 1).SetEase(Ease.OutSine);
-            coralSprite.DOScaleY(0, 0.9f).SetEase(Ease.OutSine);
             
-            tentacleGateSwitcher.DisableSwitcher();
-            canOpenGate = false;
             _isOpen = true;
             _nextCloseTime = Time.time + config.GateOpenTime;
+            canOpenGate = false;
             Sequence seq = DOTween.Sequence();
             seq.SetEase(Ease.InOutSine);
+            seq.PrependInterval(0.25f);
             //every two tentacles
             seq.AppendCallback(() =>
             {
-                // var instance = RuntimeManager.CreateInstance(config.SfxActivate);
-                // instance.set3DAttributes(RuntimeUtils.To3DAttributes(tentacleGateSwitcher.transform.position));
-                // instance.setVolume(.9f);
-                // instance.start();
-                // instance.release();
+                coralGateSwitcher.DisableSwitcher();
+                RuntimeManager.PlayOneShot(config.SfxSwitch);
             });
-            seq.AppendInterval(.2f);
+            seq.AppendInterval(1.75f);
             seq.AppendCallback(
                 () =>
                 {
                     coralsController.ToggleCorals(true);
-                    RuntimeManager.PlayOneShot(config.SfxActivate);
+                    RuntimeManager.PlayOneShot(config.SfxOpen);
 
                 });
-            seq.Append(DOTween.To(() => gateLight.intensity, x => gateLight.intensity = x, 2,
-                1.5f));
-            seq.Join(DOTween.To(() => gateCollider.offset.y, x => gateCollider.offset = new Vector2(1, x), -2,
+            seq.Append(DOTween.To(() => gateCollider.offset.y, x => gateCollider.offset = new Vector2(1, x), -4,
                 1));
 
         }
        
     }
 
+    //Closes the coral gate
     public IEnumerator Close()
     {
         if (_isOpen)
         {
             _isOpen = false;
-            Debug.Log("Closing gate");
-
             coralsController.ToggleCorals(false);
 
             Sequence seq = DOTween.Sequence();
@@ -108,12 +100,13 @@ public class TentacleGate : MonoBehaviour
             
             yield return new WaitForSeconds(config.SwitchResetTime);
             canOpenGate = true;
-            tentacleGateSwitcher.EnableSwitcher();
+            coralGateSwitcher.EnableSwitcher();
 
 
         }
     }
 
+    //Collider events to know if coral gate can be closed or not
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

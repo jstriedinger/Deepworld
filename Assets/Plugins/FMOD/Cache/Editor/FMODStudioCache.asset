@@ -109,6 +109,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6500
+--- !u!114 &-7781285575676236579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_monster_Swim
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_monster_Swim
+  Guid:
+    Data1: 997688691
+    Data2: 1127499286
+    Data3: -518493567
+    Data4: -358451874
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1350
 --- !u!114 &-7267413408219300141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +189,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 6700
+  Length: 5600
+--- !u!114 &-5962474616352705583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient/Underwater Loop
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient/Underwater Loop
+  Guid:
+    Data1: 327083379
+    Data2: 1249287377
+    Data3: -542293082
+    Data4: -1548512321
+  Banks:
+  - {fileID: 868291782933054533}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13500
 --- !u!114 &-5528467146699098610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +286,7 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638759416180262284
+  lastModified: 638791306449369979
   FileSizes: []
   Exists: 1
 --- !u!114 &-3074462226683292851
@@ -262,6 +316,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5200
+--- !u!114 &-2698438263787984341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambient/Underwater Loop 2
+  m_EditorClassIdentifier: 
+  Path: event:/Ambient/Underwater Loop 2
+  Guid:
+    Data1: 1787846480
+    Data2: 1259523477
+    Data3: -1860900213
+    Data4: -988840344
+  Banks:
+  - {fileID: 868291782933054533}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 290000
 --- !u!114 &-2577596922319098531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,9 +358,36 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638759416181765379
+  lastModified: 638791306450698599
   FileSizes: []
   Exists: 1
+--- !u!114 &-2347979487340453672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_GateSwitch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_GateSwitch
+  Guid:
+    Data1: -1446787255
+    Data2: 1116806093
+    Data3: -715390830
+    Data4: -942008543
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 410
 --- !u!114 &-2074214064063209705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,10 +484,10 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638759416180297574
+  lastModified: 638791306449406437
   FileSizes:
   - Name: 
-    Value: 2036
+    Value: 2226
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -398,6 +506,7 @@ MonoBehaviour:
   - {fileID: -3817822993745296562}
   - {fileID: -2577596922319098531}
   - {fileID: 8789107609421317367}
+  - {fileID: 868291782933054533}
   EditorEvents:
   - {fileID: -8927136396298308843}
   - {fileID: 3229128079912399852}
@@ -422,15 +531,36 @@ MonoBehaviour:
   - {fileID: 6656686853560623902}
   - {fileID: 956646628356651725}
   - {fileID: 6798551333433890447}
-  - {fileID: 7420667893567458061}
-  - {fileID: 7236500957745771837}
+  - {fileID: -2698438263787984341}
+  - {fileID: -5962474616352705583}
+  - {fileID: -7781285575676236579}
+  - {fileID: 5826801535865985805}
+  - {fileID: -2347979487340453672}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3817822993745296562}
   StringsBanks:
   - {fileID: -5432930024993847}
-  cacheTime: 638759416182761907
+  cacheTime: 638791306452297148
   cacheVersion: 131618
+--- !u!114 &868291782933054533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambient.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/_Project/_FMODBanks/Desktop/Ambient.bank
+  Name: Ambient
+  StudioPath: bank:/Ambient
+  lastModified: 638791306449344877
+  FileSizes: []
+  Exists: 1
 --- !u!114 &956646628356651725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +641,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 15504
+  Length: 13000
 --- !u!114 &4318144509217194512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +658,7 @@ MonoBehaviour:
   StudioPath: 
   Min: 0
   Max: 1
-  Default: 0
+  Default: 0.14367816
   ID:
     data1: 1912065779
     data2: 2974066463
@@ -617,6 +747,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 644
+--- !u!114 &5826801535865985805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_GateOpen
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_GateOpen
+  Guid:
+    Data1: 1279453717
+    Data2: 1175780359
+    Data3: -227318651
+    Data4: 262849109
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2100
 --- !u!114 &6543355871144087503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,8 +852,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 64
+  MaxDistance: 500
   Length: 3375
 --- !u!114 &6798551333433890447
 MonoBehaviour:
@@ -724,61 +881,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2000
---- !u!114 &7236500957745771837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Underwater Loop
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Underwater Loop
-  Guid:
-    Data1: 327083379
-    Data2: 1249287377
-    Data3: -542293082
-    Data4: -1548512321
-  Banks:
-  - {fileID: -2577596922319098531}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 13500
---- !u!114 &7420667893567458061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/sfx_Gate
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/sfx_Gate
-  Guid:
-    Data1: 1279453717
-    Data2: 1175780359
-    Data3: -227318651
-    Data4: 262849109
-  Banks:
-  - {fileID: 8789107609421317367}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1900
+  Length: 1120
 --- !u!114 &7467037968471604609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,7 +908,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2000
+  Length: 2100
 --- !u!114 &8789107609421317367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +924,6 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638759416182761907
+  lastModified: 638791306452297148
   FileSizes: []
   Exists: 1

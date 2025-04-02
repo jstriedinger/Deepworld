@@ -1,82 +1,116 @@
+using System;
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class CoralLimb : MonoBehaviour
 {
-    [Header("General")]
+    [Header("General")] 
+    [SerializeField] private Texture2D coralTexture;
     public int length;
-    [SerializeField] private Sprite sprite;
+    public Transform wiggleDir;
+    public Transform wiggleTarget;
+    public float wiggleSpeed;
+    [SerializeField] private bool throwBubbles;
+    [SerializeField] private ParticleSystem vfxBubbles;
+    [SerializeField] private float bubbleTime;
+    private float _nextBubbles;
+    private Tween _bubbleTween;
     
     [Header("Opening Gate")]
     [SerializeField] private float openingSpeed;
     [SerializeField] private float openingLineWidth;
     [SerializeField] private float openingDistBetweenPoints;
+    [SerializeField] private float openingTweenDuration;
 
     [Header("Closing")] [SerializeField] private float closingSpeed;
     [SerializeField] private float closingLineWidth;
-    [SerializeField] private float closingDistBetweenPoints;
+    public float closingDistBetweenPoints;
     
     
-    private Vector3[] _segmentPoses, _segmentV;
     public LineRenderer lineRenderer;
-
     public float currentSpeed, currentDistBetweenPoints;
+    private bool isOpen = false;
+    private Coroutine _bubbleCoroutine =  null;
+    private MaterialPropertyBlock propertyBlock;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.material.SetTexture("_MainTex",textureFromSprite(sprite));
-        _segmentPoses = new Vector3[length];
-        _segmentV = new Vector3[length];
+        
+        //set our texture
+        propertyBlock = new MaterialPropertyBlock();
+        // Get the current property block
+        lineRenderer.GetPropertyBlock(propertyBlock);
+        // Set the texture only for this LineRenderer instance
+        propertyBlock.SetTexture("_MainTex", coralTexture);
+        // Apply the property block to the LineRenderer
+        lineRenderer.SetPropertyBlock(propertyBlock);
+        
         Close();
+        _bubbleTween = transform.DOPunchPosition(new Vector3(0, .5f, 0), .5f, 1, 0f).OnComplete(
+            () => { vfxBubbles.Stop(); vfxBubbles.Play(); }).SetAutoKill(false).Pause();
+        
+        if(!throwBubbles)
+            Destroy(vfxBubbles.gameObject);
     }
 
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     _segmentPoses[0] = transform.position;
-    //     for(int i = 1; i < _segmentPoses.Length; i++)
-    //     {
-    //         _segmentPoses[i] = Vector3.SmoothDamp(_segmentPoses[i], _segmentPoses[i-1] + transform.right * currentDistBetweenPoints, ref _segmentV[i], 
-    //             currentSpeed);
-    //     }
-    //
-    //     lineRenderer.SetPositions(_segmentPoses);
-    // }
+    IEnumerator ThrowBubbles()
+    {
+        while (throwBubbles && !isOpen)
+        {
+            yield return new WaitForSeconds(bubbleTime);
+            vfxBubbles.transform.position = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
+            _bubbleTween.Restart();
+
+        }
+
+    }
+
+    
 
     public void Open()
     {
         Debug.Log("Opening coral");
         currentSpeed = openingSpeed;
-        currentDistBetweenPoints = openingDistBetweenPoints;
+        isOpen = true;
+        //lineRenderer.textureScale = new Vector2(1, openingLineWidth);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(DOTween.To(() => currentDistBetweenPoints, x => currentDistBetweenPoints = x,
+            closingDistBetweenPoints +0.2f, openingTweenDuration * 0.6f));
+        seq.Append(DOTween.To(() => currentDistBetweenPoints, x => currentDistBetweenPoints = x,
+            openingDistBetweenPoints, openingTweenDuration));
+        seq.Join(DOTween.To(() => lineRenderer.textureScale.y, x =>
+            {
+                Vector2 tmp = lineRenderer.textureScale;
+                tmp.y = x;
+                lineRenderer.textureScale = tmp;
+            },
+            openingLineWidth, openingTweenDuration+.1f));
+            
+        //DOTween.To(() => currentDistBetweenPoints, x => currentDistBetweenPoints = x,
+          //  openingDistBetweenPoints, 2f).SetEase(Ease.InBounce);
+        //currentDistBetweenPoints = openingDistBetweenPoints;
 
-        lineRenderer.textureScale = new Vector2(1, openingLineWidth);
+        if(_bubbleCoroutine != null)
+            StopCoroutine(_bubbleCoroutine);
 
     }
 
     public void Close()
     {
         Debug.Log("Closing coral");
+        isOpen = false;
         currentSpeed = closingSpeed;
-        currentDistBetweenPoints = closingDistBetweenPoints;
         lineRenderer.textureScale = new Vector2(1, closingLineWidth);
+        currentDistBetweenPoints = closingDistBetweenPoints;
+        if(throwBubbles)
+            _bubbleCoroutine = StartCoroutine(ThrowBubbles());
     }
     
-    public static Texture2D textureFromSprite(Sprite sprite)
-    {
-        if(sprite.rect.width != sprite.texture.width){
-            Texture2D newText = new Texture2D((int)sprite.rect.width,(int)sprite.rect.height);
-            Color[] newColors = sprite.texture.GetPixels((int)sprite.textureRect.x, 
-                (int)sprite.textureRect.y, 
-                (int)sprite.textureRect.width, 
-                (int)sprite.textureRect.height );
-            newText.SetPixels(newColors);
-            newText.Apply();
-            return newText;
-        } else
-            return sprite.texture;
-    }
+   
     
 
     

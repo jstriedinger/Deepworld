@@ -6437,7 +6437,7 @@ Transform:
   m_GameObject: {fileID: 5278061453918920970}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.2, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7193,7 +7193,7 @@ Transform:
   m_GameObject: {fileID: 6784684105019156936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0.2, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7451,25 +7451,45 @@ LineRenderer:
   m_SortingOrder: 18
   m_Positions:
   - {x: 1470.4, y: -475.7, z: 0}
+  - {x: 1470.4, y: -475.85, z: 0}
   - {x: 1470.4, y: -476, z: 0}
+  - {x: 1470.4, y: -476.15, z: 0}
   - {x: 1470.4, y: -476.3, z: 0}
+  - {x: 1470.4, y: -476.44998, z: 0}
   - {x: 1470.4, y: -476.59998, z: 0}
+  - {x: 1470.4, y: -476.74997, z: 0}
   - {x: 1470.4, y: -476.89996, z: 0}
+  - {x: 1470.4, y: -477.04996, z: 0}
   - {x: 1470.4, y: -477.19995, z: 0}
+  - {x: 1470.4, y: -477.34995, z: 0}
   - {x: 1470.4, y: -477.49994, z: 0}
+  - {x: 1470.4, y: -477.64993, z: 0}
   - {x: 1470.4, y: -477.79993, z: 0}
+  - {x: 1470.4, y: -477.94992, z: 0}
   - {x: 1470.4, y: -478.0999, z: 0}
+  - {x: 1470.4, y: -478.2499, z: 0}
   - {x: 1470.4, y: -478.3999, z: 0}
+  - {x: 1470.4, y: -478.5499, z: 0}
   - {x: 1470.4, y: -478.6999, z: 0}
+  - {x: 1470.4, y: -478.84988, z: 0}
   - {x: 1470.4, y: -478.99988, z: 0}
+  - {x: 1470.4, y: -479.14987, z: 0}
   - {x: 1470.4, y: -479.29987, z: 0}
+  - {x: 1470.4, y: -479.44986, z: 0}
   - {x: 1470.4, y: -479.59985, z: 0}
+  - {x: 1470.4, y: -479.74985, z: 0}
   - {x: 1470.4, y: -479.89984, z: 0}
+  - {x: 1470.4, y: -480.04984, z: 0}
   - {x: 1470.4, y: -480.19983, z: 0}
+  - {x: 1470.4, y: -480.34982, z: 0}
   - {x: 1470.4, y: -480.49982, z: 0}
+  - {x: 1470.4, y: -480.6498, z: 0}
   - {x: 1470.4, y: -480.7998, z: 0}
+  - {x: 1470.4, y: -480.9498, z: 0}
   - {x: 1470.4, y: -481.0998, z: 0}
+  - {x: 1470.4, y: -481.2498, z: 0}
   - {x: 1470.4, y: -481.39978, z: 0}
+  - {x: 1470.4, y: -481.54977, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.9667169
@@ -7541,10 +7561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8e83cab61d1cf4fa360332045a8fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 20
+  length: 40
   segmentPoses: []
   targetDir: {fileID: 7899289817624706469}
-  targetDist: 0.3
+  targetDist: 0.15
   smoothSpeed: 0.0001
   wiggleSpeed: 0.5
   wiggleMagnitude: 0.5
@@ -7552,8 +7572,8 @@ MonoBehaviour:
   bodyParts:
   - {fileID: 7055298759358132506}
   - {fileID: 2880813587380899022}
-  upperBody: 6
-  lowerBody: 12
+  upperBody: 10
+  lowerBody: 26
 --- !u!114 &6176218473168512466
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class PolypTracker : MonoBehaviour
             //Check if the playerCharacter is within our target distance
             //If not, skip eveything else in this script
         
-            if(distTrigger < Math.Abs(Vector3.Distance(targetSearchLocation.transform.position, target.transform.position))){
+            if(distTrigger < Math.Abs(Vector2.Distance(targetSearchLocation.transform.position, target.transform.position))){
                 if(!_tentacle.enabled){
                     _tentacle.enabled = true;
                     _tentacle.RecalcPos(_segments);

@@ -40,25 +40,23 @@ public class MonsterCinematic : MonsterBase
     }
 
     /**
-     * Toggle manual pursuit
+     * Toggle manual pursuit.
+     * Type used to know if to change right away to pursue or follow
      */
-    public void TogglePursuit(bool pursue, float timeOffset = 0, bool withSound = false)
+    public void TogglePursuit(bool pursue, bool type = false, bool withSound = false)
     {
-        Sequence seq = DOTween.Sequence();
         if (pursue)
         {
-            seq.AppendCallback(() =>
-            {
-                UpdateMonsterState(MonsterState.Follow);
-                _aiPath.canMove = true;
-                _behaviorTree.EnableBehavior();
-                _behaviorTree.Start();
-            });
-            seq.AppendInterval(timeOffset);
-            seq.AppendCallback(() =>
-            {
+            _aiPath.canMove = true;
+            _behaviorTree.EnableBehavior();
+            _behaviorTree.Start();
+            if(!type)
+                UpdateMonsterState(MonsterState.Follow, withSound);
+            else
                 UpdateMonsterState(MonsterState.Chasing, withSound);
-            });
+            
+            
+                //UpdateMonsterState(MonsterState.Chasing, withSound);
             //_aiPath.maxSpeed = monsterStats.ChasingSpeed;
         }
         else

@@ -78,14 +78,6 @@ public class UIManager : MonoBehaviour
         //regardless of what happens, we start with a smooth fadeout
         blackout.DOFade(0, 3).SetEase(Ease.InQuad);
     }
-
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public void HideMainMenu()
     {

@@ -19,13 +19,7 @@ public class TentacleToggler : MonoBehaviour
         _tentacle = GetComponent<TentacleInfo>();
         _targetDistDefault = _tentacle.minPointGap;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
 
     public void Close()
     {

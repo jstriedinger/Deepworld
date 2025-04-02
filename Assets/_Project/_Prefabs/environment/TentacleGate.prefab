@@ -161,16 +161,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ca91e4f4494d344a8eee3f3e312c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateAnimDuration: 0
+  resetAnimDuration: 0
   bulb: {fileID: 8434666479056597289}
   bulbLight: {fileID: 5017170103341605021}
-  activeLightIntensity: 6
+  activeLightIntensity: 0
   defaultLightIntensity: 1
-  activeFeedbackAlpha: 0
-  defaultFeedbackAlpha: 0
-  switchCoralsController: {fileID: 9075175233974475321}
   circleSprite: {fileID: 5720555964839487633}
   circleRotateDuration: 25
-  tweenDuration: 1.5
+  defaultFeedbackAlpha: 0
+  vfxDust: {fileID: 0}
   playerInRange: 0
 --- !u!58 &4315320813951117056
 CircleCollider2D:
@@ -632,9 +632,8 @@ MonoBehaviour:
   tentaclesObj: {fileID: 7990814029715286639}
   gateCollider: {fileID: 0}
   gateLight: {fileID: 1506392718680521256}
-  tentacleGateSwitcher: {fileID: 8344820919811803490}
+  coralGateSwitcher: {fileID: 8344820919811803490}
   coralsController: {fileID: 0}
-  coralSprite: {fileID: 0}
   canOpenGate: 0
 --- !u!61 &4868071540001578746
 BoxCollider2D:
@@ -3524,11 +3523,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812e259969d924b3291797f51fb3c550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coralTexture: {fileID: 0}
   length: 15
-  sprite: {fileID: 0}
+  wiggleDir: {fileID: 0}
+  wiggleTarget: {fileID: 0}
+  wiggleSpeed: 0
+  throwBubbles: 0
+  vfxBubbles: {fileID: 0}
+  bubbleTime: 0
   openingSpeed: 0
   openingLineWidth: 0
   openingDistBetweenPoints: 0
+  openingTweenDuration: 0
   closingSpeed: 0
   closingLineWidth: 0
   closingDistBetweenPoints: 0

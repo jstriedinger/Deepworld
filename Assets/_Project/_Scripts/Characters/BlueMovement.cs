@@ -151,7 +151,8 @@ public class BlueMovement : MonoBehaviour
             //Reduce head wobble a little
             if (angles > 15)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
             }
             
         }
@@ -170,9 +171,9 @@ public class BlueMovement : MonoBehaviour
         //nextWaypointDistance = 1;
         minDistance -= 6;
         distanceToSwim -= 5;
-        moveSpeed += 100;
-        maxSpeed += 650;
-        swimForce += 3f;
+        moveSpeed += 200;
+        maxSpeed += 750;
+        swimForce += 3.5f;
         _minDistancePow = minDistance * minDistance;
         _distanceToSwimPow = distanceToSwim * distanceToSwim;
     }

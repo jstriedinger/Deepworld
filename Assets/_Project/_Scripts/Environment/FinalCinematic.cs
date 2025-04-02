@@ -49,18 +49,6 @@ public class FinalCinematic : MonoBehaviour
 
 
 
-    // Update is called once per frame
-
-    void Update()
-
-    {
-
-        
-
-    }
-
-
-
     void PlayFinalCinematic()
     {
         Vector3[] playerVectors = new Vector3[path.Length];

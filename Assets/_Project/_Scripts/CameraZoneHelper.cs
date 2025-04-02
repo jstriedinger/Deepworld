@@ -20,12 +20,7 @@ public class CameraZoneHelper : MonoBehaviour
         _trigerred = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+  
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead && _inCamera)

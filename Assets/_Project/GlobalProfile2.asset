@@ -209,4 +209,4 @@ MonoBehaviour:
   height:
     m_OverrideState: 0
     m_Value: 1
-  shader: {fileID: 0}
+  shader: {fileID: 4800000, guid: cc32764044bcef746970dca5bb25a328, type: 3}

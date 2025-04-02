@@ -109,10 +109,11 @@ public abstract class MonsterBase : MonoBehaviour
         }
     }
     
-    public IEnumerator PlayReactSound(bool showEffect, bool animate)
+    public IEnumerator PlayReactSfx(bool showEffect, bool animate)
     {
         if (showEffect)
         {
+            Debug.Log("PLaying react vfx");
             vfxDetect.Play();
             yield return new WaitForSeconds(0.25f);
         }
@@ -144,11 +145,10 @@ public abstract class MonsterBase : MonoBehaviour
       /**
      * Function that updates the monster state visually
      */
-    public void UpdateMonsterState(MonsterState newState, bool withSound = true)
+    public void UpdateMonsterState(MonsterState newState, bool withSound = true, bool showEffect = false)
     {
         if (CurrentState == newState && CurrentState != MonsterState.Default)
             return;
-        Debug.Log("Updating monster state to: "+newState);
         //Kill all transitions and return to normal before deciding what to do
         _chaseScaleTween.Rewind();
         _headObj.transform.localScale = Vector3.one;
@@ -179,7 +179,7 @@ public abstract class MonsterBase : MonoBehaviour
             case MonsterState.Follow:
                 UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false,  monsterStats.DefaultLightColor);
                 if(withSound)
-                    StartCoroutine(PlayReactSound(true, true));
+                    StartCoroutine(PlayReactSfx(true, true));
                 break;
             case MonsterState.Investigate:
                 _behaviorTree?.SetVariableValue("CanReactToCall",true);
@@ -187,7 +187,7 @@ public abstract class MonsterBase : MonoBehaviour
                 
                 UpdateColorsAndToggleAnimation(monsterStats.FollowColorGradient,false,  monsterStats.DefaultLightColor);
                 if(withSound)
-                    StartCoroutine(PlayReactSound(true, true));
+                    StartCoroutine(PlayReactSfx(true, true));
                 break;
             case MonsterState.Chasing:
                 if (canAddChaseMusic)
@@ -196,11 +196,11 @@ public abstract class MonsterBase : MonoBehaviour
                 
                 UpdateColorsAndToggleAnimation(monsterStats.ChaseColorGradient,true,  monsterStats.ChaseLightColor);
                 if(withSound)
-                    StartCoroutine(PlayReactSound(false, false));
+                    StartCoroutine(PlayReactSfx(showEffect, false));
                 break;
             case MonsterState.Frustrated:
                 if(withSound)
-                    StartCoroutine(PlayReactSound(false, false));
+                    StartCoroutine(PlayReactSfx(showEffect, false));
                 break;
             
         }
@@ -369,14 +369,23 @@ public abstract class MonsterBase : MonoBehaviour
     
     #endregion
 
+    //Attack player sequence
     public void AttackPlayerAnim()
     {
         _chaseScaleTween.Rewind();
+        FMODUnity.RuntimeManager.PlayOneShot(monsterStats.SfxMonsterAttack);
         Sequence seq = DOTween.Sequence();
         seq.SetEase(Ease.OutCubic);
         seq.Append(_headObj.DOScaleY(2f, 0.65f));
         seq.Append(_headObj.DOScaleY(1f, 0.65f  * 1.5f));
     }
+
+    //extra method to play swim sfx
+    public void PlaySwimSfx()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(monsterStats.SfxMonsterAttack);
+    }
+    
     public void EatPlayerAnimation()
     {
         _chaseScaleTween.Rewind();

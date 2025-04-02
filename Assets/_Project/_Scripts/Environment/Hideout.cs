@@ -15,6 +15,7 @@ using Unity.Mathematics;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class Hideout : MonoBehaviour
@@ -78,7 +79,7 @@ public class Hideout : MonoBehaviour
             Vector3 d = (transform.position -  collision.transform.position).normalized;
             StartCoroutine(GameManager.Instance.playerRef.AddImpulseForceToPlayer(d, configuration.CoverForce));
             //vfx bubbles 
-            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector3.Distance(collision.transform.position, obj.transform.position)).First();
+            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
             //Sound effect
             RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
@@ -101,7 +102,7 @@ public class Hideout : MonoBehaviour
         else if (collision.gameObject.CompareTag("Blue"))
         {
             //just the sound
-            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector3.Distance(collision.transform.position, obj.transform.position)).First();
+            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
             RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
         }
@@ -122,7 +123,7 @@ public class Hideout : MonoBehaviour
             Vector3 d = (collision.transform.position - transform.position).normalized;
             StartCoroutine(GameManager.Instance.playerRef.AddImpulseForceToPlayer(d, configuration.CoverForce));
             //vfx bubble
-            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector3.Distance(collision.transform.position, obj.transform.position)).First();
+            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
             //sound effect
             FMODUnity.RuntimeManager.PlayOneShot(configuration.SfxExit, transform.position);
@@ -134,7 +135,7 @@ public class Hideout : MonoBehaviour
         {
             //just the sound
             RuntimeManager.PlayOneShot(configuration.SfxExit, transform.position);
-            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector3.Distance(collision.transform.position, obj.transform.position)).First();
+            ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
         }
     }

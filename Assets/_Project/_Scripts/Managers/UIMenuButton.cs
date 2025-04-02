@@ -12,12 +12,7 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
     private TextMeshProUGUI _btnText;
     private Camera _mainCamera;
     // Start is called before the first frame updat
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     private void Awake()
     {
         _btnText = GetComponentInChildren<TextMeshProUGUI>();

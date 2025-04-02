@@ -15,6 +15,7 @@ public class MonsterSO : ScriptableObject
     
     [field: Header("sfx")]
     [field: SerializeField] public EventReference SfxMonsterReact { get; private set; }
+    [field: SerializeField] public EventReference SfxMonsterAttack { get; private set; }
 
 
     [field:Header("Eye behavior")]

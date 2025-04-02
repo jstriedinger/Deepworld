@@ -23,6 +23,11 @@ public class ColliderEventTrigger : MonoBehaviour
         _triggered = false;
     }
 
+    public void RestartTrigger()
+    {
+        _triggered = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((triggerOnce && !_triggered) || !triggerOnce)

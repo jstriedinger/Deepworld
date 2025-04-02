@@ -112,7 +112,7 @@ PrefabInstance:
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
       propertyPath: showBehaviorDesignerGizmo
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6734201551289017990, guid: 6b9c9de70c2fa48a78fb272e58575661,
         type: 3}
@@ -151,6 +151,18 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 6180491382842585875}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &200683703328004402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6272807196478843425, guid: 6b9c9de70c2fa48a78fb272e58575661,
+    type: 3}
+  m_PrefabInstance: {fileID: 6180491382842585875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2d90dfb29d52548ab2e2a4fc99e142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1951333236065612892 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5679324004921067343, guid: 6b9c9de70c2fa48a78fb272e58575661,
@@ -182,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterStats: {fileID: 11400000, guid: af124119e7d5a461c9fbc0d2ea5c2f11, type: 2}
-  monsterTails: {fileID: 0}
+  monsterTails: {fileID: 200683703328004402}
   vfxSwimBubbles: {fileID: 163669103827325562}
   vfxDetect: {fileID: 193203404905246779}
   _tail: {fileID: 4465723045806856069}

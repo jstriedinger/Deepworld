@@ -24,11 +24,18 @@ MonoBehaviour:
       Data3: -1875364733
       Data4: -434441116
     Path: event:/SFX/sfx_monsteraggro_Impact_1
-  <SpriteBall>k__BackingField: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SfxMonsterAttack>k__BackingField:
+    Guid:
+      Data1: 997688691
+      Data2: 1127499286
+      Data3: -518493567
+      Data4: -358451874
+    Path: event:/SFX/sfx_monster_Swim
+  <SpriteBall>k__BackingField: {fileID: -6665555259446299630, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
-  <SpriteMaw>k__BackingField: {fileID: 9094214531208688103, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpriteMaw>k__BackingField: {fileID: -4080239575899590826, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
-  <SpritePupil>k__BackingField: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpritePupil>k__BackingField: {fileID: -2552084727849433238, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
   <PupilDropSpeed>k__BackingField: 0.175
   <EyeBallShutSpeed>k__BackingField: 0.125
