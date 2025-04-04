@@ -95,7 +95,29 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   multiSpriteImportData: []
   layeredSpriteImportData:
-  - name: Maw
+  - name: pupil2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 1862
+      width: 125
+      height: 125
+    spriteID: 463f08eccfb864fb09a09335ca37fdba
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 1860}
+    spritePosition: {x: 142, y: 143}
+  - name: veinsfg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -105,6 +127,50 @@ ScriptedImporter:
       serializedVersion: 2
       x: 424
       y: 32
+      width: 247
+      height: 238
+    spriteID: fa5f6d307060a4576a44798fd1161ce8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 424, y: 32}
+    spritePosition: {x: 81, y: 86}
+  - name: veinsbg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 1514
+      width: 279
+      height: 284
+    spriteID: 48a16e5be073942d7a355284c57c0217
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 1514}
+    spritePosition: {x: 66, y: 62}
+  - name: Maw
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 814
       width: 286
       height: 286
     spriteID: 58a94e94d20c18e47a3e8e457a43ab76
@@ -115,7 +181,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 424, y: 32}
+    uvTransform: {x: 32, y: 814}
     spritePosition: {x: 62, y: 62}
   - name: Pupil
     originalName: 
@@ -147,8 +213,8 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 424
-      y: 382
+      x: 32
+      y: 1164
       width: 286
       height: 286
     spriteID: fb49e2036b70c8440838e17b00471d60
@@ -159,7 +225,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 424, y: 382}
+    uvTransform: {x: 32, y: 1164}
     spritePosition: {x: 62, y: 62}
   - name: EyeLiner
     originalName: 
@@ -369,17 +435,121 @@ ScriptedImporter:
     flatten: 0
     isGroup: 0
     importLayer: 1
-  psdLayers:
-  - name: Vector Smart Object copy
-    spriteName: 
+  - spriteId: 47c7d0799e47a4323bfa4930b592d8ca
+    name: objs
+    layerId: 25
+    flatten: 0
+    isGroup: 1
+    importLayer: 1
+  - spriteId: 463f08eccfb864fb09a09335ca37fdba
+    name: pupil2
+    layerId: 35
+    flatten: 0
     isGroup: 0
+    importLayer: 1
+  - spriteId: fa5f6d307060a4576a44798fd1161ce8
+    name: veinsfg
+    layerId: 32
+    flatten: 0
+    isGroup: 0
+    importLayer: 1
+  - spriteId: 48a16e5be073942d7a355284c57c0217
+    name: veinsbg
+    layerId: 30
+    flatten: 0
+    isGroup: 0
+    importLayer: 1
+  psdLayers:
+  - name: newEye
+    spriteName: 
+    isGroup: 1
     parentIndex: -1
-    spriteID: 3e47427da5363d245a8c6fffecabacb4
-    layerID: 16
+    spriteID: 70e15746011754d16b9a2ad8f42d36d3
+    layerID: 38
     mosaicPosition: {x: 0, y: 0}
     flatten: 0
     isImported: 0
     isVisible: 0
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 1538af9c452ce45e1933209cc197a7d9
+    layerID: 46
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: f292487f16c2844b6844c02f37857773
+    layerID: 44
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 519390511777b4aee955d370cc4b96ae
+    layerID: 50
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 05f07af0e80724997a308279351e3201
+    layerID: 52
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 99c3fb6aaf2ca4c369a3af75ab88a76d
+    layerID: 56
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 1d2f18b1db5a04bd88087893802bb025
+    layerID: 40
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: dd5692644435949169f0e72fd8661c4b
+    layerID: 54
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 6ad20d3bc9d3d4399949b214e6fa12f1
+    layerID: 48
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
   - name: Pupil copy
     spriteName: 
     isGroup: 0
@@ -390,13 +560,53 @@ ScriptedImporter:
     flatten: 0
     isImported: 0
     isVisible: 0
+  - name: objs
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 47c7d0799e47a4323bfa4930b592d8ca
+    layerID: 25
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: pupil2
+    spriteName: pupil2
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 463f08eccfb864fb09a09335ca37fdba
+    layerID: 35
+    mosaicPosition: {x: 32, y: 1862}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: veinsfg
+    spriteName: veinsfg
+    isGroup: 0
+    parentIndex: 10
+    spriteID: fa5f6d307060a4576a44798fd1161ce8
+    layerID: 32
+    mosaicPosition: {x: 424, y: 32}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: veinsbg
+    spriteName: veinsbg
+    isGroup: 0
+    parentIndex: 10
+    spriteID: 48a16e5be073942d7a355284c57c0217
+    layerID: 30
+    mosaicPosition: {x: 32, y: 1514}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: Maw
     spriteName: Maw
     isGroup: 0
     parentIndex: -1
     spriteID: 58a94e94d20c18e47a3e8e457a43ab76
     layerID: 4
-    mosaicPosition: {x: 424, y: 32}
+    mosaicPosition: {x: 32, y: 814}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -426,7 +636,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: fb49e2036b70c8440838e17b00471d60
     layerID: 3
-    mosaicPosition: {x: 424, y: 382}
+    mosaicPosition: {x: 32, y: 1164}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -440,6 +650,16 @@ ScriptedImporter:
     flatten: 0
     isImported: 1
     isVisible: 1
+  - name: Layer 1
+    spriteName: 
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 02bf4d91a8b4f4ed58caab99a4677446
+    layerID: 29
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
   mosaicPSDLayers: []
   rigPSDLayers:
   - name: Pupil
