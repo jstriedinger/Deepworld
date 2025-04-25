@@ -7,8 +7,9 @@ using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using Gilzoide.UpdateManager;
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : AManagedBehaviour, IUpdatable
 {
 
     public static event Action PlayerOnControlsChanged;
@@ -82,13 +83,15 @@ public class PlayerCharacter : MonoBehaviour
 
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         GameManager.OnRestartingGame += OnRestartingGame;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         GameManager.OnRestartingGame -= OnRestartingGame;
     }
 
@@ -200,11 +203,7 @@ public class PlayerCharacter : MonoBehaviour
     
     private void Update()
     {
-        Move();
-        SlowTurn();
-        if (Time.time >= _nextSwim + 1f)
-            swimStage = false;
-        _rigidBody.AddForce(_finalMovement);
+        
     }
 
     private void FixedUpdate()
@@ -400,6 +399,14 @@ public class PlayerCharacter : MonoBehaviour
         
     }
 
+    public void ManagedUpdate()
+    {
+        Move();
+        SlowTurn();
+        if (Time.time >= _nextSwim + 1f)
+            swimStage = false;
+        _rigidBody.AddForce(_finalMovement);
+    }
 }
 
 

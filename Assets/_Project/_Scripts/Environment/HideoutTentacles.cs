@@ -1,6 +1,7 @@
 using UnityEngine;
+using Gilzoide.UpdateManager;
 
-public class HideoutTentacles : MonoBehaviour
+public class HideoutTentacles : AManagedBehaviour, IUpdatable
 {
     [SerializeField] private float extraDistBetweenPoints;
     [SerializeField] private float extraWiggleSpeed;
@@ -25,23 +26,6 @@ public class HideoutTentacles : MonoBehaviour
         SetupTentacles();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        for (int i = 0; i < _tentacles.Length; i++)
-        {
-            TentacleInfo t = _tentacles[i];
-            t.wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * t.minWiggleSpeed) * idleWiggleMagnitude);
-            _tentaclesSegmentPoses[i][0] = t.targetDir.position;
-            for(int j = 1; j < t.tentacleLength; j++)
-            {
-                _tentaclesSegmentPoses[i][j] = Vector3.SmoothDamp(_tentaclesSegmentPoses[i][j], _tentaclesSegmentPoses[i][j-1] + 
-                    (t.targetDir.right * t.minPointGap), ref _tentaclesSegmentV[i][j], 
-                    smoothSpeed);
-            }
-            t.lineRenderer.SetPositions(_tentaclesSegmentPoses[i]);
-        }
-    }
     public void SetupTentacles()
     {
         for (int i = 0; i < _tentacles.Length; i++)
@@ -66,5 +50,22 @@ public class HideoutTentacles : MonoBehaviour
             t.lineRenderer.SetPositions(_tentaclesSegmentPoses[i]);
         }
         
+    }
+
+    public void ManagedUpdate()
+    {
+        for (int i = 0; i < _tentacles.Length; i++)
+        {
+            TentacleInfo t = _tentacles[i];
+            t.wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * t.minWiggleSpeed) * idleWiggleMagnitude);
+            _tentaclesSegmentPoses[i][0] = t.targetDir.position;
+            for(int j = 1; j < t.tentacleLength; j++)
+            {
+                _tentaclesSegmentPoses[i][j] = Vector3.SmoothDamp(_tentaclesSegmentPoses[i][j], _tentaclesSegmentPoses[i][j-1] + 
+                    (t.targetDir.right * t.minPointGap), ref _tentaclesSegmentV[i][j], 
+                    smoothSpeed);
+            }
+            t.lineRenderer.SetPositions(_tentaclesSegmentPoses[i]);
+        }
     }
 }

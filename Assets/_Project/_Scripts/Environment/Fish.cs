@@ -27,11 +27,11 @@ public class Fish : MonoBehaviour
             //randome sizing ourselves
             if (randomSizes)
             {
-                float r1 = GetRandomStepFloat(1, 2f, 0.2f);
-                float r2 = GetRandomStepFloat(1, 1.4f, 0.1f);
+                float r1 = GetRandomStepFloat(1, 1.5f, 0.2f);
+                float r2 = GetRandomStepFloat(1, 1.2f, 0.1f);
                 transform.localScale = new Vector3(r1,r2,1);
             }
-            _spriteRenderer.material = fishMats[Random.Range(0, fishMats.Length)];
+            _spriteRenderer.sharedMaterial = fishMats[Random.Range(0, fishMats.Length)];
             _behaviorTree = GetComponent<BehaviorTree>();
             
         }

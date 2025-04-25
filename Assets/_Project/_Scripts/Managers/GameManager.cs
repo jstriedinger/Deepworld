@@ -94,8 +94,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //framerate
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+        //QualitySettings.vSyncCount = 0;
+        //Application.targetFrameRate = 60;
         
         //Setting up
         _originPos = playerRef.transform.position;
@@ -142,53 +142,61 @@ public class GameManager : MonoBehaviour
                 AudioManager.Instance.ToggleCloseDangerMusic(false);
             }
             
+            //always unload everything first
+            for (int i = 1; i < levelSections.Length; i++)
+            {
+                levelSections[i].SetActive(false);
+            }
+            
 		    //Prepare everything to start from a checkpoint or something
             switch (startSection)
             {
                 case StartSection.Default:
                     //playing the way it is supposed to be played
                     //by default all sections are disable except the first one
-                    for (int i = 1; i < levelSections.Length; i++)
-                    {
-                        levelSections[i].SetActive(false);
-                    }
+                    
                     LoadLevelSection(0);
                     ChangeGameState(GameState.Cinematic);
                     
                     CinematicsManager.Instance.DoCinematicTitles();
                     break;
                 case StartSection.Checkpoint1:
+                    LoadLevelSection(0);
                     UIManager.Instance.isWorldUiActive = true;
                     AudioManager.Instance.ChangeBackgroundMusic(1);
                     CinematicsManager.Instance.PrepareBlueForMeetup();
                     //blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
                 case StartSection.Checkpoint2:
+                    LoadLevelSection(2);
                     UIManager.Instance.isWorldUiActive = true;
                     AudioManager.Instance.ChangeBackgroundMusic(-1);
                     //place blue in the first point of path
                     CinematicsManager.Instance.PrepareBlueForMonsterEncounter();
                     break;
                 case StartSection.Checkpoint3:
+                    LoadLevelSection(3);
                     playerRef.ToggleMonsterEyeDetection(true);
                     playerRef.ToggleEyeFollowTarget(true);
                     break;
                 case StartSection.Checkpoint4:
+                    LoadLevelSection(3);
+                    playerRef.ToggleMonsterEyeDetection(true);
+                    playerRef.ToggleEyeFollowTarget(true);
                     break;
                 case StartSection.Checkpoint5:
+                    LoadLevelSection(3);
+                    playerRef.ToggleMonsterEyeDetection(true);
+                    playerRef.ToggleEyeFollowTarget(true);
                     break;
                 case StartSection.Checkpoint6:
+                    LoadLevelSection(4); //for now
                     playerRef.SetBlueReference(blueNpcRef);
                     blueNpcRef.ToggleFollow(true);
                     blueNpcRef.GetHurt();
                     blueNpcRef.ChangeBlueStats(playerRef.transform);
                     break;
-                case StartSection.Checkpoint7:
-                    playerRef.SetBlueReference(blueNpcRef);
-                    blueNpcRef.ToggleFollow(true);
-                    blueNpcRef.GetHurt();
-                    blueNpcRef.ChangeBlueStats(playerRef.transform);
-                    break;
+                
                 
             }
             cp = checkPoints[_currentCheckPointIndex].GetSpawnPoint();
@@ -425,6 +433,23 @@ public class GameManager : MonoBehaviour
             propsLight, 1f));
         
 
+    }
+
+    public void TempTeleportToFinal()
+    {
+        UnloadLevelSection(3);
+        LoadLevelSection(4);
+        playerRef.SetBlueReference(blueNpcRef);
+        blueNpcRef.ToggleFollow(true);
+        blueNpcRef.GetHurt();
+        blueNpcRef.ChangeBlueStats(playerRef.transform);
+
+        CheckPoint cp = checkPoints[6];
+        Transform sp = cp.GetSpawnPoint();
+        playerRef.transform.position = cp.GetSpawnPoint().position;
+        Transform blueSpawn = cp.GetBlueSpawnPoint();
+        if (blueSpawn)
+            blueNpcRef.transform.position = blueSpawn.position;
     }
 
 }

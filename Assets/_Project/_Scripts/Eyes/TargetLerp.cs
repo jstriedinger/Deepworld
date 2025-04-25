@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Gilzoide.UpdateManager;
 
-public class TargetLerp : MonoBehaviour
+public class TargetLerp : AManagedBehaviour, IUpdatable
 {
 
     [SerializeField] MonsterBase monsterBase;
     [SerializeField] private bool followOverride;
+    //this becomes a ref to the player in runtime
     public Transform idealTarget;
     public float smoothTime;
     private Vector3 velocity = Vector3.zero;
@@ -19,8 +21,7 @@ public class TargetLerp : MonoBehaviour
     }
 
     //TargetLerp is supposed to be attached to the arms' target objects. It allows us to smooth out transitions between different splines and animations by following an ideal target.
-
-    void Update()
+    public void ManagedUpdate()
     {
         if(monsterBase && (monsterBase.CurrentState == MonsterState.Frustrated || monsterBase.CurrentState == MonsterState.Follow )  )
         {
@@ -28,6 +29,5 @@ public class TargetLerp : MonoBehaviour
         }
 
     }
-
 }
 

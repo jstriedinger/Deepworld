@@ -5,8 +5,9 @@ using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using Gilzoide.UpdateManager;
 
-public class MonsterTails : MonoBehaviour
+public class MonsterTails : AManagedBehaviour, IUpdatable
 {
     [SerializeField] private bool rotateToPoint = true;
     [SerializeField] private Transform idleCenterPivot;
@@ -50,36 +51,6 @@ public class MonsterTails : MonoBehaviour
         {
             _currentPivot = idleCenterPivot;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        for (int i = 0; i < _tentacles.Length; i++)
-        {
-            TentacleInfo t = _tentacles[i];
-            t.wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * t.currentWiggleSpeed) * idleWiggleMagnitude);
-            _tentaclesSegmentPoses[i][0] = t.targetDir.position;
-            for(int j = 1; j < t.tentacleLength; j++)
-            {
-                _tentaclesSegmentPoses[i][j] = Vector3.SmoothDamp(_tentaclesSegmentPoses[i][j], _tentaclesSegmentPoses[i][j-1] + 
-                    (t.targetDir.right * (aiPath.velocity.magnitude > Mathf.Epsilon ? t.minPointGap : t.minPointGap + 0.1f) ), ref _tentaclesSegmentV[i][j], 
-                smoothSpeed);
-            }
-            t.lineRenderer.SetPositions(_tentaclesSegmentPoses[i]);
-
-            if (rotateToPoint)
-            {
-                //Rotate tail to center
-                Vector2 direction = _currentPivot.transform.position - t.transform.position;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                t.transform.rotation = Quaternion.Slerp(t.transform.rotation, rotation, rotateToCenterSpeed * Time.deltaTime);      
-                
-            }
-
-        }
-
     }
 
     public void SetupTentacles()
@@ -153,8 +124,37 @@ public class MonsterTails : MonoBehaviour
         }
         
     }
-    
-    
-    
-    
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
+    public void ManagedUpdate()
+    {
+        for (int i = 0; i < _tentacles.Length; i++)
+        {
+            TentacleInfo t = _tentacles[i];
+            t.wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * t.currentWiggleSpeed) * idleWiggleMagnitude);
+            _tentaclesSegmentPoses[i][0] = t.targetDir.position;
+            for(int j = 1; j < t.tentacleLength; j++)
+            {
+                _tentaclesSegmentPoses[i][j] = Vector3.SmoothDamp(_tentaclesSegmentPoses[i][j], _tentaclesSegmentPoses[i][j-1] + 
+                    (t.targetDir.right * (aiPath.velocity.magnitude > Mathf.Epsilon ? t.minPointGap : t.minPointGap + 0.1f) ), ref _tentaclesSegmentV[i][j], 
+                    smoothSpeed);
+            }
+            t.lineRenderer.SetPositions(_tentaclesSegmentPoses[i]);
+
+            if (rotateToPoint)
+            {
+                //Rotate tail to center
+                Vector2 direction = _currentPivot.transform.position - t.transform.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                t.transform.rotation = Quaternion.Slerp(t.transform.rotation, rotation, rotateToCenterSpeed * Time.deltaTime);      
+                
+            }
+
+        }
+    }
 }

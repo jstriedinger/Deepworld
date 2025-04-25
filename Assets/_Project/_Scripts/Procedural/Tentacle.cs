@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
-
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Gilzoide.UpdateManager;
 
 
-public class Tentacle : MonoBehaviour
+public class Tentacle : AManagedBehaviour, IUpdatable, IFixedUpdatable
 {
     [SerializeField] private bool nonReactive = false;
     private LineRenderer _lineRenderer;
@@ -44,14 +43,14 @@ public class Tentacle : MonoBehaviour
         ResetPos();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _lineRenderer.positionCount = length;
 
         segmentPoses = new Vector3[length];
         segmentV = new Vector3[length];
 
-        
         //ResetPos();
     }
 
@@ -59,52 +58,6 @@ public class Tentacle : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         resettingFromPlayer = false;
-    }
-
-    private void FixedUpdate()
-    {
-        if (nonReactive)
-        {
-            //non reactiove, lets move it on fixed update and slower with Lerp. performant
-            wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
-            segmentPoses[0] = targetDir.position;
-            for(int i = 1; i < segmentPoses.Length; i++)
-            {
-                segmentPoses[i] = Vector3.Lerp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, Time.fixedDeltaTime * smoothSpeed);
-                //segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
-                //  resettingFromPlayer? 0.15f : smoothSpeed);
-            }
-            
-            //light always follows last point in line renderer
-            if (_internalLight2D is not null)
-                _internalLightParent.position = segmentPoses[^1];
-
-            _lineRenderer.SetPositions(segmentPoses);
-        }
-    }
-
-
-    private void Update()
-    {
-        if (!nonReactive)
-        {
-            wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
-            segmentPoses[0] = targetDir.position;
-
-            for(int i = 1; i < segmentPoses.Length; i++)
-            {
-                segmentPoses[i] = Vector3.Lerp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, Time.deltaTime * smoothSpeed);
-                segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
-                  resettingFromPlayer? 0.15f : smoothSpeed);
-            }
-
-            //light always follows last point in line renderer
-            if (_internalLight2D is not null)
-                _internalLightParent.position = segmentPoses[^1];
-
-            _lineRenderer.SetPositions(segmentPoses);
-            
-        }
     }
 
     public void ResetPos()
@@ -131,5 +84,49 @@ public class Tentacle : MonoBehaviour
         return _internalLight2D;
     }
 
+    public void ManagedUpdate()
+    {
+        if (!nonReactive)
+        {
+            wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
+            segmentPoses[0] = targetDir.position;
+
+            for(int i = 1; i < segmentPoses.Length; i++)
+            {
+                segmentPoses[i] = Vector3.Lerp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, Time.deltaTime * smoothSpeed);
+                segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
+                    resettingFromPlayer? 0.15f : smoothSpeed);
+            }
+
+            //light always follows last point in line renderer
+            if (_internalLight2D is not null)
+                _internalLightParent.position = segmentPoses[^1];
+
+            _lineRenderer.SetPositions(segmentPoses);
+            
+        }
+    }
+
+    public void ManagedFixedUpdate()
+    {
+        if (nonReactive)
+        {
+            //non reactiove, lets move it on fixed update and slower with Lerp. performant
+            wiggleDir.localRotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * wiggleSpeed) * wiggleMagnitude);
+            segmentPoses[0] = targetDir.position;
+            for(int i = 1; i < segmentPoses.Length; i++)
+            {
+                segmentPoses[i] = Vector3.Lerp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, Time.fixedDeltaTime * smoothSpeed);
+                //segmentPoses[i] = Vector3.SmoothDamp(segmentPoses[i], segmentPoses[i-1] + targetDir.right * targetDist, ref segmentV[i], 
+                //  resettingFromPlayer? 0.15f : smoothSpeed);
+            }
+            
+            //light always follows last point in line renderer
+            if (_internalLight2D is not null)
+                _internalLightParent.position = segmentPoses[^1];
+
+            _lineRenderer.SetPositions(segmentPoses);
+        }
+    }
 }
 

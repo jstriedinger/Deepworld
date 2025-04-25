@@ -124,6 +124,8 @@ public class CinematicsManager : MonoBehaviour
         
         pInput.actions.FindAction("Call").Enable();
         pInput.actions.FindAction("Call").performed += FirstTimeCallInput;
+        
+        GameManager.Instance.LoadLevelSection(2);
 
     }
     
@@ -805,6 +807,7 @@ public class CinematicsManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f);
         RuntimeManager.PlayOneShot(AudioManager.Instance.sfxMonsterScream, transform.position);
         tunnelRocks.SetActive(true);
+        //unload previous levels
         GameManager.Instance.UnloadLevelSection(0);
         GameManager.Instance.UnloadLevelSection(1);
         

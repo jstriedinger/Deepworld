@@ -2,18 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
-using BehaviorDesigner.Runtime;
-using DG.Tweening;
-using FMODUnity;
-using TMPro;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
-using LineRenderer = UnityEngine.LineRenderer;
-using Random = UnityEngine.Random;
+using Gilzoide.UpdateManager;
 
 
-public class MonsterReactive : MonsterBase
+public class MonsterReactive : MonsterBase, IUpdatable, IFixedUpdatable
 {
     [HideInInspector]
     public bool inCamera = false;
@@ -40,30 +32,6 @@ public class MonsterReactive : MonsterBase
             
             _behaviorTree.SetVariableValue("playerRef",GameManager.Instance.playerRef.gameObject);
             _behaviorTree.SetVariableValue("playerLastPosition",GameManager.Instance.playerLastPosition);
-        }
-    }
-
-    
-    private void FixedUpdate()
-    {
-        if(canReactToCamera && !GameManager.Instance.isPlayerDead)
-            UpdateEnemyInCamera();
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            UpdateMonsterState(MonsterState.Default);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            UpdateMonsterState(MonsterState.Follow);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            UpdateMonsterState(MonsterState.Chasing);
         }
     }
 
@@ -203,7 +171,17 @@ public class MonsterReactive : MonsterBase
             
         }
     }
-    
-    
+
+    public void ManagedUpdate()
+    {
+        //eye manager update
+        MonsterEyeManager.UpdateBlink();
+    }
+
+    public void ManagedFixedUpdate()
+    {
+        if(canReactToCamera && !GameManager.Instance.isPlayerDead)
+            UpdateEnemyInCamera();
+    }
 }
 

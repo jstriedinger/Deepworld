@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
@@ -6,11 +7,12 @@ using FMODUnity;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Gilzoide.UpdateManager;
 
 public enum MonsterState {  Default, Investigate, Follow, Chasing, Frustrated };
 
-[RequireComponent(typeof(EyeManager), typeof(StudioEventEmitter))]
-public abstract class MonsterBase : MonoBehaviour
+[RequireComponent(typeof(MonsterEyeManager), typeof(StudioEventEmitter))]
+public abstract class MonsterBase : AManagedBehaviour
 {
     public MonsterState CurrentState { get; protected set; }
 
@@ -33,7 +35,7 @@ public abstract class MonsterBase : MonoBehaviour
     public bool isKillingPlayer = false;
 
     //protected IEnumerator _attackColorAnimationLoop1,_attackColorAnimationLoop2,_attackColorAnimationLoop3,_attackColorAnimationLoop4;
-    protected EyeManager _eyeManager;
+    protected MonsterEyeManager MonsterEyeManager;
     protected BehaviorTree _behaviorTree;
     protected AIPath _aiPath;
     
@@ -57,7 +59,7 @@ public abstract class MonsterBase : MonoBehaviour
         _aiPath = GetComponent<AIPath>();
         _monsterChaseMusicEmitter = GetComponent<StudioEventEmitter>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _eyeManager = GetComponent<EyeManager>();
+        MonsterEyeManager = GetComponent<MonsterEyeManager>();
     }
 
     protected virtual void Start()
@@ -97,7 +99,7 @@ public abstract class MonsterBase : MonoBehaviour
         }
         UpdateColorsAndToggleAnimation(monsterStats.DefaultColorGradient,false, monsterStats.DefaultLightColor);
         CurrentState = MonsterState.Default;
-        _eyeManager.OnUpdateMonsterState();
+        MonsterEyeManager.OnUpdateMonsterState();
     }
 
     IEnumerator SwimBubbles()
@@ -206,7 +208,7 @@ public abstract class MonsterBase : MonoBehaviour
         }
 
         CurrentState = newState;
-        _eyeManager.OnUpdateMonsterState();
+        MonsterEyeManager.OnUpdateMonsterState();
         monsterTails.OnUpdateMonsterState(newState);
     }
 
@@ -413,5 +415,8 @@ public abstract class MonsterBase : MonoBehaviour
             isKillingPlayer = false;
         });
     }
+
+
+   
 }
 

@@ -86,7 +86,7 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         //final chase danger audio
-        if (FinalChaseManager.Instance.inFinalChase)
+        if (FinalChaseManager.Instance && FinalChaseManager.Instance.inFinalChase )
         {
             float d = Mathf.Clamp(Vector2.Distance(_playerRef.position, finalAnchor.transform.position) / finalCloseDangerRadius, 0,1) ;
             _instanceCloseDanger.setParameterByName("Monster Distance", 1.3f - d);

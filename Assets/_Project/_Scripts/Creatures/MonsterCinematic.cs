@@ -47,6 +47,7 @@ public class MonsterCinematic : MonsterBase
     {
         if (pursue)
         {
+            Debug.Log("Toggling persuit");
             _aiPath.canMove = true;
             _behaviorTree.EnableBehavior();
             _behaviorTree.Start();
@@ -66,13 +67,6 @@ public class MonsterCinematic : MonsterBase
             _behaviorTree.DisableBehavior();
         }
     }
-
-    public void GoToPosition(Vector3 d)
-    {
-        _behaviorTree.DisableBehavior();
-        _aiPath.canMove = true;
-        //_aiDestinationSetter.enabled = false;
-        _aiPath.destination = d;
-    }
+    
     
 }

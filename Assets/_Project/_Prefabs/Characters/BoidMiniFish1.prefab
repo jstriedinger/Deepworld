@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2943200215287572071}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2300238618568686877}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &4541520141479711640
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b93d97d5f89b7314e86bc19257a0139c, type: 2}
+  - {fileID: 2100000, guid: f9e7fd12d536441a7a8bc9eb62f0eac3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: -1313410095
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d6ce7d49872b44d89898fe015a172227, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 263c148ec7086a04d8653be59a71a67f, type: 3}
   m_Color: {r: 0.20392157, g: 0.7254902, b: 0.6638038, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.85333335, y: 1.7066667}
+  m_Size: {x: 0.93, y: 3.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1097211570005691376}
   - component: {fileID: 498781679580504054}
   m_Layer: 13
-  m_Name: FishDefault
+  m_Name: BoidMiniFish1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 3069541806291960988}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 2.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1073741824
-  radius: 0.5
+  radius: 1
   height: 1
   canMove: 1
   maxSpeed: 4
@@ -203,7 +203,7 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
-    value: 330
+    value: -1
 --- !u!114 &4042353508971603808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.5
 --- !u!50 &8723988111937849810
 Rigidbody2D:
   serializedVersion: 5
@@ -344,7 +344,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 4541520141479711640}
   fishMats:
   - {fileID: 2100000, guid: f9e7fd12d536441a7a8bc9eb62f0eac3, type: 2}
-  - {fileID: 2100000, guid: b93d97d5f89b7314e86bc19257a0139c, type: 2}
+  - {fileID: 2100000, guid: aa9fd6e1d0a9e5b4f9869a9f9aff12a0, type: 2}
   randomSizes: 1
 --- !u!114 &498781679580504054
 MonoBehaviour:

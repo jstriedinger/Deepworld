@@ -93,6 +93,7 @@ public class FinalChaseManager : MonoBehaviour
      */
     public void ResetFinalChase()
     {
+        Debug.Log("Reset final chase");
         inFinalChase = false;
         Gamepad pad = Gamepad.current;
         if (pad != null)
@@ -140,8 +141,6 @@ public class FinalChaseManager : MonoBehaviour
         {
             case 1 :
                 //Monster 1
-                
-                
                 TriggerMonsterWithPath(_monsters[0],monstersPaths[0], true, 1.5f);
                 inFinalChase = true;
                 AudioManager.Instance.TriggerFinalChaseAudio(true);

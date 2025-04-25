@@ -91,7 +91,7 @@ public class Hideout : MonoBehaviour
             {
                 Debug.Log("Found monster: "+monsterCollider.gameObject.name);
                 MonsterReactive monsterReactive = monsterCollider.GetComponent<MonsterReactive>();
-                monsterReactive.OnPlayerHides();
+                monsterReactive?.OnPlayerHides();
                 
             }
 

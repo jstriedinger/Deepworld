@@ -44,7 +44,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public static GameObject WithinSight2D(Transform transform, Vector3 positionOffset, float fieldOfViewAngle, float viewDistance, Collider2D[] overlapColliders, LayerMask objectLayerMask, Vector3 targetOffset, float angleOffset2D, LayerMask ignoreLayerMask, bool drawDebugRay)
         {
             GameObject objectFound = null;
+#if UNITY_6000_0_OR_NEWER
+            var hitCount = Physics2D.OverlapCircle(transform.position, viewDistance, new ContactFilter2D() { layerMask = objectLayerMask}, overlapColliders);
+#else
             var hitCount = Physics2D.OverlapCircleNonAlloc(transform.position, viewDistance, overlapColliders, objectLayerMask);
+#endif
             if (hitCount > 0) {
 #if UNITY_EDITOR
                 if (hitCount == overlapColliders.Length) {
@@ -113,7 +117,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
             }
             if (direction.magnitude < viewDistance && angle < fieldOfViewAngle * 0.5f) {
                 // The hit agent needs to be within view of the current agent
-                var hitTransform = LineOfSight(transform, positionOffset, targetObject, targetOffset, usePhysics2D, ignoreLayerMask, drawDebugRay);
+                var hitTransform = LineOfSight(transform, positionOffset, targetObject, targetOffset, usePhysics2D, ignoreLayerMask);
                 if (hitTransform != null) {
                     if (IsAncestor(targetObject.transform, hitTransform)) {
 #if UNITY_EDITOR
@@ -146,12 +150,12 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
             return null;
         }
 
-        public static Transform LineOfSight(Transform transform, Vector3 positionOffset, GameObject targetObject, Vector3 targetOffset, bool usePhysics2D, int ignoreLayerMask, bool drawDebugRay)
+        public static Transform LineOfSight(Transform transform, Vector3 positionOffset, GameObject targetObject, Vector3 targetOffset, bool usePhysics2D, int ignoreLayerMask)
         {
             Transform hitTransform = null;
             if (usePhysics2D) {
                 RaycastHit2D hit;
-                if ((hit = Physics2D.Linecast(transform.TransformPoint(positionOffset), targetObject.transform.TransformPoint(targetOffset), ~ignoreLayerMask))) {
+                if ((hit = Physics2D.Linecast(transform.TransformPoint(positionOffset), targetObject.transform.TransformPoint(targetOffset), ~ignoreLayerMask)).transform != null) {
                     hitTransform = hit.transform;
                 }
             } else {
@@ -203,7 +207,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public static GameObject WithinHearingRange2D(Transform transform, Vector3 positionOffset, float audibilityThreshold, float hearingRadius, Collider2D[] overlapColliders, LayerMask objectLayerMask)
         {
             GameObject objectHeard = null;
+#if UNITY_6000_0_OR_NEWER
+            var hitCount = Physics2D.OverlapCircle(transform.TransformPoint(positionOffset), hearingRadius, new ContactFilter2D() { layerMask = objectLayerMask }, overlapColliders);
+#else
             var hitCount = Physics2D.OverlapCircleNonAlloc(transform.TransformPoint(positionOffset), hearingRadius, overlapColliders, objectLayerMask);
+#endif
             if (hitCount > 0) {
 #if UNITY_EDITOR
                 if (hitCount == overlapColliders.Length) {
