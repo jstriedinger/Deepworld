@@ -1,50 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:editor="UnityEditor.UIElements" xmlns:engine="UnityEngine.UIElements" xmlns="UnityEditor.Overlays" elementFormDefault="qualified" targetNamespace="UnityEditor.Overlays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema 
+    xmlns:editor="UnityEditor.UIElements" 
+    xmlns:engine="UnityEngine.UIElements" 
+    xmlns="UnityEditor.Overlays" 
+    elementFormDefault="qualified" 
+    targetNamespace="UnityEditor.Overlays" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Import definitions from UnityEngine.UIElements -->
   <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
+
+  <!-- Define a common attribute group for overlay containers -->
+  <xs:attributeGroup name="OverlayAttributes">
+    <xs:attribute name="name" type="xs:string" default=""/>
+    <xs:attribute name="view-data-key" type="xs:string" default=""/>
+    <xs:attribute name="picking-mode" type="engine:VisualElement_picking-mode_Type" default="Position"/>
+    <xs:attribute name="tooltip" type="xs:string" default=""/>
+    <xs:attribute name="usage-hints" type="engine:VisualElement_usage-hints_Type" default="None"/>
+    <xs:attribute name="tabindex" type="xs:int" default="0"/>
+    <xs:attribute name="focusable" type="xs:boolean" default="false"/>
+    <xs:attribute name="class" type="xs:string" default=""/>
+    <xs:attribute name="content-container" type="xs:string" default=""/>
+    <xs:attribute name="style" type="xs:string" default=""/>
+    <xs:attribute name="horizontal" type="xs:boolean" default="false"/>
+    <xs:attribute name="supported-overlay-layout" type="xs:string" default=""/>
+    <xs:anyAttribute processContents="lax"/>
+  </xs:attributeGroup>
+
+  <!-- OverlayContainerType definition as a restriction of engine:VisualElementType -->
   <xs:complexType name="OverlayContainerType">
-    <xs:complexContent mixed="false">
+    <xs:complexContent>
       <xs:restriction base="engine:VisualElementType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
+          <xs:element ref="engine:VisualElement"/>
         </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:attribute default="false" name="horizontal" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="supported-overlay-layout" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
+        <xs:attributeGroup ref="OverlayAttributes"/>
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="OverlayContainer" substitutionGroup="engine:VisualElement" type="OverlayContainerType" />
+
+  <!-- Define the OverlayContainer element, substitutable for engine:VisualElement -->
+  <xs:element name="OverlayContainer" substitutionGroup="engine:VisualElement" type="OverlayContainerType"/>
+
+  <!-- ToolbarOverlayContainerType definition (identical attributes to OverlayContainerType) -->
   <xs:complexType name="ToolbarOverlayContainerType">
-    <xs:complexContent mixed="false">
+    <xs:complexContent>
       <xs:restriction base="engine:VisualElementType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
+          <xs:element ref="engine:VisualElement"/>
         </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:attribute default="false" name="horizontal" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="supported-overlay-layout" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
+        <xs:attributeGroup ref="OverlayAttributes"/>
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="ToolbarOverlayContainer" substitutionGroup="engine:VisualElement" type="ToolbarOverlayContainerType" />
+
+  <!-- Define the ToolbarOverlayContainer element -->
+  <xs:element name="ToolbarOverlayContainer" substitutionGroup="engine:VisualElement" type="ToolbarOverlayContainerType"/>
+
 </xs:schema>
