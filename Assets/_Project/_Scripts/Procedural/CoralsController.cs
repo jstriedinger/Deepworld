@@ -42,6 +42,7 @@ public class CoralsController : MonoBehaviour
         for (int i = 0; i < _corals.Length; i++)
         {
             CoralLimb t = _corals[i];
+            t.Setup();
             
             t.lineRenderer.positionCount = t.length;
             _coralsSegmentPoses[i] = new Vector3[t.length];

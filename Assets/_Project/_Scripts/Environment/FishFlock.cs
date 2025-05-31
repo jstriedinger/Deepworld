@@ -42,11 +42,11 @@ public class FishFlock : MonoBehaviour
             //create a fish
             Vector3 randomPos = Random.insideUnitCircle * initialFlockRadius;
             Collider[] hitColliders = new Collider[2];
-            while (Physics.OverlapSphereNonAlloc(randomPos, col.radius*2.5f, hitColliders) == 0)
+            /*while (Physics.OverlapSphereNonAlloc(randomPos, col.radius*1.5f, hitColliders) == 0)
             {
                 randomPos = Random.insideUnitCircle * initialFlockRadius;
                 Debug.Log("Something there");
-            }
+            }*/
             GameObject fishObj = Instantiate(fishPrefab,transform.position,quaternion.identity,transform);
             fishObj.transform.localPosition = randomPos;
             Fish fish = fishObj.GetComponent<Fish>();

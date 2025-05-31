@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PatrolSpeed>k__BackingField: 10
   <FollowRange>k__BackingField: 75
-  <FollowSpeed>k__BackingField: 14
-  <ChasingRange>k__BackingField: 40
-  <ChasingSpeed>k__BackingField: 18
+  <FollowSpeed>k__BackingField: 15
+  <ChasingRange>k__BackingField: 5
+  <ChasingSpeed>k__BackingField: 21
   <SfxMonsterReact>k__BackingField:
     Guid:
       Data1: 548043345
@@ -31,11 +31,11 @@ MonoBehaviour:
       Data3: -518493567
       Data4: -358451874
     Path: event:/SFX/sfx_monster_Swim
-  <SpriteBall>k__BackingField: {fileID: -6665555259446299630, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpriteBall>k__BackingField: {fileID: 3565407352661579711, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
-  <SpriteMaw>k__BackingField: {fileID: -4080239575899590826, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpriteMaw>k__BackingField: {fileID: 5978888802955792442, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
-  <SpritePupil>k__BackingField: {fileID: -536305411045670736, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpritePupil>k__BackingField: {fileID: 6583038903351538898, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
   <PupilDropSpeed>k__BackingField: 0.175
   <EyeBallShutSpeed>k__BackingField: 3.75

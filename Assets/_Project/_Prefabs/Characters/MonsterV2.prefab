@@ -76,7 +76,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 862094791
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 4
   m_Positions:
   - {x: 1119.7, y: -374.40002, z: 0}
@@ -273,7 +273,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 862094791
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 5
   m_Positions:
   - {x: 1119.7, y: -374.40002, z: 0}
@@ -714,7 +714,7 @@ PrefabInstance:
     - target: {fileID: 7123034158159383304, guid: 853219686f09c479bb2db04992346225,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7123034158159383304, guid: 853219686f09c479bb2db04992346225,
         type: 3}

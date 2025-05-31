@@ -342,7 +342,7 @@ public class GameManager : MonoBehaviour
         #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
         #else
-                        Application.Quit();
+            Application.Quit();
         #endif
     }
 
@@ -414,8 +414,8 @@ public class GameManager : MonoBehaviour
         float envLight, playerLight, propsLight;
         if (toogle)
         {
-            envLight = 0.3f;
-            propsLight = 0.35f;
+            envLight = 0.4f;
+            propsLight = 0.45f;
             playerLight = .5f;
         }
         else

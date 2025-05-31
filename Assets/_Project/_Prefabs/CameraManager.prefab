@@ -111,50 +111,6 @@ PolygonCollider2D:
       - {x: 104.72609, y: -65.668884}
       - {x: 133.07983, y: -5.5552406}
   m_UseDelaunayMesh: 0
---- !u!1 &1671940620511779415
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3018499403241487997}
-  - component: {fileID: 7259033211826507485}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3018499403241487997
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1671940620511779415}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -37.5, z: 165}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2265145591650690846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7259033211826507485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1671940620511779415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2122991236325171830
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +197,7 @@ MonoBehaviour:
   lerpDuration: 2.5
   camZoomPlayer: 26
   camZoomEnemy: 26
-  chaseCamAnchor: {fileID: 0}
+  finalChaseCamAnchor: {fileID: 0}
   chaseCameDistance: 200
   maxAddRadiusChase: 20
 --- !u!1 &4773832264463855681
@@ -391,8 +347,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 87.100006, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3018499403241487997}
+  m_Children: []
   m_Father: {fileID: 193075210771597026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2336080942270599487

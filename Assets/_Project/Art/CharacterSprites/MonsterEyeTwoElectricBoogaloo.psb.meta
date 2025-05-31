@@ -35,7 +35,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 50
+    spritePixelsToUnits: 200
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -95,6 +95,50 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   multiSpriteImportData: []
   layeredSpriteImportData:
+  - name: Maw2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1276
+      y: 1251
+      width: 1111
+      height: 1111
+    spriteID: 5020c4058766afb4ba7c6541ea964fc3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1276, y: 1251}
+    spritePosition: {x: 50, y: 49}
+  - name: MawN
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1276
+      y: 2426
+      width: 1110
+      height: 1110
+    spriteID: 4713643739bed3f4aa985b3c6ad1d1a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1276, y: 2426}
+    spritePosition: {x: 50, y: 54}
   - name: Pupil2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -103,10 +147,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 762
-      y: 32
-      width: 133
-      height: 133
+      x: 3551
+      y: 1125
+      width: 464
+      height: 462
     spriteID: 8574876b77de96641a5611715f368144
     spriteBone: []
     spriteOutline: []
@@ -115,140 +159,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 760, y: 31}
-    spritePosition: {x: 138, y: 138}
-  - name: Pupil
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 419
-      y: 1267
-      width: 120
-      height: 120
-    spriteID: c6e52eb065d92164ab026ae2a2194f9b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 419, y: 1267}
-    spritePosition: {x: 145, y: 145}
-  - name: veinsfg
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 419
-      y: 711
-      width: 247
-      height: 238
-    spriteID: fa5f6d307060a4576a44798fd1161ce8
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 419, y: 711}
-    spritePosition: {x: 81, y: 86}
-  - name: veinsbg
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 419
-      y: 32
-      width: 279
-      height: 284
-    spriteID: 48a16e5be073942d7a355284c57c0217
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 419, y: 32}
-    spritePosition: {x: 66, y: 62}
-  - name: Maw
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 32
-      y: 1184
-      width: 286
-      height: 286
-    spriteID: 58a94e94d20c18e47a3e8e457a43ab76
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 32, y: 1184}
-    spritePosition: {x: 62, y: 62}
-  - name: EyeBall
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 32
-      y: 1534
-      width: 286
-      height: 286
-    spriteID: fb49e2036b70c8440838e17b00471d60
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 32, y: 1534}
-    spritePosition: {x: 62, y: 62}
-  - name: EyeLiner
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 32
-      y: 419
-      width: 320
-      height: 320
-    spriteID: 8c33e5da4ec99ce4c98f9b2d66dbce5a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 32, y: 419}
-    spritePosition: {x: 45, y: 45}
+    uvTransform: {x: 3550, y: 1124}
+    spritePosition: {x: 369, y: 393}
   - name: shine1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -257,10 +169,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 419
-      y: 1013
-      width: 233
-      height: 190
+      x: 2477
+      y: 3081
+      width: 842
+      height: 681
     spriteID: 1538af9c452ce45e1933209cc197a7d9
     spriteBone: []
     spriteOutline: []
@@ -269,8 +181,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 419, y: 1013}
-    spritePosition: {x: 89, y: 109}
+    uvTransform: {x: 2477, y: 3081}
+    spritePosition: {x: 184, y: 280}
   - name: shine2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -279,10 +191,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 32
-      y: 1884
-      width: 205
-      height: 127
+      x: 1276
+      y: 3600
+      width: 737
+      height: 446
     spriteID: f292487f16c2844b6844c02f37857773
     spriteBone: []
     spriteOutline: []
@@ -291,9 +203,9 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 32, y: 1884}
-    spritePosition: {x: 156, y: 221}
-  - name: pupil
+    uvTransform: {x: 1276, y: 3600}
+    spritePosition: {x: 434, y: 698}
+  - name: pupil2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -301,10 +213,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 761
-      y: 380
-      width: 102
-      height: 207
+      x: 3435
+      y: 2157
+      width: 479
+      height: 744
     spriteID: 519390511777b4aee955d370cc4b96ae
     spriteBone: []
     spriteOutline: []
@@ -313,8 +225,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 761, y: 380}
-    spritePosition: {x: 154, y: 101}
+    uvTransform: {x: 3435, y: 2157}
+    spritePosition: {x: 366, y: 248}
   - name: veinsInner
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -323,10 +235,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 419
-      y: 380
-      width: 278
-      height: 267
+      x: 2477
+      y: 1125
+      width: 1010
+      height: 968
     spriteID: 05f07af0e80724997a308279351e3201
     spriteBone: []
     spriteOutline: []
@@ -335,8 +247,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 419, y: 380}
-    spritePosition: {x: 66, y: 71}
+    uvTransform: {x: 2477, y: 1125}
+    spritePosition: {x: 100, y: 123}
   - name: VeinsOutter
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -345,10 +257,10 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 32
-      y: 803
-      width: 312
-      height: 317
+      x: 1276
+      y: 32
+      width: 1137
+      height: 1155
     spriteID: 1d2f18b1db5a04bd88087893802bb025
     spriteBone: []
     spriteOutline: []
@@ -357,9 +269,75 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 32, y: 803}
-    spritePosition: {x: 49, y: 46}
-  - name: Vector Smart Object
+    uvTransform: {x: 1276, y: 32}
+    spritePosition: {x: 37, y: 28}
+  - name: Eyeball2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 1276
+      width: 1178
+      height: 1178
+    spriteID: 6ad20d3bc9d3d4399949b214e6fa12f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 1276}
+    spritePosition: {x: 16, y: 16}
+  - name: veinsfg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2477
+      y: 2157
+      width: 894
+      height: 860
+    spriteID: fa5f6d307060a4576a44798fd1161ce8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2477, y: 2157}
+    spritePosition: {x: 154, y: 194}
+  - name: veinsbg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2477
+      y: 32
+      width: 1013
+      height: 1029
+    spriteID: 48a16e5be073942d7a355284c57c0217
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2477, y: 32}
+    spritePosition: {x: 98, y: 106}
+  - name: Eyeball
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -369,9 +347,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 32
       y: 32
-      width: 323
-      height: 323
-    spriteID: 6ad20d3bc9d3d4399949b214e6fa12f1
+      width: 1180
+      height: 1180
+    spriteID: 3eb14a1824771be4e84562f3471667ac
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -379,8 +357,30 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 32, y: 32}
-    spritePosition: {x: 44, y: 43}
+    uvTransform: {x: 30, y: 31}
+    spritePosition: {x: 15, y: 15}
+  - name: Eyeliner
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 2518
+      width: 1160
+      height: 1160
+    spriteID: 86cedd1eada071c42800c913ef8eb644
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 2517}
+    spritePosition: {x: 25, y: 25}
   spriteImportData:
   - name: 
     originalName: 
@@ -502,7 +502,7 @@ ScriptedImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0
     crunchedCompression: 0
@@ -592,13 +592,323 @@ ScriptedImporter:
     isGroup: 0
     importLayer: 1
   psdLayers:
+  - name: Teeth1 copy
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: baa4b3d9ee79dbb4eac534bedeee5a74
+    layerID: 221
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: d10b551847c42aa4694a5197ef427fe0
+    layerID: 220
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 563f9cc66bd3a6c469b525a91ddddcca
+    layerID: 225
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 6
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 8ec6ba05889f14b42931fabba44ee368
+    layerID: 219
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 8ffb151a1ccf3a842ab08fed41cb7e3b
+    layerID: 218
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 4
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: d6ed605f2cc25e04f8c8c5be5fc3a002
+    layerID: 216
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 95d47606562009848bd50ade3d663c22
+    layerID: 212
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 7
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: e165daafbf95fad4f8d10950a81e3470
+    layerID: 222
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 5
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 232520a9b6ef5384a8b6498b859abe79
+    layerID: 211
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: cffb03daa1158d445995945245389637
+    layerID: 210
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: aa18e123b2a19834f99bc19963b2554b
+    layerID: 209
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 9a85a923de8562b4ab864d6d861a1ef4
+    layerID: 208
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Teeth1
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: e721c928d36690d498477e3943de1b87
+    layerID: 188
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 0510adcf1542ed742bffd748380c24f3
+    layerID: 181
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 6
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: dbfcd966a7ee4c14397b39bcee451037
+    layerID: 206
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 60aecd60017161a4ea5c66a23c107ac4
+    layerID: 204
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 9e05d08f190f83e4abb743b20013f651
+    layerID: 186
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 4
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 6467cea2c7d440a48a70adae21f9a343
+    layerID: 198
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 2e01fab7317616145bc39cb29fe6670b
+    layerID: 194
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 2
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: ff6e2a5a380dd804f8ddc77f7a208929
+    layerID: 192
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 6e79aa4f7bac1da4697621b1dcc69623
+    layerID: 184
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 7471ef9b812e0314384307d1e21be652
+    layerID: 183
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object copy 5
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 88f63b152e7ad62449ff43e32fb743f9
+    layerID: 203
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: dff1fc112ee909240aff359c4c6867da
+    layerID: 199
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 050435955e38a0d428db9937bb698c6c
+    layerID: 196
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Vector Smart Object
+    spriteName: 
+    isGroup: 0
+    parentIndex: 12
+    spriteID: 0cad6931c118bfc40b35122e52d73e71
+    layerID: 201
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Maw2
+    spriteName: Maw2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5020c4058766afb4ba7c6541ea964fc3
+    layerID: 258
+    mosaicPosition: {x: 1276, y: 1251}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: MawN
+    spriteName: MawN
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7637639010743e8459cc4a3170adeaf0
+    layerID: 241
+    mosaicPosition: {x: 1276, y: 1207}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: MawN
+    spriteName: MawN
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4713643739bed3f4aa985b3c6ad1d1a8
+    layerID: 276
+    mosaicPosition: {x: 1276, y: 2426}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Ellipse 1
+    spriteName: Ellipse 1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4ea84a953bb89d8489b859dbb15fb229
+    layerID: 174
+    mosaicPosition: {x: 32, y: 6246}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Maw
+    spriteName: Maw
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 58a94e94d20c18e47a3e8e457a43ab76
+    layerID: 4
+    mosaicPosition: {x: 1276, y: 2381}
+    flatten: 0
+    isImported: 0
+    isVisible: 0
   - name: Pupil2
     spriteName: Pupil2
     isGroup: 0
     parentIndex: -1
     spriteID: 8574876b77de96641a5611715f368144
     layerID: 131
-    mosaicPosition: {x: 762, y: 32}
+    mosaicPosition: {x: 3551, y: 1125}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -610,55 +920,85 @@ ScriptedImporter:
     layerID: 17
     mosaicPosition: {x: 419, y: 1267}
     flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: shine1
+    spriteName: shine1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1538af9c452ce45e1933209cc197a7d9
+    layerID: 46
+    mosaicPosition: {x: 2477, y: 3081}
+    flatten: 0
     isImported: 1
     isVisible: 1
-  - name: objs
-    spriteName: 
-    isGroup: 1
+  - name: shine2
+    spriteName: shine2
+    isGroup: 0
     parentIndex: -1
-    spriteID: 47c7d0799e47a4323bfa4930b592d8ca
-    layerID: 25
-    mosaicPosition: {x: 0, y: 0}
+    spriteID: f292487f16c2844b6844c02f37857773
+    layerID: 44
+    mosaicPosition: {x: 1276, y: 3600}
     flatten: 0
-    isImported: 0
+    isImported: 1
     isVisible: 1
   - name: pupil2
     spriteName: pupil2
     isGroup: 0
-    parentIndex: 2
-    spriteID: 463f08eccfb864fb09a09335ca37fdba
-    layerID: 35
-    mosaicPosition: {x: 762, y: 32}
+    parentIndex: -1
+    spriteID: 519390511777b4aee955d370cc4b96ae
+    layerID: 50
+    mosaicPosition: {x: 3435, y: 2157}
     flatten: 0
-    isImported: 0
-    isVisible: 0
+    isImported: 1
+    isVisible: 1
+  - name: veinsInner
+    spriteName: veinsInner
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 05f07af0e80724997a308279351e3201
+    layerID: 52
+    mosaicPosition: {x: 2477, y: 1125}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: VeinsOutter
+    spriteName: VeinsOutter
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1d2f18b1db5a04bd88087893802bb025
+    layerID: 40
+    mosaicPosition: {x: 1276, y: 32}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Eyeball2
+    spriteName: Eyeball2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6ad20d3bc9d3d4399949b214e6fa12f1
+    layerID: 48
+    mosaicPosition: {x: 32, y: 1276}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: veinsfg
     spriteName: veinsfg
     isGroup: 0
-    parentIndex: 2
+    parentIndex: -1
     spriteID: fa5f6d307060a4576a44798fd1161ce8
     layerID: 32
-    mosaicPosition: {x: 419, y: 711}
+    mosaicPosition: {x: 2477, y: 2157}
     flatten: 0
     isImported: 1
     isVisible: 1
   - name: veinsbg
     spriteName: veinsbg
     isGroup: 0
-    parentIndex: 2
+    parentIndex: -1
     spriteID: 48a16e5be073942d7a355284c57c0217
     layerID: 30
-    mosaicPosition: {x: 419, y: 32}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: Maw
-    spriteName: Maw
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 58a94e94d20c18e47a3e8e457a43ab76
-    layerID: 4
-    mosaicPosition: {x: 32, y: 1184}
+    mosaicPosition: {x: 2477, y: 32}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -690,6 +1030,26 @@ ScriptedImporter:
     layerID: 3
     mosaicPosition: {x: 32, y: 1534}
     flatten: 0
+    isImported: 0
+    isVisible: 0
+  - name: Eyeball
+    spriteName: Eyeball
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 3eb14a1824771be4e84562f3471667ac
+    layerID: 309
+    mosaicPosition: {x: 32, y: 32}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Eyeliner
+    spriteName: Eyeliner
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 86cedd1eada071c42800c913ef8eb644
+    layerID: 172
+    mosaicPosition: {x: 32, y: 2518}
+    flatten: 0
     isImported: 1
     isVisible: 1
   - name: EyeLiner
@@ -700,98 +1060,8 @@ ScriptedImporter:
     layerID: 2
     mosaicPosition: {x: 32, y: 419}
     flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: newEye
-    spriteName: 
-    isGroup: 1
-    parentIndex: -1
-    spriteID: 70e15746011754d16b9a2ad8f42d36d3
-    layerID: 38
-    mosaicPosition: {x: 0, y: 0}
-    flatten: 0
-    isImported: 0
-    isVisible: 1
-  - name: shine1
-    spriteName: shine1
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 1538af9c452ce45e1933209cc197a7d9
-    layerID: 46
-    mosaicPosition: {x: 419, y: 1013}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: shine2
-    spriteName: shine2
-    isGroup: 0
-    parentIndex: 11
-    spriteID: f292487f16c2844b6844c02f37857773
-    layerID: 44
-    mosaicPosition: {x: 32, y: 1884}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: pupil
-    spriteName: pupil
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 519390511777b4aee955d370cc4b96ae
-    layerID: 50
-    mosaicPosition: {x: 761, y: 380}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: veinsInner
-    spriteName: veinsInner
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 05f07af0e80724997a308279351e3201
-    layerID: 52
-    mosaicPosition: {x: 419, y: 380}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: Vector Smart Object
-    spriteName: 
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 99c3fb6aaf2ca4c369a3af75ab88a76d
-    layerID: 56
-    mosaicPosition: {x: 0, y: 0}
-    flatten: 0
     isImported: 0
     isVisible: 0
-  - name: VeinsOutter
-    spriteName: VeinsOutter
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 1d2f18b1db5a04bd88087893802bb025
-    layerID: 40
-    mosaicPosition: {x: 32, y: 803}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: Vector Smart Object
-    spriteName: 
-    isGroup: 0
-    parentIndex: 11
-    spriteID: dd5692644435949169f0e72fd8661c4b
-    layerID: 54
-    mosaicPosition: {x: 0, y: 0}
-    flatten: 0
-    isImported: 0
-    isVisible: 0
-  - name: Vector Smart Object
-    spriteName: Vector Smart Object
-    isGroup: 0
-    parentIndex: 11
-    spriteID: 6ad20d3bc9d3d4399949b214e6fa12f1
-    layerID: 48
-    mosaicPosition: {x: 32, y: 32}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
   - name: Layer 1
     spriteName: 
     isGroup: 0
@@ -846,7 +1116,7 @@ ScriptedImporter:
     isVisible: 1
   sharedRigPSDLayers: []
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638775044498292896
+  platformSettingsDirtyTick: 638812277744198105
   spriteSizeExpandChanged: 1
   generateGOHierarchy: 0
   textureAssetName: 

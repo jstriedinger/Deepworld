@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 87024207551165101, guid: d877110c458c70c45ac8bdb1805a8ee4,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 87024207551165101, guid: d877110c458c70c45ac8bdb1805a8ee4,
         type: 3}

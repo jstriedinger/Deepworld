@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1514588497022265890}
   - component: {fileID: 1660917520154562047}
   m_Layer: 8
-  m_Name: LevelShape
+  m_Name: LVLShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,9 @@ SpriteShapeRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,9 +76,9 @@ SpriteShapeRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1313410095
-  m_SortingLayer: 2
-  m_SortingOrder: 55
+  m_SortingLayerID: -949640393
+  m_SortingLayer: 8
+  m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: 8748af15394e4b64ea5005d12c450808, type: 3}
@@ -717,7 +720,7 @@ MonoBehaviour:
       corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 956b03ad78b068f47bef06a0f17a9110, type: 2}
-  m_FillPixelPerUnit: 256
+  m_FillPixelPerUnit: 75
   m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
@@ -729,7 +732,11 @@ MonoBehaviour:
   m_UpdateCollider: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
-  m_UTess2D: 0
+  m_UTess2D: 1
+  m_UpdateShadow: 0
+  m_ShadowDetail: 16
+  m_ShadowOffset: 0.5
+  m_BoundsScale: 2
   m_Creator: {fileID: 0}
   m_Modifiers: []
   m_ColliderSegment:
@@ -1980,6 +1987,7 @@ MonoBehaviour:
   - {x: -45.929977, y: -256.0677}
   - {x: -44.929977, y: 97.929504}
   - {x: -44.472397, y: 98.76962}
+  m_ShadowSegment: []
 --- !u!68 &1660917520154562047
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1988,8 +1996,9 @@ EdgeCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9144773367481966436}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e3dcb08f00db44f47943dec0926ce2ca, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2011,7 +2020,8 @@ EdgeCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:

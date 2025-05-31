@@ -31,23 +31,23 @@ public class CoralLimb : MonoBehaviour
     
     public LineRenderer lineRenderer;
     public float currentSpeed, currentDistBetweenPoints;
-    private bool isOpen = false;
+    private bool _isOpen = false;
     private Coroutine _bubbleCoroutine =  null;
-    private MaterialPropertyBlock propertyBlock;
+    private MaterialPropertyBlock _propertyBlock;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void Setup()
     {
         lineRenderer = GetComponent<LineRenderer>();
         
         //set our texture
-        propertyBlock = new MaterialPropertyBlock();
+        _propertyBlock = new MaterialPropertyBlock();
         // Get the current property block
-        lineRenderer.GetPropertyBlock(propertyBlock);
+        lineRenderer.GetPropertyBlock(_propertyBlock);
         // Set the texture only for this LineRenderer instance
-        propertyBlock.SetTexture("_MainTex", coralTexture);
+        _propertyBlock.SetTexture("_MainTex", coralTexture);
         // Apply the property block to the LineRenderer
-        lineRenderer.SetPropertyBlock(propertyBlock);
+        lineRenderer.SetPropertyBlock(_propertyBlock);
         
         Close();
         _bubbleTween = transform.DOPunchPosition(new Vector3(0, .5f, 0), .5f, 1, 0f).OnComplete(
@@ -59,7 +59,7 @@ public class CoralLimb : MonoBehaviour
 
     IEnumerator ThrowBubbles()
     {
-        while (throwBubbles && !isOpen)
+        while (throwBubbles && !_isOpen)
         {
             yield return new WaitForSeconds(bubbleTime);
             vfxBubbles.transform.position = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
@@ -75,7 +75,7 @@ public class CoralLimb : MonoBehaviour
     {
         Debug.Log("Opening coral");
         currentSpeed = openingSpeed;
-        isOpen = true;
+        _isOpen = true;
         //lineRenderer.textureScale = new Vector2(1, openingLineWidth);
         Sequence seq = DOTween.Sequence();
         seq.Append(DOTween.To(() => currentDistBetweenPoints, x => currentDistBetweenPoints = x,
@@ -102,7 +102,7 @@ public class CoralLimb : MonoBehaviour
     public void Close()
     {
         Debug.Log("Closing coral");
-        isOpen = false;
+        _isOpen = false;
         currentSpeed = closingSpeed;
         lineRenderer.textureScale = new Vector2(1, closingLineWidth);
         currentDistBetweenPoints = closingDistBetweenPoints;

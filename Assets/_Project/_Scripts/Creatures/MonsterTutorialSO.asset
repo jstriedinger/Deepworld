@@ -31,11 +31,11 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  <SpriteBall>k__BackingField: {fileID: -6665555259446299630, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpriteBall>k__BackingField: {fileID: 3565407352661579711, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
-  <SpriteMaw>k__BackingField: {fileID: -4080239575899590826, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpriteMaw>k__BackingField: {fileID: 5978888802955792442, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
-  <SpritePupil>k__BackingField: {fileID: -2552084727849433238, guid: 3adf8c2eaf525c149aeac517b987f6cb,
+  <SpritePupil>k__BackingField: {fileID: 6583038903351538898, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
   <PupilDropSpeed>k__BackingField: 0.175
   <EyeBallShutSpeed>k__BackingField: 3.75
