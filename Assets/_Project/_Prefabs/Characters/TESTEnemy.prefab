@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 1824785459058989857}
+  center: {fileID: 1824785459058989857}
 --- !u!1 &229967711980109048
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 50
   segmentPoses: []
@@ -102,6 +103,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 7731861231031968431}
+  resettingFromPlayer: 0
 --- !u!120 &3330321730601023884
 LineRenderer:
   serializedVersion: 2
@@ -120,6 +122,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -142,7 +147,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078282617
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -298,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 50
   segmentPoses: []
@@ -307,6 +313,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 1667678333124123414}
+  resettingFromPlayer: 0
 --- !u!120 &1646938015526981060
 LineRenderer:
   serializedVersion: 2
@@ -325,6 +332,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -347,7 +357,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078282617
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -472,6 +482,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -494,7 +507,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: 5235332661289849187, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
@@ -505,7 +518,7 @@ SpriteRenderer:
   m_Size: {x: 3.1, y: 3.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1647936061688534419
@@ -585,6 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 50
   segmentPoses: []
@@ -594,6 +608,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 6567151680263472929}
+  resettingFromPlayer: 0
 --- !u!120 &7766839229153368042
 LineRenderer:
   serializedVersion: 2
@@ -612,6 +627,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -634,7 +652,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078282617
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -786,14 +804,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
+  m_ComponentVersion: 2
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.742
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_LightVolumeIntensity: 0.01
-  m_LightVolumeIntensityEnabled: 0
+  m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000c136fae1d1f3b6b187b6babf9fb8071d15f7ed4437a365c7dd0239a8
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
@@ -803,8 +821,10 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
+  m_ShadowsEnabled: 0
   m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0
+  m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
@@ -869,11 +889,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8543b5042968874da5ce26b3cfc4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMonster: {fileID: 4013539651867559864}
   target: {fileID: 8644200576770049404}
   pupil: {fileID: 9086030757828695908}
   offMod: 0.1
   offMax: 1
+  canTrack: 0
 --- !u!1 &3910578992639490846
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 1824785459058989857}
+  center: {fileID: 1824785459058989857}
 --- !u!1 &5401863154645315687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,13 +1032,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423533c32e7448c40a2a563808e91ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterStats: {fileID: 11400000, guid: e2162fd1385914ecb8d82853022ea1ca, type: 2}
-  _pupil: {fileID: 1072006124411310023}
-  _eyeBall: {fileID: 6557561463741752968}
-  CanTrackPlayer: 1
+  defaultEye: {fileID: 0}
+  mawEye: {fileID: 0}
+  eyeBall: {fileID: 0}
   eyeRenderer: {fileID: 8906213389041749866}
   pupilRenderer: {fileID: 5527174553719690557}
-  _simplePatrol: 0
+  eyeTracker: {fileID: 0}
   timer: 3.25
 --- !u!114 &4013539651867559864
 MonoBehaviour:
@@ -1032,19 +1051,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc35666562a2149988b0beef5b439548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterStats: {fileID: 11400000, guid: e2162fd1385914ecb8d82853022ea1ca, type: 2}
-  patrolObject: {fileID: 0}
-  _tentacles:
-  - {fileID: 1646938015526981060}
-  - {fileID: 3330321730601023884}
-  - {fileID: 5981271975517618766}
-  - {fileID: 7766839229153368042}
+  monsterStats: {fileID: 0}
+  monsterTails: {fileID: 0}
+  vfxSwimBubbles: {fileID: 0}
+  vfxDetect: {fileID: 0}
+  _tail: {fileID: 0}
   _headObj: {fileID: 8975018061798418240}
-  _pupilObj: {fileID: 1072006124411310023}
-  _light2D: {fileID: 5801203956732968756}
-  _canAffectCamera: 0
-  _Testing: 1
-  isChasing: 0
+  _headLight: {fileID: 0}
+  patrolObject: {fileID: 0}
+  canReactToPlayer: 0
+  canReactToCamera: 0
+  canAddChaseMusic: 0
+  addForceWhenKillPlayer: 1
+  isKillingPlayer: 0
+  inCamera: 0
 --- !u!114 &2289235338297122811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 1073741824
   radius: 2
   height: 2
   canMove: 1
@@ -1066,6 +1086,14 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  endReachedDistance: 0.5
+  whenCloseToDestination: 0
+  rvoDensityBehavior:
+    enabled: 0
+    densityThreshold: 0.5
+    returnAfterBeingPushedAway: 0
+    progressAverage: 0
+    lastJobDensityResult: 0
   centerOffsetCompatibility: NaN
   repathRateCompatibility: NaN
   canSearchCompability: 0
@@ -1073,19 +1101,18 @@ MonoBehaviour:
   enableRotation: 1
   autoRepath:
     mode: 2
-    interval: 0.5
+    period: 0.5
     sensitivity: 20
-    maximumInterval: 2
+    maximumPeriod: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0
   pickNextWaypointDist: 2
-  endReachedDistance: 0.5
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
+  preventMovingBackwards: 0
   constrainInsideGraph: 0
 --- !u!114 &4767542599160114223
 MonoBehaviour:
@@ -1099,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 1073741824
   drawGizmos: 1
   detailedGizmos: 0
   startEndModifier:
@@ -1127,7 +1154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 1073741824
   smoothType: 0
   subdivisions: 2
   iterations: 2
@@ -1145,6 +1172,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5401863154645315687}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1168,13 +1196,13 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 1.6
 --- !u!50 &5038222169594272408
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1185,8 +1213,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
-  m_AngularDrag: 5
+  m_LinearDamping: 2
+  m_AngularDamping: 5
   m_GravityScale: 0.005
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1384,7 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 1824785459058989857}
+  center: {fileID: 1824785459058989857}
 --- !u!1 &7145990796068668100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
-  Center: {fileID: 1824785459058989857}
+  center: {fileID: 1824785459058989857}
 --- !u!1 &7232508873316604347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1510,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1504,7 +1535,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_Sprite: {fileID: -2862913606453552052, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
@@ -1515,7 +1546,7 @@ SpriteRenderer:
   m_Size: {x: 2.76, y: 2.76}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!331 &3558171448803418326
@@ -1535,6 +1566,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1570,6 +1604,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!1 &7976078607288515654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a6b77a1d1f7214a8e4f42d272ad964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMonster: {fileID: 4013539651867559864}
+  monsterBase: {fileID: 0}
+  followOverride: 0
   idealTarget: {fileID: 0}
   smoothTime: 0.25
 --- !u!1 &8672057676260064993
@@ -1760,6 +1796,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1782,7 +1821,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 487045279
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 4
   m_Sprite: {fileID: -9149412876166854845, guid: 3adf8c2eaf525c149aeac517b987f6cb,
     type: 3}
@@ -1793,7 +1832,7 @@ SpriteRenderer:
   m_Size: {x: 1.1, y: 1.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &9176903837018877538
@@ -1842,6 +1881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670c702c687eb3419bc0ba41c8b6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonReactive: 0
   _internalLight2D: {fileID: 0}
   length: 50
   segmentPoses: []
@@ -1851,6 +1891,7 @@ MonoBehaviour:
   wiggleSpeed: 1
   wiggleMagnitude: 50
   wiggleDir: {fileID: 3767183701739463978}
+  resettingFromPlayer: 0
 --- !u!120 &5981271975517618766
 LineRenderer:
   serializedVersion: 2
@@ -1869,6 +1910,9 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1891,7 +1935,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078282617
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}

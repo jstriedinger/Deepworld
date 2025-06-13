@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio sfx")]
     [SerializeField] private EventReference sfxFirstMonsterAppear;
     public EventReference sfxMonsterScream;
+    public EventReference sfxExplosion;
     [SerializeField] private EventReference sfxBlueCall;
     [SerializeField] private EventReference sfxBlueCall2;
     [SerializeField] private EventReference sfxBlueScream;

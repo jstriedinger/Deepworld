@@ -104,7 +104,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 32
-      y: 32
+      y: 528
       width: 317
       height: 435
     spriteID: f007707a77100ff4eb7a1fe5e678e843
@@ -115,8 +115,96 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 32, y: 32}
+    uvTransform: {x: 32, y: 528}
     spritePosition: {x: 72, y: 7}
+  - name: fishv4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 413
+      y: 528
+      width: 235
+      height: 442
+    spriteID: 4ea662d37a6e47b488c17a346a279dd5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 413, y: 528}
+    spritePosition: {x: 108, y: 4}
+  - name: fishv3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 32
+      width: 392
+      height: 432
+    spriteID: c8cbaec058923714c96a2493f1f0f8a4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 32}
+    spritePosition: {x: 30, y: 10}
+  - name: fishv2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 488
+      y: 32
+      width: 337
+      height: 431
+    spriteID: f2060155aa7884741b38a1a720729f84
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 488, y: 32}
+    spritePosition: {x: 51, y: 7}
+  - name: fishv1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 712
+      y: 528
+      width: 193
+      height: 430
+    spriteID: d5b49ba6cc124cc48b4b88112cfecb90
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 712, y: 528}
+    spritePosition: {x: 121, y: 4}
   spriteImportData: []
   rigSpriteImportData: []
   sharedRigSpriteImportData: []
@@ -170,7 +258,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: f007707a77100ff4eb7a1fe5e678e843
     layerID: 12
-    mosaicPosition: {x: 32, y: 32}
+    mosaicPosition: {x: 32, y: 528}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -180,40 +268,40 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 4ea662d37a6e47b488c17a346a279dd5
     layerID: 10
-    mosaicPosition: {x: 231, y: 347}
+    mosaicPosition: {x: 413, y: 528}
     flatten: 0
-    isImported: 0
-    isVisible: 0
+    isImported: 1
+    isVisible: 1
   - name: fishv3
     spriteName: fishv3
     isGroup: 0
     parentIndex: -1
     spriteID: c8cbaec058923714c96a2493f1f0f8a4
     layerID: 6
-    mosaicPosition: {x: 4, y: 4}
+    mosaicPosition: {x: 32, y: 32}
     flatten: 0
-    isImported: 0
-    isVisible: 0
+    isImported: 1
+    isVisible: 1
   - name: fishv2
     spriteName: fishv2
     isGroup: 0
     parentIndex: -1
     spriteID: f2060155aa7884741b38a1a720729f84
     layerID: 4
-    mosaicPosition: {x: 32, y: 32}
+    mosaicPosition: {x: 488, y: 32}
     flatten: 0
-    isImported: 0
-    isVisible: 0
+    isImported: 1
+    isVisible: 1
   - name: fishv1
     spriteName: fishv1
     isGroup: 0
     parentIndex: -1
     spriteID: d5b49ba6cc124cc48b4b88112cfecb90
     layerID: 3
-    mosaicPosition: {x: 546, y: 32}
+    mosaicPosition: {x: 712, y: 528}
     flatten: 0
-    isImported: 0
-    isVisible: 0
+    isImported: 1
+    isVisible: 1
   - name: Layer 1
     spriteName: Layer 1
     isGroup: 0

@@ -50,7 +50,7 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
     private float _nextCall;
     
     public bool isHidden = false;
-    private BlueNPC _blueRef;
+    public BlueNPC _blueRef;
 
 
     [Header("Animation")]

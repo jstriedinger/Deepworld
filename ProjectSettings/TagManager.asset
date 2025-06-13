@@ -64,6 +64,9 @@ TagManager:
   - name: Player
     uniqueID: 487045279
     locked: 0
+  - name: Particles3
+    uniqueID: 1315886039
+    locked: 0
   - name: MonsterProps
     uniqueID: 862094791
     locked: 0

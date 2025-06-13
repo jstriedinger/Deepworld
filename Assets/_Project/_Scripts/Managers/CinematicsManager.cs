@@ -32,6 +32,8 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private Transform camPivotHelper;
     
     [Header("Cinematic - Intro & main menu")]
+    [SerializeField] private BoidFlock flockTitle1;
+    [SerializeField] private BoidFlock flockTitle2;
     [SerializeField] private GameObject pathBlueTitles1;
     [SerializeField] private GameObject pathBlueTitles2;
     [SerializeField] private GameObject pathBlueTitles3;
@@ -55,7 +57,6 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] Rigidbody2D rockFall;
     [SerializeField] Transform rockFallPivot;
     [SerializeField] ParticleSystem[] rockFallBubbles;
-    [SerializeField] AudioClip sfxExplosion;
     [SerializeField] GameObject pathBlueEarthquake;
     [SerializeField] GameObject pathBlueEarthquake2;
 
@@ -431,7 +432,7 @@ public class CinematicsManager : MonoBehaviour
                 _blueNpc.gameObject.SetActive(true);
                 AudioManager.Instance.ToggleCanPlayDangerMusic(true);
                 CameraManager.Instance.ShakeCamera(1,10);
-                AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f );
+                RuntimeManager.PlayOneShot(AudioManager.Instance.sfxExplosion, transform.position);
             })
             .AppendInterval(1f)
             .OnComplete(() =>
@@ -583,7 +584,7 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() =>
             {
                 CameraManager.Instance.ShakeCamera(2,30);
-                AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.9f );
+                RuntimeManager.PlayOneShot(AudioManager.Instance.sfxExplosion, transform.position);
                 rockFall.bodyType = RigidbodyType2D.Dynamic;
                 
                 rockFallBubbles[0].Play();
@@ -699,11 +700,12 @@ public class CinematicsManager : MonoBehaviour
             .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(10));
         
         Sequence introBlue = DOTween.Sequence()
-            .AppendInterval(5)
+            .AppendInterval(7)
             .AppendCallback(() => { 
                 AudioManager.Instance.ChangeBackgroundMusic(1);
             })
-            .AppendInterval(9)
+            .AppendInterval(8)
+            .AppendCallback(() => {flockTitle1.ToggleActivity(true);})
             .Append(_blueNpc.transform.DOPath(bluePathC0Pos, blueC0Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
@@ -712,6 +714,8 @@ public class CinematicsManager : MonoBehaviour
                     {
                         if (waypointIndex == 2)
                             StartCoroutine(_blueNpc.PlayCallSFX());
+                        if(waypointIndex == 3)
+                            flockTitle2.ToggleActivity(true);
                     }))
             .AppendCallback(() =>
             {
@@ -725,10 +729,9 @@ public class CinematicsManager : MonoBehaviour
 
         CameraManager.Instance.toggleVCamDeadZone(false);
         Sequence introMover = DOTween.Sequence()
-            .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 45)
+            .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 50)
                 .SetEase(Ease.InOutSine))
             .Join(UIManager.Instance.blackout.DOFade(0, 3))
-           
             .Join(introBlue)
             .OnComplete(
                 () =>
@@ -804,7 +807,7 @@ public class CinematicsManager : MonoBehaviour
     public void DoCinematicRockWallLevel3()
     {
         CameraManager.Instance.ShakeCamera(1.5f);
-        AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f);
+        RuntimeManager.PlayOneShot(AudioManager.Instance.sfxExplosion, transform.position);
         RuntimeManager.PlayOneShot(AudioManager.Instance.sfxMonsterScream, transform.position);
         tunnelRocks.SetActive(true);
         //unload previous levels
@@ -817,12 +820,14 @@ public class CinematicsManager : MonoBehaviour
     public void DoCinematicRockWallLevel4()
     {
         CameraManager.Instance.ShakeCamera(1,10);
-        AudioSource.PlayClipAtPoint(sfxExplosion, Camera.main.transform.position, 0.75f);
+        RuntimeManager.PlayOneShot(AudioManager.Instance.sfxExplosion, transform.position);
         
         rockWallLevel4Before.SetActive(false);
         rockWallLevel4After.SetActive(true);
         GameManager.Instance.UnloadLevelSection(2);
     }
+    
+    
 
 
 }

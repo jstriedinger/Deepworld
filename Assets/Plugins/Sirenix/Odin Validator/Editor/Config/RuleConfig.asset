@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 1434321088, guid: afbf832bc46149f5a291e87cab63e46d, type: 3}
   m_Name: RuleConfig
   m_EditorClassIdentifier: 
-  projectRules: []
+  projectRules:
+  - Enabled: 1
+    EnabledOverridden: 1
+    Type: Sirenix.OdinValidator.Editor.Validators.ShaderCompilerErrorsValidator,
+      Sirenix.OdinValidator.Editor
+    Override: "{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|Sirenix.OdinValidator.Editor.Validators.ShaderCompilerErrorsValidator,
+      Sirenix.OdinValidator.Editor\",\r\n    \"ErrorSeverity\": 0,\r\n    \"WarningSeverity\":
+      1,\r\n    \"IgnoredShaders\": {\r\n        \"$id\": 1,\r\n        \"$type\":
+      \"1|UnityEngine.Shader[], UnityEngine.CoreModule\",\r\n        \"$rlength\":
+      1,\r\n        \"$rcontent\": [\r\n            $fstrref:\"{\\\"guid\\\":\\\"79ee6cefbc672a44e97359d4d14ea301\\\",\\\"IsBroken\\\":false,\\\"Type\\\":1,\\\"AssetPath\\\":\\\"Assets/AllIn1SpriteShader/2DRenderer_URP/Resources/AllIn1Urp2dRenderer.shader\\\",\\\"SubAsset\\\":{\\\"AssetType\\\":{\\\"TypeName\\\":\\\"\\\"},\\\"InstanceID\\\":0,\\\"Index\\\":0},\\\"Hierarchy\\\":{\\\"SubNames\\\":[],\\\"SubIndices\\\":[]},\\\"Component\\\":{\\\"ComponentIndex\\\":0,\\\"ComponentType\\\":{\\\"TypeName\\\":\\\"\\\"}},\\\"Name\\\":\\\"AllIn1SpriteShader/AllIn1Urp2dRenderer\\\",\\\"ObjectType\\\":{\\\"TypeName\\\":\\\"UnityEngine.Shader,
+      UnityEngine.CoreModule\\\"}}\"\r\n        ]\r\n    }\r\n}"

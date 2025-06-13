@@ -14,7 +14,7 @@ Material:
   m_ValidKeywords:
   - ATLAS_ON
   - DISTORT_ON
-  - ROUNDWAVEUV_ON
+  - GLOW_ON
   m_InvalidKeywords:
   - _GLOWAFFECTLIGHT_ON
   m_LightmapFlags: 4
@@ -118,7 +118,7 @@ Material:
     - _DistortAmount: 0.05
     - _DistortTexXSpeed: 0.5
     - _DistortTexYSpeed: 0.5
-    - _EditorDrawers: 4
+    - _EditorDrawers: 6
     - _FadeAmount: 1
     - _FadeBurnGlow: 1
     - _FadeBurnTransition: 0.5
@@ -132,9 +132,9 @@ Material:
     - _GhostTransparency: 0.857
     - _GlitchAmount: 3
     - _GlitchSize: 1
-    - _Glow: 61
+    - _Glow: 1
     - _GlowAffectLight: 1
-    - _GlowGlobal: 100
+    - _GlowGlobal: 1
     - _GradBlend: 1
     - _GradBoostX: 1.2
     - _GradBoostY: 1.2
@@ -250,3 +250,4 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

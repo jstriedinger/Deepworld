@@ -37,7 +37,7 @@ MonoBehaviour:
       IncludeAssetDependencies: 1
     AssetBundle: 
     AddressableGroup: 
-  - Enabled: 0
+  - Enabled: 1
     Type: 2
     Asset:
       Path: 
@@ -49,7 +49,7 @@ MonoBehaviour:
       IncludeAssetDependencies: 0
     AssetBundle: 
     AddressableGroup: 
-  - Enabled: 0
+  - Enabled: 1
     Type: 0
     Asset:
       Path: Assets
@@ -61,5 +61,17 @@ MonoBehaviour:
       IncludeAssetDependencies: 0
     AssetBundle: 
     AddressableGroup: 
-  Exclude: []
+  Exclude:
+  - Enabled: 1
+    Type: 0
+    Asset:
+      Path: Assets/_Project/Flocking/objs/FlockBehaviors.asset
+      Filter: 
+    Object: {fileID: 0}
+    Scene:
+      Type: 0
+      Value: 
+      IncludeAssetDependencies: 0
+    AssetBundle: 
+    AddressableGroup: 
   icon: 391

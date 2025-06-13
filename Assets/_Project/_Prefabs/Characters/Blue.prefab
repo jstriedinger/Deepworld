@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 393324275603114831}
   - component: {fileID: 2843738064674605511}
   m_Layer: 6
-  m_Name: Blue
+  m_Name: BLUE
   m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,13 +619,13 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 14
   m_Positions:
-  - {x: -1.249, y: -9.93, z: 0}
-  - {x: -1.249, y: -10.08, z: 0}
-  - {x: -1.249, y: -10.23, z: 0}
-  - {x: -1.249, y: -10.379999, z: 0}
-  - {x: -1.249, y: -10.529999, z: 0}
-  - {x: -1.249, y: -10.679998, z: 0}
-  - {x: -1.249, y: -10.829998, z: 0}
+  - {x: 53.481, y: -23.4, z: 0}
+  - {x: 53.481, y: -23.55, z: 0}
+  - {x: 53.481, y: -23.699999, z: 0}
+  - {x: 53.481, y: -23.849998, z: 0}
+  - {x: 53.481, y: -23.999998, z: 0}
+  - {x: 53.481, y: -24.149998, z: 0}
+  - {x: 53.481, y: -24.299997, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1264,13 +1264,13 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 14
   m_Positions:
-  - {x: 1.25, y: -9.93, z: 0}
-  - {x: 1.25, y: -10.08, z: 0}
-  - {x: 1.25, y: -10.23, z: 0}
-  - {x: 1.25, y: -10.379999, z: 0}
-  - {x: 1.25, y: -10.529999, z: 0}
-  - {x: 1.25, y: -10.679998, z: 0}
-  - {x: 1.25, y: -10.829998, z: 0}
+  - {x: 55.98, y: -23.4, z: 0}
+  - {x: 55.98, y: -23.55, z: 0}
+  - {x: 55.98, y: -23.699999, z: 0}
+  - {x: 55.98, y: -23.849998, z: 0}
+  - {x: 55.98, y: -23.999998, z: 0}
+  - {x: 55.98, y: -24.149998, z: 0}
+  - {x: 55.98, y: -24.299997, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1639,6 +1639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3886696081585773702}
+  - component: {fileID: 8071868141666360183}
   m_Layer: 6
   m_Name: WiggleDir
   m_TagString: Untagged
@@ -1662,6 +1663,61 @@ Transform:
   - {fileID: 7899289817624706469}
   m_Father: {fileID: 5335836652397838011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8071868141666360183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290441019458469581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.3
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.5
+  m_LightVolumeIntensity: 0.07
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 00000000c136fae1d1f3b6b173208727d7d36e4e
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 40
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 20
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.3966484, y: -2.3189697, z: 0}
+  - {x: 0.169281, y: -2.3396301, z: 0}
+  - {x: 1.4094734, y: -0.5128174, z: 0}
+  - {x: 0.8472862, y: 0.41912842, z: 0}
+  - {x: -0.020851135, y: 0.79119873, z: 0}
+  - {x: -0.9509926, y: 0.43981934, z: 0}
+  - {x: -1.4508171, y: -0.5541992, z: 0}
 --- !u!1 &5440502421513338222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,14 +1856,14 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 14
   m_Positions:
-  - {x: 0, y: -10.13, z: 0}
-  - {x: -0.000000017881394, y: -10.28, z: 0}
-  - {x: -0.00000003576279, y: -10.429999, z: 0}
-  - {x: -0.000000053644182, y: -10.579999, z: 0}
-  - {x: -0.00000007152558, y: -10.729999, z: 0}
-  - {x: -0.00000008940697, y: -10.879998, z: 0}
-  - {x: -0.00000010728836, y: -11.029998, z: 0}
-  - {x: -0.00000012516975, y: -11.179997, z: 0}
+  - {x: 54.73, y: -23.599998, z: 0}
+  - {x: 54.73, y: -23.749998, z: 0}
+  - {x: 54.73, y: -23.899998, z: 0}
+  - {x: 54.73, y: -24.049997, z: 0}
+  - {x: 54.73, y: -24.199997, z: 0}
+  - {x: 54.73, y: -24.349997, z: 0}
+  - {x: 54.73, y: -24.499996, z: 0}
+  - {x: 54.73, y: -24.649996, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -2580,23 +2636,23 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 13
   m_Positions:
-  - {x: 0, y: -9.33, z: 0}
-  - {x: -0.00000003218651, y: -9.6, z: 0}
-  - {x: -0.00000006437302, y: -9.870001, z: 0}
-  - {x: -0.00000009655953, y: -10.140001, z: 0}
-  - {x: -0.00000012874604, y: -10.410002, z: 0}
-  - {x: -0.00000016093254, y: -10.680002, z: 0}
-  - {x: -0.00000019311905, y: -10.950003, z: 0}
-  - {x: -0.00000022530556, y: -11.220003, z: 0}
-  - {x: -0.00000025749208, y: -11.490004, z: 0}
-  - {x: -0.00000028967858, y: -11.760004, z: 0}
-  - {x: -0.0000003218651, y: -12.0300045, z: 0}
-  - {x: -0.0000003540516, y: -12.300005, z: 0}
-  - {x: -0.0000003862381, y: -12.570005, z: 0}
-  - {x: -0.0000004184246, y: -12.840006, z: 0}
-  - {x: -0.0000004506111, y: -13.110006, z: 0}
-  - {x: -0.00000048279765, y: -13.380007, z: 0}
-  - {x: -0.00000051498415, y: -13.650007, z: 0}
+  - {x: 54.73, y: -22.8, z: 0}
+  - {x: 54.73, y: -23.07, z: 0}
+  - {x: 54.73, y: -23.34, z: 0}
+  - {x: 54.73, y: -23.61, z: 0}
+  - {x: 54.73, y: -23.880001, z: 0}
+  - {x: 54.73, y: -24.150002, z: 0}
+  - {x: 54.73, y: -24.420002, z: 0}
+  - {x: 54.73, y: -24.690002, z: 0}
+  - {x: 54.73, y: -24.960003, z: 0}
+  - {x: 54.73, y: -25.230003, z: 0}
+  - {x: 54.73, y: -25.500004, z: 0}
+  - {x: 54.73, y: -25.770004, z: 0}
+  - {x: 54.73, y: -26.040005, z: 0}
+  - {x: 54.73, y: -26.310005, z: 0}
+  - {x: 54.73, y: -26.580006, z: 0}
+  - {x: 54.73, y: -26.850006, z: 0}
+  - {x: 54.73, y: -27.120007, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.9667169
@@ -2706,14 +2762,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 2
-  m_LightType: 1
+  m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.6
+  m_FalloffIntensity: 0.5
   m_Color: {r: 0, g: 0.4039216, b: 0.83921576, a: 1}
-  m_Intensity: 1.5
-  m_LightVolumeIntensity: 0.1
+  m_Intensity: 0.25
+  m_LightVolumeIntensity: 0.3
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 00000000c136fae1
+  m_ApplyToSortingLayers: 00000000d1f3b6b1
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2729,12 +2785,12 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.021699905, y: -0.7734995, z: 0}
-    m_Extent: {x: 21.4296, y: 21.5652, z: 0}
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightOuterRadius: 30
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

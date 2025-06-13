@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Level management")] 
     [SerializeField] private StartSection startSection;
+    [SerializeField] private GameObject level0Objects;
     [SerializeField] private GameObject[] levelSections;
     [SerializeField] CheckPoint[] checkPoints;
 
@@ -88,6 +89,9 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.HideMainMenu();
         CinematicsManager.Instance.DoCinematicStartGame();
         AudioManager.Instance.OnStartGame();
+        LoadLevelSection(1);
+        //cleanup and opti for fishbowl
+        Destroy(level0Objects);
     }
 
 
@@ -120,6 +124,7 @@ public class GameManager : MonoBehaviour
                 playerRef.isHidden = true;
                 
             }
+            ToggleLigthing(false);
 
             if (_currentCheckPointIndex >= 3 )
             {
@@ -162,6 +167,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case StartSection.Checkpoint1:
                     LoadLevelSection(0);
+                    LoadLevelSection(1);
                     UIManager.Instance.isWorldUiActive = true;
                     AudioManager.Instance.ChangeBackgroundMusic(1);
                     CinematicsManager.Instance.PrepareBlueForMeetup();
@@ -368,15 +374,11 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
+    #region worldLoading
     public void LoadLevelSection(int level)
     {
         //depends on the section multiples things get activated and deactivated
         levelSections[level].SetActive(true);
-        if (level == 0)
-        {
-            //also L2
-            levelSections[1].SetActive(true);
-        }
         
     }
 
@@ -385,6 +387,8 @@ public class GameManager : MonoBehaviour
         levelSections[level].SetActive(false);
         Destroy(levelSections[level]);
     }
+    
+    #endregion
 
     private void OnApplicationQuit()
     {
