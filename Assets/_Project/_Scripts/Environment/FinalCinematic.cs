@@ -75,10 +75,10 @@ public class FinalCinematic : MonoBehaviour
             (int waypointIndex) =>
             {
                 if (waypointIndex == 4 )
-                    StartCoroutine(playerCharacter.PlayCallSFX(false));
+                    StartCoroutine(playerCharacter.PlayCallSfx(false));
 
             }))
-            .AppendCallback(() => { StartCoroutine(blueNPC.PlayCallSFX()); })
+            .AppendCallback(() => { StartCoroutine(blueNPC.PlayCallSfx()); })
             .AppendInterval(3)
             .Append(fadeOut.DOFade(1, 3))
             .OnComplete( () =>

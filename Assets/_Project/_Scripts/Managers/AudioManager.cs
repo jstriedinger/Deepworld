@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference sfxBlueCall;
     [SerializeField] private EventReference sfxBlueCall2;
     [SerializeField] private EventReference sfxBlueScream;
+    [SerializeField] private EventReference sfxCreatureCallLow;
     public AudioClip uiButtonFocus;
     public AudioClip uiButtonSelected;
     
@@ -512,5 +513,16 @@ public class AudioManager : MonoBehaviour
     public void DoCinematicScreamsInsideTunnel()
     {
         
+    }
+
+    //Play one shot of creature call Low
+    public void PlayCreatureCallLow()
+    {
+        RuntimeManager.PlayOneShot(sfxCreatureCallLow, transform.position);
+    }
+
+    public void PlayOneShotEvent(EventReference sfx, Vector3 from)
+    {
+        RuntimeManager.PlayOneShot(sfx, from);
     }
 }

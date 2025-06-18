@@ -55,6 +55,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 24056
+--- !u!114 &-8453892307570947815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_Creature_callLow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_Creature_callLow
+  Guid:
+    Data1: 1670165683
+    Data2: 1298465860
+    Data3: 1084657579
+    Data4: -1963117976
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3800
 --- !u!114 &-8397487888536239844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,33 +271,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13500
---- !u!114 &-5528467146699098610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/sfx_covermuffle out
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/sfx_covermuffle out
-  Guid:
-    Data1: -995696551
-    Data2: 1235270268
-    Data3: 1084793497
-    Data4: -2133877000
-  Banks:
-  - {fileID: 8789107609421317367}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1599
 --- !u!114 &-3971302704924024036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638853422033441436
+  lastModified: 638856306861858515
   FileSizes: []
   Exists: 1
 --- !u!114 &-3074462226683292851
@@ -385,7 +385,7 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638853422034175694
+  lastModified: 638856306863908266
   FileSizes: []
   Exists: 1
 --- !u!114 &-2347979487340453672
@@ -415,33 +415,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 410
---- !u!114 &-2074214064063209705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/sfx_GREEN_dial3
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/sfx_GREEN_dial3
-  Guid:
-    Data1: 1670165683
-    Data2: 1298465860
-    Data3: 1084657579
-    Data4: -1963117976
-  Banks:
-  - {fileID: 8789107609421317367}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4400
 --- !u!114 &-904455782990439907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,10 +484,10 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638853422033456711
+  lastModified: 638856306861893662
   FileSizes:
   - Name: 
-    Value: 2298
+    Value: 2370
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -547,16 +520,13 @@ MonoBehaviour:
   - {fileID: -7267413408219300141}
   - {fileID: -3074462226683292851}
   - {fileID: -6042567108526888998}
-  - {fileID: -5528467146699098610}
   - {fileID: 4744797857840612860}
   - {fileID: -8397487888536239844}
   - {fileID: 5502331975436856083}
   - {fileID: -8109586307823462498}
   - {fileID: 6728555948289029791}
   - {fileID: 4153553226447038096}
-  - {fileID: -2074214064063209705}
   - {fileID: 6656686853560623902}
-  - {fileID: 956646628356651725}
   - {fileID: 6798551333433890447}
   - {fileID: -2698438263787984341}
   - {fileID: -5962474616352705583}
@@ -565,12 +535,16 @@ MonoBehaviour:
   - {fileID: -2347979487340453672}
   - {fileID: 5769249304850807061}
   - {fileID: -6849212758921915846}
+  - {fileID: 2299451390668163935}
+  - {fileID: 5783016810939690009}
+  - {fileID: -8453892307570947815}
+  - {fileID: 2105881596464309122}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3817822993745296562}
   StringsBanks:
   - {fileID: -5432930024993847}
-  cacheTime: 638853422034824963
+  cacheTime: 638856306866623042
   cacheVersion: 131618
 --- !u!114 &868291782933054533
 MonoBehaviour:
@@ -587,10 +561,10 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Ambient
-  lastModified: 638853422033393269
+  lastModified: 638856306861829738
   FileSizes: []
   Exists: 1
---- !u!114 &956646628356651725
+--- !u!114 &2105881596464309122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -600,9 +574,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/sfx_covermuffle in
+  m_Name: event:/SFX/sfx_Covermuffle in
   m_EditorClassIdentifier: 
-  Path: event:/SFX/sfx_covermuffle in
+  Path: event:/SFX/sfx_Covermuffle in
   Guid:
     Data1: 1188042724
     Data2: 1291741675
@@ -617,6 +591,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1632
+--- !u!114 &2299451390668163935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_Creature_callHigh
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_Creature_callHigh
+  Guid:
+    Data1: 1266975529
+    Data2: 1077745872
+    Data3: 722821780
+    Data4: -1648483894
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1840
 --- !u!114 &3229128079912399852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +804,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1320
+--- !u!114 &5783016810939690009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/sfx_Covermuffle out
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/sfx_Covermuffle out
+  Guid:
+    Data1: -995696551
+    Data2: 1235270268
+    Data3: 1084793497
+    Data4: -2133877000
+  Banks:
+  - {fileID: 8789107609421317367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1599
 --- !u!114 &5826801535865985805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,6 +1008,6 @@ MonoBehaviour:
   Path: Assets/_Project/_FMODBanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638853422034824963
+  lastModified: 638856306866623042
   FileSizes: []
   Exists: 1

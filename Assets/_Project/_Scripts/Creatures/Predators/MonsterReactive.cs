@@ -9,10 +9,50 @@ public class MonsterReactive : MonsterBase, IUpdatable, IFixedUpdatable
 {
     [HideInInspector]
     public bool inCamera = false;
+    [SerializeField] private int playerCallReactRadius = 85;
     
     protected override void Awake()
     {
         base.Awake();
+    }
+    
+    private void OnEnable()
+    {
+        PlayerCharacter.OnPlayerCall += OnPlayerCallReact;
+        PlayerCharacter.OnPlayerHide += OnPlayerHides;
+    }
+
+    private void OnDisable()
+    {
+        PlayerCharacter.OnPlayerCall -= OnPlayerCallReact;
+        PlayerCharacter.OnPlayerHide -= OnPlayerHides;
+    }
+
+    private void OnPlayerCallReact()
+    {
+        PlayerCharacter player = GameManager.Instance.playerRef;
+        //player not hidding?
+        if (!player.isHidden)
+        {
+            //able to react?
+            if (canReactToPlayer && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
+            {
+                //is close enough?
+                float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
+                if (sqrDistance <= playerCallReactRadius * playerCallReactRadius)
+                {
+                    StartCoroutine(ReactToPlayerCall());
+                }
+            }
+            
+        }
+
+    }
+    
+    public IEnumerator ReactToPlayerCall()
+    {
+        yield return new WaitForSeconds(.8f);
+        UpdateMonsterState(MonsterState.Investigate);
     }
 
     // Start is called before the first frame update
@@ -77,18 +117,7 @@ public class MonsterReactive : MonsterBase, IUpdatable, IFixedUpdatable
 
 
     //react to playerCharacter call, go investigate a position using a lastpos object since btree needs an object
-    public IEnumerator ReactToPlayerCall()
-    {
-        if (canReactToPlayer && CurrentState != MonsterState.Chasing && CurrentState != MonsterState.Follow)
-        {
-           // if (_canReactToCall || CurrentState == MonsterState.Investigate) 
-            //{
-                //if mosnter is not chasing or following, it can react to playerCharacter call
-                yield return new WaitForSeconds(.75f);
-                UpdateMonsterState(MonsterState.Investigate);
-            //}
-        }
-    }
+    
 
 
     //Fire when entering chase mode
@@ -100,8 +129,6 @@ public class MonsterReactive : MonsterBase, IUpdatable, IFixedUpdatable
 
     public void OnPlayerHides()
     {
-        Debug.Log("Player hiding1");
-        Debug.Log("State: "+CurrentState);
         if (CurrentState == MonsterState.Chasing ||
             CurrentState == MonsterState.Follow)
         {

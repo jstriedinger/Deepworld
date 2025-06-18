@@ -6,6 +6,7 @@ using Pathfinding;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class BlueNPC : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class BlueNPC : MonoBehaviour
     
     
     [Header("Audio")]
+    [SerializeField] private bool canReactToPlayerCall = false;
     [SerializeField] private ParticleSystem vfxVoice;
     [SerializeField] private EventReference sfxCall1;
     [SerializeField] private EventReference sfxCall2;
@@ -28,6 +30,7 @@ public class BlueNPC : MonoBehaviour
     private AIDestinationSetter _aiDestinationSetter;
     private float _nextSwim;
     private EyeFollower _eyeFollower;
+    private Rigidbody2D _rigidBody;
     
     
     //Procedural bodies
@@ -37,6 +40,7 @@ public class BlueNPC : MonoBehaviour
 
     private void Awake()
     {
+        _rigidBody = GetComponent<Rigidbody2D>();
         _aiBlue = GetComponent<BlueMovement>();
         _aiDestinationSetter = GetComponent<AIDestinationSetter>();
         _aiBlue.canMove = false;
@@ -54,18 +58,45 @@ public class BlueNPC : MonoBehaviour
         _playBubbles = true;
         StartCoroutine("NPCBubbleSwim");
     }
+    
+    private void OnEnable()
+    {
+        PlayerCharacter.OnPlayerCall += OnPlayerCall;
+    }
+
+    private void OnDisable()
+    {
+        PlayerCharacter.OnPlayerCall -= OnPlayerCall;
+    }
+
+    public void ToggleReactToCall(bool newReactToCall)
+    {
+        canReactToPlayerCall = newReactToCall;
+    }
 
     public Transform GetFollowTarget()
     {
         return _aiBlue.target;
     }
-    
 
-
-    public IEnumerator PlayCallSFX()
+    private void OnPlayerCall()
     {
+        if (canReactToPlayerCall)
+        {
+            StartCoroutine(PlayCallSfx(true));
+        }
+    }
+    
+    //offset time used when responding from player call
+    public IEnumerator PlayCallSfx(bool offsetTime = false)
+    {
+        if(offsetTime)
+            yield return new WaitForSeconds(Random.Range(1.5f, 2.5f));
+        
         vfxVoice.Play();
         yield return new WaitForSeconds(0.2f);
+        //visual feedback
+        transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.2f);
         if(_sfxLastTime.Equals(sfxCall1))
         {
             _sfxLastTime = sfxCall2;
@@ -75,8 +106,6 @@ public class BlueNPC : MonoBehaviour
             _sfxLastTime = sfxCall1;
         }
         FMODUnity.RuntimeManager.PlayOneShot(_sfxLastTime, transform.position);
-        //visual feedback
-        transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.2f);
 
     }
 
@@ -133,11 +162,14 @@ public class BlueNPC : MonoBehaviour
     {
         _eyeFollower.ToggleFollowTarget(willFollow,newTarget);
     }
+    
 
     public void GetHurt()
     {
         Destroy(disposableTentacle);
+        
     }
+    
 
     /**
      * Prepare blue to be faster in the last section of the game
@@ -145,6 +177,23 @@ public class BlueNPC : MonoBehaviour
     public void ChangeBlueStats(Transform newTarget)
     {
         _aiBlue.ChangeBlueStats(newTarget);
+    }
+    
+    //change who Blue msut follow. When it does it also changes the eye follow target
+    public void ChangeFollowTarget(Transform newTarget, float newMinDistance = -1, bool newCanSwim = true)
+    {
+        ToggleEyeFollowTarget(true, newTarget);
+        _aiBlue.ChangeFollowTarget(newTarget, newMinDistance, newCanSwim);
+    }
+
+    public void ToggleFireReachedDestinationEvent(bool toggle)
+    {
+        _aiBlue.ToggleFireReachedDestinationEvent(toggle);
+    }
+    
+    public void StopMovement()
+    {
+        _rigidBody.linearVelocity = Vector2.zero;
     }
 
 }

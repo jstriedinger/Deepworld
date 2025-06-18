@@ -1610,6 +1610,7 @@ MonoBehaviour:
   addForceWhenKillPlayer: 0
   isKillingPlayer: 0
   inCamera: 0
+  playerCallReactRadius: 85
 --- !u!114 &5039743520618852438
 MonoBehaviour:
   m_ObjectHideFlags: 0

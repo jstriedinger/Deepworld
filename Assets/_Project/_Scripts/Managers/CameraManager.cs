@@ -14,7 +14,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera virtualCamera;
     [SerializeField] CinemachineTargetGroup targetGroup;
     [SerializeField] float lerpDuration = 1f;
-    [SerializeField] int camZoomPlayer = 28;
+    public int camZoomPlayer = 28;
     [SerializeField] int camZoomEnemy = 28;
 
     [Header("Final chase cam")]
@@ -55,8 +55,6 @@ public class CameraManager : MonoBehaviour
         targetGroup.Targets[0].Radius = camZoomPlayer;
         _cameraStep = (float) maxAddRadiusChase / chaseCameDistance;
 
-
-
     }
 
     private void LateUpdate()
@@ -64,7 +62,6 @@ public class CameraManager : MonoBehaviour
         //for final chase cam
         if (_checkChaseCamDistance)
         {
-            
             UpdateCameraZoomForFinalChase();
         }
     }
@@ -250,6 +247,17 @@ public class CameraManager : MonoBehaviour
         //StartCoroutine(LerpWeightinTargetGroup(objectToAdd.transform, lerpDuration, 0, isMonster? 1 : 1.2f, isMonster));
     }
 
+    public void ToggleBlueOnCamera(bool toggle, int radius, int weight)
+    {
+        Transform blueTemp = GameManager.Instance.blueNpcRef.transform;
+        if (toggle)
+        {
+            if (targetGroup.FindMember(blueTemp) == -1)
+                targetGroup.AddMember(blueTemp, 0, radius);
+        }
+        ToggleCameraTween(blueTemp,weight, true,false);
+    }
+
 
 
 
@@ -352,13 +360,13 @@ public class CameraManager : MonoBehaviour
 
 
 
-    public void ChangePlayerRadius(int newRadius)
+    public void UpdatePlayerRadius(int newRadius, bool addOrNot)
     {
-        DOTween.To(() => targetGroup.Targets[0].Radius, x => targetGroup.Targets[0].Radius = x, newRadius, 2)
-            .OnComplete(() =>
-            {
-                camZoomPlayer = newRadius;
-            });
+        if (addOrNot)
+            camZoomPlayer += newRadius;
+        else
+            camZoomPlayer -= newRadius;
+        DOTween.To(() => targetGroup.Targets[0].Radius, x => targetGroup.Targets[0].Radius = x, camZoomPlayer, 2);
     }
     
 

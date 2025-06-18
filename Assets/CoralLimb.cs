@@ -101,7 +101,7 @@ public class CoralLimb : MonoBehaviour
 
     public void Close()
     {
-        Debug.Log("Closing coral");
+        //Debug.Log("Closing coral");
         _isOpen = false;
         currentSpeed = closingSpeed;
         lineRenderer.textureScale = new Vector2(1, closingLineWidth);

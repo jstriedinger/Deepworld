@@ -62,7 +62,7 @@ MonoBehaviour:
     AssetBundle: 
     AddressableGroup: 
   Exclude:
-  - Enabled: 1
+  - Enabled: 0
     Type: 0
     Asset:
       Path: Assets/_Project/Flocking/objs/FlockBehaviors.asset

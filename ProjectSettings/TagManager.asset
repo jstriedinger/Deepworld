@@ -52,7 +52,7 @@ TagManager:
   - name: Background
     uniqueID: 2981557201
     locked: 0
-  - name: Particles2
+  - name: FishBottom
     uniqueID: 663167091
     locked: 0
   - name: PropsBackground
@@ -64,7 +64,7 @@ TagManager:
   - name: Player
     uniqueID: 487045279
     locked: 0
-  - name: Particles3
+  - name: FishTop
     uniqueID: 1315886039
     locked: 0
   - name: MonsterProps

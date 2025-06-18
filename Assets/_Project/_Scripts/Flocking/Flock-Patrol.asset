@@ -30,5 +30,5 @@ MonoBehaviour:
   <avoidPlayerSpeedDuration>k__BackingField: 1
   <followPlayer>k__BackingField: 0
   followPlayerWeight: 1.5
-  <FollowPlayerDistance>k__BackingField: 70
+  <FollowPlayerDistance>k__BackingField: 100
   agentSmoothTime: 0.75

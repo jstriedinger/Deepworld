@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407751715453448178e11ae9b0bdebb0, type: 3}
   m_Name: MonsterSOV2
   m_EditorClassIdentifier: 
-  <PatrolSpeed>k__BackingField: 9
+  <PatrolSpeed>k__BackingField: 10
   <FollowRange>k__BackingField: 75
-  <FollowSpeed>k__BackingField: 15
+  <FollowSpeed>k__BackingField: 16
   <ChasingRange>k__BackingField: 35
-  <ChasingSpeed>k__BackingField: 24
+  <ChasingSpeed>k__BackingField: 25
   <SfxMonsterReact>k__BackingField:
     Guid:
       Data1: 548043345

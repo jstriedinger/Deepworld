@@ -7,18 +7,7 @@ public class TunnelHideout : MonoBehaviour
     {
         if( collision.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead)
         {
-            GlobalVariables.Instance.SetVariableValue("isPlayerHidden", true);
-            GameManager.Instance.playerRef.isHidden = true;
-
-            Collider2D[] monsterHits = Physics2D.OverlapCircleAll(collision.transform.position, 100, LayerMask.GetMask("Monster"));
-            //lets tell the monster chasing that were near the shelter
-            foreach (Collider2D monsterCollider in monsterHits)
-            {
-                MonsterReactive monsterReactive = monsterCollider.GetComponent<MonsterReactive>();
-                monsterReactive?.OnPlayerHides();
-                
-            }
-
+            GameManager.Instance.playerRef.ToggleHidePlayer(true);
         }
     }
 
@@ -26,8 +15,7 @@ public class TunnelHideout : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead)
         {
-            GlobalVariables.Instance.SetVariableValue("isPlayerHidden", false);
-            GameManager.Instance.playerRef.isHidden = false;
+            GameManager.Instance.playerRef.ToggleHidePlayer(false);
         }
     }
 }

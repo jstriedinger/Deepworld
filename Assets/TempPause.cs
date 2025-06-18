@@ -6,17 +6,17 @@ public class TempPause : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerCharacter.PlayerOnPause += OnPause;
+        PlayerCharacter.OnPauseGame += OnPauseGame;
     }
 
     private void OnEnable()
     {
-        PlayerCharacter.PlayerOnPause += OnPause;
+        PlayerCharacter.OnPauseGame += OnPauseGame;
     }
 
     private void OnDisable()
     {
-        PlayerCharacter.PlayerOnPause -= OnPause;
+        PlayerCharacter.OnPauseGame -= OnPauseGame;
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class TempPause : MonoBehaviour
         
     }
     
-    private void OnPause()
+    private void OnPauseGame()
     {
         Time.timeScale = Time.timeScale > 0 ? 0 : 1;
     }

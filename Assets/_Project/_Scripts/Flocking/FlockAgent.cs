@@ -8,6 +8,7 @@ public abstract class FlockAgent : MonoBehaviour
 {
 
     BoidFlock _agentFlock;
+    public float orbitBias;
     public BoidFlock AgentFlock { get { return _agentFlock; } }
 
     Collider2D _agentCollider;

@@ -35,13 +35,11 @@ public class Hideout : MonoBehaviour
     private Tween _punchUpTween;
     private Tween _lightGlowTween;
 
-    private Vector3 _lastContactPos;
 
 
     private void Start()
     {
         SetupTentacles();
-        _lastContactPos = Vector3.negativeInfinity;
     }
     
     
@@ -71,8 +69,6 @@ public class Hideout : MonoBehaviour
     {
         if( collision.gameObject.CompareTag("Player") && !GameManager.Instance.isPlayerDead)
         {
-            GlobalVariables.Instance.SetVariableValue("isPlayerHidden", true);
-            GameManager.Instance.playerRef.isHidden = true;
             _punchDownTween.Rewind();
             _punchDownTween.Play();
             //Add force for player away
@@ -82,19 +78,9 @@ public class Hideout : MonoBehaviour
             ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
             //Sound effect
-            RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
-            _lastContactPos = collision.transform.position;
-
-            Collider2D[] monsterHits = Physics2D.OverlapCircleAll(collision.transform.position, 100, LayerMask.GetMask("Monster"));
-            //lets tell the monster chasing that were near the shelter
-            foreach (Collider2D monsterCollider in monsterHits)
-            {
-                Debug.Log("Found monster: "+monsterCollider.gameObject.name);
-                MonsterReactive monsterReactive = monsterCollider.GetComponent<MonsterReactive>();
-                monsterReactive?.OnPlayerHides();
-                
-            }
-
+            AudioManager.Instance.PlayOneShotEvent(configuration.SfxEnter, transform.position);
+            
+            GameManager.Instance.playerRef.ToggleHidePlayer(true);
             //metric handler
             MetricManagerScript.instance?.LogString("Hideout", "Enter");
 
@@ -104,7 +90,7 @@ public class Hideout : MonoBehaviour
             //just the sound
             ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
-            RuntimeManager.PlayOneShot(configuration.SfxEnter, transform.position);
+            AudioManager.Instance.PlayOneShotEvent(configuration.SfxEnter, transform.position);
         }
     }
 
@@ -116,9 +102,6 @@ public class Hideout : MonoBehaviour
         {
             _punchUpTween.Rewind();
             _punchUpTween.Play();
-            
-            GlobalVariables.Instance.SetVariableValue("isPlayerHidden", false);
-            GameManager.Instance.playerRef.isHidden = false;
             //Add force for player away
             Vector3 d = (collision.transform.position - transform.position).normalized;
             StartCoroutine(GameManager.Instance.playerRef.AddImpulseForceToPlayer(d, configuration.CoverForce));
@@ -126,15 +109,15 @@ public class Hideout : MonoBehaviour
             ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
             //sound effect
-            FMODUnity.RuntimeManager.PlayOneShot(configuration.SfxExit, transform.position);
+            AudioManager.Instance.PlayOneShotEvent(configuration.SfxEnter, transform.position);
             
-            _lastContactPos = collision.transform.position;
+            GameManager.Instance.playerRef.ToggleHidePlayer(false);
             MetricManagerScript.instance?.LogString("Hideout", "Exit");
         }
         else if (collision.gameObject.CompareTag("Blue"))
         {
             //just the sound
-            RuntimeManager.PlayOneShot(configuration.SfxExit, transform.position);
+            AudioManager.Instance.PlayOneShotEvent(configuration.SfxExit,transform.position);
             ParticleSystem vfxClosest = vfxBubbles.OrderBy(obj => Vector2.Distance(collision.transform.position, obj.transform.position)).First();
             vfxClosest.Play();
         }
@@ -142,11 +125,7 @@ public class Hideout : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (_lastContactPos != Vector3.negativeInfinity)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(_lastContactPos, transform.position);
-        }
+        
     }
 }
 

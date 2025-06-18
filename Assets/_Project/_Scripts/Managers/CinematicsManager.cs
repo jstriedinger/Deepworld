@@ -27,6 +27,8 @@ public class CinematicsManager : MonoBehaviour
             Instance = this; 
         } 
     }
+
+    [SerializeField] CinematicsFishbowl cinematicsFishbowl;
     
     [SerializeField] private BlueNPC _blueNpc;
     [SerializeField] private Transform camPivotHelper;
@@ -46,12 +48,6 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] float blueC0Time;
     [SerializeField] int blueC01Time;
     
-    
-    [Header("Cinematic - Blue meetup")]
-    [SerializeField] private GameObject pathBlueMeetup1;
-    [SerializeField] private GameObject pathBlueMeetup2;
-    [SerializeField] private GameObject pathPlayerMeetup1;
-    [SerializeField] private GameObject pathPlayerMeetup2;
 
     [Header("Cinematic - earthquake & tunnel")] 
     [SerializeField] Rigidbody2D rockFall;
@@ -87,7 +83,7 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private GameObject rockWallLevel4After;
 
     //stuff that happens before starting a blocking cinematic
-    private void BeforeCinematicStarts(bool bars = true, bool deactivateInput = true)
+    public void BeforeCinematicStarts(bool bars = true, bool deactivateInput = true)
     {
         
         GameManager.Instance.playerRef.StopMovement();
@@ -105,129 +101,13 @@ public class CinematicsManager : MonoBehaviour
             UIManager.Instance.ToggleCinematicBars(true);
     }
     
-    private void AfterCinematicEnds()
+    public void AfterCinematicEnds()
     {
         UIManager.Instance.ToggleCinematicBars(false);
         GameManager.Instance.playerRef.playerInput.ActivateInput();
         GameManager.Instance.ChangeGameState(GameState.Default);
        
     }
-    
-    //Start cinematic of blue encounter and wait for playerCharacter input
-    public void CinematicBlueMeetupPt1()
-    {
-        PlayerInput pInput = GameManager.Instance.playerRef.playerInput;
-        //disable move input action
-        pInput.actions.FindAction("Move").Disable();
-        GameManager.Instance.playerRef.StopMovement();
-        UIManager.Instance.PrepareBlueMeetupCinematic();
-        
-        
-        pInput.actions.FindAction("Call").Enable();
-        pInput.actions.FindAction("Call").performed += FirstTimeCallInput;
-        
-        GameManager.Instance.LoadLevelSection(2);
-
-    }
-    
-    private void FirstTimeCallInput(InputAction.CallbackContext ctx)
-    {
-        //does the call normally
-        CinematicBlueMeetupPt2();
-        GameManager.Instance.playerRef.playerInput.actions.FindAction("Call").performed -= FirstTimeCallInput;
-        
-    }
-    
-    /* Initial Blue encounter.This is triggered after Player uses the call input */
-    public void CinematicBlueMeetupPt2()
-    {
-        
-        Transform[] bluePathTransforms = pathBlueMeetup1.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathPos1 = new Vector3[bluePathTransforms.Length-1];
-        for (int i = 1; i < bluePathTransforms.Length; i++)
-        {
-            bluePathPos1[i-1] = bluePathTransforms[i].position;
-        }
-        
-        Transform[] bluePathTransforms2 = pathBlueMeetup2.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathPos2 = new Vector3[bluePathTransforms2.Length-1];
-        for (int i = 1; i < bluePathTransforms2.Length; i++)
-        {
-            bluePathPos2[i-1] = bluePathTransforms2[i].position;
-        }
-        
-        Transform[] playerPathTransforms = pathPlayerMeetup1.GetComponentsInChildren<Transform>();
-        Vector3[] playerPathPos1 = new Vector3[playerPathTransforms.Length-1];
-        for (int i = 1; i < playerPathTransforms.Length; i++)
-        {
-            playerPathPos1[i-1] = playerPathTransforms[i].position;
-        }
-        
-        Transform[] playerPathTransforms2 = pathPlayerMeetup2.GetComponentsInChildren<Transform>();
-        Vector3[] playerPathPos2 = new Vector3[playerPathTransforms2.Length-1];
-        for (int i = 1; i < playerPathTransforms2.Length; i++)
-        {
-            playerPathPos2[i-1] = playerPathTransforms2[i].position;
-        }
-        
-        //ok hide the call icons
-        UIManager.Instance.ToggleCallIcons(false);
-        
-
-        Sequence cinematic = DOTween.Sequence();
-        cinematic.Append(GameManager.Instance.playerRef.transform.DOPath(playerPathPos1, 3, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .Join(_blueNpc.transform.DOPath(bluePathPos1, 4f, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).OnWaypointChange(
-                    (int waypointIndex) =>
-                    {
-                        if (waypointIndex == 1)
-                        {
-                            GameManager.Instance.playerRef.ToggleEyeFollowTarget(true,_blueNpc.transform);
-                            _blueNpc.ToggleEyeFollowTarget(true,GameManager.Instance.playerRef.transform);
-                            
-                        }
-                    }).SetDelay(1))
-            
-        .AppendCallback(() =>
-            {
-                AudioManager.Instance.ChangeBackgroundMusic(2);
-                StartCoroutine(_blueNpc.PlayCallSFX());
-                //change to friend music
-            })
-            .AppendInterval(1)
-            .Append(_blueNpc.transform.DOPath(bluePathPos2, 5, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .Join(GameManager.Instance.playerRef.transform.DOPath(playerPathPos2, 4.5f, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1.5f)
-                .OnWaypointChange(
-                    (int waypointIndex) =>
-                    {
-                        if (waypointIndex == 3)
-                            StartCoroutine(GameManager.Instance.playerRef.PlayCallSFX(false));
-                    }))
-            .AppendCallback(() => { StartCoroutine(_blueNpc.PlayCallSFX()); })
-            .OnComplete(
-                () =>
-                {
-                    
-                    GameManager.Instance.playerRef.playerInput.actions.FindAction("Move").Enable();
-                    AfterCinematicEnds();
-                    _blueNpc.ToggleFollow(true);
-                    GameManager.Instance.playerRef.SetBlueReference(_blueNpc);
-                    GameManager.Instance.LoadLevelSection(2);
-                    GameManager.Instance.playerRef.ToggleEyeFollowTarget(false);
-                    CameraManager.Instance.ChangePlayerRadius(28);
-                }
-            );
-
-    }
-
-
     
     
     //Cinematic of screaming and changing background music
@@ -236,14 +116,12 @@ public class CinematicsManager : MonoBehaviour
         AudioManager.Instance.DoCinematicScreams();
     }
     
-    
-
     public void DoCinematicMonsterEncounterPt2(InputAction.CallbackContext ctx)
     {
         PlayerInput pInput = GameManager.Instance.playerRef.playerInput;
         //we disable it here so that playerCharacter cna not spam it. Consequence is that the normal action is not called, gotta do it manually
         pInput.actions.FindAction("Call").Disable();
-        StartCoroutine(GameManager.Instance.playerRef.PlayCallSFX(false));
+        StartCoroutine(GameManager.Instance.playerRef.PlayCallSfx(false));
         
         
         UIManager.Instance.ToggleCallIcons(false);
@@ -377,7 +255,7 @@ public class CinematicsManager : MonoBehaviour
                 .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(1.2f)
                 .OnComplete(() =>
                 {
-                    StartCoroutine(_blueNpc.PlayCallSFX());
+                    StartCoroutine(_blueNpc.PlayCallSfx());
                 }))
             .AppendInterval(0.15f)
             .AppendCallback(() =>
@@ -495,7 +373,7 @@ public class CinematicsManager : MonoBehaviour
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 1)
-                            StartCoroutine(_blueNpc.PlayCallSFX());
+                            StartCoroutine(_blueNpc.PlayCallSfx());
                         else if (waypointIndex == 2)
                         {
                             RuntimeManager.PlayOneShot(AudioManager.Instance.sfxMonsterScream, transform.position);
@@ -608,7 +486,7 @@ public class CinematicsManager : MonoBehaviour
                 .SetLookAt(0.001f, transform.forward, Vector3.right)
                 .OnComplete(() =>
                 {
-                    StartCoroutine(_blueNpc.PlayCallSFX());
+                    StartCoroutine(_blueNpc.PlayCallSfx());
                 }))
             .AppendInterval(0.3f)
             .Append(_blueNpc.transform.DOPath(bluePath2EarthquakePos, 5f, PathType.CatmullRom, PathMode.Sidescroller2D)
@@ -619,7 +497,7 @@ public class CinematicsManager : MonoBehaviour
                     {
                         if (waypointIndex == 1)
                         {
-                            StartCoroutine(GameManager.Instance.playerRef.PlayCallSFX(false));
+                            StartCoroutine(GameManager.Instance.playerRef.PlayCallSfx(false));
                             _blueNpc.ToggleEyeFollowTarget(false);
                         }
                         
@@ -647,9 +525,7 @@ public class CinematicsManager : MonoBehaviour
 
     public void PrepareBlueForMeetup()
     {
-        Transform[] tBluePathMonster = pathBlueMeetup1.GetComponentsInChildren<Transform>();
-        
-        _blueNpc.transform.position = tBluePathMonster[1].position;
+        cinematicsFishbowl.PrepareBlueForMeetup();
     }
 
     public void DoCinematicTitles()
@@ -704,7 +580,7 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() => { 
                 AudioManager.Instance.ChangeBackgroundMusic(1);
             })
-            .AppendInterval(8)
+            .AppendInterval(9)
             .AppendCallback(() => {flockTitle1.ToggleActivity(true);})
             .Append(_blueNpc.transform.DOPath(bluePathC0Pos, blueC0Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -713,7 +589,7 @@ public class CinematicsManager : MonoBehaviour
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 2)
-                            StartCoroutine(_blueNpc.PlayCallSFX());
+                            StartCoroutine(_blueNpc.PlayCallSfx());
                         if(waypointIndex == 3)
                             flockTitle2.ToggleActivity(true);
                     }))
@@ -764,13 +640,13 @@ public class CinematicsManager : MonoBehaviour
         }
         
         //we need the first point of the next Blue cinematic to position her
-        Transform[] nextBlueCinematicTransforms = pathBlueMeetup1.GetComponentsInChildren<Transform>();
+        //Transform[] nextBlueCinematicTransforms = pathBlueMeetup1.GetComponentsInChildren<Transform>();
        
         Sequence startGameCinematic = DOTween.Sequence()
             .AppendInterval(0.5f)
             .AppendCallback(() =>
             {
-                StartCoroutine(_blueNpc.PlayCallSFX());
+                StartCoroutine(_blueNpc.PlayCallSfx());
                 GameManager.Instance.playerRef.transform.position = playerPathC0Pos[0];
             })
             .Append(_blueNpc.transform.DOPath(bluePathC2Pos, 5, PathType.CatmullRom, PathMode.Sidescroller2D)
@@ -779,9 +655,10 @@ public class CinematicsManager : MonoBehaviour
                 .OnComplete(() =>
                 {
                     var blueTransform = _blueNpc.transform;
-                    blueTransform.position = nextBlueCinematicTransforms[1].position + Vector3.down * 5;
-                    blueTransform.rotation = Quaternion.identity;
-                    _blueNpc.transform.DOMoveY(nextBlueCinematicTransforms[1].position.y, 1);
+                    cinematicsFishbowl.PrepareBlueForMeetup();
+                    //blueTransform.position = nextBlueCinematicTransforms[1].position + Vector3.down * 5;
+                    //blueTransform.rotation = Quaternion.identity;
+                    //_blueNpc.transform.DOMoveY(nextBlueCinematicTransforms[1].position.y, 1);
                 }))
             .Join(GameManager.Instance.playerRef.transform.DOPath(playerPathC0Pos, 6, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)

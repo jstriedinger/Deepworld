@@ -32777,7 +32777,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 869152356}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TogglePauseGame
+        m_MethodName: TogglePauseGameGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

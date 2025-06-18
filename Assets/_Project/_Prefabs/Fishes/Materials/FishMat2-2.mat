@@ -15,7 +15,6 @@ Material:
   - ATLAS_ON
   - GRADIENT2COL_ON
   - GRADIENT_ON
-  - WIND_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

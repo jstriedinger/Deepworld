@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using BehaviorDesigner.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
@@ -12,12 +13,8 @@ using Gilzoide.UpdateManager;
 public class PlayerCharacter : AManagedBehaviour, IUpdatable
 {
 
-    public static event Action PlayerOnControlsChanged;
-    public static event Action PlayerOnPause;
-
-    public static event Action OnPlayerSwim;
-
-    public static event Action OnPlayerCall;
+    public static event Action PlayerOnControlsChanged, OnPauseGame, OnPlayerSwim, OnPlayerCall
+        , OnPlayerHide;
     //managers
     private Tentacle[] _proceduralTentacles;
     private TentacleDynamic[] _proceduralDynamicTentacles;
@@ -60,7 +57,6 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
     [SerializeField] private ParticleSystem vfxVoice;
     [SerializeField] private EventReference sfxCall1;
     [SerializeField] private EventReference sfxCall2;
-    [SerializeField] private EventReference sfxCall3;
     private EventReference _sfxCallLastTime;
     [SerializeField] private float callRadiusForEnemies;
     [SerializeField] private float callRadiusDoor;
@@ -118,7 +114,7 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
         StopMovement();
         _rigidBody.AddForce(dir * force,ForceMode2D.Impulse);
         playerInput.actions.FindAction("Move").Disable();
-        yield return new WaitForSeconds(0.25F);
+        yield return new WaitForSeconds(0.2F);
         playerInput.actions.FindAction("Move").Enable();
     }
 
@@ -130,7 +126,7 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
             if (Time.time >= _nextCall)
             {
                 _nextCall = Time.time + 2f;
-                StartCoroutine(PlayCallSFX(true));
+                StartCoroutine(PlayCallSfx(true));
             }
         }
     }
@@ -159,7 +155,7 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
 
     private void OnPause(InputValue inputValue)
     {
-        PlayerOnPause?.Invoke();
+        OnPauseGame?.Invoke();
     }
 
     public void ToggleInput(bool activate)
@@ -331,11 +327,22 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
 
     }
 
+
+    public void ToggleHidePlayer(bool hide)
+    {
+        //global behaviordesigner variables
+        GlobalVariables.Instance.SetVariableValue("isPlayerHidden", hide);
+        isHidden = hide;
+        if(hide)
+            OnPlayerHide?.Invoke();
+    }
+
    
 
-    public IEnumerator PlayCallSFX(bool respond)
+    public IEnumerator PlayCallSfx(bool triggerEvent)
     {
         //vfx
+        GameManager.Instance.playerLastPosition.transform.position =  transform.position;
         vfxVoice.Play();
         yield return new WaitForSeconds(0.25f);
         if(_sfxCallLastTime.Equals(sfxCall1))
@@ -347,19 +354,13 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
             _sfxCallLastTime = sfxCall1;
         }
         //audio
-        FMODUnity.RuntimeManager.PlayOneShot(_sfxCallLastTime, transform.position);
-         //visual feedback
-         transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.25f);
-        
-        //tell blue to do a call as well
-        if (_blueRef && respond)
-        {
-            yield return new WaitForSeconds(Random.Range(1.5f, 2.5f));
-            StartCoroutine(_blueRef.PlayCallSFX());
-        }
-
-        GameManager.Instance.playerLastPosition.transform.position =  transform.position;
-        if (!isHidden)
+        AudioManager.Instance.PlayOneShotEvent(_sfxCallLastTime, transform.position);
+        //visual feedback
+        transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.25f);
+        if(triggerEvent)
+            OnPlayerCall?.Invoke();
+        //Last know position for enemies to look for you
+        /*if (!isHidden)
         {
             Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, callRadiusForEnemies, LayerMask.GetMask("Monster"));
             
@@ -377,9 +378,8 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
                 //tell to check a position
             }
             
-        }
-        //Check for door switcher
-        OnPlayerCall?.Invoke();
+        }*/
+        
 
     }
 

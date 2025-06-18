@@ -75,12 +75,12 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerCharacter.PlayerOnPause += TogglePauseGame;
+        PlayerCharacter.OnPauseGame += TogglePauseGameGame;
     }
 
     private void OnDisable()
     {
-        PlayerCharacter.PlayerOnPause -= TogglePauseGame;
+        PlayerCharacter.OnPauseGame -= TogglePauseGameGame;
         DOTween.KillAll();
     }
     
@@ -172,6 +172,13 @@ public class GameManager : MonoBehaviour
                     AudioManager.Instance.ChangeBackgroundMusic(1);
                     CinematicsManager.Instance.PrepareBlueForMeetup();
                     //blueNpcRef.ChangeBlueStats(playerRef.transform);
+                    //temp for testing fishbowl
+                    playerRef.SetBlueReference(blueNpcRef);
+                    playerRef.ToggleEyeFollowTarget(true,blueNpcRef.transform);
+                    blueNpcRef.ToggleEyeFollowTarget(true,playerRef.transform);
+                    CameraManager.Instance.UpdatePlayerRadius(4,true);
+                    CameraManager.Instance.AddObjectToCameraView(GameManager.Instance.blueNpcRef.transform,false,false,CameraManager.Instance.camZoomPlayer,1);
+                    blueNpcRef.ToggleFollow(true);
                     break;
                 case StartSection.Checkpoint2:
                     LoadLevelSection(2);
@@ -328,7 +335,7 @@ public class GameManager : MonoBehaviour
     }
     
     #region UI
-    public void TogglePauseGame()
+    public void TogglePauseGameGame()
     {
         if (!UIManager.Instance.isPauseFading)
         {
