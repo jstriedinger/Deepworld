@@ -27,6 +27,8 @@ public class AudioManager : MonoBehaviour
     }
     
     [Header("Audio sfx")]
+    [SerializeField] private EventReference sfxSwimSmall;
+    [SerializeField] private EventReference sfxSwimLarge;
     [SerializeField] private EventReference sfxFirstMonsterAppear;
     public EventReference sfxMonsterScream;
     public EventReference sfxExplosion;
@@ -34,8 +36,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private EventReference sfxBlueCall2;
     [SerializeField] private EventReference sfxBlueScream;
     [SerializeField] private EventReference sfxCreatureCallLow;
-    public AudioClip uiButtonFocus;
-    public AudioClip uiButtonSelected;
+    [SerializeField] EventReference uiButton;
     
 
 
@@ -524,5 +525,20 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShotEvent(EventReference sfx, Vector3 from)
     {
         RuntimeManager.PlayOneShot(sfx, from);
+    }
+
+
+    public void PlaySwimSmallSfx(Vector3 from)
+    {
+        RuntimeManager.PlayOneShot(sfxSwimSmall, from);
+    }
+    public void PlaySwimLargeSfx(Vector3 from)
+    {
+        RuntimeManager.PlayOneShot(sfxSwimLarge, from);
+    }
+
+    public void PlayUIButtonSfx()
+    {
+        
     }
 }

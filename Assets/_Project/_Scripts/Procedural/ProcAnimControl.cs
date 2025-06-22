@@ -1,16 +1,19 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class ProcAnimControl : MonoBehaviour
 {
     [Header("Body")]
     [SerializeField] private BodyTentacleInfo bodyTentacleInfo;
-    [SerializeField] private float bodyWiggleMagnitude;
+    [SerializeField] private int bodyWiggleMagnitude;
     [SerializeField] private float bodyWiggleSpeed;
     [SerializeField] private float bodySmoothSpeed;
     [SerializeField] private bool randomizeBody = false;
     [SerializeField] private float bodyRandomPointGap;
+    [SerializeField] private int bodyWiggleSpeedExtra;
+    [SerializeField] private float bodyWiggleMagExtra;
     //forbody tentacle
     private Vector3[] _bodyTentaclesSegmentPoses;
     private Vector2[] _bodyTentaclesSegmentV;
@@ -105,9 +108,15 @@ public class ProcAnimControl : MonoBehaviour
         _bodyTentaclesSegmentPoses = new Vector3[bodyTentacleInfo.tentacleLength];
         _bodyTentaclesSegmentPoses[0] = bodyTentacleInfo.targetDir.position;
         _bodyTentaclesSegmentV = new Vector2[bodyTentacleInfo.tentacleLength];
-        
-        if(randomizeBody)
+
+        if (randomizeBody)
+        {
             bodyTentacleInfo.SetupRandomValues(bodyRandomPointGap);
+            bodyWiggleMagnitude =
+                GetRandomStepInt(bodyWiggleMagnitude, bodyWiggleMagnitude + bodyWiggleSpeedExtra, 1);
+            bodyWiggleSpeed = GetRandomStepFloat(bodyWiggleSpeed, bodyWiggleSpeed + bodyWiggleSpeedExtra, 0.1f);
+
+        }
 
         for(int j = 1; j < bodyTentacleInfo.tentacleLength; j++)
         {
@@ -158,5 +167,18 @@ public class ProcAnimControl : MonoBehaviour
         }
         bodyTentacleInfo.lineRenderer.SetPositions(_bodyTentaclesSegmentPoses);
         //   Debug.Log("finished resetting position");
+    }
+    
+    private float GetRandomStepFloat(float min, float max, float step)
+    {
+        int steps = Mathf.RoundToInt((max - min) / step); // Total possible steps
+        int randomStep = Random.Range(0, steps + 1); // Random step index
+        return min + (randomStep * step); // Convert step index to float
+    }
+    private int GetRandomStepInt(int min, int max, int step)
+    {
+        int steps = Mathf.RoundToInt((max - min) / step); // Total possible steps
+        int randomStep = Random.Range(0, steps + 1); // Random step index
+        return min + (randomStep * step); // Convert step index to float
     }
 }

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8750494617370103468
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704336355878549007, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: 'fishMats.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f4650c38bc763449b1d7a7519a681c7, type: 2}
+    - target: {fileID: 2704336355878549007, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: 'fishMats.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 17d96fedc65fbc54baf7707d92aa94b0, type: 2}
+    - target: {fileID: 3069541806291960988, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_Name
+      value: FlockFishGreenish
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541520141479711640, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 21508585d1308864e8656e695ba62000,
+        type: 3}
+    - target: {fileID: 4541520141479711640, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 17d96fedc65fbc54baf7707d92aa94b0, type: 2}
+    - target: {fileID: 7528681455059390217, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f17ddd4c8e1c954a9995a9713572745, type: 3}

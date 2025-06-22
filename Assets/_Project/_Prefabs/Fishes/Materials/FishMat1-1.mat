@@ -140,7 +140,7 @@ Material:
     - _GlowGlobal: 100
     - _GradBlend: 1
     - _GradBoostX: 1.2
-    - _GradBoostY: 3.24
+    - _GradBoostY: 3
     - _GradIsRadial: 0
     - _GrassManualAnim: 1
     - _GrassManualToggle: 0
@@ -242,7 +242,7 @@ Material:
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _GradBotLeftCol: {r: 0.084549636, g: 0.50389236, b: 0.9433962, a: 1}
     - _GradBotRightCol: {r: 0, g: 1, b: 0, a: 1}
-    - _GradTopLeftCol: {r: 0, g: 1, b: 0.95772004, a: 1}
+    - _GradTopLeftCol: {r: 0, g: 1, b: 0.7722802, a: 1}
     - _GradTopRightCol: {r: 1, g: 1, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}

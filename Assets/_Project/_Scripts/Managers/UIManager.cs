@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SpriteRenderer[] uiKeyboardIcons;
     [SerializeField] private SpriteRenderer[] uiGamepadIcons;
     [SerializeField] private SpriteRenderer[] uiXboxIcons;
+    [SerializeField] private SpriteRenderer[] uiPlayerPrompts;
+    private Sequence _uiPlayerPromptSeq;
     [SerializeField] private RectTransform topCinematicBar;
     [SerializeField] private RectTransform bottomCinematicBar;
 
@@ -45,13 +47,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SpriteRenderer logoSprite;
     [SerializeField] private SpriteRenderer creditsSprite;
     [SerializeField] private GameObject mainMenuGroup;
+    [SerializeField] private Button startGameBtn;
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup mainMenuBack;
+    [SerializeField] private BoidFlock menuFlock;
+    [SerializeField] private Transform menuFlockFollowPivot;
     private Button _pauseContinueBtn;
     private Button _mainMenuBackBtn;
     private Button _mainMenuStartBtn;
     [HideInInspector]
-    public bool isPauseFading = false, isWorldUiActive = false;
+    public bool isPauseFading = false;
 
     private void OnEnable()
     {
@@ -69,6 +74,8 @@ public class UIManager : MonoBehaviour
     {
         blackout.gameObject.SetActive(true);
         pauseGroup.gameObject.SetActive(false);
+        //disable main menu
+        mainMenuGroup.SetActive(true);
         mainMenuBack.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
         pauseGroup.alpha = mainMenu.alpha = mainMenuBack.alpha = 0;
@@ -77,13 +84,22 @@ public class UIManager : MonoBehaviour
         _pauseContinueBtn = pauseGroup.GetComponentInChildren<Button>();
         //regardless of what happens, we start with a smooth fadeout
         blackout.DOFade(0, 3).SetEase(Ease.InQuad);
+        
+        Color transparent = new Color(255, 255, 255, 0);
+        for (int i = 0; i < uiPlayerPrompts.Length; i++)
+        {
+            uiPlayerPrompts[i].color =  transparent;
+        }
     }
     
-    public void HideMainMenu()
+    public IEnumerator HideMainMenu()
     {
         //do cinematic
         mainMenuGroup.gameObject.SetActive(false);
-        
+        menuFlockFollowPivot.position -= new Vector3(0,30,0);
+        yield return new WaitForSeconds(15);
+        Destroy(menuFlock);
+
     }
 
     public void PauseGame(bool toggle)
@@ -115,6 +131,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        menuFlock.ToggleActivity(true);
         mainMenu.gameObject.SetActive(true);
         _mainMenuStartBtn.Select();
         Sequence seq = DOTween.Sequence()
@@ -127,6 +144,11 @@ public class UIManager : MonoBehaviour
                 mainMenuBack.gameObject.SetActive(false);
             });
 
+    }
+
+    public void SelectStartButtonMainMenu()
+    {
+        startGameBtn.Select();
     }
 
     //show credits from main menu
@@ -157,7 +179,6 @@ public class UIManager : MonoBehaviour
     
     public void SetupWorldUIForTitles()
     {
-        isWorldUiActive = true;
         Color transparent = new Color(255, 255, 255, 0);
         for (int i = 0; i < uiKeyboardIcons.Length; i++)
         {
@@ -194,86 +215,60 @@ public class UIManager : MonoBehaviour
     public void PrepareBlueMeetupCinematic()
     {
         ToggleCinematicBars(true);
-        ToggleCallIcons(true);
+        TogglePlayerUIPrompt(true);
     }
-
-    public void ToggleCallIcons(bool toggle)
-    {
-        Debug.Log("Toggle call icons");
-        if (toggle)
-        {
-            uiGamepadIcons[2].DOFade(1, 0.75f);
-            uiXboxIcons[2].DOFade(1, 0.75f);
-            uiKeyboardIcons[2].DOFade(1, 0.75f);
-            
-            uiGamepadIcons[3].DOFade(1, 0.75f);
-            uiXboxIcons[3].DOFade(1, 0.75f);
-            uiKeyboardIcons[3].DOFade(1, 0.75f);
-            
-            uiGamepadIcons[4].DOFade(1, 0.75f);
-            uiXboxIcons[4].DOFade(1, 0.75f);
-            uiKeyboardIcons[4].DOFade(1, 0.75f);
-        }
-        else
-        {
-            uiGamepadIcons[2].DOFade(0, 0.75f);
-            uiXboxIcons[2].DOFade(0, 0.75f);
-            uiKeyboardIcons[2].DOFade(0, 0.75f);
-            
-            uiGamepadIcons[3].DOFade(0, 0.75f);
-            uiXboxIcons[3].DOFade(0, 0.75f);
-            uiKeyboardIcons[3].DOFade(0, 0.75f);
-            
-            uiGamepadIcons[4].DOFade(0, 0.75f);
-            uiXboxIcons[4].DOFade(0, 0.75f);
-            uiKeyboardIcons[4].DOFade(0, 0.75f);
-        }
-    }
+    
     
     
     //callback to control showing the world UI
     public void OnControlsChanged()
     {
-        if (isWorldUiActive)
+        if (GameManager.Instance.playerRef.playerInput.currentControlScheme == "Gamepad")
         {
-            if (GameManager.Instance.playerRef.playerInput.currentControlScheme == "Gamepad")
+            //nnow to see if xbox or another
+            //Debug.Log(playerCharacterRef.playerInput.devices[0].name);
+            if (GameManager.Instance.playerRef.playerInput.devices[0].name.Contains("windows",StringComparison.OrdinalIgnoreCase))
             {
-                //nnow to see if xbox or another
-                //Debug.Log(playerCharacterRef.playerInput.devices[0].name);
-                if (GameManager.Instance.playerRef.playerInput.devices[0].name.Contains("windows",StringComparison.OrdinalIgnoreCase))
-                {
-                    //xbox gamepad
-                    for (int i = 0; i < uiGamepadIcons.Length; i++)
-                    {
-                        uiKeyboardIcons[i].gameObject.SetActive(false);
-                        uiGamepadIcons[i].gameObject.SetActive(false);
-                        uiXboxIcons[i].gameObject.SetActive(true);
-                    }
-                }
-                else
-                {
-                    Debug.Log("Default gamepad");
-                    //default gamepad
-                    for (int i = 0; i < uiGamepadIcons.Length; i++)
-                    {
-                        uiKeyboardIcons[i].gameObject.SetActive(false);
-                        uiXboxIcons[i].gameObject.SetActive(false);
-                        uiGamepadIcons[i].gameObject.SetActive(true);
-                    }
-                }
-               
-            }
-            else if(GameManager.Instance.playerRef.playerInput.currentControlScheme.Contains("Keyboard"))
-            {
+                //xbox gamepad
                 for (int i = 0; i < uiGamepadIcons.Length; i++)
                 {
-                    uiKeyboardIcons[i].gameObject.SetActive(true);
+                    uiKeyboardIcons[i].gameObject.SetActive(false);
                     uiGamepadIcons[i].gameObject.SetActive(false);
-                    uiXboxIcons[i].gameObject.SetActive(false);
+                    uiXboxIcons[i].gameObject.SetActive(true);
                 }
+                uiPlayerPrompts[0].gameObject.SetActive(true);
+                uiPlayerPrompts[1].gameObject.SetActive(false);
+                uiPlayerPrompts[2].gameObject.SetActive(false);
             }
-            
+            else
+            {
+                Debug.Log("Default gamepad");
+                //default gamepad
+                for (int i = 0; i < uiGamepadIcons.Length; i++)
+                {
+                    uiKeyboardIcons[i].gameObject.SetActive(false);
+                    uiXboxIcons[i].gameObject.SetActive(false);
+                    uiGamepadIcons[i].gameObject.SetActive(true);
+                }
+                uiPlayerPrompts[0].gameObject.SetActive(false);
+                uiPlayerPrompts[1].gameObject.SetActive(true);
+                uiPlayerPrompts[2].gameObject.SetActive(false);
+            }
+           
         }
+        else if(GameManager.Instance.playerRef.playerInput.currentControlScheme.Contains("Keyboard"))
+        {
+            for (int i = 0; i < uiGamepadIcons.Length; i++)
+            {
+                uiKeyboardIcons[i].gameObject.SetActive(true);
+                uiGamepadIcons[i].gameObject.SetActive(false);
+                uiXboxIcons[i].gameObject.SetActive(false);
+            }
+            uiPlayerPrompts[0].gameObject.SetActive(false);
+            uiPlayerPrompts[1].gameObject.SetActive(false);
+            uiPlayerPrompts[2].gameObject.SetActive(true);
+        }
+        
     }
     
     
@@ -308,6 +303,35 @@ public class UIManager : MonoBehaviour
         seq.Append(uiKeyboardIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1))
             .Join(uiGamepadIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1))
             .Join(uiXboxIcons[1].transform.DOPunchScale(new Vector3(-1,-1,0) * .35f, 1f, 1));
+    }
+
+    //Toggling player UI prompts
+    public void TogglePlayerUIPrompt(bool toggle)
+    {
+        int x = toggle ? 1 : 0;
+        
+        _uiPlayerPromptSeq.Kill();
+        _uiPlayerPromptSeq = DOTween.Sequence();
+        _uiPlayerPromptSeq.Append(uiPlayerPrompts[0].DOFade(x, .5f))
+            .Join(uiPlayerPrompts[1].DOFade(x, .5f))
+            .Join(uiPlayerPrompts[2].DOFade(x, .5f));
+        
+        if(toggle)
+            GameManager.Instance?.playerRef.ToggleUIPromptPositioning(true);
+        else
+        {
+            _uiPlayerPromptSeq.OnComplete(() =>
+            {
+                GameManager.Instance?.playerRef.ToggleUIPromptPositioning(false);
+            });
+        }
+    }
+
+
+    //Change the flock tracking pos
+    public void ChangeMenuFlockPosition(Vector3 newPos)
+    {
+        menuFlockFollowPivot.position = newPos;
     }
     
     

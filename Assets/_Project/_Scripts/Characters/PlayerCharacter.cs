@@ -49,6 +49,9 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
     public bool isHidden = false;
     public BlueNPC _blueRef;
 
+    [Header("UI")]
+    [SerializeField] Transform playerUIPrompt;
+    private bool _isPlayerPromptActive = false;
 
     [Header("Animation")]
     [Tooltip("How much the head scales doing the swim")]
@@ -200,6 +203,15 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
     private void Update()
     {
         
+    }
+
+    private void LateUpdate()
+    {
+        if (_isPlayerPromptActive)
+        {
+            playerUIPrompt.transform.position = transform.position + new Vector3(2,2,0);
+            playerUIPrompt.rotation = Quaternion.identity;
+        }
     }
 
     private void FixedUpdate()
@@ -406,6 +418,12 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
         if (Time.time >= _nextSwim + 1f)
             swimStage = false;
         _rigidBody.AddForce(_finalMovement);
+    }
+
+    public void ToggleUIPromptPositioning(bool toggle)
+    {
+        _isPlayerPromptActive = toggle;
+        playerUIPrompt.gameObject.SetActive(true);
     }
 }
 

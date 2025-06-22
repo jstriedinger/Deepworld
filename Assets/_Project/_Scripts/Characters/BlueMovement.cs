@@ -129,6 +129,7 @@ public class BlueMovement : MonoBehaviour
         float toTargetSqrMag = (target.position - transform.position).sqrMagnitude;
         if (!_repathing)
         {
+            //Debug.Log("No repathing. Moving");
             if (toTargetSqrMag > _minDistancePow )
             {
                 //Is not close enough, should move
@@ -174,7 +175,7 @@ public class BlueMovement : MonoBehaviour
                     //transform.rotation = Quaternion.RotateTowards(transform.rotation, tempRotation, rotationSpeed * Time.deltaTime);
                 }*/
                 Vector3 dir = ( (target.position - transform.position).normalized);
-                Vector3 newUp = Vector3.Slerp(transform.up, dir, rotationSpeed * Time.deltaTime);
+                Vector3 newUp = Vector3.Slerp(transform.up, movDirection, rotationSpeed * Time.deltaTime);
                 transform.up = newUp;
                 
                 _rigidBody.linearVelocity = Vector3.ClampMagnitude(_rigidBody.linearVelocity, maxSpeed);

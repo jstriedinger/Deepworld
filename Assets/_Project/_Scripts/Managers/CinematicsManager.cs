@@ -124,7 +124,7 @@ public class CinematicsManager : MonoBehaviour
         StartCoroutine(GameManager.Instance.playerRef.PlayCallSfx(false));
         
         
-        UIManager.Instance.ToggleCallIcons(false);
+        UIManager.Instance.TogglePlayerUIPrompt(false);
         GameManager.Instance.playerRef.playerInput.actions.FindAction("Call").performed -= DoCinematicMonsterEncounterPt2;
         //disable call again
         
@@ -218,7 +218,7 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() =>
             {
                 TutorialMonster1.ToggleBehaviorTree(false);
-                TutorialMonster1.ToggleTrackTarget(GameManager.Instance.playerRef.gameObject);
+                TutorialMonster1.ToggleTrackTarget(true, GameManager.Instance.playerRef.gameObject);
                 StartCoroutine(TutorialMonster1.PlayReactSfx(true,true));
             })
             .AppendInterval(.25f)
@@ -230,7 +230,7 @@ public class CinematicsManager : MonoBehaviour
             .JoinCallback(() =>
             {
                 TutorialMonster2.ToggleBehaviorTree(false);
-                TutorialMonster2.ToggleTrackTarget(GameManager.Instance.playerRef.gameObject);
+                TutorialMonster2.ToggleTrackTarget(true, GameManager.Instance.playerRef.gameObject);
             })
             .Join(TutorialMonster2.transform.DOPath(path1MiniMonster2Pos, 1f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -260,13 +260,13 @@ public class CinematicsManager : MonoBehaviour
             .AppendInterval(0.15f)
             .AppendCallback(() =>
             {
-                TutorialMonster2.ToggleTrackTarget(_blueNpc.gameObject);
+                TutorialMonster2.ToggleTrackTarget(true, _blueNpc.gameObject);
                 StartCoroutine(TutorialMonster2.PlayReactSfx(true,true));
             })
             .AppendInterval(0.5f)
             .AppendCallback(() =>
             {
-                TutorialMonster1.ToggleTrackTarget(_blueNpc.gameObject);
+                TutorialMonster1.ToggleTrackTarget(true, _blueNpc.gameObject);
                 
             })
             .AppendInterval(.25f)
@@ -363,8 +363,8 @@ public class CinematicsManager : MonoBehaviour
             {
                 AudioManager.Instance.ChangeBackgroundMusic(3);
                 CameraManager.Instance.AddTempFollowedObj(encounterFollowCamObj, false, 8);
-                TutorialMonster1.ToggleTrackTarget(_blueNpc.gameObject);
-                TutorialMonster2.ToggleTrackTarget(_blueNpc.gameObject);
+                TutorialMonster1.ToggleTrackTarget(true, _blueNpc.gameObject);
+                TutorialMonster2.ToggleTrackTarget(true, _blueNpc.gameObject);
             })
             .Append(_blueNpc.transform.DOPath(bluePathMonsterPos, 5f, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -404,7 +404,7 @@ public class CinematicsManager : MonoBehaviour
             {
                 //enable call
                 //show QTE
-                UIManager.Instance.ToggleCallIcons(true);
+                UIManager.Instance.TogglePlayerUIPrompt(true);
                 pInput.actions.FindAction("Call").Enable();
                 pInput.actions.FindAction("Call").performed += DoCinematicMonsterEncounterPt2;
                 GameManager.Instance.LoadLevelSection(3);
@@ -452,7 +452,8 @@ public class CinematicsManager : MonoBehaviour
         }
         
         camPivotHelper.position = GameManager.Instance.playerRef.transform.position;
-        CameraManager.Instance.AddTempFollowedObj(camPivotHelper, true, 0);
+        CameraManager.Instance?.RemoveObjectFromCameraView(GameManager.Instance?.blueNpcRef.transform,false);
+        CameraManager.Instance?.AddTempFollowedObj(camPivotHelper, true, 0);
         Sequence seq = DOTween.Sequence()
             .Append(_blueNpc.transform.DOPath(closeToPlayerPath, 2, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -533,6 +534,7 @@ public class CinematicsManager : MonoBehaviour
         BeforeCinematicStarts(false);
         UIManager.Instance.SetupWorldUIForTitles();
         CameraManager.Instance.ToggleDefaultNoise(false);
+        CameraManager.Instance?.ChangeCameraTracking(logosFollowCamObj);
         
         Transform[] playerPathC0Transforms = pathPlayerTitles.GetComponentsInChildren<Transform>();
         GameManager.Instance.playerRef.transform.position = playerPathC0Transforms[1].position;
@@ -601,11 +603,11 @@ public class CinematicsManager : MonoBehaviour
                 .DOPath(bluePathC1Pos, blueC01Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(5))
-            .Join(UIManager.Instance.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(10f ));
+            .Join(UIManager.Instance.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(8f ));
 
         CameraManager.Instance.toggleVCamDeadZone(false);
         Sequence introMover = DOTween.Sequence()
-            .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 50)
+            .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 47)
                 .SetEase(Ease.InOutSine))
             .Join(UIManager.Instance.blackout.DOFade(0, 3))
             .Join(introBlue)
@@ -615,6 +617,7 @@ public class CinematicsManager : MonoBehaviour
                     //showMainMenu
                     GameManager.Instance.ShowMainMenuFirstTime();
                     CameraManager.Instance.toggleVCamDeadZone(true);
+                    //CameraManager.Instance?.ToggleConfiner2D(true);
                 }
                 
             );

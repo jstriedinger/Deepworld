@@ -19,12 +19,12 @@ MonoBehaviour:
   cohesionWeight: 1.2
   separationWeight: 1.8
   <NeighborRadius>k__BackingField: 5
-  softAvoidanceWeight: 2.5
+  softAvoidanceWeight: 2
   <SoftAvoidLayers>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
-  hardAvoidanceWeight: 2
+  hardAvoidanceWeight: 2.5
   <hardAvoidanceDistanceSqrd>k__BackingField: 49
-  <hardAvoidanceSpeedMultiplier>k__BackingField: 1.5
+  <hardAvoidanceSpeedMultiplier>k__BackingField: 2
   <hardAvoidanceSpeedDuration>k__BackingField: 1
   agentSmoothTime: 0.75

@@ -140,13 +140,13 @@ Material:
     - _GlowGlobal: 2
     - _GradBlend: 1
     - _GradBoostX: 1.2
-    - _GradBoostY: 1.04
+    - _GradBoostY: 0.6
     - _GradIsRadial: 0
     - _GrassManualAnim: 1
     - _GrassManualToggle: 0
-    - _GrassRadialBend: 0.1
-    - _GrassSpeed: 5
-    - _GrassWind: 1
+    - _GrassRadialBend: 0.2
+    - _GrassSpeed: 8
+    - _GrassWind: 2
     - _GreyscaleBlend: 1
     - _GreyscaleLuminosity: 1
     - _GreyscaleOutline: 0
@@ -240,9 +240,9 @@ Material:
     - _ColorSwapRed: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradBotLeftCol: {r: 1, g: 0.8235294, b: 0, a: 1}
+    - _GradBotLeftCol: {r: 0.72156864, g: 0.6862745, b: 0.9529412, a: 1}
     - _GradBotRightCol: {r: 0.47058824, g: 0.2, b: 0.023529412, a: 1}
-    - _GradTopLeftCol: {r: 0.18039216, g: 0.8, b: 0.44313726, a: 1}
+    - _GradTopLeftCol: {r: 0.33333334, g: 0.23921569, b: 0.9529412, a: 1}
     - _GradTopRightCol: {r: 1, g: 0.8, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}

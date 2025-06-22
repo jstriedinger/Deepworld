@@ -35,7 +35,7 @@ public class BoidFlock : MonoBehaviour
     [Header("Follow behavior")]
     [SerializeField] private bool isFollowing;
     [SerializeField] private Transform followObj;
-    [SerializeField, Range(.1f, 3f)] private float followWeight = 1;
+    [SerializeField, Range(.1f, 4f)] private float followWeight = 1;
     [SerializeField, Tooltip("Will follow within distance, 0 if always follow regardless")]
     private float followDistance = 0;
     [SerializeField]
@@ -107,7 +107,8 @@ public class BoidFlock : MonoBehaviour
         _contactFilter2DObstacles = new ContactFilter2D();
         _contactFilter2DObstacles.SetLayerMask(flockBehavior.SoftAvoidLayers);
         //get all possible obstacles in our bounds
-        _agentNumObstacles = _collider2D.Overlap(_contactFilter2DObstacles, _agentObstacles);
+        if(_collider2D)
+            _agentNumObstacles = _collider2D.Overlap(_contactFilter2DObstacles, _agentObstacles);
         
         //patrol info
         if (patrolObj)
@@ -137,12 +138,13 @@ public class BoidFlock : MonoBehaviour
             CalculateAgentDirection(agent);
 
             
-            if (agent.avoidingPlayer)
+            if (agent.AvoidingPlayer)
             {
                 //the closer the fish is to the plaeyr the stronger the boos multiplier
-                float dynamicWeight = Mathf.InverseLerp(flockBehavior.hardAvoidanceDistanceSqrd , 4f, _currentSqrdDistanceFromPlayer); // closer = 1.0
+                float dynamicWeight = Mathf.InverseLerp(flockBehavior.hardAvoidanceDistanceSqrd , 1f, _currentSqrdDistanceFromPlayer); // closer = 1.0
                 float boostMultiplier = Mathf.Lerp(1f, flockBehavior.hardAvoidanceSpeedMultiplier, dynamicWeight);
-                _currentAgentMove *= acceleration * boostMultiplier;
+                float finalAcceleration = acceleration * boostMultiplier;
+                _currentAgentMove *= finalAcceleration;
             }
             else
             {
@@ -191,8 +193,6 @@ public class BoidFlock : MonoBehaviour
         //avoid soft obstacles
         GetSoftAvoidanceDir(agent);
         
-        //Hard avoidance (player, blue)
-        CalculateHardAvoidanceDir(agent);
         //Following object
         CalculateFollowObjectDir(agent);
         CalculateSwimAroundObjectDir(agent);
@@ -202,6 +202,8 @@ public class BoidFlock : MonoBehaviour
         CalculatePatrolingDir(agent);
         //If inside circle
         CalculateRandomInsideCircleDir(agent);
+        //Hard avoidance (player, blue)
+        CalculateHardAvoidanceDir(agent);
       
         _currentAgentMove.Normalize();
     }
@@ -299,7 +301,7 @@ public class BoidFlock : MonoBehaviour
     //Get the direction if the agent needs to move inside the bounds
     private void CalculateDirInsideBounds(FlockAgent agent)
     {
-        if (isContained && _collider2D && !agent.avoidingPlayer)
+        if (isContained && _collider2D && !agent.AvoidingPlayer)
         {
             //if inside the collider, no adjustment
             if (_collider2D.OverlapPoint(_currentAgentPos))
@@ -328,18 +330,22 @@ public class BoidFlock : MonoBehaviour
         
         for (int i = 0; i < _agentNumObstacles; i++)
         {
-            Vector2 toObstacle = (_agentObstacles[i].ClosestPoint(_currentAgentPos) - (Vector2)_currentAgentPos);
-            //now check sqr distance to see if that obstacle is near
+            //closest point is very expensive
+            //Vector2 toObstacle = (_agentObstacles[i].ClosestPoint(_currentAgentPos) - (Vector2)_currentAgentPos);
+            //for now lets just check distance to the object itself. Way less accuarate for level
+            Vector2 toObstacle = (_agentObstacles[i].transform.position - _currentAgentPos);
+            //check sqr distance to see if that obstacle is near
             if (toObstacle.sqrMagnitude < _squareAvoidanceRadius)
             {
-                numSoftObstacles++;
                 //close osbtacle!
+                numSoftObstacles++;
+                //get direction
                 toObstacle.Normalize();
-                // Compute both perpendicular options
+                // dot product to get both perpendicular directions
                 Vector2 perp = new Vector2(-toObstacle.y, toObstacle.x); // left
                 float dot = Vector2.Dot(forward, perp);
 
-                // If dot is negative, right is better → invert perp
+                // If dot is negative, then is better to go to the right
                 if (dot < 0f)
                     perp = -perp;
 
@@ -366,7 +372,7 @@ public class BoidFlock : MonoBehaviour
         {
             num++;
             Vector2 toPlayer = _player.position - _currentAgentPos;
-            //_currentSqrdDistanceFromPlayer = toPlayer.sqrMagnitude;
+            _currentSqrdDistanceFromPlayer = toPlayer.sqrMagnitude;
             if (toPlayer.sqrMagnitude < flockBehavior.hardAvoidanceDistanceSqrd)
             {
                 agent.TriggerSpeedBoost(flockBehavior.hardAvoidanceSpeedDuration);

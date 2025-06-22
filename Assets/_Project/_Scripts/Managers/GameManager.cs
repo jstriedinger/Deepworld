@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     }
 
     public static event Action OnRestartingGame;
+
+    [Header("Global")] 
+    public LayerMask playerLayer;
     
     [Header("Level management")] 
     [SerializeField] private StartSection startSection;
@@ -86,12 +89,12 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
-        UIManager.Instance.HideMainMenu();
         CinematicsManager.Instance.DoCinematicStartGame();
         AudioManager.Instance.OnStartGame();
         LoadLevelSection(1);
         //cleanup and opti for fishbowl
         Destroy(level0Objects);
+        StartCoroutine(UIManager.Instance.HideMainMenu());
     }
 
 
@@ -162,13 +165,12 @@ public class GameManager : MonoBehaviour
                     
                     LoadLevelSection(0);
                     ChangeGameState(GameState.Cinematic);
-                    
+                    //CameraManager.Instance?.ToggleConfiner2D(false);
                     CinematicsManager.Instance.DoCinematicTitles();
                     break;
                 case StartSection.Checkpoint1:
                     LoadLevelSection(0);
                     LoadLevelSection(1);
-                    UIManager.Instance.isWorldUiActive = true;
                     AudioManager.Instance.ChangeBackgroundMusic(1);
                     CinematicsManager.Instance.PrepareBlueForMeetup();
                     //blueNpcRef.ChangeBlueStats(playerRef.transform);
@@ -179,10 +181,10 @@ public class GameManager : MonoBehaviour
                     CameraManager.Instance.UpdatePlayerRadius(4,true);
                     CameraManager.Instance.AddObjectToCameraView(GameManager.Instance.blueNpcRef.transform,false,false,CameraManager.Instance.camZoomPlayer,1);
                     blueNpcRef.ToggleFollow(true);
+                    blueNpcRef.ToggleReactToCall(true);
                     break;
                 case StartSection.Checkpoint2:
                     LoadLevelSection(2);
-                    UIManager.Instance.isWorldUiActive = true;
                     AudioManager.Instance.ChangeBackgroundMusic(-1);
                     //place blue in the first point of path
                     CinematicsManager.Instance.PrepareBlueForMonsterEncounter();
@@ -363,7 +365,7 @@ public class GameManager : MonoBehaviour
     {
         ChangeGameState(GameState.MainMenu);
         UIManager.Instance.ShowMainMenu();
-        
+        UIManager.Instance?.SelectStartButtonMainMenu();
     }
 
     public void UIShowCredits()

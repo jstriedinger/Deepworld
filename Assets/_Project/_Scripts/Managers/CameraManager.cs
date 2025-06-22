@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance { get; private set; }
     
     [SerializeField] private CinemachineCamera virtualCamera;
+    [SerializeField] private CinemachineConfiner2D cmConfiner2D;
     [SerializeField] CinemachineTargetGroup targetGroup;
     [SerializeField] float lerpDuration = 1f;
     public int camZoomPlayer = 28;
@@ -84,10 +85,10 @@ public class CameraManager : MonoBehaviour
     
 
     //set camera to follow specific target
-    public void ChangeCameraTracking(GameObject newTarget = null)
+    public void ChangeCameraTracking(Transform newTarget = null)
     {
         if (newTarget)
-            virtualCamera.Follow = newTarget.transform;
+            virtualCamera.Follow = newTarget;
         else
             virtualCamera.Follow = targetGroup.transform;
     }
@@ -371,12 +372,6 @@ public class CameraManager : MonoBehaviour
     
 
 
-
-    public void RemoveddObjectToTargetGroup(GameObject obj)
-    {
-        targetGroup.RemoveMember(obj.transform);
-    }
-
     /**
      * Increaese/decrease the radius by 10
      */
@@ -428,6 +423,12 @@ public class CameraManager : MonoBehaviour
 
 
         }
+    }
+
+
+    public void ToggleConfiner2D(bool toggle)
+    {
+        cmConfiner2D.enabled = toggle;
     }
 }
 

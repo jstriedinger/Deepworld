@@ -13,16 +13,16 @@ public abstract class FlockAgent : MonoBehaviour
 
     Collider2D _agentCollider;
     public Collider2D AgentCollider { get { return _agentCollider; } }
-    
-    public bool avoidingPlayer = false;
+
+    internal bool AvoidingPlayer = false;
     private float _speedBoostTimer = 0f;
 
-    public Vector2 previousSpeed = Vector2.zero;
+    private Vector2 _previousSpeed = Vector2.zero;
     Vector2 _currentVelocity;
     
     public void TriggerSpeedBoost(float duration)
     {
-        avoidingPlayer = true;
+        AvoidingPlayer = true;
         _speedBoostTimer = duration;
     }
 
@@ -34,7 +34,7 @@ public abstract class FlockAgent : MonoBehaviour
             _speedBoostTimer -= deltaTime;
             if (_speedBoostTimer <= 0f)
             {
-                avoidingPlayer = false;
+                AvoidingPlayer = false;
             }
         }
     }
@@ -52,7 +52,7 @@ public abstract class FlockAgent : MonoBehaviour
 
     public void Move(Vector2 velocity)
     {
-        velocity = Vector2.SmoothDamp(previousSpeed, velocity, ref _currentVelocity, 0.5f);
+        velocity = Vector2.SmoothDamp(_previousSpeed, velocity, ref _currentVelocity, 0.5f);
 
         // Rotate toward movement direction (only if there's a strong enough direction)
         if (velocity.sqrMagnitude > 0.0001f)
@@ -61,7 +61,7 @@ public abstract class FlockAgent : MonoBehaviour
         // Move using the smoothed velocity
         transform.position += (Vector3)(velocity * Time.deltaTime);
 
-        previousSpeed = velocity;
+        _previousSpeed = velocity;
         
     }
 

@@ -27,31 +27,16 @@ public class UIMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
 
     private void OnClickedBtn()
     {
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonSelected, _mainCamera.transform.position, 0.05f);
-            Time.timeScale = 0;
-        }
-        else
-            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonSelected, _mainCamera.transform.position, 0.05f);
+        AudioManager.Instance?.PlayUIButtonSfx();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        _btnText.color = Color.black;
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonFocus, _mainCamera.transform.position, 0.02f);
-            Time.timeScale = 0;
-        }
-        else
-            AudioSource.PlayClipAtPoint(AudioManager.Instance.uiButtonFocus, _mainCamera.transform.position, 0.02f);
+        _btnText.fontWeight = FontWeight.Bold; 
     }
     public void OnDeselect(BaseEventData eventData)
     {
-        _btnText.color = Color.white;
+        _btnText.fontWeight = FontWeight.Regular;
     }
     
     public void OnPointerClick(PointerEventData eventData)

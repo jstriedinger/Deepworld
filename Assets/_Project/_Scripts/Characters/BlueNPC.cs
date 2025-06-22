@@ -93,9 +93,13 @@ public class BlueNPC : MonoBehaviour
         if(offsetTime)
             yield return new WaitForSeconds(Random.Range(1.5f, 2.5f));
         
+        PlayCallSfxImmediate();
+
+    }
+
+    public void PlayCallSfxImmediate ()
+    {
         vfxVoice.Play();
-        yield return new WaitForSeconds(0.2f);
-        //visual feedback
         transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.2f);
         if(_sfxLastTime.Equals(sfxCall1))
         {
@@ -105,8 +109,7 @@ public class BlueNPC : MonoBehaviour
         {
             _sfxLastTime = sfxCall1;
         }
-        FMODUnity.RuntimeManager.PlayOneShot(_sfxLastTime, transform.position);
-
+        AudioManager.Instance?.PlayOneShotEvent(_sfxLastTime, transform.position);
     }
 
     public void ResetProceduralBody()

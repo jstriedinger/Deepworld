@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,11 +12,11 @@ public class CinematicsFishbowl : MonoBehaviour
     [SerializeField] private GameObject pathPlayerMeetup1;
     [SerializeField] private GameObject pathPlayerMeetup2;
     
-    [Header("Event 1 - fishes")]
-    [SerializeField] BoidFlock flockFishes;
-    [SerializeField] private Transform newFollowTmp;
-    [SerializeField] GameObject bluePathBefore;
-    [SerializeField] GameObject bluePathAfter;
+    [Header("Monster approach")]
+    [SerializeField] MonsterCinematic curiousMonster1;
+    [SerializeField] Transform curiousMonsterCameraPoint;
+    [SerializeField] GameObject curiousMonsterPath1;
+    [SerializeField] GameObject curiousMonsterPath2;
     
     [Header("Event 2 - fishes for green")]
     [SerializeField] BoidFlock flockFishes2;
@@ -23,12 +24,24 @@ public class CinematicsFishbowl : MonoBehaviour
     [SerializeField] GameObject bluePathAfter3;
     
     
-    [Header("Event 2 - BIg blue")]
+    [Header("Event 3&4 - Big blue and green")]
     [SerializeField] SwimmerFish bigBlueFish;
-    [SerializeField] GameObject bluePathBefore2;
-    [SerializeField] GameObject bluePathAfter2;
+    [SerializeField] SwimmerFish bigGreenFish;
+    [SerializeField] Transform tempFollowForbigGreenFish;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-  
+
+    private void Start()
+    {
+        if (bigGreenFish)
+        {
+            bigGreenFish.ToggleCanReactToPlayer(false);
+        }
+        if (bigBlueFish)
+        {
+            bigBlueFish.ToggleCanReactToPlayer(false);
+        }
+    }
+
     //Trigger meetup blue on fishbowl pt1
     public void TriggerBlueMeetupPt1()
     {
@@ -43,6 +56,52 @@ public class CinematicsFishbowl : MonoBehaviour
         pInput.actions.FindAction("Call").performed += FirstTimeCallInput;
         
         GameManager.Instance.LoadLevelSection(2);
+
+    }
+
+    public void TriggerCinematicCuriousMonster()
+    {
+        Transform[] bluePathTransforms = curiousMonsterPath1.GetComponentsInChildren<Transform>();
+        Vector3[] bluePathPos1 = new Vector3[bluePathTransforms.Length-1];
+        for (int i = 1; i < bluePathTransforms.Length; i++)
+        {
+            bluePathPos1[i-1] = bluePathTransforms[i].position;
+        }
+        
+        bluePathTransforms = curiousMonsterPath2.GetComponentsInChildren<Transform>();
+        Vector3[] bluePathPos2 = new Vector3[bluePathTransforms.Length-1];
+        for (int i = 1; i < bluePathTransforms.Length; i++)
+        {
+            bluePathPos2[i-1] = bluePathTransforms[i].position;
+        }
+        curiousMonster1.gameObject.SetActive(true);
+        curiousMonster1.ToggleTrackTarget(true, GameManager.Instance?.playerRef.gameObject);
+        CameraManager.Instance.AddObjectToCameraView(curiousMonsterCameraPoint,false,false,CameraManager.Instance.camZoomPlayer,1);
+        Sequence seq = DOTween.Sequence()
+            .Append(curiousMonster1.transform.DOPath(bluePathPos1, 3f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right))
+            .AppendInterval(0.5f)
+            .AppendCallback(() =>
+            {
+                StartCoroutine(curiousMonster1.PlayReactSfx(true, true));
+            })
+            .AppendInterval(0.5f)
+            .AppendCallback(() =>
+            {
+                CameraManager.Instance?.RemoveObjectFromCameraView(curiousMonsterCameraPoint, false);
+                curiousMonster1.ToggleTrackTarget(false);
+            })
+            .Append(curiousMonster1.transform.DOPath(bluePathPos2, 5f, PathType.CatmullRom, PathMode.Sidescroller2D)
+                .SetEase(Ease.InOutSine)
+                .SetLookAt(0.001f, transform.forward, Vector3.right))
+            .OnComplete(() =>
+            {
+                curiousMonster1.gameObject.SetActive(false);
+
+            });
+
+
 
     }
     
@@ -78,7 +137,7 @@ public class CinematicsFishbowl : MonoBehaviour
         }
         
         //ok hide the call icons
-        UIManager.Instance.ToggleCallIcons(false);
+        UIManager.Instance.TogglePlayerUIPrompt(false);
 
         BlueNPC blueNpc = GameManager.Instance.blueNpcRef;
         Sequence cinematic = DOTween.Sequence();
@@ -143,125 +202,84 @@ public class CinematicsFishbowl : MonoBehaviour
         GameManager.Instance.playerRef.playerInput.actions.FindAction("Call").performed -= FirstTimeCallInput;
         
     }
-
-    public void TriggerFisbowlBlueFishesPt1(bool fullCinematic = false)
-    {
-        //if(fullCinematic)
-          //  CinematicsManager.Instance?.BeforeCinematicStarts(true, true);
-
-        
-        //positions
-        Transform[] bluePathTransforms = bluePathBefore.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathPos = new Vector3[bluePathTransforms.Length-1];
-        for (int i = 1; i < bluePathTransforms.Length; i++)
-        {
-            bluePathPos[i-1] = bluePathTransforms[i].position;
-        }
-        
-
-        GameManager.Instance?.blueNpcRef.ToggleReactToCall(false);
-        StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
-        GameManager.Instance.blueNpcRef.ChangeFollowTarget(newFollowTmp, 3, false);
-        GameManager.Instance.blueNpcRef.ToggleFireReachedDestinationEvent(true);
-        BlueMovement.OnBlueReachedDestination += TriggerFisbowlBlueFishesPt2;
-        
-    }
-
-    //this is fired when Blue AI reaches the destination on our fishbowl fishes event 1
-    public void TriggerFisbowlBlueFishesPt2()
-    {
-        Transform[] bluePathTransforms = bluePathAfter.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathPos2 = new Vector3[bluePathTransforms.Length-1];
-        for (int i = 1; i < bluePathTransforms.Length; i++)
-        {
-            bluePathPos2[i-1] = bluePathTransforms[i].position;
-        }
-        BlueMovement.OnBlueReachedDestination -= TriggerFisbowlBlueFishesPt2;
-        GameManager.Instance.blueNpcRef.StopMovement();
-        Sequence seq = DOTween.Sequence()
-            .AppendInterval(0.5f)
-            .AppendCallback(() =>
-            {
-                StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
-                flockFishes.ToggleContainment(false);
-                flockFishes.ToggleAvoidPlayer(true);
-                flockFishes.ToggleAvoidBlue(true);
-                
-                GameManager.Instance?.blueNpcRef.ToggleFollow(false);
-            })
-            .Append(GameManager.Instance.blueNpcRef.transform
-                .DOPath(bluePathPos2, 4, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .AppendInterval(0.25f)
-            .AppendCallback(() =>
-            {
-                GameManager.Instance.blueNpcRef.ChangeFollowTarget(GameManager.Instance.playerRef.transform, -1,true);
-                //CinematicsManager.Instance?.AfterCinematicEnds();
-            });
-    }
+    
     
     public void TriggerFisbowlBigBlue()
     {
-        //positions
-        Transform[] bluePathTransforms = bluePathBefore2.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathPos = new Vector3[bluePathTransforms.Length-1];
-        for (int i = 1; i < bluePathTransforms.Length; i++)
-        {
-            bluePathPos[i-1] = bluePathTransforms[i].position;
-        }
-        bluePathTransforms = bluePathAfter2.GetComponentsInChildren<Transform>();
-        Vector3[] bluePathPos2 = new Vector3[bluePathTransforms.Length-1];
-        for (int i = 1; i < bluePathTransforms.Length; i++)
-        {
-            bluePathPos2[i-1] = bluePathTransforms[i].position;
-        }
+        Debug.Log("Trigger big whale");
+        //blue sound
+        StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
+        //blue follow 
+        GameManager.Instance.blueNpcRef.ChangeFollowTarget(bigBlueFish.transform, 1,true);
+        GameManager.Instance.blueNpcRef.ToggleEyeFollowTarget(true,bigBlueFish.transform);
+        //whale sound
+        // wait couple of seconds
+        // restart
 
         Sequence seq = DOTween.Sequence()
+            .AppendInterval(1)
+            .AppendCallback(() =>
+            {
+                bigBlueFish.PlayCallSfxSimple();
+            })
+            .AppendInterval(10f)
             .AppendCallback(() =>
             {
                 StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
-                GameManager.Instance.blueNpcRef.ToggleFollow(false);
-                GameManager.Instance.blueNpcRef.ToggleEyeFollowTarget(true, bigBlueFish.transform);
-            })
-            .AppendInterval(0.2f)
-            .Append(GameManager.Instance.blueNpcRef.transform
-                .DOPath(bluePathPos, 4, PathType.CatmullRom, PathMode.Sidescroller2D)
-                .SetEase(Ease.InOutSine)
-                .SetLookAt(0.001f, transform.forward, Vector3.right))
-            .AppendCallback(() =>
-            {
-                StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
-            })
-            .AppendInterval(0.1f)
-            .AppendCallback(() =>
-            {
-                bigBlueFish.StarTree();
-            })
-            .AppendInterval(0.1f)
-            .AppendCallback(() =>
-            {
-                StartCoroutine(bigBlueFish.PlayCallSfx());
-
-            })
-            .AppendInterval(0.2f)
-            .AppendCallback(() =>
-            {
-                StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
-                GameManager.Instance.blueNpcRef.ChangeFollowTarget(bigBlueFish.transform, 1);
-                GameManager.Instance.blueNpcRef.ToggleFollow(true);
+                GameManager.Instance?.blueNpcRef.ChangeFollowTarget(GameManager.Instance?.playerRef.transform);
+                GameManager.Instance?.blueNpcRef.ToggleEyeFollowTarget(true,GameManager.Instance?.playerRef.transform);
             });
 
 
     }
+
+    public void TriggerFishbowlBigGreenFish()
+    {
+        GameManager.Instance?.blueNpcRef.ToggleReactToCall(false);
+        GameManager.Instance?.blueNpcRef.ChangeFollowTarget(tempFollowForbigGreenFish, 3, false);
+        GameManager.Instance?.blueNpcRef.ToggleFireReachedDestinationEvent(true);
+        BlueMovement.OnBlueReachedDestination += BigGreenFishSequence;
+        bigGreenFish.StarTree();
+        CameraManager.Instance.AddObjectToCameraView(bigGreenFish.transform,false,false,CameraManager.Instance.camZoomPlayer,1);
+        
+    }
+    private void BigGreenFishSequence()
+    {
+        BlueMovement.OnBlueReachedDestination -= BigGreenFishSequence;
+        GameManager.Instance.blueNpcRef.StopMovement(); 
+        Sequence seq = DOTween.Sequence();
+        StartCoroutine(GameManager.Instance?.blueNpcRef.PlayCallSfx());
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() =>
+        {
+            bigGreenFish.PlayCallSfxSimple();
+            GameManager.Instance.blueNpcRef.ChangeFollowTarget(bigGreenFish.transform, 1, false);
+
+        });
+        seq.AppendInterval(10);
+        seq.AppendCallback(() =>
+        {
+            bigGreenFish.PlayCallSfxSimple();
+        });
+        seq.AppendInterval(1);
+        seq.AppendCallback(() =>
+        {
+            GameManager.Instance.blueNpcRef.PlayCallSfxImmediate();
+            GameManager.Instance?.blueNpcRef.ChangeFollowTarget(GameManager.Instance.playerRef.transform, -1,true);
+            GameManager.Instance?.blueNpcRef.PlayCallSfxImmediate();
+            GameManager.Instance?.blueNpcRef.ToggleReactToCall(true);
+            bigGreenFish.ToggleCanReactToPlayer(true);
+            CameraManager.Instance.RemoveObjectFromCameraView(bigGreenFish.transform,false);
+
+        });
+
+    }
+
 
 
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void PrepareBlueForMeetup()
     {

@@ -46,7 +46,7 @@ public class FinalChaseManager : MonoBehaviour
         foreach (MonsterCinematic monsterCinematic in _monsters)
         {
             _monstersPos[index] = monsterCinematic.transform.position;
-            monsterCinematic.ToggleTrackTarget();
+            monsterCinematic.ToggleTrackTarget(false);
             index++;
         }
        

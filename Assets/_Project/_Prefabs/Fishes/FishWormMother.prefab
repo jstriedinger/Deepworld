@@ -81,16 +81,16 @@ LineRenderer:
   m_SortingLayer: 7
   m_SortingOrder: -1
   m_Positions:
-  - {x: 367.60004, y: -151.4, z: 0}
-  - {x: 367.4072, y: -151.6298, z: 0}
-  - {x: 367.21436, y: -151.85962, z: 0}
-  - {x: 367.0215, y: -152.08943, z: 0}
-  - {x: 366.82867, y: -152.31924, z: 0}
-  - {x: 366.63583, y: -152.54906, z: 0}
-  - {x: 366.443, y: -152.77887, z: 0}
-  - {x: 366.25015, y: -153.00868, z: 0}
-  - {x: 366.0573, y: -153.2385, z: 0}
-  - {x: 365.86447, y: -153.4683, z: 0}
+  - {x: 579.82, y: -11.73999, z: 0}
+  - {x: 579.6272, y: -11.969804, z: 0}
+  - {x: 579.4344, y: -12.199617, z: 0}
+  - {x: 579.2416, y: -12.429431, z: 0}
+  - {x: 579.04877, y: -12.659245, z: 0}
+  - {x: 578.85596, y: -12.889058, z: 0}
+  - {x: 578.66315, y: -13.118872, z: 0}
+  - {x: 578.47034, y: -13.348685, z: 0}
+  - {x: 578.2775, y: -13.578499, z: 0}
+  - {x: 578.0847, y: -13.808312, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 5
@@ -296,31 +296,31 @@ LineRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_Positions:
-  - {x: 368.40002, y: -151.4, z: 0}
-  - {x: 368.40002, y: -151.79999, z: 0}
-  - {x: 368.40002, y: -152.19998, z: 0}
-  - {x: 368.40002, y: -152.59998, z: 0}
-  - {x: 368.40002, y: -152.99997, z: 0}
-  - {x: 368.40002, y: -153.39996, z: 0}
-  - {x: 368.40002, y: -153.79996, z: 0}
-  - {x: 368.40002, y: -154.19995, z: 0}
-  - {x: 368.40002, y: -154.59995, z: 0}
-  - {x: 368.40002, y: -154.99994, z: 0}
-  - {x: 368.40002, y: -155.39993, z: 0}
-  - {x: 368.40002, y: -155.79993, z: 0}
-  - {x: 368.40002, y: -156.19992, z: 0}
-  - {x: 368.40002, y: -156.59991, z: 0}
-  - {x: 368.40002, y: -156.99991, z: 0}
-  - {x: 368.40002, y: -157.3999, z: 0}
-  - {x: 368.40002, y: -157.7999, z: 0}
-  - {x: 368.40002, y: -158.19989, z: 0}
-  - {x: 368.40002, y: -158.59988, z: 0}
-  - {x: 368.40002, y: -158.99988, z: 0}
-  - {x: 368.40002, y: -159.39987, z: 0}
-  - {x: 368.40002, y: -159.79987, z: 0}
-  - {x: 368.40002, y: -160.19986, z: 0}
-  - {x: 368.40002, y: -160.59985, z: 0}
-  - {x: 368.40002, y: -160.99985, z: 0}
+  - {x: 580.62, y: -11.73999, z: 0}
+  - {x: 580.62, y: -12.13999, z: 0}
+  - {x: 580.62, y: -12.539989, z: 0}
+  - {x: 580.62, y: -12.939989, z: 0}
+  - {x: 580.62, y: -13.339989, z: 0}
+  - {x: 580.62, y: -13.739988, z: 0}
+  - {x: 580.62, y: -14.139988, z: 0}
+  - {x: 580.62, y: -14.539988, z: 0}
+  - {x: 580.62, y: -14.939987, z: 0}
+  - {x: 580.62, y: -15.339987, z: 0}
+  - {x: 580.62, y: -15.739986, z: 0}
+  - {x: 580.62, y: -16.139986, z: 0}
+  - {x: 580.62, y: -16.539986, z: 0}
+  - {x: 580.62, y: -16.939985, z: 0}
+  - {x: 580.62, y: -17.339985, z: 0}
+  - {x: 580.62, y: -17.739985, z: 0}
+  - {x: 580.62, y: -18.139984, z: 0}
+  - {x: 580.62, y: -18.539984, z: 0}
+  - {x: 580.62, y: -18.939983, z: 0}
+  - {x: 580.62, y: -19.339983, z: 0}
+  - {x: 580.62, y: -19.739983, z: 0}
+  - {x: 580.62, y: -20.139982, z: 0}
+  - {x: 580.62, y: -20.539982, z: 0}
+  - {x: 580.62, y: -20.939981, z: 0}
+  - {x: 580.62, y: -21.339981, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 5
@@ -559,16 +559,16 @@ LineRenderer:
   m_SortingLayer: 7
   m_SortingOrder: -1
   m_Positions:
-  - {x: 369.2, y: -151.4, z: 0}
-  - {x: 369.39285, y: -151.6298, z: 0}
-  - {x: 369.5857, y: -151.85962, z: 0}
-  - {x: 369.77853, y: -152.08943, z: 0}
-  - {x: 369.97137, y: -152.31924, z: 0}
-  - {x: 370.1642, y: -152.54906, z: 0}
-  - {x: 370.35706, y: -152.77887, z: 0}
-  - {x: 370.5499, y: -153.00868, z: 0}
-  - {x: 370.74274, y: -153.2385, z: 0}
-  - {x: 370.93558, y: -153.4683, z: 0}
+  - {x: 581.42, y: -11.73999, z: 0}
+  - {x: 581.6128, y: -11.969804, z: 0}
+  - {x: 581.8056, y: -12.199617, z: 0}
+  - {x: 581.9984, y: -12.429431, z: 0}
+  - {x: 582.1912, y: -12.659245, z: 0}
+  - {x: 582.38403, y: -12.889058, z: 0}
+  - {x: 582.57684, y: -13.118872, z: 0}
+  - {x: 582.76965, y: -13.348685, z: 0}
+  - {x: 582.96246, y: -13.578499, z: 0}
+  - {x: 583.1553, y: -13.808312, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 5
@@ -742,19 +742,19 @@ LineRenderer:
   m_SortingLayer: 7
   m_SortingOrder: -1
   m_Positions:
-  - {x: 367.40002, y: -151.4, z: 0}
-  - {x: 367.14023, y: -151.54999, z: 0}
-  - {x: 366.88043, y: -151.69998, z: 0}
-  - {x: 366.62064, y: -151.84998, z: 0}
-  - {x: 366.36084, y: -151.99997, z: 0}
-  - {x: 366.10104, y: -152.14996, z: 0}
-  - {x: 365.84125, y: -152.29996, z: 0}
-  - {x: 365.58145, y: -152.44995, z: 0}
-  - {x: 365.32166, y: -152.59995, z: 0}
-  - {x: 365.06186, y: -152.74994, z: 0}
-  - {x: 364.80206, y: -152.89993, z: 0}
-  - {x: 364.54227, y: -153.04993, z: 0}
-  - {x: 364.28247, y: -153.19992, z: 0}
+  - {x: 579.62, y: -11.73999, z: 0}
+  - {x: 579.36017, y: -11.88999, z: 0}
+  - {x: 579.10034, y: -12.039989, z: 0}
+  - {x: 578.8405, y: -12.189989, z: 0}
+  - {x: 578.5807, y: -12.339989, z: 0}
+  - {x: 578.32086, y: -12.489988, z: 0}
+  - {x: 578.06104, y: -12.639988, z: 0}
+  - {x: 577.8012, y: -12.789988, z: 0}
+  - {x: 577.5414, y: -12.939987, z: 0}
+  - {x: 577.28156, y: -13.089987, z: 0}
+  - {x: 577.0217, y: -13.239986, z: 0}
+  - {x: 576.7619, y: -13.389986, z: 0}
+  - {x: 576.5021, y: -13.539986, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 5
@@ -875,7 +875,7 @@ Transform:
   m_GameObject: {fileID: 2673209912164555115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.5, w: 0.8660254}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 226, y: 84.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -928,19 +928,19 @@ LineRenderer:
   m_SortingLayer: 7
   m_SortingOrder: -1
   m_Positions:
-  - {x: 369.40002, y: -151.4, z: 0}
-  - {x: 369.65982, y: -151.54999, z: 0}
-  - {x: 369.91962, y: -151.69998, z: 0}
-  - {x: 370.1794, y: -151.84998, z: 0}
-  - {x: 370.4392, y: -151.99997, z: 0}
-  - {x: 370.699, y: -152.14996, z: 0}
-  - {x: 370.9588, y: -152.29996, z: 0}
-  - {x: 371.2186, y: -152.44995, z: 0}
-  - {x: 371.4784, y: -152.59995, z: 0}
-  - {x: 371.7382, y: -152.74994, z: 0}
-  - {x: 371.998, y: -152.89993, z: 0}
-  - {x: 372.25778, y: -153.04993, z: 0}
-  - {x: 372.51758, y: -153.19992, z: 0}
+  - {x: 806.62, y: 72.860016, z: 0}
+  - {x: 806.8798, y: 72.710014, z: 0}
+  - {x: 807.13965, y: 72.56001, z: 0}
+  - {x: 807.3995, y: 72.41001, z: 0}
+  - {x: 807.6593, y: 72.26001, z: 0}
+  - {x: 807.9191, y: 72.11001, z: 0}
+  - {x: 808.17896, y: 71.96001, z: 0}
+  - {x: 808.4388, y: 71.810005, z: 0}
+  - {x: 808.6986, y: 71.66, z: 0}
+  - {x: 808.95844, y: 71.51, z: 0}
+  - {x: 809.21826, y: 71.36, z: 0}
+  - {x: 809.4781, y: 71.21, z: 0}
+  - {x: 809.7379, y: 71.06, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 5
@@ -1081,6 +1081,7 @@ GameObject:
   - component: {fileID: 4042353508971603808}
   - component: {fileID: 7528681455059390217}
   - component: {fileID: 7348978189118198152}
+  - component: {fileID: 6288380896839075180}
   m_Layer: 15
   m_Name: FishWormMother
   m_TagString: Untagged
@@ -1128,7 +1129,7 @@ MonoBehaviour:
     Path: event:/SFX/sfx_Creature_callHigh
   playerCallReactRadius: 50
   patrolObject: {fileID: 0}
-  startAutomatically: 1
+  startAutomatically: 0
   canEyeFollow: 1
   eye: {fileID: 2625936021752116709}
   pupil: {fileID: 767054256109149669}
@@ -1150,6 +1151,8 @@ MonoBehaviour:
   bodySmoothSpeed: 0.04
   randomizeBody: 0
   bodyRandomPointGap: 0
+  bodyWiggleSpeedExtra: 0
+  bodyWiggleMagExtra: 0
   limbWiggleMagnitude: 15
   limbSmoothSpeed: 0.05
   randomizeLimbs: 0
@@ -1172,8 +1175,8 @@ MonoBehaviour:
   radius: 3
   height: 2
   canMove: 1
-  maxSpeed: 4
-  gravity: {x: NaN, y: NaN, z: NaN}
+  maxSpeed: 5
+  gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1303,9 +1306,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWhenEnabled: 1
+  startWhenEnabled: 0
   asynchronousLoad: 0
-  pauseWhenDisabled: 1
+  pauseWhenDisabled: 0
   restartWhenComplete: 1
   logTaskChanges: 0
   group: 0
@@ -1320,7 +1323,7 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"PatrolInfo","IsShared":true,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"Tooltip":"Speed
-        for patrol","SinglemValue":6}]}'
+        for patrol","SinglemValue":7}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -1332,6 +1335,58 @@ MonoBehaviour:
       Version: 1.7.12
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &6288380896839075180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069541806291960988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.6
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: d7d36e4e
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 7
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &3758751702657351615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1840,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

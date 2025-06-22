@@ -16,9 +16,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   alignmentWeight: 1
-  cohesionWeight: 0.2
-  separationWeight: 2.5
-  <NeighborRadius>k__BackingField: 7
+  cohesionWeight: 0.1
+  separationWeight: 3
+  <NeighborRadius>k__BackingField: 10
   softAvoidanceWeight: 0
   <SoftAvoidLayers>k__BackingField:
     serializedVersion: 2

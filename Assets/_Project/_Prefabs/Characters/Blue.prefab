@@ -384,7 +384,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 1
-  m_AngularDamping: 10
+  m_AngularDamping: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -460,7 +460,7 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
-    value: -1
+    value: 1
 --- !u!114 &393324275603114831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,13 +622,13 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 14
   m_Positions:
-  - {x: 53.481, y: -23.4, z: 0}
-  - {x: 53.481, y: -23.55, z: 0}
-  - {x: 53.481, y: -23.699999, z: 0}
-  - {x: 53.481, y: -23.849998, z: 0}
-  - {x: 53.481, y: -23.999998, z: 0}
-  - {x: 53.481, y: -24.149998, z: 0}
-  - {x: 53.481, y: -24.299997, z: 0}
+  - {x: 53.481, y: -23.31, z: 0}
+  - {x: 53.481, y: -23.46, z: 0}
+  - {x: 53.481, y: -23.609999, z: 0}
+  - {x: 53.481, y: -23.759998, z: 0}
+  - {x: 53.481, y: -23.909998, z: 0}
+  - {x: 53.481, y: -24.059998, z: 0}
+  - {x: 53.481, y: -24.209997, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1267,13 +1267,13 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 14
   m_Positions:
-  - {x: 55.98, y: -23.4, z: 0}
-  - {x: 55.98, y: -23.55, z: 0}
-  - {x: 55.98, y: -23.699999, z: 0}
-  - {x: 55.98, y: -23.849998, z: 0}
-  - {x: 55.98, y: -23.999998, z: 0}
-  - {x: 55.98, y: -24.149998, z: 0}
-  - {x: 55.98, y: -24.299997, z: 0}
+  - {x: 55.98, y: -23.31, z: 0}
+  - {x: 55.98, y: -23.46, z: 0}
+  - {x: 55.98, y: -23.609999, z: 0}
+  - {x: 55.98, y: -23.759998, z: 0}
+  - {x: 55.98, y: -23.909998, z: 0}
+  - {x: 55.98, y: -24.059998, z: 0}
+  - {x: 55.98, y: -24.209997, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1642,7 +1642,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3886696081585773702}
-  - component: {fileID: 8071868141666360183}
   m_Layer: 6
   m_Name: WiggleDir
   m_TagString: Untagged
@@ -1666,61 +1665,6 @@ Transform:
   - {fileID: 7899289817624706469}
   m_Father: {fileID: 5335836652397838011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8071868141666360183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5290441019458469581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ComponentVersion: 2
-  m_LightType: 3
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.3
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
-  m_LightVolumeIntensity: 0.07
-  m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000c136fae1d1f3b6b173208727d7d36e4e
-  m_LightCookieSprite: {fileID: 0}
-  m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
-  m_UseNormalMap: 0
-  m_ShadowsEnabled: 0
-  m_ShadowIntensity: 0.75
-  m_ShadowSoftness: 0
-  m_ShadowSoftnessFalloffIntensity: 0.5
-  m_ShadowVolumeIntensityEnabled: 0
-  m_ShadowVolumeIntensity: 0.75
-  m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 40
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 20
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.3966484, y: -2.3189697, z: 0}
-  - {x: 0.169281, y: -2.3396301, z: 0}
-  - {x: 1.4094734, y: -0.5128174, z: 0}
-  - {x: 0.8472862, y: 0.41912842, z: 0}
-  - {x: -0.020851135, y: 0.79119873, z: 0}
-  - {x: -0.9509926, y: 0.43981934, z: 0}
-  - {x: -1.4508171, y: -0.5541992, z: 0}
 --- !u!1 &5440502421513338222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,14 +1803,14 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 14
   m_Positions:
-  - {x: 54.73, y: -23.599998, z: 0}
-  - {x: 54.73, y: -23.749998, z: 0}
-  - {x: 54.73, y: -23.899998, z: 0}
-  - {x: 54.73, y: -24.049997, z: 0}
-  - {x: 54.73, y: -24.199997, z: 0}
-  - {x: 54.73, y: -24.349997, z: 0}
-  - {x: 54.73, y: -24.499996, z: 0}
-  - {x: 54.73, y: -24.649996, z: 0}
+  - {x: 54.73, y: -23.509998, z: 0}
+  - {x: 54.73, y: -23.659998, z: 0}
+  - {x: 54.73, y: -23.809998, z: 0}
+  - {x: 54.73, y: -23.959997, z: 0}
+  - {x: 54.73, y: -24.109997, z: 0}
+  - {x: 54.73, y: -24.259996, z: 0}
+  - {x: 54.73, y: -24.409996, z: 0}
+  - {x: 54.73, y: -24.559996, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -2639,23 +2583,23 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 13
   m_Positions:
-  - {x: 54.73, y: -22.8, z: 0}
-  - {x: 54.73, y: -23.07, z: 0}
-  - {x: 54.73, y: -23.34, z: 0}
-  - {x: 54.73, y: -23.61, z: 0}
-  - {x: 54.73, y: -23.880001, z: 0}
-  - {x: 54.73, y: -24.150002, z: 0}
-  - {x: 54.73, y: -24.420002, z: 0}
-  - {x: 54.73, y: -24.690002, z: 0}
-  - {x: 54.73, y: -24.960003, z: 0}
-  - {x: 54.73, y: -25.230003, z: 0}
-  - {x: 54.73, y: -25.500004, z: 0}
-  - {x: 54.73, y: -25.770004, z: 0}
-  - {x: 54.73, y: -26.040005, z: 0}
-  - {x: 54.73, y: -26.310005, z: 0}
-  - {x: 54.73, y: -26.580006, z: 0}
-  - {x: 54.73, y: -26.850006, z: 0}
-  - {x: 54.73, y: -27.120007, z: 0}
+  - {x: 54.73, y: -22.71, z: 0}
+  - {x: 54.73, y: -22.98, z: 0}
+  - {x: 54.73, y: -23.25, z: 0}
+  - {x: 54.73, y: -23.52, z: 0}
+  - {x: 54.73, y: -23.79, z: 0}
+  - {x: 54.73, y: -24.060001, z: 0}
+  - {x: 54.73, y: -24.330002, z: 0}
+  - {x: 54.73, y: -24.600002, z: 0}
+  - {x: 54.73, y: -24.870003, z: 0}
+  - {x: 54.73, y: -25.140003, z: 0}
+  - {x: 54.73, y: -25.410004, z: 0}
+  - {x: 54.73, y: -25.680004, z: 0}
+  - {x: 54.73, y: -25.950005, z: 0}
+  - {x: 54.73, y: -26.220005, z: 0}
+  - {x: 54.73, y: -26.490005, z: 0}
+  - {x: 54.73, y: -26.760006, z: 0}
+  - {x: 54.73, y: -27.030006, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.9667169
@@ -2769,10 +2713,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0, g: 0.4039216, b: 0.83921576, a: 1}
-  m_Intensity: 0.25
-  m_LightVolumeIntensity: 0.2
+  m_Intensity: 0.3
+  m_LightVolumeIntensity: 0.3
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 00000000d1f3b6b1
+  m_ApplyToSortingLayers: d1f3b6b173208727d7d36e4e
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

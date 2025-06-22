@@ -43,16 +43,26 @@ public class SwimmerFish : MonoBehaviour
     private void OnPlayerCallNear()
     {
         if ((GameManager.Instance.playerRef.transform.position - transform.position).sqrMagnitude
-            < playerCallReactRadius * playerCallReactRadius)
+            < playerCallReactRadius * playerCallReactRadius && _canReactToPlayer)
         {
             //player near enough
             StartCoroutine(PlayCallSfx());
         }
     }
+
+    public void ToggleCanReactToPlayer(bool toggle)
+    {
+        _canReactToPlayer = toggle;
+    }
     
     public IEnumerator PlayCallSfx()
     {
         yield return new WaitForSeconds(Random.Range(1.8f, 2.5f));
+        PlayCallSfxSimple();
+    }
+
+    public void PlayCallSfxSimple()
+    {
         vfxCall.Play();
         AudioManager.Instance.PlayOneShotEvent(sfxCall, transform.position);
         transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.2f);
@@ -91,8 +101,8 @@ public class SwimmerFish : MonoBehaviour
                 {
                     Vector3 targetPos = _eyeTarget.position;
                     Vector3 localDir = eye.InverseTransformDirection((targetPos - eye.position).normalized);
-                    localDir.x = Mathf.Clamp(localDir.x, -0.12f, 0.12f);
-                    localDir.y = Mathf.Clamp(localDir.x, -0.05f, 0.05f);
+                    localDir.x = Mathf.Clamp(localDir.x, -0.07f, 0.07f);
+                    localDir.y = 0;
                     localDir.z = 0;
                     pupil.localPosition = Vector3.SmoothDamp(pupil.localPosition, localDir, ref _smoothVelocity, 0.2f);
                 

@@ -34,9 +34,9 @@ public class MonsterCinematic : MonsterBase
     }
 
 
-    public void ToggleTrackTarget(GameObject obj = null)
+    public void ToggleTrackTarget(bool track, GameObject obj = null)
     {
-        _eyeTracker.ToggleTrackTarget(obj ? obj :target);
+        _eyeTracker.ToggleTrackTarget(track, obj ? obj :target);
     }
 
     /**

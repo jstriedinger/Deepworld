@@ -331,13 +331,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c196ca5b1653b40a37070cb66413b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidingPlayer: 0
-  previousSpeed: {x: 0, y: 0}
+  orbitBias: 0
   _spriteRenderer: {fileID: 0}
   fishMats: []
   randomSizes: 0
-  maxXSize: 0
-  maxYSize: 0
+  maxXSize: 1.2
+  maxYSize: 1.2
 --- !u!114 &4232359354031409831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,17 +350,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyTentacleInfo: {fileID: 8983790417000187967}
-  bodyWiggleMagnitude: 30
-  bodyWiggleSpeed: 3
+  bodyWiggleMagnitude: 20
+  bodyWiggleSpeed: 2
   bodySmoothSpeed: 0.04
   randomizeBody: 1
-  bodyRandomPointGap: 0.2
+  bodyRandomPointGap: 0.3
+  bodyWiggleSpeedExtra: 1
+  bodyWiggleMagExtra: 10
   limbWiggleMagnitude: 15
   limbSmoothSpeed: 0.05
   randomizeLimbs: 0
-  extraPointGap: 0
-  extraWiggleSpeed: 0
-  extraLength: 0
+  extraPointGap: 0.2
+  extraWiggleSpeed: 2
+  extraLength: 2
 --- !u!1 &3183222008225011786
 GameObject:
   m_ObjectHideFlags: 0
