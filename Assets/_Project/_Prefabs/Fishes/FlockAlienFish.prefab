@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 7528681455059390217}
   - component: {fileID: 3210083748445345877}
   - component: {fileID: 4232359354031409831}
+  - component: {fileID: 3738745564349343290}
   m_Layer: 13
   m_Name: FlockAlienFish
   m_TagString: Untagged
@@ -363,6 +364,24 @@ MonoBehaviour:
   extraPointGap: 0.2
   extraWiggleSpeed: 2
   extraLength: 2
+--- !u!114 &3738745564349343290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069541806291960988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7687bd7c24bd4184ab92bb27715aec4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbitBias: 0
+  _spriteRenderer: {fileID: 0}
+  fishMats: []
+  randomSizes: 0
+  maxXSize: 0
+  maxYSize: 0
 --- !u!1 &3183222008225011786
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class MonsterReactive : MonsterBase, IUpdatable, IFixedUpdatable
     
     public IEnumerator ReactToPlayerCall()
     {
-        yield return new WaitForSeconds(.8f);
+        yield return new WaitForSeconds(1f);
         UpdateMonsterState(MonsterState.Investigate);
     }
 

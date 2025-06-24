@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PatrolSpeed>k__BackingField: 10
   <FollowRange>k__BackingField: 75
-  <FollowSpeed>k__BackingField: 16
+  <FollowSpeed>k__BackingField: 18
   <ChasingRange>k__BackingField: 35
-  <ChasingSpeed>k__BackingField: 25
+  <ChasingSpeed>k__BackingField: 26
   <SfxMonsterReact>k__BackingField:
     Guid:
       Data1: 548043345

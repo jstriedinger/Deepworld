@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 919931869080501353, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: 'fishMats.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5afadfe7439bfb34cb12f1836380aa8d, type: 2}
+    - target: {fileID: 919931869080501353, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
+      propertyPath: 'fishMats.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b04daadad5269446b25e922e71fe2af, type: 2}
     - target: {fileID: 2300238618568686877, guid: 5f17ddd4c8e1c954a9995a9713572745,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,6 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704336355878549007, guid: 5f17ddd4c8e1c954a9995a9713572745,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704336355878549007, guid: 5f17ddd4c8e1c954a9995a9713572745,
+        type: 3}
       propertyPath: 'fishMats.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5afadfe7439bfb34cb12f1836380aa8d, type: 2}
@@ -71,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 3069541806291960988, guid: 5f17ddd4c8e1c954a9995a9713572745,
         type: 3}
       propertyPath: m_Name
-      value: FlockFishV2
+      value: FlockFishYellow
       objectReference: {fileID: 0}
     - target: {fileID: 4541520141479711640, guid: 5f17ddd4c8e1c954a9995a9713572745,
         type: 3}

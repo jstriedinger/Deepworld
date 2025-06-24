@@ -129,7 +129,7 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
             if (Time.time >= _nextCall)
             {
                 _nextCall = Time.time + 2f;
-                StartCoroutine(PlayCallSfx(true));
+                PlayCallSfx(true);
             }
         }
     }
@@ -351,12 +351,10 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
 
    
 
-    public IEnumerator PlayCallSfx(bool triggerEvent)
+    public void PlayCallSfx(bool triggerEvent)
     {
         //vfx
         GameManager.Instance.playerLastPosition.transform.position =  transform.position;
-        vfxVoice.Play();
-        yield return new WaitForSeconds(0.25f);
         if(_sfxCallLastTime.Equals(sfxCall1))
         {
             _sfxCallLastTime = sfxCall2;
@@ -365,33 +363,13 @@ public class PlayerCharacter : AManagedBehaviour, IUpdatable
         {
             _sfxCallLastTime = sfxCall1;
         }
+        vfxVoice.Play();
         //audio
         AudioManager.Instance.PlayOneShotEvent(_sfxCallLastTime, transform.position);
         //visual feedback
         transform.DOPunchScale(new Vector3(.1f, .4f, 0), .75f, 1, 0f).SetDelay(0.25f);
         if(triggerEvent)
             OnPlayerCall?.Invoke();
-        //Last know position for enemies to look for you
-        /*if (!isHidden)
-        {
-            Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, callRadiusForEnemies, LayerMask.GetMask("Monster"));
-            
-            for (int i = 0; i < enemies.Length; i++)
-            {
-                if (enemies[i].TryGetComponent(out MonsterReactive monsterReactive))
-                {
-                    if (monsterReactive.CurrentState == MonsterState.Default || monsterReactive.CurrentState == MonsterState.Investigate)
-                    {
-                        Debug.Log("Trying to react");
-                        StartCoroutine(monsterReactive.ReactToPlayerCall());
-                    }
-                    // Do something with gameManager
-                }
-                //tell to check a position
-            }
-            
-        }*/
-        
 
     }
 

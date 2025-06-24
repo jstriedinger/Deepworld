@@ -115,7 +115,7 @@ public abstract class MonsterBase : AManagedBehaviour
     {
         if (showEffect)
         {
-            Debug.Log("PLaying react vfx");
+            //Debug.Log("PLaying react vfx");
             vfxDetect.Play();
             yield return new WaitForSeconds(0.25f);
         }

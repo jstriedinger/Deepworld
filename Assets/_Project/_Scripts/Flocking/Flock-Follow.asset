@@ -15,20 +15,16 @@ MonoBehaviour:
   <AgentLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 8192
-  alignmentWeight: 1.5
-  cohesionWeight: 1.2
+  alignmentWeight: 1.2
+  cohesionWeight: 0.5
   separationWeight: 2
-  softAvoidanceWeight: 2.5
   <NeighborRadius>k__BackingField: 6
+  softAvoidanceWeight: 2.5
   <SoftAvoidLayers>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
-  <avoidPlayer>k__BackingField: 0
-  avoidPlayerWeight: 3
-  <avoidPlayerDistanceSqrd>k__BackingField: 1
-  <avoidPlayerSpeedMultiplier>k__BackingField: 3
-  <avoidPlayerSpeedDuration>k__BackingField: 1
-  <followPlayer>k__BackingField: 0
-  followPlayerWeight: 1.5
-  <FollowPlayerDistance>k__BackingField: 70
+  hardAvoidanceWeight: 1
+  <hardAvoidanceDistanceSqrd>k__BackingField: 1
+  <hardAvoidanceSpeedMultiplier>k__BackingField: 1
+  <hardAvoidanceSpeedDuration>k__BackingField: 1
   agentSmoothTime: 0.75

@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button startGameBtn;
     [SerializeField] private CanvasGroup mainMenu;
     [SerializeField] private CanvasGroup mainMenuBack;
-    [SerializeField] private BoidFlock menuFlock;
+    [SerializeField] private BoidFlockJob menuFlock;
     [SerializeField] private Transform menuFlockFollowPivot;
     private Button _pauseContinueBtn;
     private Button _mainMenuBackBtn;
@@ -131,6 +131,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        Debug.Log("Show main menu 2");
         menuFlock.ToggleActivity(true);
         mainMenu.gameObject.SetActive(true);
         _mainMenuStartBtn.Select();
@@ -242,7 +243,6 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Default gamepad");
                 //default gamepad
                 for (int i = 0; i < uiGamepadIcons.Length; i++)
                 {
@@ -329,10 +329,25 @@ public class UIManager : MonoBehaviour
 
 
     //Change the flock tracking pos
-    public void ChangeMenuFlockPosition(Vector3 newPos)
+    public void ChangeMenuFlockPosition(RectTransform rectTransform)
     {
-        menuFlockFollowPivot.position = newPos;
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners); // [0]=bottom left, [2]=top right
+        // Get world center between bottom-left and top-right corners
+        Vector3 centerScreen = (corners[0] + corners[2]) * 0.5f;
+        float zDistance = Mathf.Abs(Camera.main.transform.position.z); // usually 10 in 2D
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(centerScreen.x, centerScreen.y, zDistance));
+        worldPos.z = 0f;
+        
+        menuFlockFollowPivot.position = worldPos;
     }
+
+    public void SendFlockToStartBtn()
+    {
+        RectTransform rt =startGameBtn.GetComponent<RectTransform>();
+        ChangeMenuFlockPosition(rt);
+    }
+    
     
     
     

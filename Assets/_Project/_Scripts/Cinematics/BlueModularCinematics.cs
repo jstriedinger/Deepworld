@@ -10,7 +10,7 @@ public class BlueModularCinematics : MonoBehaviour
     [SerializeField] GameObject flora;
     private Material _floraMatInstance;
     [SerializeField] ParticleSystem vfxBubbles;
-    [SerializeField] BoidFlock flock;
+    [SerializeField] BoidFlockJob flock;
     [SerializeField] Transform followObj;
     [SerializeField] GameObject bluePathAfter;
     [SerializeField] float bluePathAfterTime;
@@ -77,6 +77,7 @@ public class BlueModularCinematics : MonoBehaviour
             .SetLookAt(0.001f, transform.forward, Vector3.right)
             .OnComplete(() =>
             {
+                GameManager.Instance?.blueNpcRef.ToggleReactToCall(true);
                 GameManager.Instance.blueNpcRef.ChangeFollowTarget(GameManager.Instance.playerRef.transform, -1,true);
             });
     }
@@ -156,6 +157,7 @@ public class BlueModularCinematics : MonoBehaviour
             .AppendInterval(0.25f)
             .AppendCallback(() =>
             {
+                GameManager.Instance?.blueNpcRef.ToggleReactToCall(true);
                 GameManager.Instance.blueNpcRef.ChangeFollowTarget(GameManager.Instance.playerRef.transform, -1,true);
             });
     }

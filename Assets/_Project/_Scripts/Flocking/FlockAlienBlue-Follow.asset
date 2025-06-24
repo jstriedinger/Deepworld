@@ -17,7 +17,7 @@ MonoBehaviour:
     m_Bits: 8192
   alignmentWeight: 1
   cohesionWeight: 0.25
-  separationWeight: 2.5
+  separationWeight: 2
   <NeighborRadius>k__BackingField: 10
   softAvoidanceWeight: 2
   <SoftAvoidLayers>k__BackingField:

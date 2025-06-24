@@ -9,12 +9,17 @@ using UnityEngine.Rendering.Universal;
 public class TentacleGate : MonoBehaviour
 {
     [SerializeField] private GateSO config;
+    public bool showUIHelp;
     [SerializeField] private GameObject tentaclesObj;
     [SerializeField] private Collider2D gateCollider;
     [SerializeField] private Light2D gateLight;
     private TentacleToggler[] _tentacleTogglers;
     [FormerlySerializedAs("tentacleGateSwitcher")] [SerializeField] private CoralGateSwitcher coralGateSwitcher;
     [FormerlySerializedAs("gateCorals")] [SerializeField] private CoralsController coralsController;
+    
+    [Header("Extra - fishes")]
+    [SerializeField] BoidFlockJob boidFlockJob;
+    private bool _boidFlockTriggered = false;
     
     private float _nextCloseTime;
     private bool _canCloseGate;
@@ -56,7 +61,16 @@ public class TentacleGate : MonoBehaviour
     {
         if (!_isOpen && canOpenGate && coralGateSwitcher.playerInRange)
         {
-            
+            if (!_boidFlockTriggered && boidFlockJob != null)
+            {
+                boidFlockJob.ToggleContainment(false);
+                boidFlockJob.ToggleAvoidPlayer(true);
+                _boidFlockTriggered = true;
+            }
+            if (showUIHelp)
+            {
+                UIManager.Instance?.TogglePlayerUIPrompt(false);
+            }
             _isOpen = true;
             _nextCloseTime = Time.time + config.GateOpenTime;
             canOpenGate = false;

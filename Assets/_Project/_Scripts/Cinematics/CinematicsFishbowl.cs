@@ -18,12 +18,6 @@ public class CinematicsFishbowl : MonoBehaviour
     [SerializeField] GameObject curiousMonsterPath1;
     [SerializeField] GameObject curiousMonsterPath2;
     
-    [Header("Event 2 - fishes for green")]
-    [SerializeField] BoidFlock flockFishes2;
-    [SerializeField] GameObject bluePathBefore3;
-    [SerializeField] GameObject bluePathAfter3;
-    
-    
     [Header("Event 3&4 - Big blue and green")]
     [SerializeField] SwimmerFish bigBlueFish;
     [SerializeField] SwimmerFish bigGreenFish;
@@ -55,7 +49,6 @@ public class CinematicsFishbowl : MonoBehaviour
         pInput.actions.FindAction("Call").Enable();
         pInput.actions.FindAction("Call").performed += FirstTimeCallInput;
         
-        GameManager.Instance.LoadLevelSection(2);
 
     }
 
@@ -174,7 +167,7 @@ public class CinematicsFishbowl : MonoBehaviour
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 3)
-                            StartCoroutine(GameManager.Instance.playerRef.PlayCallSfx(false));
+                            GameManager.Instance.playerRef.PlayCallSfx(false);
                     }))
             .AppendCallback(() => { StartCoroutine(blueNpc.PlayCallSfx()); })
             .OnComplete(
@@ -204,11 +197,52 @@ public class CinematicsFishbowl : MonoBehaviour
     }
     
     
+    public void TriggerFisbowlBigGreen()
+    {
+        Debug.Log("Trigger big green");
+        //blue sound
+        StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
+        CameraManager.Instance.AddObjectToCameraView(bigGreenFish.transform,false,false,CameraManager.Instance.camZoomPlayer,1);
+        GameManager.Instance?.blueNpcRef.ToggleReactToCall(false);
+        //blue follow 
+        GameManager.Instance.blueNpcRef.ChangeFollowTarget(bigGreenFish.transform, 1,true);
+        GameManager.Instance.blueNpcRef.ToggleEyeFollowTarget(true,bigGreenFish.transform);
+        //whale sound
+        // wait couple of seconds
+        // restart
+
+        Sequence seq = DOTween.Sequence()
+            .AppendInterval(1)
+            .AppendCallback(() =>
+            {
+                bigGreenFish.PlayCallSfxSimple();
+            })
+            .AppendInterval(8f)
+            .AppendCallback(() =>
+            {
+                StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
+                GameManager.Instance?.blueNpcRef.ChangeFollowTarget(GameManager.Instance?.playerRef.transform);
+                GameManager.Instance?.blueNpcRef.ToggleEyeFollowTarget(true,GameManager.Instance?.playerRef.transform);
+                CameraManager.Instance.RemoveObjectFromCameraView(bigGreenFish.transform,false);
+
+            })
+            .AppendCallback(() =>
+            {
+                bigGreenFish.PlayCallSfxSimple();
+                bigGreenFish.ToggleCanReactToPlayer(true);
+                GameManager.Instance?.blueNpcRef.ToggleReactToCall(true);
+            });
+
+
+    }
+
     public void TriggerFisbowlBigBlue()
     {
         Debug.Log("Trigger big whale");
         //blue sound
         StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
+        CameraManager.Instance.AddObjectToCameraView(bigBlueFish.transform,false,false,CameraManager.Instance.camZoomPlayer,1);
+        GameManager.Instance?.blueNpcRef.ToggleReactToCall(false);
         //blue follow 
         GameManager.Instance.blueNpcRef.ChangeFollowTarget(bigBlueFish.transform, 1,true);
         GameManager.Instance.blueNpcRef.ToggleEyeFollowTarget(true,bigBlueFish.transform);
@@ -228,56 +262,19 @@ public class CinematicsFishbowl : MonoBehaviour
                 StartCoroutine(GameManager.Instance.blueNpcRef.PlayCallSfx());
                 GameManager.Instance?.blueNpcRef.ChangeFollowTarget(GameManager.Instance?.playerRef.transform);
                 GameManager.Instance?.blueNpcRef.ToggleEyeFollowTarget(true,GameManager.Instance?.playerRef.transform);
+                CameraManager.Instance.RemoveObjectFromCameraView(bigBlueFish.transform,false);
+
+            })
+            .AppendCallback(() =>
+            {
+                bigBlueFish.PlayCallSfxSimple();
+                bigBlueFish.ToggleCanReactToPlayer(true);
+                GameManager.Instance?.blueNpcRef.ToggleReactToCall(true);
             });
 
 
     }
-
-    public void TriggerFishbowlBigGreenFish()
-    {
-        GameManager.Instance?.blueNpcRef.ToggleReactToCall(false);
-        GameManager.Instance?.blueNpcRef.ChangeFollowTarget(tempFollowForbigGreenFish, 3, false);
-        GameManager.Instance?.blueNpcRef.ToggleFireReachedDestinationEvent(true);
-        BlueMovement.OnBlueReachedDestination += BigGreenFishSequence;
-        bigGreenFish.StarTree();
-        CameraManager.Instance.AddObjectToCameraView(bigGreenFish.transform,false,false,CameraManager.Instance.camZoomPlayer,1);
-        
-    }
-    private void BigGreenFishSequence()
-    {
-        BlueMovement.OnBlueReachedDestination -= BigGreenFishSequence;
-        GameManager.Instance.blueNpcRef.StopMovement(); 
-        Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameManager.Instance?.blueNpcRef.PlayCallSfx());
-        seq.AppendInterval(0.5f);
-        seq.AppendCallback(() =>
-        {
-            bigGreenFish.PlayCallSfxSimple();
-            GameManager.Instance.blueNpcRef.ChangeFollowTarget(bigGreenFish.transform, 1, false);
-
-        });
-        seq.AppendInterval(10);
-        seq.AppendCallback(() =>
-        {
-            bigGreenFish.PlayCallSfxSimple();
-        });
-        seq.AppendInterval(1);
-        seq.AppendCallback(() =>
-        {
-            GameManager.Instance.blueNpcRef.PlayCallSfxImmediate();
-            GameManager.Instance?.blueNpcRef.ChangeFollowTarget(GameManager.Instance.playerRef.transform, -1,true);
-            GameManager.Instance?.blueNpcRef.PlayCallSfxImmediate();
-            GameManager.Instance?.blueNpcRef.ToggleReactToCall(true);
-            bigGreenFish.ToggleCanReactToPlayer(true);
-            CameraManager.Instance.RemoveObjectFromCameraView(bigGreenFish.transform,false);
-
-        });
-
-    }
-
-
-
-
+    
     // Update is called once per frame
     
 

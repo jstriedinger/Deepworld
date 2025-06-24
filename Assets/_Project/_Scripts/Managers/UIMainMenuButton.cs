@@ -47,15 +47,9 @@ public class UIMainMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler,
         _btnText.fontSize = _txtSize + 16;
         _btnText.color = Color.white; 
 
-        Vector3[] corners = new Vector3[4];
-        _rectTransform.GetWorldCorners(corners); // [0]=bottom left, [2]=top right
-        // Get world center between bottom-left and top-right corners
-        Vector3 centerScreen = (corners[0] + corners[2]) * 0.5f;
-        float zDistance = Mathf.Abs(_mainCamera.transform.position.z); // usually 10 in 2D
-        Vector3 worldPos = _mainCamera.ScreenToWorldPoint(new Vector3(centerScreen.x, centerScreen.y, zDistance));
-        worldPos.z = 0f;
-        UIManager.Instance?.ChangeMenuFlockPosition(worldPos);
+        UIManager.Instance?.ChangeMenuFlockPosition(_rectTransform);
     }
+    
     public void OnDeselect(BaseEventData eventData)
     {
         _btnText.fontStyle = FontStyles.Normal | FontStyles.UpperCase;

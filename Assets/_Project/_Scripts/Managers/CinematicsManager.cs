@@ -34,8 +34,8 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] private Transform camPivotHelper;
     
     [Header("Cinematic - Intro & main menu")]
-    [SerializeField] private BoidFlock flockTitle1;
-    [SerializeField] private BoidFlock flockTitle2;
+    [SerializeField] private BoidFlockJob flockTitle1;
+    [SerializeField] private BoidFlockJob flockTitle2;
     [SerializeField] private GameObject pathBlueTitles1;
     [SerializeField] private GameObject pathBlueTitles2;
     [SerializeField] private GameObject pathBlueTitles3;
@@ -121,7 +121,7 @@ public class CinematicsManager : MonoBehaviour
         PlayerInput pInput = GameManager.Instance.playerRef.playerInput;
         //we disable it here so that playerCharacter cna not spam it. Consequence is that the normal action is not called, gotta do it manually
         pInput.actions.FindAction("Call").Disable();
-        StartCoroutine(GameManager.Instance.playerRef.PlayCallSfx(false));
+        GameManager.Instance.playerRef.PlayCallSfx(false);
         
         
         UIManager.Instance.TogglePlayerUIPrompt(false);
@@ -497,8 +497,8 @@ public class CinematicsManager : MonoBehaviour
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 1)
-                        {
-                            StartCoroutine(GameManager.Instance.playerRef.PlayCallSfx(false));
+                        {  
+                            GameManager.Instance.playerRef.PlayCallSfx(false);
                             _blueNpc.ToggleEyeFollowTarget(false);
                         }
                         
@@ -582,7 +582,7 @@ public class CinematicsManager : MonoBehaviour
             .AppendCallback(() => { 
                 AudioManager.Instance.ChangeBackgroundMusic(1);
             })
-            .AppendInterval(9)
+            .AppendInterval(8)
             .AppendCallback(() => {flockTitle1.ToggleActivity(true);})
             .Append(_blueNpc.transform.DOPath(bluePathC0Pos, blueC0Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
@@ -591,9 +591,10 @@ public class CinematicsManager : MonoBehaviour
                     (int waypointIndex) =>
                     {
                         if (waypointIndex == 2)
+                        {
                             StartCoroutine(_blueNpc.PlayCallSfx());
-                        if(waypointIndex == 3)
                             flockTitle2.ToggleActivity(true);
+                        }
                     }))
             .AppendCallback(() =>
             {
@@ -603,9 +604,14 @@ public class CinematicsManager : MonoBehaviour
                 .DOPath(bluePathC1Pos, blueC01Time, PathType.CatmullRom, PathMode.Sidescroller2D)
                 .SetEase(Ease.InOutSine)
                 .SetLookAt(0.001f, transform.forward, Vector3.right).SetDelay(5))
-            .Join(UIManager.Instance.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(8f ));
-
+            .AppendCallback(() =>
+            {
+                UIManager.Instance?.SendFlockToStartBtn();
+            })
+            .Join(UIManager.Instance.logoTitle.DOFade(1, 3.5f).SetEase(Ease.InQuart).SetDelay(2f ));
+        
         CameraManager.Instance.toggleVCamDeadZone(false);
+        
         Sequence introMover = DOTween.Sequence()
             .Append(logosFollowCamObj.transform.DOMoveY(playerPathC0Transforms[^1].position.y + 5, 47)
                 .SetEase(Ease.InOutSine))

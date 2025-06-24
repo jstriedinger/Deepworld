@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2362570104458736664}
-  - component: {fileID: 252288581273648248}
+  - component: {fileID: 2557172369912774737}
   m_Layer: 13
   m_Name: FishFlock
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   - {fileID: 3458790157437883505}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &252288581273648248
+--- !u!114 &2557172369912774737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,17 +74,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 842791081102020856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f0d3da20a4d06346a7c3f94346f3a2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 50801837929198e4e9a71bb12e74fda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flockBehavior: {fileID: 11400000, guid: 81fe1c5095d080e499011ba54aba0a04, type: 2}
-  agentPrefab: {fileID: 6699029577588586659, guid: 0c91e14334f562e4ab4e82a17d97db2e,
+  agentPrefab: {fileID: 8481475841225306821, guid: 0c91e14334f562e4ab4e82a17d97db2e,
     type: 3}
   spawnPoint: {fileID: 3458790157437883505}
   _collider2D: {fileID: 0}
   isActive: 1
   isContained: 1
-  numAgents: 50
+  canAvoidPlayer: 0
+  canAvoidBlue: 0
+  numAgents: 250
   acceleration: 10
   avoidanceRadiusMultiplier: 0.5
   isFollowing: 0
@@ -92,8 +94,6 @@ MonoBehaviour:
   followWeight: 1
   followDistance: 0
   followKeepDistance: 0
-  canAvoidPlayer: 0
-  canAvoidBlue: 0
   isPatroling: 0
   patrolObj: {fileID: 6748070306129291303}
   patrolWeight: 1

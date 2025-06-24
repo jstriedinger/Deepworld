@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2300238618568686877}
   - component: {fileID: 7528681455059390217}
-  - component: {fileID: 2704336355878549007}
+  - component: {fileID: 919931869080501353}
   m_Layer: 13
   m_Name: FlockFishBlue
   m_TagString: Untagged
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.4
---- !u!114 &2704336355878549007
+--- !u!114 &919931869080501353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,11 +166,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3069541806291960988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1c196ca5b1653b40a37070cb66413b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7687bd7c24bd4184ab92bb27715aec4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidingPlayer: 0
-  previousSpeed: {x: 0, y: 0}
+  orbitBias: 0
   _spriteRenderer: {fileID: 4541520141479711640}
   fishMats:
   - {fileID: 2100000, guid: f9e7fd12d536441a7a8bc9eb62f0eac3, type: 2}

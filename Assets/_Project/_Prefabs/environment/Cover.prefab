@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Intensity: 0.25
   m_LightVolumeIntensity: 0.25
   m_LightVolumeEnabled: 1
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000c136fae173208727
   m_LightCookieSprite: {fileID: 21300000, guid: a44be4c4fef8f38449b46bc06cab2734,
     type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
@@ -21027,12 +21027,12 @@ PrefabInstance:
     - target: {fileID: 2336305837628199876, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0000031211157
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199876, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1299844
+      value: 2.19
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199876, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
@@ -21122,7 +21122,12 @@ PrefabInstance:
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
@@ -21132,7 +21137,7 @@ PrefabInstance:
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
@@ -21142,7 +21147,7 @@ PrefabInstance:
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
@@ -21162,17 +21167,17 @@ PrefabInstance:
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key1.b
-      value: 0.82552296
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key1.g
-      value: 0.64880735
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199877, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key1.r
-      value: 0.9169811
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199878, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
@@ -21182,7 +21187,7 @@ PrefabInstance:
     - target: {fileID: 2336305837628199878, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199878, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
@@ -21192,7 +21197,7 @@ PrefabInstance:
     - target: {fileID: 2336305837628199878, guid: c32821818ea794411add15b43b6340b5,
         type: 3}
       propertyPath: m_SortingLayerID
-      value: -503695679
+      value: -949640393
       objectReference: {fileID: 0}
     - target: {fileID: 2336305837628199878, guid: c32821818ea794411add15b43b6340b5,
         type: 3}

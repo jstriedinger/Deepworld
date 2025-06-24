@@ -11,6 +11,7 @@ using Vector3 = UnityEngine.Vector3;
 public class CoralGateSwitcher : MonoBehaviour
 {
     [Header("Feedbacks")]
+    [SerializeField] private ParticleSystem[] bubbles;
     [SerializeField] private float activateAnimDuration;
     [SerializeField] private float resetAnimDuration;
     
@@ -123,6 +124,10 @@ public class CoralGateSwitcher : MonoBehaviour
         _feedbackActive = false;
         _activateFeedbackTween.Restart();
         vfxDust.Stop();
+        foreach (ParticleSystem particleSystem in bubbles)
+        {
+            particleSystem.Play();
+        }
         
 
         //
@@ -162,6 +167,10 @@ public class CoralGateSwitcher : MonoBehaviour
             if (_tentacleGate.canOpenGate)
             {
                 StartCoroutine(TogglePlayerInRangeFeedback());
+                if (_tentacleGate.showUIHelp)
+                {
+                    UIManager.Instance?.TogglePlayerUIPrompt(true);
+                }
             }
 
         }
@@ -188,6 +197,11 @@ public class CoralGateSwitcher : MonoBehaviour
                 DOTween.To(() => bulbLight.intensity, x => bulbLight.intensity = x,
                   defaultLightIntensity,
                     activateAnimDuration/2);
+                
+                if (_tentacleGate.showUIHelp)
+                {
+                    UIManager.Instance?.TogglePlayerUIPrompt(false);
+                }
                 
             }
 

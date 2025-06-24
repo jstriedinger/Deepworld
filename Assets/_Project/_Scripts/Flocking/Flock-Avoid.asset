@@ -15,11 +15,11 @@ MonoBehaviour:
   <AgentLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 8192
-  alignmentWeight: 1
-  cohesionWeight: 1.2
-  separationWeight: 1.8
+  alignmentWeight: 3
+  cohesionWeight: 1.4
+  separationWeight: 2
   <NeighborRadius>k__BackingField: 5
-  softAvoidanceWeight: 2
+  softAvoidanceWeight: 0
   <SoftAvoidLayers>k__BackingField:
     serializedVersion: 2
     m_Bits: 256

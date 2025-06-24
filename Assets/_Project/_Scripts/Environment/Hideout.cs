@@ -60,7 +60,7 @@ public class Hideout : MonoBehaviour
         
         _punchDownTween = body.DOPunchScale(Vector3.down * .1f, .75f, 1).SetEase(Ease.InOutSine).SetAutoKill(false).Pause();
         _punchUpTween = body.DOPunchScale(Vector3.up * .1f, .75f, 1).SetEase(Ease.InOutSine).SetAutoKill(false).Pause();
-        _lightGlowTween = DOTween.To(() => light2D.intensity, x => light2D.intensity = x, light2D.intensity + 0.25f,
+        _lightGlowTween = DOTween.To(() => light2D.intensity, x => light2D.intensity = x, light2D.intensity + 0.45f,
             1.5f).SetLoops(-1, LoopType.Yoyo);
     }
 

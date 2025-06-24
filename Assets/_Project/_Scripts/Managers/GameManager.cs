@@ -40,20 +40,26 @@ public class GameManager : MonoBehaviour
 
     [Header("Global")] 
     public LayerMask playerLayer;
+    public PlayerCharacter playerRef;
+    public GameObject playerLastPosition;
+    public BlueNPC blueNpcRef;
     
     [Header("Level management")] 
     [SerializeField] private StartSection startSection;
     [SerializeField] private GameObject level0Objects;
     [SerializeField] private GameObject[] levelSections;
     [SerializeField] CheckPoint[] checkPoints;
+    
+    [Header("Flocks in game")]
+    [SerializeField] BoidFlockJob[] flocksSection0;
+    [SerializeField] GameObject coverSection0;
+    [SerializeField] BoidFlockJob[] flocksSection1_1;
+    [SerializeField] BoidFlockJob[] flocksSection1_2;
 
-    [Header("Others")] 
+    [Header("Lighting")] 
     [SerializeField] private Light2D globalPlayerLight;
     [SerializeField] private Light2D globalEnvLight;
     [SerializeField] private Light2D globalPropsLight;
-    public PlayerCharacter playerRef;
-    public GameObject playerLastPosition;
-    public BlueNPC blueNpcRef;
 
     public bool skipTemp = true;
     [HideInInspector]
@@ -92,6 +98,7 @@ public class GameManager : MonoBehaviour
         CinematicsManager.Instance.DoCinematicStartGame();
         AudioManager.Instance.OnStartGame();
         LoadLevelSection(1);
+        ToggleFlocksSection1_1(true);
         //cleanup and opti for fishbowl
         Destroy(level0Objects);
         StartCoroutine(UIManager.Instance.HideMainMenu());
@@ -111,6 +118,9 @@ public class GameManager : MonoBehaviour
         playerLastPosition.transform.position = _originPos;
         
         AudioManager.Instance.Initialize(playerRef.transform);
+
+        //all flocks start off
+        TurnOffOAllFlocks();
 
         //Cursor.visible = false;
         if (!skipTemp)
@@ -164,6 +174,7 @@ public class GameManager : MonoBehaviour
                     //by default all sections are disable except the first one
                     
                     LoadLevelSection(0);
+                    //ToggleFlocksSection0(true);
                     ChangeGameState(GameState.Cinematic);
                     //CameraManager.Instance?.ToggleConfiner2D(false);
                     CinematicsManager.Instance.DoCinematicTitles();
@@ -171,6 +182,7 @@ public class GameManager : MonoBehaviour
                 case StartSection.Checkpoint1:
                     LoadLevelSection(0);
                     LoadLevelSection(1);
+                    ToggleFlocksSection1_1(true);
                     AudioManager.Instance.ChangeBackgroundMusic(1);
                     CinematicsManager.Instance.PrepareBlueForMeetup();
                     //blueNpcRef.ChangeBlueStats(playerRef.transform);
@@ -184,28 +196,28 @@ public class GameManager : MonoBehaviour
                     blueNpcRef.ToggleReactToCall(true);
                     break;
                 case StartSection.Checkpoint2:
-                    LoadLevelSection(2);
+                    LoadLevelSection(3);
                     AudioManager.Instance.ChangeBackgroundMusic(-1);
                     //place blue in the first point of path
                     CinematicsManager.Instance.PrepareBlueForMonsterEncounter();
                     break;
                 case StartSection.Checkpoint3:
-                    LoadLevelSection(3);
+                    LoadLevelSection(4);
                     playerRef.ToggleMonsterEyeDetection(true);
                     playerRef.ToggleEyeFollowTarget(true);
                     break;
                 case StartSection.Checkpoint4:
-                    LoadLevelSection(3);
+                    LoadLevelSection(4);
                     playerRef.ToggleMonsterEyeDetection(true);
                     playerRef.ToggleEyeFollowTarget(true);
                     break;
                 case StartSection.Checkpoint5:
-                    LoadLevelSection(3);
+                    LoadLevelSection(4);
                     playerRef.ToggleMonsterEyeDetection(true);
                     playerRef.ToggleEyeFollowTarget(true);
                     break;
                 case StartSection.Checkpoint6:
-                    LoadLevelSection(4); //for now
+                    LoadLevelSection(5); //for now
                     playerRef.SetBlueReference(blueNpcRef);
                     blueNpcRef.ToggleFollow(true);
                     blueNpcRef.GetHurt();
@@ -363,6 +375,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowMainMenuFirstTime()
     {
+        Debug.Log("Show main menu");
         ChangeGameState(GameState.MainMenu);
         UIManager.Instance.ShowMainMenu();
         UIManager.Instance?.SelectStartButtonMainMenu();
@@ -394,7 +407,7 @@ public class GameManager : MonoBehaviour
     public void UnloadLevelSection(int level)
     {
         levelSections[level].SetActive(false);
-        Destroy(levelSections[level]);
+        //Destroy(levelSections[level]);
     }
     
     #endregion
@@ -421,21 +434,22 @@ public class GameManager : MonoBehaviour
     }
 
     //Change the global lighting of the game.
+    // true deep, false default
     public void ToggleLigthing(bool toogle)
     {
         
-        float envLight, playerLight, propsLight;
+        /*float envLight, playerLight, propsLight;
         if (toogle)
         {
             envLight = 0.4f;
-            propsLight = 0.45f;
+            propsLight = 0.4f;
             playerLight = .5f;
         }
         else
         {
-            envLight = 0.6f;
-            propsLight = 0.6f;
-            playerLight = .7f;
+            envLight = 0.5f;
+            propsLight = 0.5f;
+            playerLight = .6f;
         }
         Sequence seq = DOTween.Sequence();
         seq.Append(DOTween.To(() => globalEnvLight.intensity, x => globalEnvLight.intensity = x, 
@@ -443,16 +457,17 @@ public class GameManager : MonoBehaviour
         seq.Join(DOTween.To(() => globalPlayerLight.intensity, x => globalPlayerLight.intensity = x, 
             playerLight, 1f));
         seq.Join(DOTween.To(() => globalPropsLight.intensity, x => globalPropsLight.intensity = x, 
-            propsLight, 1f));
+            propsLight, 1f));*/
         
 
     }
 
     public void TempTeleportToFinal()
     {
-        UnloadLevelSection(3);
-        LoadLevelSection(4);
+        UnloadLevelSection(4);
+        LoadLevelSection(5);
         playerRef.SetBlueReference(blueNpcRef);
+        blueNpcRef.gameObject.SetActive(true);
         blueNpcRef.ToggleFollow(true);
         blueNpcRef.GetHurt();
         blueNpcRef.ChangeBlueStats(playerRef.transform);
@@ -464,6 +479,51 @@ public class GameManager : MonoBehaviour
         if (blueSpawn)
             blueNpcRef.transform.position = blueSpawn.position;
     }
+
+    #region  opti
+
+    //for performance
+
+    public void TurnOffOAllFlocks()
+    {
+        foreach (BoidFlockJob flock in flocksSection0)
+        {
+            flock.ToggleActivity(false);
+        };
+        foreach (BoidFlockJob flock in flocksSection1_1)
+        {
+            flock.ToggleActivity(false);
+        };
+        foreach (BoidFlockJob flock in flocksSection1_2)
+        {
+            flock.ToggleActivity(false);
+        };
+    }
+    public void ToggleFlocksSection0(bool toggle)
+    {
+        foreach (BoidFlockJob flock in flocksSection0)
+        {
+            flock.ToggleActivity(toggle);
+        };
+        coverSection0.SetActive(false);
+        UnloadLevelSection(0);
+    }
+    public void ToggleFlocksSection1_1(bool toggle)
+    {
+        foreach (BoidFlockJob flock in flocksSection1_1)
+        {
+            flock.ToggleActivity(toggle);
+        };
+    }
+    public void ToggleFlocksSection1_2(bool toggle)
+    {
+        foreach (BoidFlockJob flock in flocksSection1_2)
+        {
+            flock.ToggleActivity(toggle);
+        };
+    }
+
+    #endregion
 
 }
 

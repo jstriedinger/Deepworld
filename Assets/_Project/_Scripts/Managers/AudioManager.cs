@@ -93,7 +93,6 @@ public class AudioManager : MonoBehaviour
         {
             float d = Mathf.Clamp(Vector2.Distance(_playerRef.position, finalAnchor.transform.position) / finalCloseDangerRadius, 0,1) ;
             _instanceCloseDanger.setParameterByName("Monster Distance", 1.3f - d);
-            Debug.Log("Distance: "+d);
             
         }
         else

@@ -12,11 +12,11 @@ public class SwimmerFish : MonoBehaviour
 {
     [SerializeField] private ParticleSystem vfxCall;
     [SerializeField] private EventReference sfxCall;
+    [SerializeField] bool canReactToPlayer;
     [SerializeField, Range(8,50)] private float playerCallReactRadius = 8;
     [SerializeField] private Transform patrolObject;
     [SerializeField] private bool startAutomatically =  true;
     private BehaviorTree _behaviorTree;
-    private bool _canReactToPlayer;
     
     [Header("Eye following")]
     [SerializeField] private bool canEyeFollow = false;
@@ -43,7 +43,7 @@ public class SwimmerFish : MonoBehaviour
     private void OnPlayerCallNear()
     {
         if ((GameManager.Instance.playerRef.transform.position - transform.position).sqrMagnitude
-            < playerCallReactRadius * playerCallReactRadius && _canReactToPlayer)
+            < playerCallReactRadius * playerCallReactRadius && canReactToPlayer)
         {
             //player near enough
             StartCoroutine(PlayCallSfx());
@@ -52,7 +52,7 @@ public class SwimmerFish : MonoBehaviour
 
     public void ToggleCanReactToPlayer(bool toggle)
     {
-        _canReactToPlayer = toggle;
+        canReactToPlayer = toggle;
     }
     
     public IEnumerator PlayCallSfx()
@@ -122,7 +122,12 @@ public class SwimmerFish : MonoBehaviour
         _behaviorTree.EnableBehavior();
     }
 
-    
-
-   
+    private void OnDrawGizmosSelected()
+    {
+        if (canReactToPlayer)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, playerCallReactRadius);
+        }
+    }
 }
